@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield Integration Agent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { margin:0; padding:0; font-family: 'Inter', sans-serif; }
+    .grid-bg {
+      background-image: radial-gradient(circle, rgba(148,163,184,0.2) 1px, transparent 1px);
+      background-size: 28px 28px;
+      animation: moveGrid 20s linear infinite;
+    }
+    @keyframes moveGrid {
+      from { background-position: 0 0; }
+      to { background-position: 28px 28px; }
+    }
+    .node {
+      position: absolute;
+      min-width: 180px;
+      padding: 14px;
+      border-radius: 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1e293b;
+      background: white;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      cursor: grab;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .node:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+    .node h3 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+    .node p {
+      font-size: 0.8rem;
+      color: #475569;
+    }
+    /* Color accents for categories */
+    .data-node { border-left: 6px solid #3b82f6; }     /* Blue */
+    .action-node { border-left: 6px solid #22c55e; }   /* Green */
+    .analytics-node { border-left: 6px solid #8b5cf6;} /* Purple */
+    .alert-node { border-left: 6px solid #f59e0b; }    /* Amber */
+
+    svg.connector {
+      position: absolute;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    path {
+      fill: none;
+      stroke: #64748b;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 min-h-screen">
+
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield AI</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+          <a href="ai-hub.html" class="hover:text-slate-900 dark:hover:text-white">AI Hub</a>
+          <a href="ai-oversight.html" class="hover:text-slate-900 dark:hover:text-white">Oversight Tree</a>
+          <a href="api-platform.html" class="hover:text-slate-900 dark:hover:text-white">API Platform</a>
+          <a href="#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- Hero -->
+  <section class="text-center py-6 px-6">
+    <h1 class="text-4xl font-bold mb-3">Integration Agent</h1>
+    <p class="max-w-3xl mx-auto text-lg text-slate-600 dark:text-slate-300">
+      A workflow automation  — connect CRM, Core Banking, Email, APIs, Chatbots, and Analytics visually.  
+      Drag and explore how ArthaShield integrations could look.
+    </p>
+  </section>
+
+  <!-- Canvas -->
+  <section class="relative mx-auto max-w-7xl px-6 mb-20">
+    <div id="canvas" class="relative h-[700px] w-full rounded-xl border border-slate-300 dark:border-slate-700 grid-bg overflow-hidden">
+
+      <!-- Nodes -->
+      <div class="node data-node" id="node1" style="top:60px; left:80px;">
+        <h3>Core Banking</h3>
+        <p>Monitor high-value transactions</p>
+      </div>
+
+      <div class="node action-node" id="node2" style="top:200px; left:320px;">
+        <h3>CRM</h3>
+        <p>Log suspicious customer case</p>
+      </div>
+
+      <div class="node action-node" id="node3" style="top:360px; left:560px;">
+        <h3>Email</h3>
+        <p>Notify compliance team</p>
+      </div>
+
+      <div class="node data-node" id="node4" style="top:120px; left:560px;">
+        <h3>API Gateway</h3>
+        <p>Push data to regulator</p>
+      </div>
+
+      <div class="node action-node" id="node5" style="top:280px; left:800px;">
+        <h3>Chatbot</h3>
+        <p>Answer customer queries</p>
+      </div>
+
+      <div class="node analytics-node" id="node6" style="top:480px; left:800px;">
+        <h3>Analytics</h3>
+        <p>Generate fraud insights</p>
+      </div>
+
+      <div class="node alert-node" id="node7" style="top:600px; left:1080px;">
+        <h3>Alerts Dashboard</h3>
+        <p>Display risks in real time</p>
+      </div>
+
+      <!-- Curved Connectors -->
+      <svg class="connector w-full h-full">
+        <path d="M240 100 C280 160, 280 200, 320 240" marker-end="url(#arrowhead)"/>
+        <path d="M480 260 C520 300, 520 340, 560 380" marker-end="url(#arrowhead)"/>
+        <path d="M480 240 C520 200, 520 180, 560 160" marker-end="url(#arrowhead)"/>
+        <path d="M720 160 C760 200, 760 260, 800 300" marker-end="url(#arrowhead)"/>
+        <path d="M720 400 C760 440, 760 460, 800 500" marker-end="url(#arrowhead)"/>
+        <path d="M960 320 C1020 400, 1020 520, 1080 640" marker-end="url(#arrowhead)"/>
+        <path d="M960 500 C1000 540, 1040 580, 1080 640" marker-end="url(#arrowhead)"/>
+
+        <!-- Arrowhead -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
+    © 2025 ArthaShield AI. Integration Agent Mock Workflow.
+  </footer>
+
+  <script>
+    // Drag logic for nodes
+    const nodes = document.querySelectorAll('.node');
+    nodes.forEach(node => {
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      node.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - node.offsetLeft;
+        offsetY = e.clientY - node.offsetTop;
+        node.style.zIndex = 10;
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        node.style.left = (e.clientX - offsetX) + 'px';
+        node.style.top = (e.clientY - offsetY) + 'px';
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        node.style.zIndex = 5;
+      });
+    });
+  </script>
+</body>
+</html>

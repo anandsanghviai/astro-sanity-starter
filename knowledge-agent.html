@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield Knowledge Agent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 dark:text-white min-h-screen">
+
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield AI</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+          <a href="ai-hub.html" class="hover:text-slate-900 dark:hover:text-white">AI Hub</a>
+          <a href="ai-oversight.html" class="hover:text-slate-900 dark:hover:text-white">Oversight Tree</a>
+          <a href="api-platform.html" class="hover:text-slate-900 dark:hover:text-white">API Platform</a>
+          <a href="#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- Hero -->
+  <section class="text-center py-10 px-6">
+    <h1 class="text-4xl font-bold mb-3">Knowledge Agent</h1>
+    <p class="max-w-3xl mx-auto text-lg text-slate-600 dark:text-slate-300">
+      Your AI-powered compliance & risk knowledge hub. Search, ask, and get instant insights from regulations, policies, and audits.
+    </p>
+  </section>
+
+  <!-- Search Bar -->
+  <section class="flex justify-center mb-8 px-6">
+    <div class="w-full max-w-2xl flex items-center rounded-2xl glass px-4 py-2 shadow-md">
+      <input type="text" placeholder="Ask about compliance, risk, or AI ethics..." class="flex-1 bg-transparent outline-none px-2 text-slate-800 dark:text-slate-100">
+      <button class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium">Ask AI</button>
+    </div>
+  </section>
+
+  <!-- Knowledge Filters -->
+  <section class="flex justify-center gap-4 mb-10 flex-wrap">
+    <span class="px-4 py-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 cursor-pointer hover:bg-blue-600 hover:text-white">Compliance</span>
+    <span class="px-4 py-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 cursor-pointer hover:bg-blue-600 hover:text-white">Risk</span>
+    <span class="px-4 py-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 cursor-pointer hover:bg-blue-600 hover:text-white">Audit</span>
+    <span class="px-4 py-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 cursor-pointer hover:bg-blue-600 hover:text-white">Ethics</span>
+  </section>
+
+  <!-- Knowledge Cards -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-6 mb-16">
+    <div class="glass rounded-2xl p-6 shadow-md">
+      <h3 class="text-xl font-semibold mb-2">GDPR Compliance</h3>
+      <p class="text-slate-600 dark:text-slate-300 text-sm">Rules for handling personal data under EU GDPR framework.</p>
+    </div>
+    <div class="glass rounded-2xl p-6 shadow-md">
+      <h3 class="text-xl font-semibold mb-2">Model Risk Guidelines</h3>
+      <p class="text-slate-600 dark:text-slate-300 text-sm">Best practices for AI model validation & governance in BFSI.</p>
+    </div>
+    <div class="glass rounded-2xl p-6 shadow-md">
+      <h3 class="text-xl font-semibold mb-2">AI Ethics Principles</h3>
+      <p class="text-slate-600 dark:text-slate-300 text-sm">Framework for fairness, bias mitigation, and accountability.</p>
+    </div>
+    <div class="glass rounded-2xl p-6 shadow-md">
+      <h3 class="text-xl font-semibold mb-2">Regulatory Reporting</h3>
+      <p class="text-slate-600 dark:text-slate-300 text-sm">Automated workflows for sending compliance data to regulators.</p>
+    </div>
+    <div class="glass rounded-2xl p-6 shadow-md">
+      <h3 class="text-xl font-semibold mb-2">Internal Audit Playbook</h3>
+      <p class="text-slate-600 dark:text-slate-300 text-sm">Steps to assess compliance maturity & AI usage risks.</p>
+    </div>
+    <div class="glass rounded-2xl p-6 shadow-md">
+      <h3 class="text-xl font-semibold mb-2">Data Privacy Policy</h3>
+      <p class="text-slate-600 dark:text-slate-300 text-sm">Confidential handling of customer information with audit trails.</p>
+    </div>
+  </section>
+
+  <!-- AI Q&A Mock -->
+  <section class="max-w-4xl mx-auto px-6 mb-20">
+    <div class="glass rounded-2xl p-6 shadow-md">
+      <h3 class="text-lg font-semibold mb-3">AI Response</h3>
+      <div class="text-slate-700 dark:text-slate-200 text-sm leading-relaxed">
+        <p><strong>Question:</strong> How should we manage AI model risk in compliance processes?</p>
+        <p class="mt-2"><strong>AI Answer:</strong> Model risk should be managed through a structured governance framework including model validation, bias testing, monitoring drift, and audit logging. Roles like Model Risk Manager and AI Audit Specialist ensure continuous oversight.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
+    © 2025 ArthaShield AI. Knowledge Agent for Compliance & Risk.
+  </footer>
+</body>
+</html>

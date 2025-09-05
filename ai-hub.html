@@ -22,8 +22,26 @@
           <a href="ai-hub.html" class="text-blue-600 dark:text-blue-400 font-semibold">AI Hub</a>
           <a href="index.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
         </nav>
+		<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"/>
+      </svg>
+    </button>
       </div>
     </div>
+	
+	<div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+    <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
+      <a href="#features" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
+      <a href="#demo" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Live Demo</a>
+      <a href="#sandbox" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Sandbox Video</a>
+      <a href="#security" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Security</a>
+      <a href="ai-hub.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">AI Hub</a>
+      <a href="#compliance" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Compliance</a>
+      <a href="#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
+    </div>
+  </div>
   </header>
 
   <!-- Hero Section -->
@@ -74,11 +92,33 @@
     </div>
 
   </section>
+  
+  
 
   <!-- Footer -->
   <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
     © 2025 ArthaShield. All rights reserved.
   </footer>
 
+	<script>
+	const observer = new IntersectionObserver((entries)=>{
+		  entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); } });
+		}, {threshold: 0.12});
+    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+	
+	  const menuButton = document.getElementById("menuButton");
+	  const mobileMenu = document.getElementById("mobileMenu");
+
+	  menuButton.addEventListener("click", () => {
+		if (mobileMenu.classList.contains("max-h-0")) {
+		  mobileMenu.classList.remove("max-h-0");
+		  mobileMenu.classList.add("max-h-screen"); // expands smoothly
+		} else {
+		  mobileMenu.classList.add("max-h-0");
+		  mobileMenu.classList.remove("max-h-screen");
+		}
+	  });
+  </script>
+  
 </body>
 </html>
