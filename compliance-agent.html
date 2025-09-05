@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield Compliance Agent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass { backdrop-filter: blur(12px); background: rgba(255,255,255,0.7); border: 1px solid rgba(0,0,0,0.05) }
+    .glass-dark { backdrop-filter: blur(12px); background: rgba(17,24,39,0.6); border: 1px solid rgba(255,255,255,0.1) }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield AI</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+          <a href="ai-hub.html" class="hover:text-slate-900 dark:hover:text-white">AI Hub</a>
+          <a href="ai-oversight.html" class="hover:text-slate-900 dark:hover:text-white">Oversight Tree</a>
+          <a href="api-platform.html" class="hover:text-slate-900 dark:hover:text-white">API Platform</a>
+          <a href="#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="text-center py-12 px-6">
+    <h1 class="text-4xl font-bold mb-3">Compliance Agent</h1>
+    <p class="max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">
+      Automating AI compliance checks — aligning your AI systems with global regulations and internal policies.
+    </p>
+  </section>
+
+  <!-- Features -->
+  <section class="mx-auto max-w-6xl px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+    <div class="glass dark:glass-dark rounded-2xl p-5 shadow">
+      <h3 class="font-semibold">Policy Mapping</h3>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Maps AI outputs to GDPR, RBI, and other regulations.</p>
+    </div>
+    <div class="glass dark:glass-dark rounded-2xl p-5 shadow">
+      <h3 class="font-semibold">Risk Flagging</h3>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Detects bias, misuse, and non-compliant behavior in models.</p>
+    </div>
+    <div class="glass dark:glass-dark rounded-2xl p-5 shadow">
+      <h3 class="font-semibold">Audit Reports</h3>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Generates human-readable audit trails and compliance summaries.</p>
+    </div>
+    <div class="glass dark:glass-dark rounded-2xl p-5 shadow">
+      <h3 class="font-semibold">Regulation Monitoring</h3>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Keeps track of evolving AI compliance standards worldwide.</p>
+    </div>
+  </section>
+
+  <!-- Interactive Compliance Check -->
+  <section class="mx-auto max-w-4xl px-6 mb-20">
+    <div class="glass dark:glass-dark rounded-2xl p-6 shadow">
+      <h2 class="text-xl font-semibold mb-4">Run a Compliance Check</h2>
+      <textarea id="inputText" placeholder="Paste AI system output or compliance text here..."
+        class="w-full rounded-lg border border-slate-300 dark:border-slate-700 p-3 bg-transparent h-32"></textarea>
+      <button id="runCheck" 
+        class="mt-3 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+        Run Compliance Check
+      </button>
+
+      <div id="results" class="hidden mt-6 rounded-lg border border-slate-200 dark:border-slate-800 p-4 text-sm">
+        <h3 class="font-semibold mb-2">Compliance Results</h3>
+        <ul class="list-disc pl-5 space-y-1 text-slate-700 dark:text-slate-300">
+          <li><span class="font-medium">GDPR:</span> ✅ Compliant</li>
+          <li><span class="font-medium">RBI AI Guidelines:</span> ⚠️ Needs review</li>
+          <li><span class="font-medium">Bias Check:</span> ❌ Potential gender bias detected</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
+    © 2025 ArthaShield AI. Compliance Agent Module.
+  </footer>
+
+  <script>
+    document.getElementById('runCheck').addEventListener('click', () => {
+      const txt = document.getElementById('inputText').value.trim();
+      if (!txt) {
+        alert("Please paste some text to analyze.");
+        return;
+      }
+      // TODO: Replace this with real backend compliance API
+      document.getElementById('results').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>

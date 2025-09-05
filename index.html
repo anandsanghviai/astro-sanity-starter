@@ -37,33 +37,57 @@
 
   <!-- Navbar -->
   <header class="sticky top-0 z-40">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm ring-1 ring-white/10 glass dark:glass-dark">
-        <a href="#" class="flex items-center gap-3 font-semibold">
-		  <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto" />
-          <span>ArthaShield AI</span>
-        </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm ring-1 ring-white/10 glass dark:glass-dark">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 font-semibold">
+        <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto" />
+        <span>ArthaShield AI</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
 		  <a href="#features" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
 		  <a href="#demo" class="hover:text-slate-900 dark:hover:text-white transition">Live Demo</a>
-		  <a href="#reports" class="hover:text-slate-900 dark:hover:text-white transition">Reports</a>
 		  <a href="#sandbox" class="hover:text-slate-900 dark:hover:text-white transition">Sandbox Video</a>
 		  <a href="#security" class="hover:text-slate-900 dark:hover:text-white transition">Security</a>
+		  <a href="ai-hub.html" class="hover:text-slate-900 dark:hover:text-white transition">AI Hub</a>
 		  <a href="#compliance" class="hover:text-slate-900 dark:hover:text-white transition">Compliance</a>
 		  <a href="#contact" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
 		</nav>
-        <div class="flex items-center gap-2">
-          <button id="cmdk" class="hidden sm:inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-900 transition">
-            <span class="material-symbols-outlined text-base"></span>
-            <span>Search </span>
-          </button>
-          
-          <a href="#demo" class="hidden sm:inline-flex rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2 text-sm font-medium hover:opacity-90 transition">Try Demo</a>
-        </div>
+
+
+      <!-- Right side (Search + Demo button + Hamburger) -->
+      <div class="flex items-center gap-2">
+        <button id="cmdk" class="hidden sm:inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-900 transition">
+          <span class="material-symbols-outlined text-base"></span>
+          <span>Search</span>
+        </button>
+        <a href="#demo" class="hidden sm:inline-flex rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2 text-sm font-medium hover:opacity-90 transition">Try Demo</a>
+
+        <!-- Mobile Hamburger -->
+        <button id="menuToggle" class="md:hidden flex flex-col justify-between w-7 h-6 focus:outline-none">
+          <span class="block h-0.5 bg-slate-900 dark:bg-white rounded"></span>
+          <span class="block h-0.5 bg-slate-900 dark:bg-white rounded"></span>
+          <span class="block h-0.5 bg-slate-900 dark:bg-white rounded"></span>
+        </button>
       </div>
     </div>
-  </header>
+  </div>
 
+  <!-- Mobile Menu (hidden by default) -->
+  <div id="mobileMenu" class="hidden md:hidden px-6 pb-6">
+    <div class="rounded-2xl glass dark:glass-dark shadow-lg ring-1 ring-white/10 p-4 space-y-3">
+      <a href="#features" class="block text-slate-700 dark:text-slate-200 hover:underline">Features</a>
+      <a href="#demo" class="block text-slate-700 dark:text-slate-200 hover:underline">Live Demo</a>
+      <a href="#sandbox" class="block text-slate-700 dark:text-slate-200 hover:underline">Sandbox Video</a>
+      <a href="#security" class="block text-slate-700 dark:text-slate-200 hover:underline">Security</a>
+      <a href="ai-hub.html" class="block text-slate-700 dark:text-slate-200 hover:underline">AI Hub</a>
+      <a href="#compliance" class="block text-slate-700 dark:text-slate-200 hover:underline">Compliance</a>
+      <a href="#contact" class="block text-slate-700 dark:text-slate-200 hover:underline">Contact</a>
+    </div>
+  </div>
+</header>
   <!-- Command Bar Modal -->
   <div id="cmdkModal" class="fixed inset-0 z-50 hidden items-start justify-center p-4">
     <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>

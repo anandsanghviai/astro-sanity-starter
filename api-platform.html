@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield API Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --radius: 1.25rem }
+    html,body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    .glass{backdrop-filter: blur(12px); background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3)); border: 1px solid rgba(255,255,255,0.4)}
+    .glass-dark{backdrop-filter: blur(12px); background: linear-gradient(180deg, rgba(17,24,39,0.6), rgba(17,24,39,0.35)); border: 1px solid rgba(255,255,255,0.08)}
+    .card{border-radius: var(--radius)}
+    .fade-up{opacity:0; transform: translateY(12px); transition: all .6s cubic-bezier(.2,.8,.2,1)}
+    .fade-up.in-view{opacity:1; transform: translateY(0)}
+    .mask { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }
+    .kbd { border:1px solid rgba(100,116,139,.35); border-radius:.375rem; padding:.125rem .375rem; font-size:.75rem }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <!-- top gradient blobs (subtle) -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-20"
+         style="background: radial-gradient(closest-side, #60a5fa, transparent)"></div>
+    <div class="absolute top-1/3 -right-24 h-[24rem] w-[24rem] rounded-full blur-3xl opacity-20"
+         style="background: radial-gradient(closest-side, #a78bfa, transparent)"></div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm ring-1 ring-white/10 glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield AI</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+          <a href="index.html#features" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
+          <a href="ai-hub.html" class="hover:text-slate-900 dark:hover:text-white transition">AI Hub</a>
+          <a href="ai-oversight.html" class="hover:text-slate-900 dark:hover:text-white transition">Oversight Tree</a>
+          <a href="index.html#contact" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <!-- Left: Generate -->
+        <div class="lg:col-span-1 card p-5 bg-white/80 dark:bg-slate-900/80 shadow ring-1 ring-slate-200/60 dark:ring-slate-800 fade-up">
+          <div class="flex items-center justify-between">
+            <h1 class="text-xl font-bold">API Platform</h1>
+            <span class="text-xs text-slate-500">Beta</span>
+          </div>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Generate and manage API keys for ArthaShield services.</p>
+
+          <div class="mt-4 space-y-3">
+            <label class="block">
+              <span class="text-sm text-slate-600 dark:text-slate-300">Key Label</span>
+              <input id="label" type="text" placeholder="e.g., BFSI Sandbox, Backend Service"
+                     class="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent p-2 outline-none"/>
+            </label>
+
+            <label class="block">
+              <span class="text-sm text-slate-600 dark:text-slate-300">Scope</span>
+              <select id="scope" class="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent p-2">
+                <option value="read">Read</option>
+                <option value="write">Write</option>
+                <option value="admin">Admin</option>
+              </select>
+            </label>
+
+            <label class="block">
+              <span class="text-sm text-slate-600 dark:text-slate-300">Expiration</span>
+              <select id="expiry" class="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent p-2">
+                <option value="7">7 days</option>
+                <option value="30" selected>30 days</option>
+                <option value="90">90 days</option>
+                <option value="365">1 year</option>
+                <option value="never">Never</option>
+              </select>
+            </label>
+
+            <button id="generate"
+              class="w-full mt-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+              Generate API Key
+            </button>
+
+            <div id="generatedBox" class="hidden mt-3 rounded-xl border border-emerald-300/50 bg-emerald-50 dark:bg-emerald-900/20 p-3">
+              <div class="text-sm font-semibold">New key created</div>
+              <div class="mt-1 flex items-center gap-2">
+                <code id="generatedKey" class="mask break-all"></code>
+                <button id="copyKey" class="rounded-lg border border-slate-300 dark:border-slate-700 px-2 py-1 text-xs hover:bg-slate-50 dark:hover:bg-slate-800">
+                  Copy
+                </button>
+              </div>
+              <div class="mt-2 text-xs text-emerald-700 dark:text-emerald-300">
+                Save this key now. You won’t be able to see it again.
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200/60 dark:border-yellow-800 p-3 text-xs text-yellow-800 dark:text-yellow-200">
+              <div class="font-semibold mb-1">Security tips</div>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>Treat keys like passwords. Don’t embed in public code.</li>
+                <li>Rotate keys regularly and use least-privilege scopes.</li>
+                <li>Use server-side calls; avoid exposing keys in browser apps.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Keys table -->
+        <div class="lg:col-span-2 card p-5 bg-white/80 dark:bg-slate-900/80 shadow ring-1 ring-slate-200/60 dark:ring-slate-800 fade-up">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <h2 class="text-lg font-bold">Your API Keys</h2>
+            <div class="text-xs text-slate-500">Stored locally for now (demo). Will connect to backend later.</div>
+          </div>
+
+          <div class="mt-3 overflow-x-auto">
+            <table class="min-w-full text-sm">
+              <thead class="text-left text-slate-500">
+                <tr class="border-b border-slate-200 dark:border-slate-800">
+                  <th class="py-2 pr-3">Label</th>
+                  <th class="py-2 pr-3">Key</th>
+                  <th class="py-2 pr-3">Scope</th>
+                  <th class="py-2 pr-3">Created</th>
+                  <th class="py-2 pr-3">Expires</th>
+                  <th class="py-2 pr-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="keysTbody" class="align-top">
+                <!-- rows injected here -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4 text-xs text-slate-500">
+            Need server integration? See inline <code>// TODO</code> markers in the script.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Revoke Modal -->
+  <div id="revokeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+    <div class="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-black/5 p-5">
+      <div class="text-lg font-bold">Revoke API Key?</div>
+      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">This action cannot be undone.</p>
+      <div class="mt-4 flex items-center justify-end gap-2">
+        <button id="cancelRevoke" class="rounded-lg border border-slate-300 dark:border-slate-700 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">Cancel</button>
+        <button id="confirmRevoke" class="rounded-lg bg-red-600 text-white px-3 py-2 text-sm hover:opacity-90">Revoke</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden">
+    <div class="rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2 text-sm shadow-lg">
+      <span id="toastMsg">Copied</span>
+    </div>
+  </div>
+
+  <footer class="py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-sm text-slate-500 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div>© 2025 ArthaShield AI. API Platform.</div>
+      <div class="flex items-center gap-4">
+        <a class="hover:text-slate-900 dark:hover:text-white" href="index.html#security">Security</a>
+        <a class="hover:text-slate-900 dark:hover:text-white" href="index.html#compliance">Compliance</a>
+        <a class="hover:text-slate-900 dark:hover:text-white" href="index.html#contact">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ------ Helpers ------
+    const $ = (sel) => document.querySelector(sel);
+    const fmt = (d)=> new Date(d).toLocaleString();
+    const toast = (msg) => {
+      const t = $('#toast'); $('#toastMsg').textContent = msg;
+      t.classList.remove('hidden'); setTimeout(()=> t.classList.add('hidden'), 1600);
+    };
+
+    // Key generation: pseudo token for demo (prefix + random base64).
+    function generateToken() {
+      // NOTE: Replace with server-side secure generation.
+      const rand = crypto.getRandomValues(new Uint8Array(24));
+      const b64 = btoa(String.fromCharCode(...rand)).replace(/[^a-zA-Z0-9]/g,'').slice(0,40);
+      return `as_${b64}`;
+    }
+
+    // Local storage (demo only)
+    const STORAGE_KEY = 'arthashield_api_keys';
+    const loadKeys = () => JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const saveKeys = (arr) => localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+
+    // ------ UI State ------
+    let pendingRevokeId = null;
+
+    function maskToken(token) {
+      if (!token) return '';
+      return token.slice(0,4) + '••••••••••••••••' + token.slice(-4);
+    }
+
+    function expiryDate(days) {
+      if (days === 'never') return 'Never';
+      const d = new Date();
+      d.setDate(d.getDate() + Number(days));
+      return d.toISOString();
+    }
+
+    function renderTable() {
+      const tbody = $('#keysTbody');
+      const keys = loadKeys();
+      if (!keys.length) {
+        tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-slate-500">No keys yet. Generate one to get started.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = keys.map(k => `
+        <tr class="border-b border-slate-200 dark:border-slate-800">
+          <td class="py-3 pr-3">${k.label || '-'}</td>
+          <td class="py-3 pr-3">
+            <span class="mask">${maskToken(k.token)}</span>
+            <button data-copy="${k.token}" class="ml-2 text-xs rounded border border-slate-300 dark:border-slate-700 px-2 py-1 hover:bg-slate-50 dark:hover:bg-slate-800">Copy</button>
+          </td>
+          <td class="py-3 pr-3 capitalize">${k.scope}</td>
+          <td class="py-3 pr-3">${fmt(k.createdAt)}</td>
+          <td class="py-3 pr-3">${k.expiresAt === 'Never' ? 'Never' : fmt(k.expiresAt)}</td>
+          <td class="py-3 pr-3 text-right">
+            <button data-revoke="${k.id}" class="text-red-600 hover:underline">Revoke</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function addKey({label, scope, expiry}) {
+      const token = generateToken();
+      const now = new Date().toISOString();
+      const keyObj = {
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()),
+        label, scope,
+        token,
+        createdAt: now,
+        expiresAt: expiryDate(expiry)
+      };
+
+      // TODO: Replace with backend call:
+      // const res = await fetch('/api/keys', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({label, scope, expiry}) });
+      // const keyObj = await res.json();
+
+      const keys = loadKeys();
+      keys.unshift(keyObj);
+      saveKeys(keys);
+
+      // Show once
+      $('#generatedKey').textContent = token;
+      $('#generatedBox').classList.remove('hidden');
+      renderTable();
+      toast('API key generated');
+    }
+
+    function revokeKey(id) {
+      // TODO: Replace with backend call:
+      // await fetch(`/api/keys/${id}`, { method:'DELETE' });
+      const keys = loadKeys().filter(k => k.id !== id);
+      saveKeys(keys);
+      renderTable();
+      toast('API key revoked');
+    }
+
+    // ------ Events ------
+    window.addEventListener('DOMContentLoaded', () => {
+      // Fade-in animations
+      document.querySelectorAll('.fade-up').forEach((el,i)=>{
+        setTimeout(()=> el.classList.add('in-view'), 80*i);
+      });
+
+      renderTable();
+
+      $('#generate').addEventListener('click', () => {
+        const label = $('#label').value.trim();
+        const scope = $('#scope').value;
+        const expiry = $('#expiry').value;
+        if (!label) { toast('Please add a label'); return; }
+        addKey({label, scope, expiry});
+        // Clear only label to encourage unique names
+        $('#label').value = '';
+      });
+
+      document.body.addEventListener('click', (e) => {
+        const copyBtn = e.target.closest('button[data-copy]');
+        const revokeBtn = e.target.closest('button[data-revoke]');
+        if (copyBtn) {
+          const token = copyBtn.getAttribute('data-copy');
+          navigator.clipboard.writeText(token).then(()=> toast('Key copied'));
+        }
+        if (revokeBtn) {
+          pendingRevokeId = revokeBtn.getAttribute('data-revoke');
+          const m = $('#revokeModal');
+          m.classList.remove('hidden'); m.classList.add('flex');
+        }
+      });
+
+      $('#cancelRevoke').addEventListener('click', () => {
+        const m = $('#revokeModal'); m.classList.add('hidden'); m.classList.remove('flex'); pendingRevokeId = null;
+      });
+      $('#confirmRevoke').addEventListener('click', () => {
+        if (pendingRevokeId) revokeKey(pendingRevokeId);
+        const m = $('#revokeModal'); m.classList.add('hidden'); m.classList.remove('flex'); pendingRevokeId = null;
+      });
+    });
+  </script>
+</body>
+</html>
