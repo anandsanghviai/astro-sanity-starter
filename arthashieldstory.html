@@ -25,14 +25,34 @@
         </a>
         <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
 		  <a href="#story" class="hover:text-slate-900 dark:hover:text-white">Why ArthaShield</a>
-          <a href="#credibility" class="hover:text-slate-900 dark:hover:text-white">Governance Principles</a>
+          <a href="#credibility" class="hover:text-slate-900 dark:hover:text-white">Global Alignment</a>
 		  <a href="#values" class="hover:text-slate-900 dark:hover:text-white">Values</a>
 		  <a href="#team" class="hover:text-slate-900 dark:hover:text-white">Team</a>
           <a href="ai-hub.html" class="hover:text-slate-900 dark:hover:text-white">AI Hub</a>
           <a href="index.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
         </nav>
-      </div>
+	  
+		<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+			  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					  d="M4 6h16M4 12h16m-7 6h7"/>
+			  </svg>
+			</button>
+		 </div>
     </div>
+	
+	
+	<!-- Mobile Nav (hidden by default) -->
+  <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+    <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
+      <a href="#story" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Why ArthaShield</a>
+          <a href="#credibility" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Global Alignment</a>
+		  <a href="#values" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Values</a>
+		  <a href="#team" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Team</a>
+          <a href="ai-hub.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">AI Hub</a>
+          <a href="index.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
+  </div>
+	
   </header>
   
    <!-- Storytelling Section -->
@@ -174,7 +194,7 @@
 <!-- Values Section -->
 <section id="values" class="py-16 bg-slate-50 dark:bg-slate-800">
   <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Human Centered Ethics</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Human Centered Ethics</h2>
     <p class="text-slate-600 dark:text-slate-400 mb-12">
       The values guiding every decision we make.
     </p>
@@ -217,7 +237,7 @@
 <!-- Team Section -->
 <section id="team" class="py-16 bg-white dark:bg-slate-900">
   <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">The People Behind ArthaShield</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">The People</h2>
     <p class="text-slate-600 dark:text-slate-400 mb-12">
       We’ve lived the pain of AI racing ahead of governance. Our team combines experience in 
       <span class="font-semibold">BFSI regulation, AI engineering, and Risk management</span> 
@@ -228,7 +248,7 @@
       <div class="p-6 rounded-2xl shadow-lg bg-slate-50 dark:bg-slate-800">
         <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Vision & Strategy Lead</h3>
         <p class="mt-2 text-slate-600 dark:text-slate-400">
-          Former product leader with deep expertise in AI governance and compliance within BFSI. 
+          Former Product Leader with  expertise in  AI applications, Governance and Compliance within BFSI. 
           Driving the mission to close the trust gap.
         </p>
       </div>
@@ -257,4 +277,24 @@
     © 2025 ArthaShield AI. Mission & Vision .
   </footer>
 </body>
+<script>
+// Scroll animations
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); } });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+	
+	  const menuButton = document.getElementById("menuButton");
+	  const mobileMenu = document.getElementById("mobileMenu");
+
+	  menuButton.addEventListener("click", () => {
+		if (mobileMenu.classList.contains("max-h-0")) {
+		  mobileMenu.classList.remove("max-h-0");
+		  mobileMenu.classList.add("max-h-screen"); // expands smoothly
+		} else {
+		  mobileMenu.classList.add("max-h-0");
+		  mobileMenu.classList.remove("max-h-screen");
+		}
+	  });
+  </script>
 </html>
