@@ -1,0 +1,509 @@
+openapi: 3.0.3
+info:
+  title: Arthashield Compliance Agent - Extended APIs
+  version: "1.0.0"
+  description: |
+    Curated Compliance Agent surface for Arthashield.
+    Includes KYC Onboarding, Fraud Intelligence (UPI & Card patterns), Omnichannel Triage (email/chat/voice),
+    and Retrieval-Augmented-Generation (RAG) over regulations (MAS/IRDAI/SEBI).
+    
+    Designed for enterprise use and aligned with ISO/IEC 42001:2023 (AI Management Systems):
+    - Governance & accountability
+    - Explainability & auditability
+    - Lifecycle controls & responsible AI adoption
+  contact:
+    name: Arthashield AI Hub
+    url: https://arthashield.ai
+    email: support@arthashield.ai
+
+servers:
+  - url: https://api.arthashield.ai/v1/compliance
+    description: Production
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+
+    KYCVerifyRequest:
+      type: object
+      required: [applicant_id, documents]
+      properties:
+        applicant_id:
+          type: string
+        documents:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: "passport, driving_license, aadhaar"
+              content:
+                type: string
+                description: "base64 or document reference id"
+    KYCVerifyResponse:
+      type: object
+      properties:
+        applicant_id:
+          type: string
+        status:
+          type: string
+          enum: [verified, manual_review, rejected]
+        match_score:
+          type: number
+        reason:
+          type: string
+
+    KYCScreenRequest:
+      type: object
+      required: [applicant_id, name]
+      properties:
+        applicant_id:
+          type: string
+        name:
+          type: string
+        dob:
+          type: string
+          format: date
+        identifiers:
+          type: object
+    KYCScreenResponse:
+      type: object
+      properties:
+        applicant_id:
+          type: string
+        screening_status:
+          type: string
+          enum: [clear, watchlist_hit, review]
+        matches:
+          type: array
+          items:
+            type: object
+            properties:
+              source:
+                type: string
+              matched_entity:
+                type: string
+              match_strength:
+                type: number
+
+    TransactionAnalyzeRequest:
+      type: object
+      required: [transaction_id, amount, channel]
+      properties:
+        transaction_id:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        channel:
+          type: string
+          description: "upi|card|netbanking"
+        merchant:
+          type: object
+          properties:
+            id:
+              type: string
+            category:
+              type: string
+        metadata:
+          type: object
+    TransactionAnalyzeResponse:
+      type: object
+      properties:
+        transaction_id:
+          type: string
+        fraud_risk_score:
+          type: number
+        risk_level:
+          type: string
+          enum: [low, medium, high, critical]
+        reasons:
+          type: array
+          items:
+            type: string
+        recommended_action:
+          type: string
+
+    SimilarityRequest:
+      type: object
+      required: [seed_text]
+      properties:
+        seed_text:
+          type: string
+        timeframe:
+          type: object
+          properties:
+            from:
+              type: string
+              format: date-time
+            to:
+              type: string
+              format: date-time
+        threshold:
+          type: number
+    SimilarityResponse:
+      type: object
+      properties:
+        seed_text:
+          type: string
+        matches:
+          type: array
+          items:
+            type: object
+            properties:
+              case_id:
+                type: string
+              snippet:
+                type: string
+              similarity_score:
+                type: number
+
+    TriageRequest:
+      type: object
+      required: [channel, payload]
+      properties:
+        channel:
+          type: string
+          enum: [email, chat, voice]
+        payload:
+          type: object
+    TriageResponse:
+      type: object
+      properties:
+        triage_id:
+          type: string
+        category:
+          type: string
+        priority:
+          type: string
+        suggested_case:
+          type: string
+
+    RegulationsQueryRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+        jurisdictions:
+          type: array
+          items:
+            type: string
+        top_k:
+          type: integer
+          default: 5
+    RegulationsQueryResponse:
+      type: object
+      properties:
+        query:
+          type: string
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              snippet:
+                type: string
+              citation:
+                type: string
+              source_url:
+                type: string
+              relevance_score:
+                type: number
+
+    RegulationsCitationResponse:
+      type: object
+      properties:
+        citation_id:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+        document_url:
+          type: string
+        clause:
+          type: string
+
+paths:
+
+  /kyc/verify:
+    post:
+      tags: [KYC]
+      summary: KYC document verification
+      description: Verify identity documents and perform biometric face-match.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KYCVerifyRequest'
+      responses:
+        "200":
+          description: KYC verification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KYCVerifyResponse'
+
+  /kyc/screen:
+    post:
+      tags: [KYC]
+      summary: AML/PEP/Watchlist screening
+      description: Screen applicant against sanctions, PEPs, and watchlists.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KYCScreenRequest'
+      responses:
+        "200":
+          description: Screening result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KYCScreenResponse'
+
+  /transactions/analyze:
+    post:
+      tags: [Fraud]
+      summary: Analyze transaction for fraud patterns
+      description: Fraud intelligence tuned to UPI and Card transactions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionAnalyzeRequest'
+      responses:
+        "200":
+          description: Transaction analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionAnalyzeResponse'
+
+  /inference/similarity:
+    post:
+      tags: [Fraud]
+      summary: Find similar cases or clusters
+      description: Identify similar incidents (fraud rings, repeated complaints).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimilarityRequest'
+      responses:
+        "200":
+          description: Similarity results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimilarityResponse'
+
+  /triage:
+    post:
+      tags: [Triage]
+      summary: Omnichannel triage
+      description: Submit inbound items from email, chat, or voice channels.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriageRequest'
+      responses:
+        "200":
+          description: Triage result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriageResponse'
+
+  /regulations/query:
+    post:
+      tags: [Regulations]
+      summary: Query regulations with RAG
+      description: Ask natural-language Qs over MAS/IRDAI/SEBI circulars.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegulationsQueryRequest'
+      responses:
+        "200":
+          description: Query results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegulationsQueryResponse'
+
+  /regulations/citation/{citation_id}:
+    get:
+      tags: [Regulations]
+      summary: Get regulation citation
+      description: Retrieve authoritative text and clause reference.
+      parameters:
+        - in: path
+          name: citation_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Citation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegulationsCitationResponse'
+
+  /cases/open:
+    post:
+      tags: [Cases]
+      summary: Open a compliance case
+      description: Create a new compliance investigation case.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                case_id:
+                  type: string
+                source:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          description: Case created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  case_id:
+                    type: string
+                  status:
+                    type: string
+
+  /explain/{case_id}:
+    get:
+      tags: [Audit]
+      summary: Explain decision
+      description: Return rules, signals, and citations linked to decisions.
+      parameters:
+        - in: path
+          name: case_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Explanation payload
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  case_id:
+                    type: string
+                  decision:
+                    type: string
+                  rules_triggered:
+                    type: array
+                    items:
+                      type: string
+                  model_signals:
+                    type: array
+                    items:
+                      type: string
+                  regulatory_citations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        citation_id:
+                          type: string
+                        snippet:
+                          type: string
+
+  /audit/search:
+    get:
+      tags: [Audit]
+      summary: Search audit logs
+      description: Query decision and audit logs for traceability.
+      parameters:
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: List of audit logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    log_id:
+                      type: string
+                    case_id:
+                      type: string
+                    action:
+                      type: string
+                    timestamp:
+                      type: string
+                      format: date-time
+
+tags:
+  - name: KYC
+    description: KYC onboarding & screening
+  - name: Fraud
+    description: Transaction analysis & fraud intelligence
+  - name: Triage
+    description: Omnichannel intake & triage
+  - name: Regulations
+    description: Regulatory RAG queries & citations
+  - name: Cases
+    description: Case lifecycle management
+  - name: Audit
+    description: Explainability & audit logs
+
+externalDocs:
+  description: ISO/IEC 42001:2023 - AI management systems reference
+  url: https://www.iso.org/standard/42001
+
