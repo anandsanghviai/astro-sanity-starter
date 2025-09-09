@@ -365,7 +365,7 @@
         <div class="p-6 rounded-xl border border-slate-100 dark:border-slate-800 bg-gradient-to-b from-white/50 to-slate-50/40 dark:from-slate-900/60 dark:to-slate-900/50 text-center">
           <!-- Simple ISO badge -->
           <div class="flex items-center justify-center mb-4">
-            <img src="ISO-42001-2023-1.png" alt="ISO-42001-2023-1 Logo" class="h- w-auto" />
+            <img src="ISO-42001-2023-1.png" alt="ISO-42001-2023-1 Logo" class="h-20 w-auto" />
           </div>
           <div class="text-sm font-semibold">ISO/IEC 42001:2023</div>
           <div class="mt-2 text-xs text-slate-500 dark:text-slate-400">Aligned AI management practices for governance &amp; safety</div>
@@ -541,6 +541,14 @@
 		  mobileMenu.classList.remove("max-h-screen");
 		}
 	  });
+	  
+	  // Close menu when clicking a link
+		document.querySelectorAll("#mobileMenu a").forEach(link => {
+		  link.addEventListener("click", () => {
+			mobileMenu.classList.add("max-h-0");
+			mobileMenu.classList.remove("max-h-screen");
+		  });
+		});
   </script>
 </body>
 </html>
