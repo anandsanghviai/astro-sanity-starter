@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ArthaShield — Autopilot Assistant (Section)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Smooth max-height transitions for mobile menu / panels */
+    .transition-max { transition: max-height 0.36s ease; }
+    /* Small visual polish for assistant bubbles */
+    .assistant-bubble { background: linear-gradient(90deg, #eef2ff, #f8fafc); }
+    .user-bubble { background: linear-gradient(90deg, #eef7ff, #ffffff); }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <!-- Autopilot Assistant Section -->
+  <section id="autopilot" class="max-w-6xl mx-auto p-6 md:p-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Left column: explanation & CTAs -->
+      <div class="lg:col-span-1 bg-white rounded-2xl p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <div class="rounded-full bg-indigo-600 text-white w-12 h-12 flex items-center justify-center text-xl font-semibold">A</div>
+          <div>
+            <h3 class="text-lg font-semibold">Autopilot Assistant</h3>
+            <p class="text-sm text-slate-600 mt-1">An always-on compliance copilot that monitors events, suggests actions, and creates audit-ready explanations. Designed to reduce false positives and speed investigator time-to-resolution.</p>
+          </div>
+        </div>
+
+        <dl class="grid grid-cols-1 gap-3 mt-5 text-sm">
+          <div class="flex items-center justify-between py-2">
+            <div class="text-slate-600">Continuous Monitoring</div>
+            <div class="text-xs px-2 py-1 rounded bg-emerald-100 text-emerald-700">Realtime</div>
+          </div>
+          <div class="flex items-center justify-between py-2">
+            <div class="text-slate-600">Explainability</div>
+            <div class="text-xs px-2 py-1 rounded bg-indigo-100 text-indigo-700">Audit Ready</div>
+          </div>
+          <div class="flex items-center justify-between py-2">
+            <div class="text-slate-600">Data Flow</div>
+            <div class="text-xs px-2 py-1 rounded bg-slate-100 text-slate-700">Agent / Local</div>
+          </div>
+        </dl>
+
+        <div class="mt-6">
+          <button id="startPilotBtn" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-2xl bg-indigo-600 text-white font-medium hover:bg-indigo-700">Start sandbox pilot</button>
+          <button id="demoBtn" class="w-full mt-3 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-2xl border border-slate-200 bg-white text-slate-700">Request live demo</button>
+        </div>
+
+        <div class="mt-6 text-xs text-slate-500">
+          <strong>How it helps:</strong>
+          <ul class="list-disc ml-4 mt-2">
+            <li>Reduce investigator time by surfacing explainable reasons.</li>
+            <li>Enforce local-only inference for high sensitivity flows.</li>
+            <li>Auto-map events to RBI CMS codes with evidentiary links.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Middle column: assistant chat & suggested actions -->
+      <div class="lg:col-span-1 bg-white rounded-2xl p-4 shadow-sm flex flex-col">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="rounded-full bg-indigo-600 w-10 h-10 flex items-center justify-center text-white font-semibold">AI</div>
+            <div>
+              <h4 class="font-semibold">Compliance Copilot</h4>
+              <p class="text-xs text-slate-500">Say something or pick a suggested action.</p>
+            </div>
+          </div>
+          <div class="text-xs text-slate-400">Sandbox</div>
+        </div>
+
+        <!-- conversation pane -->
+        <div id="chatPane" class="mt-4 flex-1 overflow-y-auto px-2 py-3 space-y-3 h-64 border rounded-lg border-slate-100">
+          <!-- messages injected here -->
+          <div class="text-center text-xs text-slate-400">No interactions yet — try a suggested action</div>
+        </div>
+
+        <!-- quick actions -->
+        <div class="mt-4">
+          <div class="grid grid-cols-2 gap-2">
+            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="triage_upi">Triage UPI alert</button>
+            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="classify_complaint">Classify complaint</button>
+            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="kyc_doc_check">KYC doc check</button>
+            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="map_to_rbi">Map to RBI CMS</button>
+          </div>
+        </div>
+
+        <!-- user input -->
+        <div class="mt-4 flex items-center gap-2">
+          <input id="userInput" class="flex-1 px-3 py-2 border rounded-lg text-sm" placeholder="Ask Autopilot: e.g. "Analyze txn 0x123..."" />
+          <button id="sendBtn" class="px-3 py-2 rounded-lg bg-indigo-600 text-white">Send</button>
+        </div>
+      </div>
+
+      <!-- Right column: explainability & evidence -->
+      <div class="lg:col-span-1 bg-white rounded-2xl p-6 shadow-sm">
+        <div class="flex items-center justify-between">
+          <h4 class="font-semibold">Explainability & Evidence</h4>
+          <button id="toggleAutoExplain" class="text-xs text-indigo-600">Auto Explain: On</button>
+        </div>
+
+        <div id="explainBox" class="mt-3 text-sm text-slate-700 h-64 overflow-y-auto border rounded-lg p-3 border-slate-100">
+          <p class="text-slate-400">Explanations will appear here after the assistant runs an analysis. Each explanation attaches evidence links and model version.</p>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="text-xs font-medium text-slate-500">Quick Evidence</h5>
+          <ul id="evidenceList" class="mt-2 text-sm text-slate-600 list-disc ml-4">
+            <li>No evidence yet.</li>
+          </ul>
+        </div>
+
+        <div class="mt-4 flex items-center gap-2 text-xs">
+          <input id="localOnly" type="checkbox" class="h-4 w-4" />
+          <label for="localOnly" class="text-slate-600">Enforce Local-only inference for HIGH sensitivity</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Small UI glue to demo the autopilot assistant section
+    const chatPane = document.getElementById('chatPane');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const actionBtns = document.querySelectorAll('.actionBtn');
+    const explainBox = document.getElementById('explainBox');
+    const evidenceList = document.getElementById('evidenceList');
+    const toggleAutoExplain = document.getElementById('toggleAutoExplain');
+    const localOnly = document.getElementById('localOnly');
+
+    let autoExplain = true;
+    toggleAutoExplain.addEventListener('click', ()=>{
+      autoExplain = !autoExplain;
+      toggleAutoExplain.textContent = `Auto Explain: ${autoExplain ? 'On' : 'Off'}`;
+    });
+
+    function appendMessage(who, text){
+      const wrapper = document.createElement('div');
+      wrapper.className = who === 'user' ? 'flex justify-end' : 'flex justify-start';
+      const bubble = document.createElement('div');
+      bubble.className = (who === 'user' ? 'user-bubble' : 'assistant-bubble') + ' rounded-xl p-3 text-sm max-w-[85%]';
+      bubble.textContent = text;
+      wrapper.appendChild(bubble);
+      chatPane.appendChild(wrapper);
+      chatPane.scrollTop = chatPane.scrollHeight;
+    }
+
+    function runMockAnalysis(action){
+      appendMessage('user', `Run: ${action}`);
+      setTimeout(()=>{
+        const assistantText = {
+          'triage_upi': 'UPI txn 0x123 flagged: 0.87 fraud_score — suspicious cluster detected (multiple small transfers). Recommend: hold & review.',
+          'classify_complaint': 'Complaint mapped: RBI CMS 2.4 (UPI failure). Urgency: High. Suggested agent: Customer Support Team A.',
+          'kyc_doc_check': 'Document check: Aadhaar front image likely tampered (edge artefacts). Risk: HIGH.',
+          'map_to_rbi': 'Event maps to RBI CMS 5.1 (Account Closure / Frozen). Rationale: repeated failed KYC attempts within 7 days.'
+        }[action] || 'I analyzed the record and suggest manual review.';
+        appendMessage('assistant', assistantText);
+
+        if(autoExplain){
+          explainBox.innerHTML = `<strong>Explanation:</strong><p class="mt-2">${assistantText} <em class=\"text-slate-500 text-xs\">(model: reg-llm-v1)</em></p>`;
+          evidenceList.innerHTML = `\n            <li>Source: txn_log_2025-09.csv (line 182)</li>\n            <li>Rule: rapid_small_transfers > 5 in 24h</li>\n            <li>Model: fraud-xgb-v3 (AUC=0.92)</li>`;
+        }
+
+      }, 700);
+    }
+
+    actionBtns.forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        runMockAnalysis(e.currentTarget.dataset.action);
+      });
+    });
+
+    sendBtn.addEventListener('click', ()=>{
+      const text = userInput.value.trim();
+      if(!text) return;
+      appendMessage('user', text);
+      userInput.value = '';
+      // mock response
+      setTimeout(()=>{
+        appendMessage('assistant', 'Autopilot: I recommend triaging this as UPI fraud. Explanation available on the right.');
+        if(autoExplain){
+          explainBox.innerHTML = `<strong>Explanation:</strong><p class="mt-2">Autopilot flagged this because of unusual recipient pattern and known mule account (evidence ids attached). <em class=\"text-slate-500 text-xs\">(model: reg-llm-v1)</em></p>`;
+          evidenceList.innerHTML = `\n            <li>Source: email_ticket_442</li>\n            <li>Evidence: recipient flagged in cluster #22</li>\n            <li>Policy: local_only enforced=${localOnly.checked}</li>`;
+        }
+      }, 800);
+    });
+
+    // Start pilot button (demo behavior)
+    document.getElementById('startPilotBtn').addEventListener('click', ()=>{
+      alert('Sandbox pilot request recorded. We will contact ArthaShield sandbox team.');
+    });
+    document.getElementById('demoBtn').addEventListener('click', ()=>{
+      alert('Demo request submitted — someone from ArthaShield will reach out.');
+    });
+  </script>
+</body>
+</html>
