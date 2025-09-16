@@ -1,199 +1,350 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ArthaShield — Autopilot Assistant (Section)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ArthaShield AI —  ISO 42001 Issues</title>
+  <meta name="description" content="ArthaShield AI: demo of Compliance Co-Pilot and  ISO/IEC 42001 issues, challenges and automated responses." />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Smooth max-height transitions for mobile menu / panels */
-    .transition-max { transition: max-height 0.36s ease; }
-    /* Small visual polish for assistant bubbles */
-    .assistant-bubble { background: linear-gradient(90deg, #eef2ff, #f8fafc); }
-    .user-bubble { background: linear-gradient(90deg, #eef7ff, #ffffff); }
+    :root { --radius: 1rem; --glass-bg: rgba(255,255,255,0.62); --glass-border: rgba(255,255,255,0.4); }
+    html,body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    .glass { backdrop-filter: blur(10px); background: linear-gradient(180deg, var(--glass-bg), rgba(255,255,255,0.28)); border: 1px solid var(--glass-border); border-radius: var(--radius); }
+    .glass-dark { backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(17,24,39,0.62), rgba(17,24,39,0.36)); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); }
+    .card { border-radius: calc(var(--radius) + 6px); }
+    .badge { font-size: 0.72rem; padding: 0.18rem 0.5rem; border-radius: 999px; background: rgba(255,255,255,0.85); border: 1px solid rgba(0,0,0,0.06); display:inline-flex; gap:0.4rem; align-items:center; }
+    .issue-tag { font-size:0.75rem; padding: 0.18rem 0.5rem; border-radius: 999px; background:#fff7ed; border-left:3px solid #f59e0b; display:inline-block; }
+    .table-scroll { max-height: 42vh; overflow:auto; }
+    .highlight { background:#fffbeb; border-left:4px solid #f59e0b; padding:0.8rem; border-radius:8px; }
+    .muted { color:#475569; }
+    .glass-action { background: linear-gradient(90deg,#eef2ff, #f8fafc); border: 1px solid rgba(79,70,229,0.06) }
+
+	/* Chat container */
+.chat-output {
+  max-height: 44vh;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scroll-behavior: smooth;
+}
+
+/* Chat bubble base */
+.bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  line-height: 1.5;
+  border-radius: 16px;
+  position: relative;
+  word-wrap: break-word;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: all 0.2s ease-in-out;
+}
+
+/* AI messages */
+.bubble.ai {
+  background: linear-gradient(90deg,#eef2ff,#f8fafc);
+  border: 1px solid rgba(79,70,229,0.1);
+  color: #1e293b;
+  align-self: flex-start;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+/* User messages */
+.bubble.user {
+  background: #3b82f6;
+  color: white;
+  align-self: flex-end;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+/* Timestamp small label */
+.bubble small {
+  display: block;
+  font-size: 0.65rem;
+  margin-top: 2px;
+  opacity: 0.6;
+}
+
+/* Scrollbar styling */
+.chat-output::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-output::-webkit-scrollbar-thumb {
+  background: rgba(100,100,100,0.3);
+  border-radius: 3px;
+}
+
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
-  <!-- Autopilot Assistant Section -->
-  <section id="autopilot" class="max-w-6xl mx-auto p-6 md:p-10">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Left column: explanation & CTAs -->
-      <div class="lg:col-span-1 bg-white rounded-2xl p-6 shadow-sm">
-        <div class="flex items-start gap-4">
-          <div class="rounded-full bg-indigo-600 text-white w-12 h-12 flex items-center justify-center text-xl font-semibold">A</div>
+<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- NAV -->
+  <header class="sticky top-4 z-40 px-6">
+    <div class="mx-auto max-w-7xl">
+      <div class="glass px-4 py-3 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
           <div>
-            <h3 class="text-lg font-semibold">Autopilot Assistant</h3>
-            <p class="text-sm text-slate-600 mt-1">An always-on compliance copilot that monitors events, suggests actions, and creates audit-ready explanations. Designed to reduce false positives and speed investigator time-to-resolution.</p>
+		  <a href="index.html" class="flex items-center gap-3 font-semibold">
+			<img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto" />
+            <div class="font-semibold">ArthaShield AI</div>
+            <div class="text-xs muted">AI Compliance Co-Pilot — ISO/IEC 42001</div>
           </div>
         </div>
-
-        <dl class="grid grid-cols-1 gap-3 mt-5 text-sm">
-          <div class="flex items-center justify-between py-2">
-            <div class="text-slate-600">Continuous Monitoring</div>
-            <div class="text-xs px-2 py-1 rounded bg-emerald-100 text-emerald-700">Realtime</div>
-          </div>
-          <div class="flex items-center justify-between py-2">
-            <div class="text-slate-600">Explainability</div>
-            <div class="text-xs px-2 py-1 rounded bg-indigo-100 text-indigo-700">Audit Ready</div>
-          </div>
-          <div class="flex items-center justify-between py-2">
-            <div class="text-slate-600">Data Flow</div>
-            <div class="text-xs px-2 py-1 rounded bg-slate-100 text-slate-700">Agent / Local</div>
-          </div>
-        </dl>
-
-        <div class="mt-6">
-          <button id="startPilotBtn" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-2xl bg-indigo-600 text-white font-medium hover:bg-indigo-700">Start sandbox pilot</button>
-          <button id="demoBtn" class="w-full mt-3 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-2xl border border-slate-200 bg-white text-slate-700">Request live demo</button>
-        </div>
-
-        <div class="mt-6 text-xs text-slate-500">
-          <strong>How it helps:</strong>
-          <ul class="list-disc ml-4 mt-2">
-            <li>Reduce investigator time by surfacing explainable reasons.</li>
-            <li>Enforce local-only inference for high sensitivity flows.</li>
-            <li>Auto-map events to RBI CMS codes with evidentiary links.</li>
-          </ul>
-        </div>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a class="muted hover:text-indigo-600" href="#demo">Demo</a>
+          <a class="muted hover:text-indigo-600" href="#-issues"> Issues</a>
+          <a class="muted hover:text-indigo-600" href="#compliance-matrix">Matrix</a>
+		  <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
+          <a href="ai-hub.html" class="flex items-center space-x-1 font-semibold text-blue-600 dark:text-blue-400">
+			<span>✨</span>
+			Explore AI Hub </a>
+          <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+		  <!-- Mobile Hamburger -->
+			<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+			  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					  d="M4 6h16M4 12h16m-7 6h7"/>
+			  </svg>
+        </nav>
       </div>
+	  
+	  <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+    <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
+      <a href="#arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
+      <a href="#demo" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Demo</a>
+      <a href="ai-hub.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Explore AI Hub</a>
+      <a href="#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
+    </div>
+  </div>
+	  
+    </div>
+  </header>
 
-      <!-- Middle column: assistant chat & suggested actions -->
-      <div class="lg:col-span-1 bg-white rounded-2xl p-4 shadow-sm flex flex-col">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="rounded-full bg-indigo-600 w-10 h-10 flex items-center justify-center text-white font-semibold">AI</div>
-            <div>
-              <h4 class="font-semibold">Compliance Copilot</h4>
-              <p class="text-xs text-slate-500">Say something or pick a suggested action.</p>
+  <!-- Hero / Summary -->
+  <main class="mx-auto max-w-7xl px-6 py-10">
+    <section class="grid lg:grid-cols-3 gap-8 items-start">
+      <div class="lg:col-span-2 space-y-6">
+        <div class="glass p-6 card shadow">
+          <h1 class="text-2xl font-semibold">ArthaShield — AI Compliance Co-Pilot</h1>
+          <p class="text-sm muted mt-1">Detect AI incidents, map to ISO/IEC 42001 controls, and provide audit-ready remediation guidance for BFSI.</p>
+          <div class="mt-3 flex gap-3">
+            <span class="badge">ISO 42001 mapped</span>
+            <span class="badge">RBI CMS aware</span>
+            <span class="badge">EU AI Act alerts</span>
+          </div>
+        </div>
+
+        <!-- Conversation & quick demo -->
+        <div class="glass p-4 card shadow">
+          <div class="flex gap-4">
+            <div class="w-1/3">
+              <h3 class="font-semibold mb-3">Triggers</h3>
+              <div class="flex flex-col gap-3">
+                <button onclick="runMockAnalysis('triage_upi')" class="py-2 px-3 rounded-lg bg-red-500 text-white">🚨 Fraud anomalies</button>
+                <button onclick="runMockAnalysis('classify_complaint')" class="py-2 px-3 rounded-lg bg-blue-600 text-white">📋 Classify Complaint</button>
+                <button onclick="runMockAnalysis('ai-bias-incident')" class="py-2 px-3 rounded-lg bg-purple-600 text-white"> 🪪 Bias detection in KYC </button>
+                <button onclick="runMockAnalysis('kyc_doc_check')" class="py-2 px-3 rounded-lg bg-amber-500 text-white">⚠️ High-risk complaints</button>
+                <button onclick="runMockAnalysis('simulate-explainability-gap')" class="py-2 px-3 rounded-lg bg-emerald-600 text-white">🔎 Simulate Explainability Gap</button>
+              </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="w-2/3 flex flex-col">
+              <div id="chat" class="glass p-3 card chat-output">
+                <div class="bubble glass-action px-3 py-2 rounded-lg inline-block">
+                  👋 Hello — I’m your AI Compliance Co-Pilot. Choose a trigger to simulate an incident and I'll map it to ISO 42001 controls, recommend actions, and prepare an audit-ready summary.
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <label class="block text-sm mb-2 font-medium">💬 Continue the conversation</label>
+                <div class="flex gap-3">
+                  <input id="userText" type="text" placeholder="e.g. 'Draft RBI incident disclosure'" class="flex-1 px-4 py-2 rounded-lg border border-slate-200 bg-white/80 focus:ring-2 focus:ring-indigo-400" />
+                  <button id="askBtn" class="px-4 py-2 rounded-lg bg-indigo-600 text-white">Ask</button>
+                </div>
+                <div class="flex gap-2 mt-3 flex-wrap">
+                  <button onclick="quickAsk('Map to RBI reporting')" class="px-3 py-1 rounded-full bg-slate-200 text-sm">📑 Map to RBI</button>
+                  <button onclick="quickAsk('Generate draft regulatory report')" class="px-3 py-1 rounded-full bg-slate-200 text-sm">📝 Draft report</button>
+                  <button onclick="quickAsk('Show ISO 42001 gaps')" class="px-3 py-1 rounded-full bg-slate-200 text-sm">⚖️ Show ISO gaps</button>
+                </div>
+              </div>
+
             </div>
           </div>
-          <div class="text-xs text-slate-400">Sandbox</div>
         </div>
 
-        <!-- conversation pane -->
-        <div id="chatPane" class="mt-4 flex-1 overflow-y-auto px-2 py-3 space-y-3 h-64 border rounded-lg border-slate-100">
-          <!-- messages injected here -->
-          <div class="text-center text-xs text-slate-400">No interactions yet — try a suggested action</div>
-        </div>
-
-        <!-- quick actions -->
-        <div class="mt-4">
-          <div class="grid grid-cols-2 gap-2">
-            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="triage_upi">Triage UPI alert</button>
-            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="classify_complaint">Classify complaint</button>
-            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="kyc_doc_check">KYC doc check</button>
-            <button class="actionBtn py-2 rounded-lg border border-slate-200 text-sm" data-action="map_to_rbi">Map to RBI CMS</button>
+        <!-- Quick Recommendation -->
+        <div class="glass p-4 card shadow">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">Quick Recommendation</h3>
+              <p class="text-sm muted">When AI misclassifications or bias incidents occur, prioritize containment, RCA, reporting, and model remediation with audit trails.</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xs muted">Severity</div>
+              <div class="text-lg font-semibold text-rose-600">High</div>
+            </div>
           </div>
-        </div>
-
-        <!-- user input -->
-        <div class="mt-4 flex items-center gap-2">
-          <input id="userInput" class="flex-1 px-3 py-2 border rounded-lg text-sm" placeholder="Ask Autopilot: e.g. "Analyze txn 0x123..."" />
-          <button id="sendBtn" class="px-3 py-2 rounded-lg bg-indigo-600 text-white">Send</button>
         </div>
       </div>
 
-      <!-- Right column: explainability & evidence -->
-      <div class="lg:col-span-1 bg-white rounded-2xl p-6 shadow-sm">
-        <div class="flex items-center justify-between">
-          <h4 class="font-semibold">Explainability & Evidence</h4>
-          <button id="toggleAutoExplain" class="text-xs text-indigo-600">Auto Explain: On</button>
-        </div>
-
-        <div id="explainBox" class="mt-3 text-sm text-slate-700 h-64 overflow-y-auto border rounded-lg p-3 border-slate-100">
-          <p class="text-slate-400">Explanations will appear here after the assistant runs an analysis. Each explanation attaches evidence links and model version.</p>
-        </div>
-
-        <div class="mt-4">
-          <h5 class="text-xs font-medium text-slate-500">Quick Evidence</h5>
-          <ul id="evidenceList" class="mt-2 text-sm text-slate-600 list-disc ml-4">
-            <li>No evidence yet.</li>
+      <!-- Right column:  Issues -->
+      <aside class="space-y-6">
+        <div class="glass p-4 card shadow">
+          <h3 class="font-semibold mb-2"> AI Compliance Issues</h3>
+          <p class="text-sm muted">Examples expected under ISO/IEC 42001 adherence.</p>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li class="flex items-start gap-2"><span class="issue-tag">A</span> Model drift affecting complaint routing</li>
+            <li class="flex items-start gap-2"><span class="issue-tag">B</span> Explainability gaps for black-box models</li>
+            <li class="flex items-start gap-2"><span class="issue-tag">C</span> Data lineage & provenance failures</li>
+            <li class="flex items-start gap-2"><span class="issue-tag">D</span> Bias discovered post-deployment</li>
           </ul>
         </div>
 
-        <div class="mt-4 flex items-center gap-2 text-xs">
-          <input id="localOnly" type="checkbox" class="h-4 w-4" />
-          <label for="localOnly" class="text-slate-600">Enforce Local-only inference for HIGH sensitivity</label>
+        <div class="glass p-4 card shadow">
+          <h3 class="font-semibold mb-2">Demo Controls</h3>
+          <div class="flex flex-col gap-2">
+            <button onclick="injectIssue()" class="py-2 rounded-lg bg-amber-500 text-white">Simulate  Issue</button>
+            <button onclick="exportIncident()" class="py-2 rounded-lg bg-slate-800 text-white">Export Incident (JSON)</button>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </aside>
+    </section>
+	
+	<section id="-issues" class="mt-12 glass p-6 card shadow">
+  <h2 class="text-xl font-semibold mb-4"> AI Compliance Issues (ISO/IEC 42001) — Challenges & ArthaShield Responses</h2>
+  <div class="table-scroll">
+    <table class="min-w-full text-sm">
+      <thead>
+        <tr class="text-left text-slate-700">
+          <th class="px-4 py-2 font-semibold">Issue</th>
+          <th class="px-4 py-2 font-semibold">Practical Challenge</th>
+          <th class="px-4 py-2 font-semibold">How ArthaShield Helps</th>
+          <th class="px-4 py-2 font-semibold">Action / KPI for CDO</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y">
+        <tr>
+          <td class="px-4 py-3 font-medium">Model drift impacting complaint routing</td>
+          <td class="px-4 py-3 muted">Undetected performance decay → missed regulatory escalations, reputational risk</td>
+          <td class="px-4 py-3">Continuous monitoring, auto-drift alerts, automated rollback & canary retrain with timestamped audit</td>
+          <td class="px-4 py-3">KPI: <b>drift_detected_rate</b>, SLA: retrain decision within 48h</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-medium">Explainability gaps for complex ensembles</td>
+          <td class="px-4 py-3 muted">Regulators demand rationale; black-box models can't produce evidence</td>
+          <td class="px-4 py-3">On-demand explainers (SHAP/LIME proxies), counterfactuals, human-readable incident summary mapped to ISO clauses</td>
+          <td class="px-4 py-3">KPI: % incidents with attached explainability artifacts (target 95%)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-medium">Training data lineage & provenance failures</td>
+          <td class="px-4 py-3 muted">Inability to prove training sets → failed audits and fines</td>
+          <td class="px-4 py-3">Immutable dataset registry, hashed artifacts, versioned datasets and access logs for every model build</td>
+          <td class="px-4 py-3">Action: enforce dataset sign-off; KPI: dataset provenance coverage 100%</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-medium">Bias discovered post-deployment</td>
+          <td class="px-4 py-3 muted">Late discovery → customer harm + regulatory escalation</td>
+          <td class="px-4 py-3">Bias scanners + synthetic probing, targeted retraining pipelines, consumer-facing remediation templates</td>
+          <td class="px-4 py-3">SLA: remediation plan within 7 days; KPI: bias incident closure rate</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-  <script>
-    // Small UI glue to demo the autopilot assistant section
-    const chatPane = document.getElementById('chatPane');
-    const userInput = document.getElementById('userInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const actionBtns = document.querySelectorAll('.actionBtn');
-    const explainBox = document.getElementById('explainBox');
-    const evidenceList = document.getElementById('evidenceList');
-    const toggleAutoExplain = document.getElementById('toggleAutoExplain');
-    const localOnly = document.getElementById('localOnly');
+	
+  </main>
+	
+	<script>
+  const chat = document.getElementById('chat');
 
-    let autoExplain = true;
-    toggleAutoExplain.addEventListener('click', ()=>{
-      autoExplain = !autoExplain;
-      toggleAutoExplain.textContent = `Auto Explain: ${autoExplain ? 'On' : 'Off'}`;
+  // Mock responses for each trigger
+  const mockResponses = {
+    triage_upi: [
+      "🚨 UPI transaction anomalies detected. Mapping to ISO 42001 controls...",
+      "Control 5.2 triggered: Customer fund loss risk mitigation.",
+      "Recommendation: Freeze suspicious accounts and notify compliance officer. Audit-ready report generated."
+    ],
+    classify_complaint: [
+      "📋 Complaint received: 'Unauthorized transaction'. Classifying under RBI complaint matrix...",
+      "Mapped to ISO 42001 Control 3.4: Complaint handling & escalation.",
+      "Recommended Action: Initiate investigation within 24h, send acknowledgement to customer."
+    ],
+    kyc_doc_check: [
+      "🪪 KYC document review triggered. Checking for missing or inconsistent data...",
+      "Detected anomalies in PAN and address proofs.",
+      "Action: Request customer to resubmit documents. Log incident for audit trail."
+    ],
+    'ai-bias-incident': [
+      "⚠️ Bias cluster detected in credit scoring AI model.",
+      "ISO 42001 Control 7.1 applied: Model fairness and bias mitigation.",
+      "Recommendation: Trigger synthetic probing and retraining pipeline. Notify CDO."
+    ],
+    'simulate-explainability-gap': [
+      "🔎 Explainability gap detected in ensemble model decisions.",
+      "Action: Generate SHAP/LIME explainers, prepare human-readable summary.",
+      "Audit-ready summary prepared for regulatory inspection."
+    ]
+  };
+
+  // Function to append message to chat
+  function appendBubble(message, isUser=false) {
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble px-3 py-2 rounded-lg inline-block ' + (isUser ? 'bg-indigo-100 text-indigo-900' : 'glass-action');
+    bubble.textContent = message;
+    chat.appendChild(bubble);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  // Run mock analysis for trigger buttons
+  function runMockAnalysis(trigger) {
+    const responses = mockResponses[trigger];
+    if (!responses) return;
+
+    responses.forEach((msg, i) => {
+      setTimeout(() => appendBubble(msg), i * 1000); // stagger messages by 1s
     });
+  }
 
-    function appendMessage(who, text){
-      const wrapper = document.createElement('div');
-      wrapper.className = who === 'user' ? 'flex justify-end' : 'flex justify-start';
-      const bubble = document.createElement('div');
-      bubble.className = (who === 'user' ? 'user-bubble' : 'assistant-bubble') + ' rounded-xl p-3 text-sm max-w-[85%]';
-      bubble.textContent = text;
-      wrapper.appendChild(bubble);
-      chatPane.appendChild(wrapper);
-      chatPane.scrollTop = chatPane.scrollHeight;
-    }
+  // Quick ask buttons
+  function quickAsk(query) {
+    appendBubble("💬 " + query, true);
+    setTimeout(() => appendBubble("🤖 Generating response for: " + query), 500);
+  }
 
-    function runMockAnalysis(action){
-      appendMessage('user', `Run: ${action}`);
-      setTimeout(()=>{
-        const assistantText = {
-          'triage_upi': 'UPI txn 0x123 flagged: 0.87 fraud_score — suspicious cluster detected (multiple small transfers). Recommend: hold & review.',
-          'classify_complaint': 'Complaint mapped: RBI CMS 2.4 (UPI failure). Urgency: High. Suggested agent: Customer Support Team A.',
-          'kyc_doc_check': 'Document check: Aadhaar front image likely tampered (edge artefacts). Risk: HIGH.',
-          'map_to_rbi': 'Event maps to RBI CMS 5.1 (Account Closure / Frozen). Rationale: repeated failed KYC attempts within 7 days.'
-        }[action] || 'I analyzed the record and suggest manual review.';
-        appendMessage('assistant', assistantText);
+  // Input field interaction
+  document.getElementById('askBtn').addEventListener('click', () => {
+    const input = document.getElementById('userText');
+    if (!input.value.trim()) return;
+    quickAsk(input.value.trim());
+    input.value = '';
+  });
+  
+  function appendBubble(message, isUser=false) {
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble ' + (isUser ? 'user' : 'ai');
+  bubble.textContent = message;
+  chat.appendChild(bubble);
+  chat.scrollTop = chat.scrollHeight;
+}
 
-        if(autoExplain){
-          explainBox.innerHTML = `<strong>Explanation:</strong><p class="mt-2">${assistantText} <em class=\"text-slate-500 text-xs\">(model: reg-llm-v1)</em></p>`;
-          evidenceList.innerHTML = `\n            <li>Source: txn_log_2025-09.csv (line 182)</li>\n            <li>Rule: rapid_small_transfers > 5 in 24h</li>\n            <li>Model: fraud-xgb-v3 (AUC=0.92)</li>`;
-        }
+</script>
 
-      }, 700);
-    }
 
-    actionBtns.forEach(btn=>{
-      btn.addEventListener('click', (e)=>{
-        runMockAnalysis(e.currentTarget.dataset.action);
-      });
-    });
-
-    sendBtn.addEventListener('click', ()=>{
-      const text = userInput.value.trim();
-      if(!text) return;
-      appendMessage('user', text);
-      userInput.value = '';
-      // mock response
-      setTimeout(()=>{
-        appendMessage('assistant', 'Autopilot: I recommend triaging this as UPI fraud. Explanation available on the right.');
-        if(autoExplain){
-          explainBox.innerHTML = `<strong>Explanation:</strong><p class="mt-2">Autopilot flagged this because of unusual recipient pattern and known mule account (evidence ids attached). <em class=\"text-slate-500 text-xs\">(model: reg-llm-v1)</em></p>`;
-          evidenceList.innerHTML = `\n            <li>Source: email_ticket_442</li>\n            <li>Evidence: recipient flagged in cluster #22</li>\n            <li>Policy: local_only enforced=${localOnly.checked}</li>`;
-        }
-      }, 800);
-    });
-
-    // Start pilot button (demo behavior)
-    document.getElementById('startPilotBtn').addEventListener('click', ()=>{
-      alert('Sandbox pilot request recorded. We will contact ArthaShield sandbox team.');
-    });
-    document.getElementById('demoBtn').addEventListener('click', ()=>{
-      alert('Demo request submitted — someone from ArthaShield will reach out.');
-    });
-  </script>
 </body>
 </html>
