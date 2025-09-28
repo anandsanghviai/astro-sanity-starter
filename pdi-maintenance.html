@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield PDI & Ongoing Maintenance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+
+<header class="sticky top-0 z-40">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+      <a href="index.html" class="flex items-center gap-3 font-semibold">
+        <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+        <span>ArthaShield AI</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+        <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
+        <a href="#pdi-autopilot" class="hover:text-slate-900 dark:hover:text-white">PDI & Maintenance</a>
+        <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
+        <a href="ai-agents.html" class="hover:text-slate-900 dark:hover:text-white">Agents</a>
+        <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+      </nav>
+      <button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+    <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
+      <a href="autopilot-assistant.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Solution</a>
+      <a href="#pdi-autopilot" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">PDI & Maintenance</a>
+      <a href="arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
+      <a href="ai-agents.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Agents</a>
+      <a href="arthashieldfeatures.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
+    </div>
+  </div>
+</header>
+
+
+<section id="pdi-autopilot" class="py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+      🛡 AI Autopilot — Pre-Deployment Inspection
+    </h2>
+    <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-12">
+      Monitor your AI like Tesla monitors its cars — anticipate risks, detect anomalies, and stay compliant before hitting the road.
+    </p>
+
+    <!-- Autopilot Dashboard Cards -->
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow flex flex-col gap-4 hover:scale-105 transition-transform duration-300">
+        <!-- <img src="images/sensor-risk.svg" class="h-16 w-16 mx-auto" alt="Sensor"> -->
+        <h3 class="text-xl font-bold text-center">AI Sensor Check</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 text-center">
+          Scan for bias, fairness gaps, and regulatory blind spots — AI’s pre-flight inspection.
+        </p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow flex flex-col gap-4 hover:scale-105 transition-transform duration-300">
+        <!-- <img src="images/anomaly-detection.svg" class="h-16 w-16 mx-auto" alt="Anomaly"> -->
+        <h3 class="text-xl font-bold text-center">Anomaly Radar</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 text-center">
+          Detect drift, model misbehavior, and potential compliance violations — like radar tracking the road ahead.
+        </p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow flex flex-col gap-4 hover:scale-105 transition-transform duration-300">
+        <!-- <img src="images/pilot-dashboard.svg" class="h-16 w-16 mx-auto" alt="Dashboard"> -->
+        <h3 class="text-xl font-bold text-center">Autopilot Dashboard</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 text-center">
+          Real-time metrics, safety scores, and compliance status — your cockpit to monitor AI before launch.
+        </p>
+      </div>
+    </div>
+
+    <a href="autopilot-assistant.html" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
+      Engage AI Autopilot →
+    </a>
+  </div>
+</section>
+
+<section id="ongoing-autopilot" class="py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+      🛰 Continuous AI Monitoring
+    </h2>
+    <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-12">
+      Like Autopilot constantly scanning the road, our AI sensors ensure safety, detect anomalies, and trigger retraining automatically.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow flex flex-col gap-4 hover:scale-105 transition-transform duration-300">
+        <!-- <img src="images/alerts.svg" class="h-16 w-16 mx-auto" alt="Alerts"> -->
+        <h3 class="text-xl font-bold text-center">🚨 Safety Alerts</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 text-center">
+          Receive instant notifications on anomalies, bias spikes, or compliance breaches — AI’s safety airbags.
+        </p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow flex flex-col gap-4 hover:scale-105 transition-transform duration-300">
+        <!-- <img src="images/retraining.svg" class="h-16 w-16 mx-auto" alt="Retraining"> -->
+        <h3 class="text-xl font-bold text-center">🔄 Smart Retraining</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 text-center">
+          Models update automatically to adapt to new data and regulations — AI’s autopilot recalibration.
+        </p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow flex flex-col gap-4 hover:scale-105 transition-transform duration-300">
+        <!-- <img src="images/audit.svg" class="h-16 w-16 mx-auto" alt="Audit"> -->
+        <h3 class="text-xl font-bold text-center">📊 Audit Logs</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 text-center">
+          Full traceability, versioning, and approvals — your AI black box for compliance.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
+  © 2025 ArthaShield AI. All Rights Reserved.
+</footer>
+
+<script>
+  const menuButton = document.getElementById("menuButton");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuButton.addEventListener("click", () => {
+    mobileMenu.classList.toggle("max-h-0");
+    mobileMenu.classList.toggle("max-h-screen");
+  });
+</script>
+
+</body>
+</html>

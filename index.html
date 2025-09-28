@@ -26,11 +26,27 @@
         <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
 		  <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
           <a href="#credibility" class="hover:text-slate-900 dark:hover:text-white">Global Alignment</a>
-		  <a href="ai-agents.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Agents</a>
+		  
 		  <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
-          <a href="ai-hub.html" class="flex items-center space-x-1 font-semibold text-blue-600 dark:text-blue-400">
-			<span>✨</span>
-			Explore AI Hub </a>
+		  <div class="relative group">
+			<button class="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-white focus:outline-none">
+			  <span>Resources</span>
+			  <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+			  </svg>
+			</button>
+			<!-- Dropdown menu -->
+			<div class="absolute left-0 mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition">
+			  <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Agents</a>
+			  <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">PDI</a>
+			  <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">
+					<span>✨</span>
+					Explore AI Hub 
+			  </a>
+			  <a href="blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
+			</div>
+		  </div>
+		  
           <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
         </nav>
 	  
@@ -60,144 +76,119 @@
   </header>
   
    <!-- Storytelling Section -->
-  <section id="story" class="py-10 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+ <!-- Storytelling Section -->
+<section id="story" class="py-10 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
   <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Hero -->
     <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-6">
       AI Trust Layer for RegTech <span class="bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">ArthaShield</span>
     </h2>
     <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-12">
-      AI is moving faster than rules. <br>  Risk is piling up. <br> 
+      AI is moving faster than rules. <br> Risk is piling up. <br>
       <strong>ArthaShield</strong> exists to close this <em>trust gap</em>.
     </p>
-	
-	<!-- Centered CTA Section -->
-		  
-
-		<div class="flex flex-row justify-center items-center gap-4 mb-12 flex-nowrap">
-		  <!-- Checkout Button -->
-		  <a href="arthashieldfeatures.html" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
-			Checkout
-		  </a>
-
-		  <!-- Try Autopilot Button -->
-		  <a href="autopilot-assistant.html" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-slate-900 to-slate-700 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
-			Try Autopilot
-		  </a>
-		</div>
-
-
-			
-
-		 
-
-
-    <!-- Narrative Grid -->
-    <div class="py-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 text-left">
-      <!-- Problem -->
-	  <div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px]">
-  
-	  <!-- Top 60%: Image -->
-	  <div class="basis-[60%] flex items-center justify-center bg-gray-100">
-		<img src="images/challenge-sheild.png" 
-			 alt="Arthashield Image" 
-			 class="w-full h-full object-contain" />
-	  </div>
-
-	  <!-- Bottom 40%: Text -->
-	 
-		<div class="basis-[40%] card bg-white  dark:bg-slate-900 p-6 shadow ring-1 ring-slate-200 dark:ring-slate-800">
-        <h3 class="text-xl font-bold mb-2"> BFSI Institutions</h3>
-        <p class="text-slate-600 dark:text-slate-300 text-sm">
-          Face fragmented systems — CRM, core banking, emails — with no unified AI oversight.  
-          Compliance struggles to keep pace with innovation.
-        </p>
-      </div>
-
-	</div>
-
-      <!-- Hero -->
-      <div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px]">
-  
-	  <!-- Top 60%: Image -->
-	  <div class="basis-[60%] flex items-center justify-center bg-gray-100">
-		<img src="images/safe-trusted-ai.png" 
-			 alt="Arthashield Image" 
-			 class="w-full h-full object-contain" />
-	  </div>
-
-	  <!-- Bottom 40%: Text -->
-	  <div class="basis-[40%] bg-gradient-to-tr from-blue-600 to-indigo-600 text-white p-6 flex flex-col justify-center">
-		<h3 class="text-xl font-bold mb-2">ArthaShield</h3>
-		<p class="text-white/90 text-sm">
-		  <strong>ArthaShield</strong> steps in as the SeatBelt for AI — giving you confidence to innovate with transparency, explainability, and compliance.
-		</p>
-	  </div>
-
-	</div>
-
-
-
-
-      <!-- Agents -->
-	  <div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px]">
-  
-		  <!-- Top 60%: Image -->
-		  <div class="basis-[60%] flex items-center justify-center bg-gray-100">
-			<img src="images/shield-agents.png" 
-				 alt="Arthashield Image" 
-				 class="w-full h-full object-contain" />
-		  </div>
-
-		  <!-- Bottom 40%: Text -->
-		  <div class="basis-[40%] card bg-white dark:bg-slate-900 p-6 shadow ring-1 ring-slate-200 dark:ring-slate-800 justify-center">
-		  
-			<h3 class="text-xl font-bold mb-2">Agents</h3>
-			
-			<ul class="space-y-2 text-sm">
-			  <li>🕵️ <strong>Compliance Agent</strong> </li>
-			  <li>📚 <strong>Knowledge Agent</strong> </li>
-			  <li>🔗 <strong>Integration Agent</strong> </li>
-			</ul> 
-		<div class="flex justify-end mt-4 w-full text-right sm:text-left">
-		  <a href="ai-agents.html" class="text-blue-600 dark:text-blue-400 hover:underline">
-			Check Agents →
-		  </a>
-		</div>
-
-      </div>
-	 </div>
-
-      <!-- Oversight -->
-      <div class="card bg-white rounded-2xl dark:bg-slate-900 p-6 shadow ring-1 ring-slate-200 dark:ring-slate-800">
-        <h3 class="text-xl font-bold mb-2">Council</h3>
-        <p class="text-slate-600 dark:text-slate-300 text-sm">
-          A governance tree led by the Chief Risk Officer, supported by Compliance, Ethics, and Data roles.  
-          They form the “council” that keeps AI accountable.
-        </p>
-      </div>
-
-      <!-- Transformation -->
-      <div class="card bg-white rounded-2xl dark:bg-slate-900 p-6 shadow ring-1 ring-slate-200 dark:ring-slate-800">
-        <h3 class="text-xl font-bold mb-2">Transformation</h3>
-        <p class="text-slate-600 dark:text-slate-300 text-sm">
-          <em>Before:</em> Scrambling during audits, unseen bias, customer complaints.  
-		<br></br>  
-          <em>After:</em> Proactive compliance, real-time bias checks, audit-ready evidence.
-        </p>
-      </div>
-
-      <!-- CTA -->
-      <div class="card bg-gradient-to-tr rounded-2xl from-emerald-600 to-teal-600 text-white p-6 shadow-lg flex flex-col justify-between">
-        <h3 class="text-xl font-bold mb-2">Your Turn</h3>
-        <p class="text-white/90 text-sm mb-4">
-          Join banks, insurers, and fintechs adopting AI with confidence.  
-          Let ArthaShield be your trust advantage.
-        </p>
-        <a href="autopilot-assistant.html" class="inline-block rounded-xl bg-white text-emerald-700 font-semibold px-4 py-2 text-center hover:opacity-90 transition">See it in Action</a>
-      </div>
+    <div class="flex flex-row justify-center items-center gap-4 mb-12 flex-nowrap">
+      <a href="arthashieldfeatures.html" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
+        Checkout
+      </a>
+      <a href="autopilot-assistant.html" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-slate-900 to-slate-700 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
+        Try Autopilot
+      </a>
     </div>
   </div>
+
+  <!-- Problem Section -->
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+    <div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px]">
+      <div class="basis-[60%] flex items-center justify-center bg-gray-100">
+        <img src="images/challenge-sheild.png" alt="Problem Image" class="w-full h-full object-contain" />
+      </div>
+      <div class="basis-[40%] bg-white dark:bg-slate-900 p-6 shadow ring-1 ring-slate-200 dark:ring-slate-800">
+        <h3 class="text-xl font-bold mb-2">The Compliance Gap</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm">
+          BFSI institutions face fragmented systems — CRM, core banking, emails — with no unified AI oversight. Compliance struggles to keep pace with innovation.
+        </p>
+      </div>
+    </div>
+	
+		  <!-- SeatBelt / Hero Solution Highlight -->
+	<div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px] mb-12">
+	  <!-- Image -->
+	  <div class="basis-[60%] flex items-center justify-center bg-gray-100">
+		<img src="images/safe-trusted-ai.png" alt="SeatBelt AI" class="w-full h-full object-contain" />
+	  </div>
+
+	  <!-- Text -->
+	  <div class="basis-[40%] bg-gradient-to-tr from-blue-600 to-indigo-600 text-white p-6 flex flex-col justify-center">
+		<h3 class="text-xl font-bold mb-2">ArthaShield — </h3>
+		<p class="text-white/90 text-sm">
+		  ArthaShield steps in as the SeatBelt for AI — giving you confidence to innovate with transparency, explainability, and compliance.  
+		</p>
+	  </div>
+	</div>
+	
+	<!-- Agents Section integrated post-SeatBelt -->
+<div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px] mb-12">
+  <!-- Top 60%: Image -->
+  <div class="basis-[60%] flex items-center justify-center bg-gray-100">
+    <img src="images/shield-agents.png" alt="Arthashield Agents" class="w-full h-full object-contain" />
+  </div>
+
+  <!-- Bottom 40%: Scrollable visible content -->
+  <div class="basis-[40%] bg-white dark:bg-slate-900 p-4 flex flex-col justify-between shadow ring-1 ring-slate-200 dark:ring-slate-800">
+  <!-- Headline -->
+  <h3 class="text-xl font-bold mb-2">AI Agents — Pilot Ready</h3>
+
+  <!-- Minimal bullets -->
+	  <ul class="list-disc list-inside text-sm text-slate-700 dark:text-slate-300 space-y-2 mb-4">
+	  <li>🕵️ Compliance Agent</li>
+	  <li>📚 Knowledge Agent</li>
+	  <li>🔗 Integration Agent</li>
+	  <li class="list-none flex justify-end">
+		<a href="ai-agents.html" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+		  Explore Agents→
+		</a>
+	  </li>
+	</ul>
+
+  
+</div>
+
+</div>
+
+
+  </div>
+  
+
+
+  <!-- Solution Section -->
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mb-16">
+    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-4 text-center">How ArthaShield Bridges Trust Gap</h2>
+    <p class="text-lg text-slate-600 dark:text-slate-300 mb-12 text-center">
+      Pre-deployment checks, continuous monitoring, explainable dashboards, and governance controls — all in one platform.
+    </p>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+        <h3 class="font-bold text-xl mb-2">Pre-Deployment Impact Checks</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-300">Validate AI models for fairness, bias, and regulatory compliance before going live.</p>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+        <h3 class="font-bold text-xl mb-2">Ongoing Monitoring</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-300">Continuous model oversight to detect drift, anomalies, and compliance violations.</p>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+        <h3 class="font-bold text-xl mb-2">Governance & Audit</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-300">Role-based approvals, audit-ready dashboards, and ISO-aligned governance controls.</p>
+      </div>
+    </div>
+    <div class="mt-10 text-center">
+      <a href="autopilot-assistant.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:opacity-90">See ArthaShield in Action</a>
+    </div>
+  </div>
+
+  
 </section>
+
 
 <section id="credibility" class="py-10 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-9500">
   <div class="max-w-6xl mx-auto px-6">
@@ -438,7 +429,7 @@
       
       <div class="bg-white dark:bg-slate-900 rounded-2xl shadow p-6">
         <button class="faq-question w-full text-left flex justify-between items-center font-medium text-slate-900 dark:text-white focus:outline-none">
-          Will ArthaShield share require network connectivity with internet for LLMs usage?
+          Will ArthaShield require network connectivity with internet for LLMs usage?
           <svg class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
