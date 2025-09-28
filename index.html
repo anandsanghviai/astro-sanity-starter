@@ -23,33 +23,31 @@
           <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
           <span>ArthaShield AI</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
-		  <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
-          <a href="#credibility" class="hover:text-slate-900 dark:hover:text-white">Global Alignment</a>
-		  
-		  <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
-		  <div class="relative group">
-			<button class="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-white focus:outline-none">
-			  <span>Resources</span>
-			  <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-			  </svg>
-			</button>
-			<!-- Dropdown menu -->
-			<div class="absolute left-0 mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition">
-			  <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Agents</a>
-			  <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">PDI</a>
-			  <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">
-					<span>✨</span>
-					Explore AI Hub 
-			  </a>
-			  <a href="blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
-			</div>
-		  </div>
-		  
-          <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
-        </nav>
-	  
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300 relative">
+  <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
+  <a href="#credibility" class="hover:text-slate-900 dark:hover:text-white">Global Alignment</a>
+  <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
+
+  <!-- Desktop Resources Dropdown -->
+  <div class="relative">
+    <button id="desktopResourcesBtn" class="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-white focus:outline-none">
+      <span>Resources</span>
+      <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </button>
+
+    <div id="desktopResourcesMenu" class="absolute left-0 mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300 z-50">
+      <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Arthasheild Agents</a>
+      <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Monitoring & PDI</a>
+      <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
+      <a href="general-blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
+    </div>
+  </div>
+
+  <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+</nav>
+
 		<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
 			  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,11 +63,24 @@
     <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
       <a href="autopilot-assistant.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Solution</a>
           <a href="#credibility" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Global Alignment</a>
-		  <a href="ai-agents.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Agents</a>
 		  <a href="arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
-		  <a href="ai-hub.html" class="flex items-center space-x-1 font-semibold text-blue-600 dark:text-blue-400">
-			<span>✨</span>
-			Explore AI Hub</a>
+		  <div class="relative">
+			  <button id="mobileResourcesBtn" class="flex items-center justify-between w-full  text-slate-700 dark:text-slate-200 hover:text-blue-600 focus:outline-none">
+				<span>Resources</span>
+				<svg id="mobileResourcesArrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+				</svg>
+			  </button>
+
+			  <!-- Dropdown menu -->
+			  <div id="mobileResourcesMenu" class="mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300">
+				<a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Arthasheild Agents</a>
+				<a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Monitoring & PDI</a>
+				<a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
+				<a href="blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
+			  </div>
+			</div>
+		 
           <a href="arthashieldfeatures.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
   </div>
 	
@@ -486,6 +497,47 @@
 		  mobileMenu.classList.remove("max-h-screen");
 		}
 	  });
+	  
+	  const resBtn = document.getElementById('mobileResourcesBtn');
+  const resMenu = document.getElementById('mobileResourcesMenu');
+  const resArrow = document.getElementById('mobileResourcesArrow');
+
+  resBtn.addEventListener('click', () => {
+    if (resMenu.classList.contains('max-h-0')) {
+      resMenu.classList.remove('max-h-0');
+      resMenu.classList.add('max-h-96'); // expand dropdown
+      resArrow.classList.add('rotate-180'); // arrow up
+    } else {
+      resMenu.classList.add('max-h-0');
+      resMenu.classList.remove('max-h-96'); // collapse dropdown
+      resArrow.classList.remove('rotate-180'); // arrow down
+    }
+  });
+  
+   const desktopBtn = document.getElementById('desktopResourcesBtn');
+  const desktopMenu = document.getElementById('desktopResourcesMenu');
+  const desktopArrow = document.getElementById('desktopResourcesArrow');
+
+  desktopBtn.addEventListener('click', () => {
+    if (desktopMenu.classList.contains('max-h-0')) {
+      desktopMenu.classList.remove('max-h-0');
+      desktopMenu.classList.add('max-h-96'); // expand
+      desktopArrow.classList.add('rotate-180'); // arrow up
+    } else {
+      desktopMenu.classList.add('max-h-0');
+      desktopMenu.classList.remove('max-h-96'); // collapse
+      desktopArrow.classList.remove('rotate-180'); // arrow down
+    }
+  });
+
+  // Optional: close dropdown if click outside
+  document.addEventListener('click', (e) => {
+    if (!desktopBtn.contains(e.target) && !desktopMenu.contains(e.target)) {
+      desktopMenu.classList.add('max-h-0');
+      desktopMenu.classList.remove('max-h-96');
+      desktopArrow.classList.remove('rotate-180');
+    }
+  });
 	  
   // FAQ toggle
   document.querySelectorAll(".faq-question").forEach(btn => {
