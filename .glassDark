@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArthaShield | Responsible RegTech Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .glass-dark {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto" />
+          <span>ArthaShield AI</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+          <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
+          <a href="#credibility" class="hover:text-slate-900 dark:hover:text-white">Global Alignment</a>
+          <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white">Features</a>
+
+          <div class="relative">
+            <button id="desktopResourcesBtn" class="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-white focus:outline-none">
+              <span>Resources</span>
+              <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <div id="desktopResourcesMenu" class="absolute left-0 mt-2 w-44 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300 z-50">
+              <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">ArthaShield Agents</a>
+              <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Monitoring & PDI</a>
+              <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
+              <a href="general-blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
+            </div>
+          </div>
+
+          <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+        </nav>
+
+        <!-- Dark mode toggle -->
+        <button id="darkModeToggle" class="ml-4 text-xl text-slate-700 dark:text-slate-200 focus:outline-none">
+          🌙
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="px-6 py-20 text-center max-w-4xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Responsible AI for Regulated Enterprises</h1>
+    <p class="text-lg text-slate-600 dark:text-slate-300 mb-6">
+      ArthaShield helps financial institutions build explainable, auditable, and globally aligned AI solutions.
+    </p>
+    <a href="autopilot-assistant.html" class="px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-md">
+      Explore Solution
+    </a>
+  </section>
+
+  <!-- Problem Section -->
+  <section id="problem" class="py-16 px-6 bg-white dark:bg-slate-900">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-6">The Problem</h2>
+      <p class="text-slate-700 dark:text-slate-300">
+        Most RegTech platforms lack explainability, compliance traceability, and adaptability to evolving global AI standards.
+        ArthaShield closes this gap through a unified, agentic architecture designed for responsible automation.
+      </p>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section id="solution" class="py-16 px-6 bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-950 dark:to-slate-950">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-6">The Solution</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="rounded-2xl p-6 glass dark:glass-dark shadow-md">
+          <h3 class="font-semibold mb-2">Explainability Engine</h3>
+          <p class="text-sm text-slate-700 dark:text-slate-300">
+            Model behavior analysis, trace visualization, and policy alignment built-in.
+          </p>
+        </div>
+        <div class="rounded-2xl p-6 glass dark:glass-dark shadow-md">
+          <h3 class="font-semibold mb-2">Audit-Ready Architecture</h3>
+          <p class="text-sm text-slate-700 dark:text-slate-300">
+            Every model decision is logged, versioned, and explainable for compliance officers.
+          </p>
+        </div>
+        <div class="rounded-2xl p-6 glass dark:glass-dark shadow-md">
+          <h3 class="font-semibold mb-2">Adaptive Agents</h3>
+          <p class="text-sm text-slate-700 dark:text-slate-300">
+            ArthaShield Agents monitor AI drift, policy breaches, and automate documentation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Credibility Section -->
+  <section id="credibility" class="py-16 px-6 bg-white dark:bg-slate-900">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-8">Aligned with Global Standards</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="rounded-xl p-4 glass dark:glass-dark shadow text-center">
+          <img src="images/mit.png" alt="MIT" class="h-12 mx-auto mb-2">
+          <p class="text-sm">MIT Responsible AI Lab</p>
+        </div>
+        <div class="rounded-xl p-4 glass dark:glass-dark shadow text-center">
+          <img src="images/wef.png" alt="WEF" class="h-12 mx-auto mb-2">
+          <p class="text-sm">World Economic Forum AI Governance</p>
+        </div>
+        <div class="rounded-xl p-4 glass dark:glass-dark shadow text-center">
+          <img src="images/nist.png" alt="NIST" class="h-12 mx-auto mb-2">
+          <p class="text-sm">NIST AI Risk Management</p>
+        </div>
+        <div class="rounded-xl p-4 glass dark:glass-dark shadow text-center">
+          <img src="images/eu.png" alt="EU AI Act" class="h-12 mx-auto mb-2">
+          <p class="text-sm">EU AI Act Alignment</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16 px-6 bg-gradient-to-br from-slate-100 to-white dark:from-slate-800 dark:to-slate-900">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-semibold text-center mb-8">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <details class="rounded-lg glass dark:glass-dark p-4 shadow-sm">
+          <summary class="font-medium cursor-pointer">How is ArthaShield different from existing RegTech tools?</summary>
+          <p class="mt-2 text-sm text-slate-700 dark:text-slate-300">
+            It goes beyond compliance tracking by embedding AI explainability, decision traceability, and agent-based monitoring.
+          </p>
+        </details>
+        <details class="rounded-lg glass dark:glass-dark p-4 shadow-sm">
+          <summary class="font-medium cursor-pointer">Can I integrate it with existing AI systems?</summary>
+          <p class="mt-2 text-sm text-slate-700 dark:text-slate-300">
+            Yes, ArthaShield provides connectors for popular platforms and APIs for model-level integration.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+    © 2025 ArthaShield AI. All rights reserved.
+  </footer>
+
+  <script>
+    // --- Dark mode toggle ---
+    const toggle = document.getElementById('darkModeToggle');
+    toggle?.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    // --- Dropdown toggle ---
+    const btn = document.getElementById('desktopResourcesBtn');
+    const menu = document.getElementById('desktopResourcesMenu');
+    btn?.addEventListener('click', () => {
+      const isOpen = menu.classList.contains('max-h-60');
+      menu.classList.toggle('max-h-0', isOpen);
+      menu.classList.toggle('max-h-60', !isOpen);
+    });
+  </script>
+</body>
+</html>

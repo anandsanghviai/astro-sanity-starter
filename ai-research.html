@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield AI RegTech Research</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield AI</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 relative">
+          <a href="autopilot-assistant.html" class="hover:text-slate-900">Solution</a>
+          <a href="#credibility" class="hover:text-slate-900">Global Alignment</a>
+          <a href="arthashieldfeatures.html" class="hover:text-slate-900">Features</a>
+
+          <!-- Resources Dropdown -->
+          <div class="relative">
+            <button id="desktopResourcesBtn" class="flex items-center space-x-1 hover:text-slate-900 focus:outline-none">
+              <span>Resources</span>
+              <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="desktopResourcesMenu" class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300 z-50">
+              <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100">Arthasheild Agents</a>
+              <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100">AI Monitoring & PDI</a>
+              <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100">AI RegTech Research</a>
+              <a href="general-blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100">Blog</a>
+            </div>
+          </div>
+        </nav>
+
+        <button id="menuButton" class="md:hidden flex items-center text-slate-700 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+      <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
+        <a href="autopilot-assistant.html" class="block text-slate-700 hover:text-blue-600">Solution</a>
+        <a href="#credibility" class="block text-slate-700 hover:text-blue-600">Global Alignment</a>
+        <a href="arthashieldfeatures.html" class="block text-slate-700 hover:text-blue-600">Features</a>
+        <div class="relative">
+          <button id="mobileResourcesBtn" class="flex items-center justify-between w-full text-slate-700 hover:text-blue-600 focus:outline-none">
+            <span>Resources</span>
+            <svg id="mobileResourcesArrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="mobileResourcesMenu" class="mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300">
+            <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100">Arthasheild Agents</a>
+            <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100">AI Monitoring & PDI</a>
+            <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100">AI RegTech Research</a>
+            <a href="blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100">Blog</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="py-16 bg-gradient-to-br from-slate-50 to-slate-100 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">AI RegTech Research Hub</h1>
+    <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+      Discover actionable AI and compliance insights curated for BFSI institutions, powered by Perplexity AI.
+    </p>
+    <a href="#knowledge-hub" class="inline-block px-6 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition">Explore Research</a>
+  </section>
+
+  <!-- Knowledge Hub Section -->
+  <section id="knowledge-hub" class="py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Knowledge Hub — AI Research</h2>
+        <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          Explore the latest insights in AI, RegTech, and governance frameworks. Curated from Perplexity AI research.
+        </p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+        <input id="khQuery" type="text" placeholder="Search AI & RegTech insights..." class="flex-1 p-3 rounded-xl border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-blue-600 focus:outline-none"/>
+        <button id="khSearchBtn" class="px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">Search</button>
+      </div>
+
+      <!-- Results -->
+      <div id="khResults" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="col-span-full text-center py-12 text-slate-500 dark:text-slate-400">Enter a query above to fetch research insights.</div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="ai-research" class="my-12 max-w-7xl mx-auto px-4">
+  <h2 class="text-2xl font-bold mb-6">Latest AI Research</h2>
+  <div class="grid md:grid-cols-3 gap-6" id="research-cards">
+    <!-- JS will populate cards here -->
+  </div>
+</section>
+
+<section id="ai-insights" class="my-12 max-w-7xl mx-auto px-4">
+  <h2 class="text-2xl font-bold mb-6">Curated AI Insights</h2>
+  <div class="overflow-x-auto flex gap-4" id="insights-cards">
+    <!-- JS will populate cards here -->
+  </div>
+</section>
+
+
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
+    © 2025 ArthaShield AI. Mission & Vision.
+  </footer>
+
+<script>
+  // Mobile menu toggle
+  const menuButton = document.getElementById("menuButton");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuButton.addEventListener("click", () => {
+    mobileMenu.classList.toggle("max-h-0");
+    mobileMenu.classList.toggle("max-h-screen");
+  });
+
+  // Mobile resources dropdown
+  const resBtn = document.getElementById('mobileResourcesBtn');
+  const resMenu = document.getElementById('mobileResourcesMenu');
+  const resArrow = document.getElementById('mobileResourcesArrow');
+  resBtn.addEventListener('click', () => {
+    resMenu.classList.toggle('max-h-0');
+    resMenu.classList.toggle('max-h-96');
+    resArrow.classList.toggle('rotate-180');
+  });
+
+  // Desktop resources dropdown
+  const desktopBtn = document.getElementById('desktopResourcesBtn');
+  const desktopMenu = document.getElementById('desktopResourcesMenu');
+  const desktopArrow = document.getElementById('desktopResourcesArrow');
+  desktopBtn.addEventListener('click', () => {
+    desktopMenu.classList.toggle('max-h-0');
+    desktopMenu.classList.toggle('max-h-96');
+    desktopArrow.classList.toggle('rotate-180');
+  });
+  document.addEventListener('click', (e) => {
+    if (!desktopBtn.contains(e.target) && !desktopMenu.contains(e.target)) {
+      desktopMenu.classList.add('max-h-0');
+      desktopMenu.classList.remove('max-h-96');
+      desktopArrow.classList.remove('rotate-180');
+    }
+  });
+
+  // Perplexity AI search
+  const khSearchBtn = document.getElementById('khSearchBtn');
+  const khResults = document.getElementById('khResults');
+  khSearchBtn.addEventListener('click', async () => {
+    const query = document.getElementById('khQuery').value.trim();
+    if (!query) return alert("Enter a search query!");
+
+    khResults.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 dark:text-slate-400">Fetching insights...</div>`;
+
+    try {
+      const res = await fetch('/api/perplexity-research', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+
+      if (!data.results || data.results.length === 0) {
+        khResults.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 dark:text-slate-400">No insights found.</div>`;
+        return;
+      }
+
+      khResults.innerHTML = data.results.map(r => `
+        <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg flex flex-col justify-between">
+          <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">${r.title || "Untitled Insight"}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">${r.snippet || r.summary || "No summary available."}</p>
+          ${r.url ? `<a href="${r.url}" target="_blank" class="text-blue-600 dark:text-blue-400 font-medium hover:underline text-sm">Read more →</a>` : ""}
+          ${r.source ? `<div class="mt-2 text-xs text-slate-400 dark:text-slate-500">Source: ${r.source}</div>` : ""}
+        </div>
+      `).join('');
+
+    } catch (err) {
+      console.error(err);
+      khResults.innerHTML = `<div class="col-span-full text-center py-12 text-red-500">Error fetching insights. Try again later.</div>`;
+    }
+  });
+  
+    // -----------------------------
+  // Example: Latest AI Research
+  // -----------------------------
+  async function fetchAIResearch() {
+    // Replace with real API endpoint (arXiv, Perplexity, etc.)
+    const data = [
+      {
+        title: "Transformers in Vision: A Survey",
+        authors: "A. Smith, B. Doe",
+        abstract: "This paper surveys transformer models applied to computer vision...",
+        link: "#"
+      },
+      {
+        title: "Large Language Models for Knowledge Graphs",
+        authors: "C. Lee, D. Wang",
+        abstract: "Exploring LLMs to improve knowledge graph completion tasks...",
+        link: "#"
+      },
+      {
+        title: "Reinforcement Learning with Human Feedback",
+        authors: "E. Kumar, F. Zhang",
+        abstract: "We study RLHF techniques for aligning AI with human preferences...",
+        link: "#"
+      }
+    ];
+
+    const container = document.getElementById('research-cards');
+    container.innerHTML = '';
+
+    data.forEach(paper => {
+      const card = document.createElement('div');
+      card.className = 'bg-white dark:bg-slate-900 p-4 rounded-xl shadow hover:shadow-lg transition';
+      card.innerHTML = `
+        <h3 class="font-bold text-lg mb-1">${paper.title}</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">${paper.authors}</p>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">${paper.abstract}</p>
+        <a href="${paper.link}" class="text-blue-600 dark:text-blue-400 hover:underline">Read More →</a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // -----------------------------
+  // Example: Curated AI Insights
+  // -----------------------------
+  async function fetchAIInsights() {
+    // Replace with real API / RSS feed
+    const insights = [
+      {
+        title: "Top 5 AI Trends in 2025",
+        link: "#",
+        summary: "From generative AI to multimodal agents, the AI landscape is evolving rapidly..."
+      },
+      {
+        title: "Integrating AI Agents in Enterprise",
+        link: "#",
+        summary: "Learn how companies are adopting AI agents for knowledge management..."
+      },
+      {
+        title: "AI Research Breakthroughs You Should Know",
+        link: "#",
+        summary: "A concise summary of the latest impactful research in NLP and CV..."
+      }
+    ];
+
+    const container = document.getElementById('insights-cards');
+    container.innerHTML = '';
+
+    insights.forEach(insight => {
+      const card = document.createElement('div');
+      card.className = 'min-w-[250px] bg-white dark:bg-slate-900 p-4 rounded-xl shadow hover:shadow-lg transition';
+      card.innerHTML = `
+        <h3 class="font-bold text-md mb-2">${insight.title}</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">${insight.summary}</p>
+        <a href="${insight.link}" class="text-blue-600 dark:text-blue-400 hover:underline">Explore →</a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // -----------------------------
+  // Initialize on page load
+  // -----------------------------
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchAIResearch();
+    fetchAIInsights();
+  });
+
+</script>
+
+</body>
+</html>
