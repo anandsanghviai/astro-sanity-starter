@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArthaShield | AI Compliance Control Tower</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .notion-card {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease-in-out;
+    }
+    .notion-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+    }
+    .dark .notion-card {
+      background: rgba(30, 41, 59, 0.6);
+      border-color: rgba(148, 163, 184, 0.2);
+    }
+    .toggle-section {
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .toggle-section:hover {
+      color: #3b82f6;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-200 min-h-screen">
+
+  <!-- HEADER -->
+  <header class="px-8 py-4 flex justify-between items-center border-b border-slate-200 dark:border-slate-800 backdrop-blur-sm">
+    <div class="flex items-center gap-3">
+      <img src="artha_shield_logo.png" class="h-10" alt="Logo">
+      <h1 class="text-xl font-semibold">ArthaShield Control Tower</h1>
+    </div>
+    <button id="themeToggle" class="px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-sm hover:bg-blue-500 hover:text-white transition">Toggle Mode</button>
+  </header>
+
+  <!-- DASHBOARD -->
+  <main class="max-w-6xl mx-auto px-6 py-10 space-y-10">
+
+    <!-- OVERVIEW -->
+    <section class="notion-card p-8">
+      <h2 class="text-2xl font-semibold mb-3">🧭 Compliance Overview</h2>
+      <p class="text-slate-600 dark:text-slate-400 mb-6">View all AI systems, risk indicators, fairness scores, and audit readiness — designed for Compliance Heads and Board visibility.</p>
+      
+      <div class="grid md:grid-cols-4 gap-4 text-center">
+        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+          <p class="text-sm text-slate-500">Active AI Systems</p>
+          <p class="text-2xl font-bold mt-1">12</p>
+        </div>
+        <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20">
+          <p class="text-sm text-slate-500">Compliant Models</p>
+          <p class="text-2xl font-bold text-green-600 mt-1">9</p>
+        </div>
+        <div class="p-4 rounded-xl bg-yellow-50 dark:bg-yellow-900/20">
+          <p class="text-sm text-slate-500">Under Review</p>
+          <p class="text-2xl font-bold text-yellow-600 mt-1">2</p>
+        </div>
+        <div class="p-4 rounded-xl bg-red-50 dark:bg-red-900/20">
+          <p class="text-sm text-slate-500">High-Risk Flags</p>
+          <p class="text-2xl font-bold text-red-600 mt-1">1</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODEL LIST -->
+    <section class="notion-card p-8">
+      <h2 class="text-xl font-semibold mb-4">📊 AI Systems Inventory</h2>
+
+      <div class="space-y-6">
+        <div class="border-l-4 border-green-500 pl-4">
+          <h3 class="font-semibold text-lg">Credit Scoring Engine</h3>
+          <p class="text-sm text-slate-500">Last audit: 5 days ago • Fairness: <span class="text-green-500 font-semibold">92%</span> • Explainability: <span class="text-yellow-500 font-semibold">76%</span></p>
+          <button class="mt-2 text-blue-500 hover:underline text-sm">View Fairness Matrix</button>
+        </div>
+
+        <div class="border-l-4 border-yellow-500 pl-4">
+          <h3 class="font-semibold text-lg">Loan Eligibility Classifier</h3>
+          <p class="text-sm text-slate-500">Last audit: 10 days ago • Fairness: <span class="text-red-500 font-semibold">68%</span> • Explainability: <span class="text-green-500 font-semibold">90%</span></p>
+          <button class="mt-2 text-blue-500 hover:underline text-sm">View Bias Audit</button>
+        </div>
+
+        <div class="border-l-4 border-green-500 pl-4">
+          <h3 class="font-semibold text-lg">Chatbot Sentiment Analyzer</h3>
+          <p class="text-sm text-slate-500">Last audit: 2 days ago • Fairness: <span class="text-green-500 font-semibold">95%</span> • Compliance: <span class="text-blue-500 font-semibold">92%</span></p>
+          <button class="mt-2 text-blue-500 hover:underline text-sm">View Explainability Map</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAIRNESS AND RISK -->
+    <section class="notion-card p-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">⚖️ Fairness & Risk Flags</h2>
+        <span class="text-sm text-slate-500">AI Bias Watch · Updated 2h ago</span>
+      </div>
+      <table class="w-full text-sm border-collapse">
+        <thead class="border-b border-slate-300 dark:border-slate-700 text-slate-500">
+          <tr>
+            <th class="py-2 text-left">Model</th>
+            <th>Issue</th>
+            <th>Severity</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800">
+            <td class="py-2">Loan Eligibility Classifier</td>
+            <td>Gender Bias Detected</td>
+            <td><span class="text-red-500 font-semibold">High</span></td>
+            <td><button class="text-blue-500 underline">View Audit Trail</button></td>
+          </tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800">
+            <td>Credit Scoring Engine</td>
+            <td>Explainability Gap</td>
+            <td><span class="text-yellow-500 font-semibold">Medium</span></td>
+            <td><button class="text-blue-500 underline">Generate SHAP Report</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- INSIGHT SECTIONS -->
+    <section class="notion-card p-8">
+      <h2 class="text-xl font-semibold mb-4">📘 Compliance Insights</h2>
+      <div class="space-y-4">
+        <div class="toggle-section" onclick="toggleInsight('impact')">
+          <h3 class="font-semibold flex items-center gap-2">🔍 Pre-Deployment Impact Checks 
+            <svg class="w-4 h-4 transform transition-transform" id="arrow-impact" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </h3>
+        </div>
+        <div id="insight-impact" class="hidden pl-4 text-sm text-slate-600 dark:text-slate-400 mt-2 space-y-2">
+          <p>✔️ Fairness Assessment — validate model outputs across demographics.</p>
+          <p>✔️ Bias Evaluation — use tools like AIF360 or Fairlearn.</p>
+          <p>✔️ Regulatory Compliance — ensure GDPR, CCPA, RBI fairness mandates.</p>
+          <p>✔️ Audit Trails — document all model changes and test results.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const toggleInsight = (id) => {
+      const section = document.getElementById(`insight-${id}`);
+      const arrow = document.getElementById(`arrow-${id}`);
+      section.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    };
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield Academy | AI Compliance Pre-Deployment Checks</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; transition: background 0.5s, color 0.5s; }
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
+    .glass-dark { background: rgba(30,41,59,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(148,163,184,0.2); }
+    .chat-bubble { max-width: 80%; padding: 0.75rem 1rem; border-radius: 1rem; margin: 0.5rem 0; }
+    .ai { background-color: rgba(59,130,246,0.1); color: #1e40af; border: 1px solid rgba(59,130,246,0.2); align-self: flex-start; }
+    .user { background-color: rgba(20,184,166,0.1); color: #0f766e; border: 1px solid rgba(20,184,166,0.2); align-self: flex-end; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-200 min-h-screen">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-10 w-auto"/>
+          <span>ArthaShield Academy</span>
+        </a>
+        <button id="themeToggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m8.66-12.34l-.7.7M4.05 19.95l.7-.7m12.73 2.05h1m-16 0h1m16.95-7H21m-18 0H3m15.95 7.05l.7-.7M4.05 4.05l.7.7M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+          </svg>
+          <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="text-center py-16 px-6">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">AI Compliance Academy</h1>
+    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+      Learn how ArthaShield ensures every AI model meets fairness, transparency, and global regulatory compliance — before deployment.
+    </p>
+  </section>
+
+  <!-- WHY COMPLIANCE HEADS LOVE ARTHASHIELD -->
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-semibold mb-8 text-center">Why Compliance Heads Choose ArthaShield</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">🧩 Unified Compliance Dashboard</h3>
+        <p class="text-sm text-slate-700 dark:text-slate-300">View all AI systems, risk flags, and fairness reports in one integrated control tower. Built for boardroom readiness.</p>
+      </div>
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">⚖️ Regulatory Mappings</h3>
+        <p class="text-sm text-slate-700 dark:text-slate-300">Instantly map AI model decisions to frameworks like GDPR, EU AI Act, and RBI guidelines. Audit logs are generated automatically.</p>
+      </div>
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">🧠 Explainability-as-a-Service</h3>
+        <p class="text-sm text-slate-700 dark:text-slate-300">Every prediction can be explained with SHAP/LIME visualizations for both internal reviewers and regulators.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- COMPLIANCE CONTROL TOWER -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold">ArthaShield Control Tower</h2>
+    <div class="flex gap-2">
+      <button class="view-btn bg-slate-200 dark:bg-slate-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-600 hover:text-white transition" data-view="systems">AI Systems</button>
+      <button class="view-btn bg-slate-200 dark:bg-slate-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-600 hover:text-white transition" data-view="risk">Risk Flags</button>
+      <button class="view-btn bg-slate-200 dark:bg-slate-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-600 hover:text-white transition" data-view="fairness">Fairness Reports</button>
+    </div>
+  </div>
+
+  <div id="dashboardContent" class="grid md:grid-cols-3 gap-6 transition-all">
+    <!-- Default AI Systems View -->
+    <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+      <h3 class="font-semibold text-lg mb-2">Credit Scoring Model</h3>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">Last audited: 5 days ago</p>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Fairness</span>
+        <span class="text-green-500 font-semibold">92%</span>
+      </div>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Explainability</span>
+        <span class="text-yellow-500 font-semibold">76%</span>
+      </div>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Compliance Coverage</span>
+        <span class="text-blue-500 font-semibold">88%</span>
+      </div>
+      <button class="mt-3 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm transition">View Details</button>
+    </div>
+
+    <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+      <h3 class="font-semibold text-lg mb-2">Loan Eligibility Classifier</h3>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">Last audited: 10 days ago</p>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Fairness</span>
+        <span class="text-red-500 font-semibold">68%</span>
+      </div>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Explainability</span>
+        <span class="text-green-500 font-semibold">90%</span>
+      </div>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Compliance Coverage</span>
+        <span class="text-yellow-500 font-semibold">70%</span>
+      </div>
+      <button class="mt-3 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm transition">View Details</button>
+    </div>
+
+    <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+      <h3 class="font-semibold text-lg mb-2">Chatbot Feedback Analyzer</h3>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">Last audited: 2 days ago</p>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Fairness</span>
+        <span class="text-green-500 font-semibold">95%</span>
+      </div>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Explainability</span>
+        <span class="text-green-500 font-semibold">89%</span>
+      </div>
+      <div class="flex justify-between items-center text-sm mb-3">
+        <span>Compliance Coverage</span>
+        <span class="text-blue-500 font-semibold">92%</span>
+      </div>
+      <button class="mt-3 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm transition">View Details</button>
+    </div>
+  </div>
+</section>
+
+  <!-- LEARNING TIMELINE -->
+  <section class="bg-gradient-to-br from-blue-50 to-white dark:from-slate-800 dark:to-slate-900 py-16">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-2xl font-semibold mb-6 text-center">Your Learning Journey in AI Compliance</h2>
+      <div class="relative border-l border-slate-300 dark:border-slate-700 pl-8 space-y-10">
+        <div>
+          <h3 class="text-lg font-semibold">Module 1 — Fairness & Bias Testing</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Learn how disparate impact testing identifies hidden discrimination in data and predictions.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold">Module 2 — Explainability & Transparency</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Understand LIME, SHAP, and model cards — how they make complex models interpretable for stakeholders.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold">Module 3 — Regulatory Alignment</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">See how ArthaShield maps AI decisions to EU AI Act risk levels, RBI digital lending norms, and GDPR obligations.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold">Module 4 — Continuous Monitoring & Audit</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Set up automated drift detection, bias rechecks, and audit-ready logs for every model lifecycle stage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE CHAT TRAINER -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Interactive AI Compliance Trainer</h2>
+    <p class="text-center text-slate-600 dark:text-slate-400 mb-6">
+      Ask the ArthaShield Academy Bot how we assess fairness, detect bias, or ensure regulatory readiness.
+    </p>
+    <div class="p-6 rounded-2xl shadow-lg glass dark:glass-dark flex flex-col h-[60vh] overflow-y-auto" id="chatContainer">
+      <div class="chat-bubble ai">
+        👋 Hi there! I'm your AI Compliance Trainer. What would you like to explore first — Fairness, Bias, Regulations, or Explainability?
+      </div>
+    </div>
+
+    <div class="mt-4 flex w-full">
+      <input id="userInput" type="text" placeholder="Ask about compliance..." 
+        class="flex-1 px-4 py-2 rounded-l-lg border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      <button id="sendBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-r-lg transition">Send</button>
+    </div>
+
+    <div class="mt-4 flex flex-wrap justify-center gap-3 text-sm">
+      <button class="topic-btn bg-slate-200 dark:bg-slate-700 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition">Fairness</button>
+      <button class="topic-btn bg-slate-200 dark:bg-slate-700 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition">Bias</button>
+      <button class="topic-btn bg-slate-200 dark:bg-slate-700 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition">Regulations</button>
+      <button class="topic-btn bg-slate-200 dark:bg-slate-700 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition">Explainability</button>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="text-center py-16">
+    <h2 class="text-2xl font-semibold mb-4">Ready to Deploy AI You Can Trust?</h2>
+    <p class="text-slate-600 dark:text-slate-400 mb-6">Request a demo to see how ArthaShield makes compliance effortless for AI leaders.</p>
+    <a href="contact.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition shadow-md">Book a Demo</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center text-sm text-slate-500 dark:text-slate-400">
+    © 2025 ArthaShield AI — Empowering Responsible AI
+  </footer>
+
+  <script>
+    const chatContainer = document.getElementById("chatContainer");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const topics = document.querySelectorAll(".topic-btn");
+
+    const aiResponses = {
+      fairness: "Fairness ensures your AI treats all demographic groups equitably. We assess data representativeness, outcome balance, and disparate impact tests — powered by ArthaShield’s fairness scanner.",
+      bias: "Bias evaluation detects hidden skew in your model’s logic. Using AIF360 and Fairlearn, our tools visualize how features influence outcomes, helping you mitigate bias before launch.",
+      regulations: "ArthaShield maps your model’s data flows and decisions against global standards like GDPR, CCPA, RBI, and EU AI Act. Full compliance reporting and audit logs are built in.",
+      explainability: "We integrate LIME and SHAP explainers so each prediction is interpretable. Regulators and internal teams can trace 'why' a model made a decision — ensuring transparency and trust."
+    };
+
+    function addMessage(text, sender = "ai") {
+      const bubble = document.createElement("div");
+      bubble.classList.add("chat-bubble", sender);
+      bubble.innerHTML = text;
+      chatContainer.appendChild(bubble);
+      chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" });
+    }
+
+    function handleInput(value) {
+      const msg = value.trim().toLowerCase();
+      if (!msg) return;
+      addMessage(value, "user");
+      userInput.value = "";
+
+      let response = "I can help you explore fairness, bias, regulations, and explainability in AI deployment.";
+      if (msg.includes("fairness")) response = aiResponses.fairness;
+      else if (msg.includes("bias")) response = aiResponses.bias;
+      else if (msg.includes("regul")) response = aiResponses.regulations;
+      else if (msg.includes("explain")) response = aiResponses.explainability;
+      else if (msg.includes("help")) response = "Try asking about Fairness, Bias, Regulations, or Explainability.";
+
+      setTimeout(() => addMessage(response), 700);
+    }
+
+    sendBtn.addEventListener("click", () => handleInput(userInput.value));
+    userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleInput(userInput.value); });
+    topics.forEach(btn => btn.addEventListener("click", () => handleInput(btn.textContent)));
+
+    // Theme toggle
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      document.documentElement.classList.add('dark');
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+    });
+	
+	  const content = {
+    systems: `
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">Credit Scoring Model</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">Last audited: 5 days ago</p>
+        <div class="flex justify-between text-sm"><span>Fairness</span><span class="text-green-500 font-semibold">92%</span></div>
+        <div class="flex justify-between text-sm"><span>Explainability</span><span class="text-yellow-500 font-semibold">76%</span></div>
+        <div class="flex justify-between text-sm"><span>Compliance Coverage</span><span class="text-blue-500 font-semibold">88%</span></div>
+      </div>
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">Loan Eligibility Classifier</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">Last audited: 10 days ago</p>
+        <div class="flex justify-between text-sm"><span>Fairness</span><span class="text-red-500 font-semibold">68%</span></div>
+        <div class="flex justify-between text-sm"><span>Explainability</span><span class="text-green-500 font-semibold">90%</span></div>
+        <div class="flex justify-between text-sm"><span>Compliance Coverage</span><span class="text-yellow-500 font-semibold">70%</span></div>
+      </div>
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">Chatbot Feedback Analyzer</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">Last audited: 2 days ago</p>
+        <div class="flex justify-between text-sm"><span>Fairness</span><span class="text-green-500 font-semibold">95%</span></div>
+        <div class="flex justify-between text-sm"><span>Explainability</span><span class="text-green-500 font-semibold">89%</span></div>
+        <div class="flex justify-between text-sm"><span>Compliance Coverage</span><span class="text-blue-500 font-semibold">92%</span></div>
+      </div>
+    `,
+    risk: `
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg col-span-3">
+        <h3 class="font-semibold text-lg mb-4">Active Risk Flags</h3>
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="text-left text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
+              <th class="py-2">Model</th>
+              <th>Flag</th>
+              <th>Severity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100 dark:border-slate-800">
+              <td class="py-2">Loan Eligibility Classifier</td>
+              <td>Gender Bias Detected</td>
+              <td><span class="text-red-500 font-semibold">High</span></td>
+              <td><button class="text-blue-500 underline">View Audit</button></td>
+            </tr>
+            <tr class="border-b border-slate-100 dark:border-slate-800">
+              <td class="py-2">Credit Scoring Model</td>
+              <td>Explainability Gap</td>
+              <td><span class="text-yellow-500 font-semibold">Medium</span></td>
+              <td><button class="text-blue-500 underline">Generate XAI Report</button></td>
+            </tr>
+            <tr>
+              <td class="py-2">Chatbot Feedback Analyzer</td>
+              <td>Data Drift Detected</td>
+              <td><span class="text-yellow-500 font-semibold">Medium</span></td>
+              <td><button class="text-blue-500 underline">Recheck Data</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `,
+    fairness: `
+      <div class="p-6 rounded-2xl glass dark:glass-dark shadow-lg col-span-3">
+        <h3 class="font-semibold text-lg mb-4">Fairness Overview</h3>
+        <div class="grid md:grid-cols-3 gap-6 text-sm">
+          <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/30">
+            <p class="font-semibold">Credit Scoring Model</p>
+            <p>Disparate Impact Ratio: <span class="font-semibold text-green-500">0.89</span></p>
+            <p>Protected Groups Balanced</p>
+          </div>
+          <div class="p-4 rounded-xl bg-yellow-50 dark:bg-yellow-900/30">
+            <p class="font-semibold">Loan Eligibility Classifier</p>
+            <p>Disparate Impact Ratio: <span class="font-semibold text-yellow-500">0.72</span></p>
+            <p>Retraining Recommended</p>
+          </div>
+          <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/30">
+            <p class="font-semibold">Chatbot Feedback Analyzer</p>
+            <p>Disparate Impact Ratio: <span class="font-semibold text-green-500">0.93</span></p>
+            <p>All groups stable</p>
+          </div>
+        </div>
+      </div>
+    `
+  };
+
+  const viewButtons = document.querySelectorAll('.view-btn');
+  const dashboard = document.getElementById('dashboardContent');
+
+  viewButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      dashboard.innerHTML = content[view];
+    });
+  });
+
+	
+  </script>
+</body>
+</html>

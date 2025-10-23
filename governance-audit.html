@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield | Governance & Audit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .notion-card {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 1rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      backdrop-filter: blur(8px);
+    }
+    .dark .notion-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .toggle-section { cursor: pointer; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 min-h-screen p-6">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-8">
+    <div class="flex items-center gap-3">
+      <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-10">
+      <h1 class="text-2xl font-semibold text-slate-700 dark:text-slate-200">ArthaShield Governance & Audit</h1>
+    </div>
+    <button id="toggleTheme" class="px-4 py-2 rounded-lg text-sm bg-slate-200 dark:bg-slate-800 dark:text-white hover:bg-slate-300 dark:hover:bg-slate-700 transition">
+      🌙 Toggle Dark Mode
+    </button>
+  </header>
+
+  <!-- Governance Overview Card -->
+  <section class="notion-card p-8 mb-8">
+    <h2 class="text-2xl font-semibold mb-3">🛡️ Governance Overview</h2>
+    <p class="text-slate-600 dark:text-slate-400 mb-6">
+      Role-based approvals, audit-ready dashboards, and ISO-aligned governance controls to ensure accountability and compliance across all AI systems.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-4 text-center">
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Active Approvals</p>
+        <p class="text-2xl font-bold mt-1">18</p>
+      </div>
+      <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20">
+        <p class="text-sm text-slate-500">ISO Controls Aligned</p>
+        <p class="text-2xl font-bold text-green-600 mt-1">95%</p>
+      </div>
+      <div class="p-4 rounded-xl bg-yellow-50 dark:bg-yellow-900/20">
+        <p class="text-sm text-slate-500">Pending Audits</p>
+        <p class="text-2xl font-bold text-yellow-600 mt-1">3</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Role-based Approvals -->
+  <section class="notion-card p-8 mb-8">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">👥 Role-based Approvals</h2>
+      <span class="text-sm text-slate-500">Updated 1h ago</span>
+    </div>
+    
+    <div class="space-y-6">
+      <div class="border-l-4 border-blue-500 pl-4">
+        <h3 class="font-semibold text-lg">AI Model Deployment</h3>
+        <p class="text-sm text-slate-500">
+          Pending approvals from: Data Governance Lead, Compliance Head • Last action: Reviewed by Risk Officer
+        </p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Approval Workflow</button>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h3 class="font-semibold text-lg">Data Usage Change Requests</h3>
+        <p class="text-sm text-slate-500">
+          Pending approvals from: Privacy Officer • Completed: 12 requests this month
+        </p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">Audit Request Log</button>
+      </div>
+
+      <div class="border-l-4 border-yellow-500 pl-4">
+        <h3 class="font-semibold text-lg">Policy Updates</h3>
+        <p class="text-sm text-slate-500">
+          Last update: 15 days ago • Pending approvals: Chief Legal Officer, CDO
+        </p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Policy History</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audit-ready Dashboards -->
+  <section class="notion-card p-8 mb-8">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">📊 Audit-ready Dashboards</h2>
+      <span class="text-sm text-slate-500">Automated Reports · Updated 30m ago</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Recent Audit Logs</p>
+        <p class="text-2xl font-bold mt-1">42</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Logs</button>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Policy Compliance Score</p>
+        <p class="text-2xl font-bold mt-1">87%</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Compliance Report</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISO-aligned Governance Controls -->
+  <section class="notion-card p-8 mb-8">
+    <h2 class="text-xl font-semibold mb-4">📋 ISO-aligned Governance Controls</h2>
+
+    <div class="space-y-3">
+      <div class="toggle-section flex items-center gap-2" onclick="toggleInsight('iso')">
+        <h3 class="font-semibold text-lg">ISO 27001 & ISO 9001 Controls</h3>
+        <svg class="w-4 h-4 transform transition-transform" id="arrow-iso" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </div>
+      <div id="insight-iso" class="hidden pl-4 text-sm text-slate-600 dark:text-slate-400 mt-2 space-y-2">
+        <p>✔️ Access control policies for AI deployment approvals.</p>
+        <p>✔️ Documentation of change management and data governance.</p>
+        <p>✔️ Regular review and audit of model performance and fairness.</p>
+        <p>✔️ Centralized dashboard for ISO-aligned compliance evidence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Copilot -->
+  <section class="notion-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div>
+      <h3 class="text-lg font-semibold mb-1">🤖 ArthaShield Copilot</h3>
+      <p class="text-sm text-slate-500">Ask: “Show pending approvals for Credit Scoring Engine” or “Generate ISO audit summary.”</p>
+    </div>
+    <button id="openChat" class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm transition">
+      Open Copilot Chat
+    </button>
+  </section>
+
+  <!-- CHAT SIDEBAR -->
+  <div id="chatSidebar" class="fixed top-0 right-0 h-full w-80 bg-white dark:bg-slate-900 shadow-xl border-l border-slate-200 dark:border-slate-700 transform translate-x-full transition-transform duration-300 p-6 flex flex-col">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">🤖 Copilot Chat</h3>
+      <button id="closeChat" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-xl">&times;</button>
+    </div>
+    <div class="flex-1 overflow-y-auto space-y-4 text-sm text-slate-600 dark:text-slate-300">
+      <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg">
+        <b>User:</b> Show pending approvals for AI models.
+      </div>
+      <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+        <b>Copilot:</b> Credit Scoring Engine: 2 pending, Loan Eligibility Classifier: 1 pending. All approvals require Compliance Head sign-off.
+      </div>
+    </div>
+    <div class="mt-4 flex gap-2">
+      <input type="text" placeholder="Type your question..." class="flex-1 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm focus:outline-none"/>
+      <button class="px-3 py-2 bg-blue-500 text-white rounded-lg">Send</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    function toggleInsight(id) {
+      const content = document.getElementById('insight-' + id);
+      const arrow = document.getElementById('arrow-' + id);
+      content.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    }
+
+    // Toggle theme
+    document.getElementById('toggleTheme').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // Copilot Chat sidebar
+    const chatSidebar = document.getElementById('chatSidebar');
+    document.getElementById('openChat').addEventListener('click', () => {
+      chatSidebar.classList.remove('translate-x-full');
+    });
+    document.getElementById('closeChat').addEventListener('click', () => {
+      chatSidebar.classList.add('translate-x-full');
+    });
+  </script>
+
+</body>
+</html>

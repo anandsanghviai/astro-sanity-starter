@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield | AI FinOps Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .notion-card {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 1rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      backdrop-filter: blur(8px);
+    }
+    .dark .notion-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .toggle-section { cursor: pointer; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 min-h-screen p-6">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-8">
+    <div class="flex items-center gap-3">
+      <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-10">
+      <h1 class="text-2xl font-semibold text-slate-700 dark:text-slate-200">ArthaShield AI FinOps</h1>
+    </div>
+    <button id="toggleTheme" class="px-4 py-2 rounded-lg text-sm bg-slate-200 dark:bg-slate-800 dark:text-white hover:bg-slate-300 dark:hover:bg-slate-700 transition">
+      🌙 Toggle Dark Mode
+    </button>
+  </header>
+
+  <!-- Overview Card -->
+  <section class="notion-card p-8 mb-8">
+    <h2 class="text-2xl font-semibold mb-3">💰 AI Spend Overview</h2>
+    <p class="text-slate-600 dark:text-slate-400 mb-6">
+      Track token consumption, compute spend, and efficiency across all AI models. Make data-driven decisions and reduce waste.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-4 text-center">
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Total Tokens Used</p>
+        <p class="text-2xl font-bold mt-1">1.2M</p>
+      </div>
+      <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20">
+        <p class="text-sm text-slate-500">Estimated Spend</p>
+        <p class="text-2xl font-bold text-green-600 mt-1">$42,300</p>
+      </div>
+      <div class="p-4 rounded-xl bg-yellow-50 dark:bg-yellow-900/20">
+        <p class="text-sm text-slate-500">Active Models</p>
+        <p class="text-2xl font-bold text-yellow-600 mt-1">12</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Token Usage by Model -->
+  <section class="notion-card p-8 mb-8">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">🖥️ Token Usage by Model</h2>
+      <span class="text-sm text-slate-500">Updated 30m ago</span>
+    </div>
+
+    <div class="space-y-4">
+      <div class="border-l-4 border-blue-500 pl-4">
+        <h3 class="font-semibold text-lg">Credit Scoring Engine</h3>
+        <p class="text-sm text-slate-500">Tokens Used: 350k • Cost: $12,400 • Efficiency: 87%</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Usage Graph</button>
+      </div>
+      <div class="border-l-4 border-green-500 pl-4">
+        <h3 class="font-semibold text-lg">Loan Eligibility Classifier</h3>
+        <p class="text-sm text-slate-500">Tokens Used: 220k • Cost: $7,600 • Efficiency: 91%</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Usage Graph</button>
+      </div>
+      <div class="border-l-4 border-yellow-500 pl-4">
+        <h3 class="font-semibold text-lg">Fraud Detection Model</h3>
+        <p class="text-sm text-slate-500">Tokens Used: 180k • Cost: $6,200 • Efficiency: 88%</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Usage Graph</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cost Allocation -->
+  <section class="notion-card p-8 mb-8">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">📊 Cost Allocation by Team</h2>
+      <span class="text-sm text-slate-500">Updated 1h ago</span>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Credit Risk Team</p>
+        <p class="text-2xl font-bold mt-1">$18,400</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Details</button>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Fraud Ops Team</p>
+        <p class="text-2xl font-bold mt-1">$12,800</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Details</button>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Loan Approval Team</p>
+        <p class="text-2xl font-bold mt-1">$11,100</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Details</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Efficiency & Optimization -->
+  <section class="notion-card p-8 mb-8">
+    <h2 class="text-xl font-semibold mb-4">⚡ Model Efficiency & Optimization</h2>
+    <ul class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
+      <li>Identify high-cost, low-accuracy models for optimization.</li>
+      <li>Batch predictions to reduce token spend.</li>
+      <li>Use smaller models for low-risk tasks.</li>
+      <li>Track per-token cost vs compliance value delivered.</li>
+    </ul>
+  </section>
+
+  <!-- Compliance & Risk -->
+  <section class="notion-card p-8 mb-8">
+    <h2 class="text-xl font-semibold mb-4">🛡️ Compliance & Risk</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="p-4 rounded-xl bg-red-50 dark:bg-red-900/20">
+        <p class="text-sm text-slate-500">High Risk Models</p>
+        <p class="text-2xl font-bold mt-1">2</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Details</button>
+      </div>
+      <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20">
+        <p class="text-sm text-slate-500">Models Within Compliance</p>
+        <p class="text-2xl font-bold mt-1">10</p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Details</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI FinOps Copilot -->
+  <section class="notion-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div>
+      <h3 class="text-lg font-semibold mb-1">🤖 AI FinOps Copilot</h3>
+      <p class="text-sm text-slate-500">Ask: “Show top cost-driving models” or “Generate monthly token spend report.”</p>
+    </div>
+    <button id="openChat" class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm transition">
+      Open Copilot Chat
+    </button>
+  </section>
+
+  <!-- CHAT SIDEBAR -->
+  <div id="chatSidebar" class="fixed top-0 right-0 h-full w-80 bg-white dark:bg-slate-900 shadow-xl border-l border-slate-200 dark:border-slate-700 transform translate-x-full transition-transform duration-300 p-6 flex flex-col">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">🤖 AI FinOps Copilot</h3>
+      <button id="closeChat" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-xl">&times;</button>
+    </div>
+    <div class="flex-1 overflow-y-auto space-y-4 text-sm text-slate-600 dark:text-slate-300">
+      <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg">
+        <b>User:</b> Show top cost-driving models.
+      </div>
+      <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+        <b>Copilot:</b> Credit Scoring Engine: $12,400, Fraud Detection: $6,200, Loan Eligibility: $7,600.
+      </div>
+    </div>
+    <div class="mt-4 flex gap-2">
+      <input type="text" placeholder="Type your question..." class="flex-1 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm focus:outline-none"/>
+      <button class="px-3 py-2 bg-blue-500 text-white rounded-lg">Send</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Toggle theme
+    document.getElementById('toggleTheme').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // Copilot Chat sidebar
+    const chatSidebar = document.getElementById('chatSidebar');
+    document.getElementById('openChat').addEventListener('click', () => {
+      chatSidebar.classList.remove('translate-x-full');
+    });
+    document.getElementById('closeChat').addEventListener('click', () => {
+      chatSidebar.classList.add('translate-x-full');
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield | Ongoing Monitoring</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .notion-card {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 1rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      backdrop-filter: blur(8px);
+    }
+    .dark .notion-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .toggle-section { cursor: pointer; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 min-h-screen p-6">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-8">
+    <div class="flex items-center gap-3">
+      <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-10">
+      <h1 class="text-2xl font-semibold text-slate-700 dark:text-slate-200">ArthaShield Control Tower</h1>
+    </div>
+    <button id="toggleTheme" class="px-4 py-2 rounded-lg text-sm bg-slate-200 dark:bg-slate-800 dark:text-white hover:bg-slate-300 dark:hover:bg-slate-700 transition">
+      🌙 Toggle Dark Mode
+    </button>
+  </header>
+
+  <!-- MAIN DASHBOARD CARD -->
+  <section class="notion-card p-8">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-semibold">📡 Ongoing Monitoring</h2>
+      <span class="text-sm text-slate-500">Continuous Oversight · Updated 10m ago</span>
+    </div>
+
+    <p class="text-slate-600 dark:text-slate-400 mb-6">
+      Continuous model oversight to detect drift, anomalies, and compliance violations across production systems.
+      This workspace provides live health metrics, automatic alerts, and AI explanations for every observed deviation.
+    </p>
+
+    <!-- METRICS GRID -->
+    <div class="grid md:grid-cols-4 gap-4 mb-8 text-center">
+      <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+        <p class="text-sm text-slate-500">Models Monitored</p>
+        <p class="text-2xl font-bold mt-1">12</p>
+      </div>
+      <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20">
+        <p class="text-sm text-slate-500">Drift Alerts (24h)</p>
+        <p class="text-2xl font-bold text-blue-600 mt-1">3</p>
+      </div>
+      <div class="p-4 rounded-xl bg-yellow-50 dark:bg-yellow-900/20">
+        <p class="text-sm text-slate-500">Anomalies Detected</p>
+        <p class="text-2xl font-bold text-yellow-600 mt-1">5</p>
+      </div>
+      <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20">
+        <p class="text-sm text-slate-500">Resolved Incidents</p>
+        <p class="text-2xl font-bold text-green-600 mt-1">11</p>
+      </div>
+    </div>
+
+    <!-- MONITORING FEED -->
+    <div class="space-y-6">
+      <div class="border-l-4 border-blue-500 pl-4">
+        <h3 class="font-semibold text-lg">📈 Credit Scoring Engine</h3>
+        <p class="text-sm text-slate-500">
+          Drift in feature “income_ratio” (+7%) detected • Action taken: retraining scheduled •
+          Confidence: <span class="text-blue-500 font-semibold">High</span>
+        </p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">View Drift Analysis</button>
+      </div>
+
+      <div class="border-l-4 border-yellow-500 pl-4">
+        <h3 class="font-semibold text-lg">⚠️ Loan Eligibility Classifier</h3>
+        <p class="text-sm text-slate-500">
+          Prediction anomaly for segment “Young Borrowers” • Fairness deviation: -12% • 
+          Suggestion: review training dataset distribution.
+        </p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">Inspect Bias Segment</button>
+      </div>
+
+      <div class="border-l-4 border-green-500 pl-4">
+        <h3 class="font-semibold text-lg">💬 Chatbot Sentiment Analyzer</h3>
+        <p class="text-sm text-slate-500">
+          Stable performance observed over 30 days • Sentiment accuracy at <span class="text-green-500 font-semibold">96%</span> • 
+          No compliance anomalies detected.
+        </p>
+        <button class="mt-2 text-blue-500 hover:underline text-sm">Generate Monthly Summary</button>
+      </div>
+    </div>
+
+    <!-- COLLAPSIBLE DETAILS -->
+    <div class="mt-8">
+      <div class="toggle-section flex items-center gap-2" onclick="toggleInsight('monitoring')">
+        <h3 class="font-semibold text-lg">🔍 Deep Monitoring Insights</h3>
+        <svg class="w-4 h-4 transform transition-transform" id="arrow-monitoring" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </div>
+      <div id="insight-monitoring" class="hidden pl-4 text-sm text-slate-600 dark:text-slate-400 mt-3 space-y-2">
+        <p>✔️ <b>Data Drift Detection</b> — monitors input feature distributions in real time.</p>
+        <p>✔️ <b>Concept Drift Analysis</b> — tracks accuracy shifts vs baseline.</p>
+        <p>✔️ <b>Bias Re-Evaluation</b> — automated fairness recalibration every 30 days.</p>
+        <p>✔️ <b>Compliance Triggers</b> — flags anomalies impacting regulatory KPIs (e.g., loan approval parity).</p>
+        <p>✔️ <b>Explainability Log</b> — generates SHAP and LIME plots for every flagged instance.</p>
+      </div>
+    </div>
+
+    <!-- AI COPILOT SIDEBAR -->
+    <div class="mt-10 p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+      <div>
+        <h3 class="text-lg font-semibold mb-1">🤖 ArthaShield Copilot</h3>
+        <p class="text-sm text-slate-500">
+          Ask: “What caused the drift in Credit Scoring Engine?” or “Summarize weekly compliance anomalies.”
+        </p>
+      </div>
+      <button id="openChat" class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm transition">
+        Open Copilot Chat
+      </button>
+    </div>
+  </section>
+
+  <!-- CHAT SIDEBAR -->
+  <div id="chatSidebar" class="fixed top-0 right-0 h-full w-80 bg-white dark:bg-slate-900 shadow-xl border-l border-slate-200 dark:border-slate-700 transform translate-x-full transition-transform duration-300 p-6 flex flex-col">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">🤖 Copilot Chat</h3>
+      <button id="closeChat" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-xl">&times;</button>
+    </div>
+    <div class="flex-1 overflow-y-auto space-y-4 text-sm text-slate-600 dark:text-slate-300">
+      <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg">
+        <b>User:</b> What caused drift in Credit Scoring Engine?
+      </div>
+      <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+        <b>Copilot:</b> The drift was primarily due to a sudden income ratio skew in new applicant data post-holiday period. Retraining initiated with weighted correction.
+      </div>
+    </div>
+    <div class="mt-4 flex gap-2">
+      <input type="text" placeholder="Type your question..." class="flex-1 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm focus:outline-none"/>
+      <button class="px-3 py-2 bg-blue-500 text-white rounded-lg">Send</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Toggle insight
+    function toggleInsight(id) {
+      const content = document.getElementById('insight-' + id);
+      const arrow = document.getElementById('arrow-' + id);
+      content.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    }
+
+    // Toggle theme
+    const toggleThemeBtn = document.getElementById('toggleTheme');
+    toggleThemeBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // Copilot Chat sidebar
+    const chatSidebar = document.getElementById('chatSidebar');
+    document.getElementById('openChat').addEventListener('click', () => {
+      chatSidebar.classList.remove('translate-x-full');
+    });
+    document.getElementById('closeChat').addEventListener('click', () => {
+      chatSidebar.classList.add('translate-x-full');
+    });
+  </script>
+</body>
+</html>
