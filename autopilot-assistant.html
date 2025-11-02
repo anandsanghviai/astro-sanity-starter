@@ -154,7 +154,7 @@
             <div class="w-1/3">
               <h3 class="font-semibold mb-3">Triggers</h3>
               <div class="flex flex-col gap-3">
-                <button onclick="runMockAnalysis('triage_upi')" class="py-2 px-3 rounded-lg bg-red-500 text-white">🚨 Fraud anomalies</button>
+					
                 <button onclick="runMockAnalysis('classify_complaint')" class="py-2 px-3 rounded-lg bg-blue-600 text-white">📋 Classify Complaint</button>
                 <button onclick="runMockAnalysis('ai-bias-incident')" class="py-2 px-3 rounded-lg bg-purple-600 text-white"> 🪪 Bias detection in KYC </button>
                 <button onclick="runMockAnalysis('kyc_doc_check')" class="py-2 px-3 rounded-lg bg-amber-500 text-white">⚠️ High-risk complaints</button>
@@ -245,22 +245,22 @@
           <td class="px-4 py-3">KPI: <b>drift_detected_rate</b>, SLA: retrain decision within 48h</td>
         </tr>
         <tr>
-          <td class="px-4 py-3 font-medium">Explainability gaps for complex ensembles</td>
-          <td class="px-4 py-3 muted">Regulators demand rationale; black-box models can't produce evidence</td>
-          <td class="px-4 py-3">On-demand explainers (SHAP/LIME proxies), counterfactuals, human-readable incident summary mapped to ISO clauses</td>
-          <td class="px-4 py-3">KPI: % incidents with attached explainability artifacts (target 95%)</td>
+          <td class="px-4 py-3 font-medium">Explainability gaps for models</td>
+          <td class="px-4 py-3 muted">Ensure audit-ready model transparency. Provide clear rationale for model-driven decisions</td>
+          <td class="px-4 py-3">On-demand decision rationales, incident summaries, and technical feature contribution analysis</td>
+          <td class="px-4 py-3">KPI: % incidents with attached explainability artifacts</td>
         </tr>
         <tr>
           <td class="px-4 py-3 font-medium">Training data lineage & provenance failures</td>
           <td class="px-4 py-3 muted">Inability to prove training sets → failed audits and fines</td>
           <td class="px-4 py-3">Immutable dataset registry, hashed artifacts, versioned datasets and access logs for every model build</td>
-          <td class="px-4 py-3">Action: enforce dataset sign-off; KPI: dataset provenance coverage 100%</td>
+          <td class="px-4 py-3">Action: enforce dataset sign-off; KPI: dataset provenance coverage 70%</td>
         </tr>
         <tr>
           <td class="px-4 py-3 font-medium">Bias discovered post-deployment</td>
           <td class="px-4 py-3 muted">Late discovery → customer harm + regulatory escalation</td>
           <td class="px-4 py-3">Bias scanners + synthetic probing, targeted retraining pipelines, consumer-facing remediation templates</td>
-          <td class="px-4 py-3">SLA: remediation plan within 7 days; KPI: bias incident closure rate</td>
+          <td class="px-4 py-3">SLA: remediation plan, KPI: bias incident closure rate</td>
         </tr>
       </tbody>
     </table>
