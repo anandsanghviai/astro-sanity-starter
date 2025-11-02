@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArthaShield — AI Literacy Challenge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+    body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+    .glass { background: rgba(255,255,255,0.72); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.18); }
+    .glass-dark { background: rgba(15,23,42,0.66); backdrop-filter: blur(8px); border: 1px solid rgba(148,163,184,0.12); }
+    .challenge-card { min-height: 240px; }
+    .muted { color: rgba(148,163,184,1); }
+    .explain-box { background: rgba(250,250,255,0.9); border-left: 4px solid #6366f1; padding: 12px; border-radius: 8px; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen text-slate-800">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass">
+        <a href="#" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield AI</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 relative">
+          <a href="#story" class="hover:text-slate-900">Home</a>
+          <a href="#how" class="hover:text-slate-900">How it works</a>
+          <a href="#challenge" class="hover:text-slate-900">Challenge</a>
+          <a href="#community" class="hover:text-slate-900">Community</a>
+        </nav>
+        <div class="hidden md:flex gap-3">
+          <a href="#challenge" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm">Start Challenge</a>
+        </div>
+        <button id="menuButton" class="md:hidden flex items-center text-slate-700 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="story" class="py-12">
+    <div class="mx-auto max-w-5xl px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">AI Literacy Challenge — For Compliance, Risk & Audit</h1>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto mb-6">Two minutes a day teaching teams to spot risky chatbot responses and to justify decisions in auditor-friendly language.</p>
+      <p class="text-sm text-slate-700 max-w-2xl mx-auto mb-6 italic">"Notice the missing evidence trail — that’s your signal." — Subtle Mentor tone</p>
+
+      <div class="flex justify-center gap-4">
+        <a href="#challenge" class="rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium">Try today's micro-challenge</a>
+        <a href="#how" class="rounded-xl ring-1 ring-slate-200 px-6 py-3 font-medium">How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why this matters -->
+  <section class="bg-white/60 py-10">
+    <div class="mx-auto max-w-6xl px-6 grid md:grid-cols-3 gap-6 items-center">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl font-semibold mb-2">Why this matters to Compliance & Audit</h2>
+        <p class="text-slate-600 mb-4">Chatbots are now frontline. Auditors and regulators expect not only logs, but evidence your people can use to explain decisions. This program trains both recognition and justification — the two things auditors value most.</p>
+        <ul class="list-disc pl-5 text-slate-700 space-y-2">
+          <li>Recognize risky AI responses (hallucinations, overclaims, security breaches).</li>
+          <li>Produce concise audit-grade justifications using governance language.</li>
+          <li>Build a local evidence log you can export for internal or regulator review.</li>
+        </ul>
+      </div>
+      <div class="p-6 rounded-2xl glass">
+        <div class="text-sm font-semibold">Quick facts</div>
+        <div class="mt-3 text-xs text-slate-700 space-y-2">
+          <div>• 2 minutes/day</div>
+          <div>• Cases focus on chatbot responses and compliance</div>
+          <div>• Audit-ready export (local CSV)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenge -->
+  <section id="challenge" class="py-12">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="flex items-start gap-8 flex-col lg:flex-row">
+
+        <!-- Left: challenge card -->
+        <div class="flex-1 bg-white rounded-2xl p-6 shadow challenge-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-xl font-bold">Today's Micro-Challenge</h3>
+              <p class="text-sm text-slate-600 mt-1">Detect risky chatbot outputs — answer, then justify.</p>
+            </div>
+            <div id="caseMeta" class="text-xs text-slate-500">Case #1 · L1</div>
+          </div>
+
+          <div id="caseArea" class="mt-6 text-sm text-slate-700"></div>
+
+          <form id="challenge-form" class="mt-6 space-y-3">
+            <div id="options" class="grid gap-3"></div>
+
+            <div class="flex items-center gap-3 mt-4">
+              <button type="button" id="skipBtn" class="px-3 py-1 text-sm rounded-lg ring-1">Skip</button>
+              <button type="button" id="submitBtn" class="px-4 py-2 text-sm rounded-xl bg-indigo-600 text-white">Submit</button>
+              <button type="button" id="nextBtn" class="ml-auto px-4 py-2 text-sm rounded-xl bg-slate-100 text-slate-800 hidden">Next case</button>
+            </div>
+          </form>
+
+          <div id="caseFeedback" class="mt-4 text-sm hidden"></div>
+
+          <div class="mt-4 hidden" id="whyBox">
+            <div class="explain-box">
+              <div id="whyTitle" class="font-semibold">Why this is risky</div>
+              <div id="whyContent" class="mt-2 text-sm text-slate-700"></div>
+              <div id="whyAudit" class="mt-3 text-xs muted"></div>
+            </div>
+          </div>
+
+          <div class="mt-6 text-xs text-slate-500">Time spent: <span id="timeSpent">0s</span></div>
+        </div>
+
+        <!-- Right: progress -->
+        <aside class="w-full lg:w-80">
+          <div class="p-6 bg-blue-600 rounded-2xl shadow glass-dark text-white">
+            <h4 class="font-semibold">Your Progress</h4>
+
+            <div class="mt-4 text-xs text-slate-200 ">Today's score</div>
+            <div class="mt-2 text-2xl font-extrabold" id="todayScore">—</div>
+
+            <div class="mt-6 text-xs text-slate-200">Weekly streak (Mon→Sun)</div>
+            <div class="mt-2 text-2xl font-extrabold" id="weeklyStreak">0</div>
+
+            <hr class="my-4 border-slate-700/40"/>
+
+            <div class="text-xs text-slate-200">Admin</div>
+            <div class="mt-2 text-xs text-slate-200">Export participation history for audits.</div>
+            <button id="exportBtn" class="mt-3 w-full px-3 py-2 rounded-lg ring-1 text-white">Export CSV (audit)</button>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="py-10 bg-gradient-to-tr from-slate-50 to-white">
+    <div class="mx-auto max-w-6xl px-6 text-center">
+      <h2 class="text-2xl font-bold mb-3">How it works</h2>
+      <p class="text-slate-600 mb-6">Daily micro-cases delivered to your team. Scoring, audit-ready reasoning, and admin controls for evidence.</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 shadow text-left">
+          <h4 class="font-semibold mb-2">1. Short daily case</h4>
+          <p class="text-sm text-slate-600">Real chatbot responses — 2 minutes to respond.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow text-left">
+          <h4 class="font-semibold mb-2">2. Submit & justify</h4>
+          <p class="text-sm text-slate-600">Explain in auditor-friendly language — built templates help you phrase the reason.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow text-left">
+          <h4 class="font-semibold mb-2">3. Audit-ready export</h4>
+          <p class="text-sm text-slate-600">Download the participation + reasoning log for internal audit or regulator review.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section id="community" class="py-12">
+    <div class="mx-auto max-w-6xl px-6 text-center">
+      <h3 class="text-2xl font-bold mb-3">Built with risk teams</h3>
+      <p class="text-slate-600 mb-6">Co-created with compliance leaders and auditors to ensure relevance and auditability.</p>
+      <a href="#" class="inline-block rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3">Join pilot</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-slate-500">© 2025 ArthaShield AI. All rights reserved.</footer>
+
+
+  <!-- Script: cases + client logic -->
+  <script>
+    // ---------- Helpers ----------
+    function getMondayKeyFor(date = new Date()) {
+      const d = new Date(date);
+      const day = d.getDay(); // 0 Sun .. 6 Sat
+      const diff = (day === 0 ? -6 : 1 - day);
+      const monday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + diff);
+      const y = monday.getFullYear();
+      const m = String(monday.getMonth() + 1).padStart(2,'0');
+      const dd = String(monday.getDate()).padStart(2,'0');
+      return `${y}-${m}-${dd}`;
+    }
+
+    // ---------- Cases (S3, L1) with E3 styled explanations (subtle mentor tone) ----------
+    const cases = [
+      {
+        id: 101,
+        domain: 'Customer Service',
+        title: 'Unverified refund promise',
+        prompt: `Chatbot response: "No worries! I've already reversed those charges for you. You should see the refund soon :)"\n\nCustomer message: "I did not make these transactions; my account seems compromised."`,
+        options: [
+          { id: 'A', text: 'Accept — chatbot was being helpful.' },
+          { id: 'B', text: 'Risky — chatbot promised a refund without verification.' },
+          { id: 'C', text: 'No issue — refunds are reversible.' }
+        ],
+        correct: 'B',
+        explain: {
+          signal: 'Chatbot commits to financial action (refund) without authentication or escalation—missing verification step.',
+          impact: 'Impact: Financial exposure and consumer harm if account takeover is real. Misleading promise can increase liability.',
+          action: 'Action: Escalate to dispute/fraud workflow; pause automated refunds until identity verified.',
+          audit: 'Audit note: Record the decision and reference dispute-handling control. (Principle: Human-in-the-loop governance; Explainability)'
+        }
+      },
+
+      {
+        id: 102,
+        domain: 'KYC',
+        title: 'AI overrides KYC check',
+        prompt: `Chatbot response: "Your KYC looks fine to me. No need to upload documents again."\n\nContext: automated KYC flagged missing address proof.`,
+        options: [
+          { id: 'A', text: 'Correct — save customer time.' },
+          { id: 'B', text: 'Incorrect — AI must not waive KYC checks.' },
+          { id: 'C', text: 'Escalate only on complaint.' }
+        ],
+        correct: 'B',
+        explain: {
+          signal: 'Chatbot suggests skipping a regulatory verification step (address proof).',
+          impact: 'Impact: Regulatory non-compliance risk; audit trail gaps for identity verification.',
+          action: 'Action: Reinstate KYC workflow; require documentary proof before proceeding.',
+          audit: 'Audit note: Attach KYC policy reference and note the override attempt. (Principle: Reliance boundaries; Accountability)'
+        }
+      },
+
+      {
+        id: 103,
+        domain: 'Fraud',
+        title: 'Authoritative fraud denial',
+        prompt: `Chatbot response: "We confirm there was no fraud. The transactions were legitimate."\n\nContext: Customer reports unauthorized UPI transfers within the last 2 hours.`,
+        options: [
+          { id: 'A', text: 'Accept — AI says no fraud.' },
+          { id: 'B', text: 'Incorrect — AI concluded without investigation.' },
+          { id: 'C', text: 'Close as duplicate.' }
+        ],
+        correct: 'B',
+        explain: {
+          signal: 'Chatbot issues a definitive fraud judgment without evidence of investigation.',
+          impact: 'Impact: Misclassification can deny consumer remedies and lead to regulatory penalties.',
+          action: 'Action: Escalate to fraud investigation; avoid authoritative language in responses.',
+          audit: 'Audit note: Log decision and require human review confirmation. (Principle: Human oversight; Explainability)'
+        }
+      },
+
+      {
+        id: 104,
+        domain: 'Lending',
+        title: 'Premature approval message',
+        prompt: `Chatbot response: "Great news! Your loan application is approved."\n\nContext: System only completed pre-screening; underwriting pending.`,
+        options: [
+          { id: 'A', text: 'Accept — helpful to customer.' },
+          { id: 'B', text: 'Non-compliant — cannot promise approval.' },
+          { id: 'C', text: 'Neutral — customer will know later.' }
+        ],
+        correct: 'B',
+        explain: {
+          signal: 'Chatbot communicates a final decision based on pre-screening signals only.',
+          impact: 'Impact: Misrepresentation of credit decisions; affects customer expectations and legal disclosure requirements.',
+          action: 'Action: Correct messaging to "application under review" and route to underwriting for confirmation.',
+          audit: 'Audit note: Document messaging control and corrective action. (Principle: Accountability; Reliance boundaries)'
+        }
+      },
+
+      {
+        id: 105,
+        domain: 'Disputes',
+        title: 'False resolution claim',
+        prompt: `Chatbot response: "Your complaint has been fully resolved."\n\nContext: Complaint about phishing; no resolution confirmed with customer or remediation team.`,
+        options: [
+          { id: 'A', text: 'Polite close — okay.' },
+          { id: 'B', text: 'Creates false closure — problematic.' },
+          { id: 'C', text: 'Only an issue if customer objects.' }
+        ],
+        correct: 'B',
+        explain: {
+          signal: 'Chatbot states closure without verified remediation or confirmation.',
+          impact: 'Impact: Dispute handling failures, regulatory reporting inaccuracies, customer rights compromised.',
+          action: 'Action: Reopen case procedures; ensure verification before closure.',
+          audit: 'Audit note: Capture correspondence and remediation evidence. (Principle: Auditability; Human oversight)'
+        }
+      },
+
+      {
+        id: 106,
+        domain: 'Security',
+        title: 'Asking for OTP/credentials',
+        prompt: `Chatbot response: "Sure, share your OTP here and I will verify the issue!"\n\nContext: Customer is frustrated and seeking quick help.`,
+        options: [
+          { id: 'A', text: 'Friendly assistance.' },
+          { id: 'B', text: 'Severe security breach — AI must never request OTP.' },
+          { id: 'C', text: 'Allowed only if session is authenticated.' }
+        ],
+        correct: 'B',
+        explain: {
+          signal: 'Chatbot requests authentication credentials (OTP) in conversation.',
+          impact: 'Impact: Direct facilitator of fraud; breach of security protocol.',
+          action: 'Action: Block such prompts; notify security team and retrain model responses.',
+          audit: 'Audit note: Escalate as critical incident; attach security control reference. (Principle: Security hygiene; Accountability)'
+        }
+      }
+    ];
+
+    // ---------- DOM refs ----------
+    const caseArea = document.getElementById('caseArea');
+    const optionsEl = document.getElementById('options');
+    const caseMeta = document.getElementById('caseMeta');
+    const caseFeedback = document.getElementById('caseFeedback');
+    const submitBtn = document.getElementById('submitBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const todayScoreEl = document.getElementById('todayScore');
+    const weeklyStreakEl = document.getElementById('weeklyStreak');
+    const exportBtn = document.getElementById('exportBtn');
+    const whyBox = document.getElementById('whyBox');
+    const whyContent = document.getElementById('whyContent');
+    const whyAudit = document.getElementById('whyAudit');
+    const timeSpentEl = document.getElementById('timeSpent');
+
+    // ---------- state ----------
+    let idx = 0;
+    let selectedOpt = null;
+    let startTs = null;
+    let timerHandle = null;
+
+    // Keys
+    const HISTORY_KEY = 'arthashield_challenge_history';
+    const WEEK_KEY = 'arthashield_week_key';
+    const WEEK_COUNT_KEY = 'arthashield_week_count';
+    const TODAY_SCORE_KEY = 'arthashield_today_score';
+    const TODAY_DATE_KEY = 'arthashield_today_date';
+
+    // init week/day
+    function ensureWeekAndDayFresh(){
+      const wkNow = getMondayKeyFor(new Date());
+      if(localStorage.getItem(WEEK_KEY) !== wkNow){
+        localStorage.setItem(WEEK_KEY, wkNow);
+        localStorage.setItem(WEEK_COUNT_KEY, '0');
+      }
+      const todayKey = new Date().toISOString().slice(0,10);
+      if(localStorage.getItem(TODAY_DATE_KEY) !== todayKey){
+        localStorage.setItem(TODAY_DATE_KEY, todayKey);
+        localStorage.setItem(TODAY_SCORE_KEY, '0');
+      }
+    }
+    ensureWeekAndDayFresh();
+
+    function updateSidebar(){
+      const todayScore = parseInt(localStorage.getItem(TODAY_SCORE_KEY) || '0');
+      const weekCount = parseInt(localStorage.getItem(WEEK_COUNT_KEY) || '0');
+      todayScoreEl.innerHTML = (todayScore === 0) ? '<span class="text-slate-200">—</span>' : `${todayScore}/1`;
+      weeklyStreakEl.textContent = String(weekCount);
+    }
+
+    // ---------- render case ----------
+    function renderCase(i){
+      idx = i % cases.length;
+      const c = cases[idx];
+      caseMeta.textContent = `Case #${c.id} · ${c.domain}`;
+      caseArea.innerHTML = `<div class="text-sm font-semibold">${c.title}</div><div class="mt-2 text-xs text-slate-600">Domain: ${c.domain}</div><div class="mt-4 text-slate-700 whitespace-pre-wrap">${c.prompt}</div>`;
+      optionsEl.innerHTML = '';
+      c.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'w-full text-left p-3 rounded-lg ring-1 hover:ring-indigo-500 bg-white';
+        btn.innerHTML = `<div class="text-sm font-medium">${opt.id}. ${opt.text}</div>`;
+        btn.dataset.opt = opt.id;
+        btn.addEventListener('click', () => {
+          optionsEl.querySelectorAll('button').forEach(b => b.classList.remove('ring-2','ring-indigo-500','bg-indigo-50'));
+          btn.classList.add('ring-2','ring-indigo-500','bg-indigo-50');
+          selectedOpt = opt.id;
+        });
+        optionsEl.appendChild(btn);
+      });
+      caseFeedback.classList.add('hidden'); caseFeedback.innerHTML = '';
+      whyBox.classList.add('hidden'); whyContent.innerHTML = ''; whyAudit.innerHTML = '';
+      nextBtn.classList.add('hidden'); submitBtn.disabled = false; selectedOpt = null; startTs = Date.now(); tickTimer();
+    }
+
+    function tickTimer(){
+      if(timerHandle) clearTimeout(timerHandle);
+      const elapsed = Math.floor((Date.now() - (startTs||Date.now()))/1000);
+      timeSpentEl.textContent = elapsed + 's';
+      timerHandle = setTimeout(tickTimer, 1000);
+    }
+
+    // ---------- submit logic (with E3 style reasoning reveal) ----------
+    submitBtn.addEventListener('click', () => {
+      if(!selectedOpt){ alert('Please select an option.'); return; }
+      submitBtn.disabled = true;
+      const c = cases[idx];
+      const correct = (selectedOpt === c.correct);
+      const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      const rec = { caseId: c.id, chosen: selectedOpt, correct: c.correct, ts: new Date().toISOString(), timeSpentSec: Math.floor((Date.now()-startTs)/1000) };
+      history.push(rec); localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+
+      // week/day bookkeeping (week resets Mon)
+      const wkKey = getMondayKeyFor(new Date());
+      if(localStorage.getItem(WEEK_KEY) !== wkKey){ localStorage.setItem(WEEK_KEY, wkKey); localStorage.setItem(WEEK_COUNT_KEY,'0'); }
+      const todayScore = parseInt(localStorage.getItem(TODAY_SCORE_KEY) || '0');
+      let weekCount = parseInt(localStorage.getItem(WEEK_COUNT_KEY) || '0');
+
+      if(correct && todayScore === 0){
+        localStorage.setItem(TODAY_SCORE_KEY, '1');
+        localStorage.setItem(WEEK_COUNT_KEY, String(weekCount + 1));
+        caseFeedback.classList.remove('hidden'); caseFeedback.innerHTML = `<div class="text-sm text-green-700">✅ Good catch — ${c.explain.impact}</div>`;
+      } else if(correct && todayScore === 1){
+        caseFeedback.classList.remove('hidden'); caseFeedback.innerHTML = `<div class="text-sm text-green-700">✅ Correct — ${c.explain.impact} (Today's challenge already completed)</div>`;
+      } else {
+        // incorrect: provide constructive feedback
+        caseFeedback.classList.remove('hidden'); caseFeedback.innerHTML = `<div class="text-sm text-amber-800">❌ This misses the key signal. ${c.explain.impact}</div>`;
+      }
+
+      // show Why box with E3 template (subtle mentor phrasing)
+      whyBox.classList.remove('hidden');
+      whyContent.innerHTML = `<strong>Signal:</strong> ${c.explain.signal}<br/><br/><strong>Action:</strong> ${c.explain.action}`;
+      whyAudit.innerHTML = `<strong>Audit note:</strong> ${c.explain.audit}`;
+
+      // update sidebar
+      updateSidebar(); nextBtn.classList.remove('hidden');
+    });
+
+    // Skip
+    skipBtn.addEventListener('click', () => { idx = (idx+1)%cases.length; renderCase(idx); });
+
+    // Next case
+    nextBtn.addEventListener('click', () => { idx = (idx+1)%cases.length; renderCase(idx); });
+
+    // Export CSV with explanation summary (audit-friendly)
+    exportBtn.addEventListener('click', () => {
+      const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      if(history.length === 0){ alert('No participation history to export.'); return; }
+      const rows = history.map(h => {
+        const c = cases.find(x=>x.id===h.caseId) || {};
+        const explSummary = (c.explain && c.explain.impact) ? c.explain.impact.replace(/\n/g,' ') : '';
+        return `${h.caseId},${h.chosen},${h.correct},${h.ts},${h.timeSpentSec},"${explSummary}"`;
+      });
+      const csv = ['caseId,chosen,correct,ts,timeSec,explanation', ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'arthashield_challenge_audit.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // initial
+    renderCase(0); updateSidebar();
+  </script>
+</body>
+</html>
