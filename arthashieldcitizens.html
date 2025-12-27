@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Complaint Management & Case Intelligence</title>
+  <title>Arthasheild AI - Complaint Intelligence</title>
   <meta name="description" content="Modern AI platform for BFSI: risk, fraud, KYC, complaints, and agentic workflows with transparent, compliant UX."/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,39 +42,38 @@
       <!-- Logo -->
       <a href="index.html" class="flex items-center gap-3 font-semibold">
         <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto" />
-        <span>ArthaShield AI</span>
+        <span>ArthaShield Resolve Desk - For Consumers</span>
       </a>
 
       <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700 dark:text-slate-200">
 		  <!-- Core product links -->
-		  <a href="#features" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
-		  <a href="#demo" class="hover:text-slate-900 dark:hover:text-white transition">Live Demo</a>
-		  <a href="#security" class="hover:text-slate-900 dark:hover:text-white transition">Security</a>
-		  <a href="ai-hub.html" class="hover:text-slate-900 dark:hover:text-white transition">Explore AI Hub</a>
-		  <a href="general-blog.html" class="text-blue-600 dark:text-blue-400 font-semibold">Blog</a>
+		  <a href="#features" class="hover:text-slate-900 dark:hover:text-white transition">Resolution Studio</a>
+		  <div class="relative">
+			<button id="desktopResourcesBtn" class="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-white focus:outline-none">
+			  <span>Resources</span>
+			  <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+			  </svg>
+			</button>
+
+			<div id="desktopResourcesMenu" class="absolute left-0 mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300 z-50">
+			  <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Arthasheild Agents</a>
+			  <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Monitoring & PDI</a>
+			  <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
+			  <a href="general-blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
+			</div>
+		  </div>
 		  <!-- Contact last -->
 		  <a href="#contact" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
 		</nav>
+		<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+			  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					  d="M4 6h16M4 12h16m-7 6h7"/>
+			  </svg>
+		</button>
 
-
-
-      <!-- Right side (Search + Demo button + Hamburger) -->
-      <div class="flex items-center gap-2">
-        <button id="cmdk" class="hidden sm:inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-900 transition">
-          <span class="material-symbols-outlined text-base"></span>
-          <span>Search</span>
-        </button>
-        <a href="#demo" class="hidden sm:inline-flex rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2 text-sm font-medium hover:opacity-90 transition">Try Demo</a>
-
-        <!-- Mobile Hamburger -->
-			<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"/>
-      </svg>
-    </button>
-      </div>
     </div>
   </div>
 
@@ -84,7 +83,6 @@
     <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
       <a href="#features" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
       <a href="#demo" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Live Demo</a>
-      <a href="#security" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Security</a>
       <a href="ai-hub.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Explore AI Hub</a>
 	  <a href="general-blog.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Blog</a>
       <a href="#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
@@ -188,7 +186,7 @@
         <div class="fade-up card bg-white dark:bg-slate-900 shadow-sm ring-1 ring-slate-200/60 dark:ring-slate-800 p-6">
           <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">KYC & Onboarding</div>
           <h3 class="mt-1 text-lg font-bold">AI‑assisted KYC with Risk Scoring</h3>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">OCR + entity resolution + watchlist screening. Explainable scores with clause‑level citations for auditors.</p>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Make identity decisions explainable & regulator-ready.</p>
           <div class="mt-3 text-xs text-slate-500">Exports: PDF, CSV · Audit log</div>
         </div>
         <div class="fade-up card bg-white dark:bg-slate-900 shadow-sm ring-1 ring-slate-200/60 dark:ring-slate-800 p-6">
@@ -225,129 +223,143 @@
     </div>
   </section>
 
-  <!-- Live Demo -->
-  <section id="demo" class="py-16 md:py-24 bg-white/60 dark:bg-slate-900/60">
-  
-	<div class="text-center mb-8">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Live Console</h2>
-      <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Your AI co-pilot for risk, compliance, and governance.</p>
+  <section id="arthashield-resolution" class="py-28 bg-white dark:bg-black">
+  <div class="mx-auto max-w-6xl px-6">
+
+    <div class="text-center mb-24">
+      <h2 class="text-5xl font-semibold tracking-tight text-slate-900 dark:text-white">
+        Resolve. Recover. Reduce.
+      </h2>
+      <p class="mt-6 text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
+        One quiet, precise system for eliminating billing waste, recovering what’s owed,
+        and closing unresolved service failures—at household scale or enterprise scale.
+      </p>
     </div>
-  
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        <div class="fade-up card bg-white dark:bg-slate-900 ring-1 ring-slate-200/60 dark:ring-slate-800 p-5">
-          <div class="text-sm font-semibold text-slate-500">Conversational Console</div>
-          <div class="mt-2 rounded-xl border border-slate-200 dark:border-slate-800 p-3">
-            <textarea id="prompt" rows="3" class="w-full resize-none bg-transparent outline-none" placeholder="Ask: \"Compare two policy wordings and flag exclusions for SME loans\""></textarea>
-            <div class="mt-2 flex items-center justify-between">
-              <div class="flex items-center gap-2 text-xs text-slate-500">
-                <label class="inline-flex items-center gap-1"><input type="checkbox" class="rounded" checked> Cite sources</label>
-                <label class="inline-flex items-center gap-1"><input type="checkbox" class="rounded" checked> Explain steps</label>
-              </div>
-              <button id="run" class="rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2 text-sm font-medium hover:opacity-90 transition">Run ▶</button>
-            </div>
-          </div>
-          <div id="output" class="mt-3 space-y-3 text-sm hidden">
-            <div class="rounded-xl bg-slate-50 dark:bg-slate-900/50 p-3 border border-slate-200 dark:border-slate-800">
-              <div class="font-medium">Summary</div>
-              <p class="mt-1">3 key exclusions differ: cyber incidents, force majeure scope, and merchant chargebacks. Potential exposure ↑ for Plan B by 1.7×.</p>
-            </div>
-            <div class="rounded-xl bg-slate-50 dark:bg-slate-900/50 p-3 border border-slate-200 dark:border-slate-800">
-              <div class="font-medium">Actions</div>
-              <ul class="mt-1 list-disc pl-5">
-                <li>Send redlined diff to Legal</li>
-                <li>Create Jira task for underwriting rules</li>
-                <li>Notify Sales with approved wording</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="fade-up card bg-white dark:bg-slate-900 ring-1 ring-slate-200/60 dark:ring-slate-800 p-5">
-          <div class="text-sm font-semibold text-slate-500">Explainability Snapshot</div>
-          <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-3">
-              <div class="text-xs text-slate-500">Decision</div>
-              <div class="text-lg font-bold">KYC Risk Score: 0.37 (Low)</div>
-              <div class="mt-2 text-xs text-slate-500">Top factors</div>
-              <ul class="mt-1 text-sm space-y-1">
-                <li>✓ Clean bureau record</li>
-                <li>✓ Verified MSME registration</li>
-                <li>⚠ Address mismatch resolved via utility bill</li>
-              </ul>
-            </div>
-            <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-3">
-              <div class="text-xs text-slate-500">Audit Trail</div>
-              <ol class="mt-1 text-sm list-decimal pl-5 space-y-1">
-                <li>OCR documents</li>
-                <li>Entity resolution</li>
-                <li>Sanctions screening</li>
-                <li>Score & explain</li>
-              </ol>
-              <button class="mt-3 w-full rounded-lg border border-slate-200 dark:border-slate-700 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition">Export PDF</button>
-            </div>
-          </div>
-          <p class="mt-3 text-xs text-slate-500">*All data synthetic for demo.</p>
-        </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-medium text-slate-900 dark:text-white">Reduce Recurring Costs</h3>
+        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+          Transparent market benchmarking and structured renegotiation frameworks.
+          Zero confrontation. Just informed leverage.
+        </p>
       </div>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-medium text-slate-900 dark:text-white">Authority-Grade Complaints</h3>
+        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+          Every case is drafted in regulatory language, evidence-weighted,
+          and escalation-aware. No more ignored tickets.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-medium text-slate-900 dark:text-white">End Silent Subscriptions</h3>
+        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+          Identify hidden renewals and retention traps.
+          We handle cancellation end-to-end—with closure proof.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-medium text-slate-900 dark:text-white">Recover Refunds & Dues</h3>
+        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+          When overcharges, delays, or denials occur—we reconstruct the trail,
+          build the case, and secure correction. Calmly and completely.
+        </p>
+      </div>
+
     </div>
-  </section>
-  
-  
+	
+	
+
+    <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl rounded-3xl p-8 space-y-8">
+
+      <!-- Chat Input w/ Attachment -->
+		<div>
+		  <label class="text-sm font-medium text-slate-700 dark:text-slate-300">
+			Describe your issue
+		  </label>
+
+		  <div class="mt-3 relative group">
+
+			<textarea id="chatInput" rows="1"
+			  class="w-full rounded-2xl bg-white/90 dark:bg-slate-900/80 border border-slate-300/70 dark:border-slate-700/60 
+			  focus:border-slate-900 dark:focus:border-white transition
+			  px-4 py-4 pr-14 outline-none text-slate-800 dark:text-slate-100 leading-relaxed resize-none"
+			  placeholder="Explain what happened… then press Enter to continue.">
+			</textarea>
+
+			<!-- Attachment Icon -->
+			<button id="attachTrigger"
+			  class="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg
+			  text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200 transition">
+			  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round"
+				  d="M21 12.79V7a5 5 0 00-10 0v10a3 3 0 006 0V9.5"/>
+			  </svg>
+			</button>
+
+			<input type="file" id="fileInput" multiple class="hidden" />
+		  </div>
+
+		  <!-- File Preview -->
+		  <div id="filePreview"
+			class="mt-3 hidden space-y-1 text-sm text-slate-600 dark:text-slate-400"></div>
+		</div>
+
+	
+	<div class="mb-14">
+      <p class="mt-4 text-slate-600 dark:text-slate-300 text-lg max-w-xl mx-auto">
+        Share documents, describe the issue, and let ArthaShield build the resolution path.
+      </p>
+    </div>
+  </div>
+    <p class="text-center mt-28 text-sm text-slate-500 dark:text-slate-600 tracking-wide">
+      One standard of fairness—for individuals, enterprises, and public institutions.
+    </p>
+
+  </div>
+	
+	</div>
+   
+   
+	
+</section>
+
+
+
+
+
+<script>
+  const attachTrigger = document.getElementById('attachTrigger');
+  const fileInput = document.getElementById('fileInput');
+  const filePreview = document.getElementById('filePreview');
+
+  attachTrigger.addEventListener('click', () => fileInput.click());
+
+  fileInput.addEventListener('change', () => {
+    filePreview.innerHTML = '';
+    if (fileInput.files.length > 0) {
+      filePreview.classList.remove('hidden');
+      [...fileInput.files].forEach(file => {
+        const row = document.createElement('div');
+        row.textContent = "📎 " + file.name;
+        filePreview.appendChild(row);
+      });
+    } else {
+      filePreview.classList.add('hidden');
+    }
+  });
+</script>
+
+
 <!-- Notes:
  - Tailwind classes used; adapt to your CSS framework if needed.
  - Replace demo/contact anchors with real links.
  - The ISO badge is illustrative; substitute with an official logo only if you have rights to use it.
 -->
-
-
-
-  <!-- Security & Compliance -->
-  <section id="security" class="py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="fade-up card bg-white dark:bg-slate-900 ring-1 ring-slate-200/60 dark:ring-slate-800 p-6">
-          <h3 class="text-lg font-bold">Security</h3>
-          <ul class="mt-2 text-sm space-y-2 text-slate-600 dark:text-slate-300">
-            <li>PII redaction & tokenization</li>
-            <li>At‑rest & in‑transit encryption</li>
-            <li>VPC / Private networking</li>
-          </ul>
-        </div>
-        <div class="fade-up card bg-white dark:bg-slate-900 ring-1 ring-slate-200/60 dark:ring-slate-800 p-6">
-          <h3 class="text-lg font-bold">Compliance</h3>
-          <ul class="mt-2 text-sm space-y-2 text-slate-600 dark:text-slate-300">
-            <li>Model cards for each release</li>
-            <li>Data retention controls</li>
-            <li>RBAC & approval workflows</li>
-          </ul>
-        </div>
-        <div id="compliance" class="fade-up card bg-white dark:bg-slate-900 ring-1 ring-slate-200/60 dark:ring-slate-800 p-6">
-          <h3 class="text-lg font-bold">Deploy Anywhere</h3>
-          <ul class="mt-2 text-sm space-y-2 text-slate-600 dark:text-slate-300">
-            <li>On‑prem or air‑gapped</li>
-            <li>BYOK (bring your own keys)</li>
-            <li>India data residency</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  
-<!-- Reports Section -->
-<section id="reports" class="py-16">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <h2 class="text-2xl font-bold mb-6">Reports & Analytics</h2>
-    <div class="card p-6 bg-white dark:bg-slate-900 shadow ring-1 ring-slate-200 dark:ring-slate-800">
-      <p class="mb-4 text-slate-600 dark:text-slate-300">Download detailed reports for compliance, fraud, and onboarding. Export as PDF or CSV.</p>
-      <div class="flex gap-3">
-        <a href="#" class="rounded-xl bg-blue-600 text-white px-5 py-3 font-medium hover:opacity-90 transition">Download KYC Report</a>
-        <a href="#" class="rounded-xl bg-indigo-600 text-white px-5 py-3 font-medium hover:opacity-90 transition">Download Fraud Report</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- Contact/Support Section -->
 <section id="contact" class="py-16">
@@ -367,7 +379,6 @@
       <div>© 2025 ArthaShield AI. Built for BFSI.</div>
       <div class="flex items-center gap-4">
         <a class="hover:text-slate-900 dark:hover:text-white" href="#">Privacy</a>
-        <a class="hover:text-slate-900 dark:hover:text-white" href="#">Security</a>
         <a class="hover:text-slate-900 dark:hover:text-white" href="#">Responsible AI</a>
       </div>
     </div>
@@ -436,6 +447,67 @@
 			mobileMenu.classList.add("max-h-0");
 			mobileMenu.classList.remove("max-h-screen");
 		  });
+		});
+		
+		
+		const desktopBtn = document.getElementById('desktopResourcesBtn');
+		  const desktopMenu = document.getElementById('desktopResourcesMenu');
+		  const desktopArrow = document.getElementById('desktopResourcesArrow');
+
+		  desktopBtn.addEventListener('click', () => {
+			if (desktopMenu.classList.contains('max-h-0')) {
+			  desktopMenu.classList.remove('max-h-0');
+			  desktopMenu.classList.add('max-h-96'); // expand
+			  desktopArrow.classList.add('rotate-180'); // arrow up
+			} else {
+			  desktopMenu.classList.add('max-h-0');
+			  desktopMenu.classList.remove('max-h-96'); // collapse
+			  desktopArrow.classList.remove('rotate-180'); // arrow down
+			}
+		  });
+
+		  // Optional: close dropdown if click outside
+		  document.addEventListener('click', (e) => {
+			if (!desktopBtn.contains(e.target) && !desktopMenu.contains(e.target)) {
+			  desktopMenu.classList.add('max-h-0');
+			  desktopMenu.classList.remove('max-h-96');
+			  desktopArrow.classList.remove('rotate-180');
+			}
+		  });
+		  
+		const chatInput = document.getElementById('chatInput');
+		const fileInput = document.getElementById('fileInput');
+		const attachTrigger = document.getElementById('attachTrigger');
+		const filePreview = document.getElementById('filePreview');
+
+		// Auto-expand textarea while typing
+		chatInput.addEventListener('input', () => {
+		  chatInput.style.height = 'auto';
+		  chatInput.style.height = chatInput.scrollHeight + 'px';
+		});
+
+		// Enter = send, Shift+Enter = new line
+		chatInput.addEventListener('keydown', (e) => {
+		  if (e.key === "Enter" && !e.shiftKey) {
+			e.preventDefault();
+			console.log("Message Submitted:", chatInput.value);
+			chatInput.value = "";
+			chatInput.style.height = 'auto';
+		  }
+		});
+
+		// Open file selector
+		attachTrigger.addEventListener('click', () => fileInput.click());
+
+		// Display attached files
+		fileInput.addEventListener('change', () => {
+		  filePreview.innerHTML = "";
+		  [...fileInput.files].forEach(file => {
+			const item = document.createElement("div");
+			item.textContent = `📎 ${file.name}`;
+			filePreview.appendChild(item);
+		  });
+		  filePreview.classList.remove("hidden");
 		});
   </script>
 </body>
