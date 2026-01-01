@@ -88,58 +88,127 @@
 
 <!-- HERO -->
 <section class="py-10 text-center">
-  <h2 class="text-3xl m:text-4xl font-bold tracking-tight mb-6">
+  <h2 class="text-3xl m:text-4xl font-extrabold tracking-tight mb-6">
        Case Intelligence <span class="bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">for BFSI</span> 
     </h2>
 
   <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-6">
-    Designed for banks, NBFCs and fintechs facing rising complaint volumes,
+    Designed for Banks, NBFCs and Fintechs facing rising complaint volumes,
     audit escalations, and tension between DPDP data minimisation
     and long-term regulatory retention.
   </p>
 </section>
 
-<!-- PROBLEM -->
 <section class="py-6">
-  <div class="glass dark:glass-dark rounded-2xl p-10">
-    <h2 class="text-2xl font-bold mb-4">Challenges of Customer Service (CX) Teams</h2>
-    <p class="text-slate-600 dark:text-slate-300 mb-6">
-      Complaint volumes keep rising, but many BFSI teams still rely on
-      manual tagging, email chains and fragmented trackers —
-      slowing resolution and increasing escalation risk.
+<div class="glass dark:glass-dark rounded-2xl p-8">
+    <h2 class="text-3xl sm:text-3xl font-bold text-center mb-6">
+       Complaints Inbound as an Operational Risk
+    </h2>
+    <p class="text-center text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-12">
+      As complaint volumes rise, small inefficiencies compound into
+      operational risk, escalations and audit stress.
     </p>
-
-    <ul class="grid md:grid-cols-2 gap-4 text-slate-600 dark:text-slate-300">
-      <li>High inbound volume across apps, branches and partners</li>
-      <li>Manual classification and routing to the right team</li>
-      <li>Repeat complaints handled in isolation</li>
-      <li>Painful Audit reviews</li>
-      <li>Conflicting pressures: retain less data v/s explain more decisions</li>
-    </ul>
+    <div class="grid gap-6 md:grid-cols-5">
+      <div class="group  rounded-2xl p-6 transition hover:scale-[1.02] border">
+        <p class="text-xs uppercase tracking-wide text-slate-400 mb-2">
+          Pressure
+        </p>
+        <h3 class="font-semibold mb-2">Rising inbound volume</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300">
+          Complaints flow in from apps, branches, partners and regulators.
+        </p>
+      </div>
+      <div class="group  rounded-2xl p-6 transition hover:scale-[1.02] border">
+        <p class="text-xs uppercase tracking-wide text-slate-400 mb-2">
+          Friction
+        </p>
+        <h3 class="font-semibold mb-2">Manual tagging & routing</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300">
+          Teams rely on judgement calls, emails and spreadsheets.
+        </p>
+      </div>
+      <div class="group rounded-2xl p-6 transition hover:scale-[1.02] border">
+        <p class="text-xs uppercase tracking-wide text-slate-400 mb-2">
+          Blind spot
+        </p>
+        <h3 class="font-semibold mb-2">Repeat issues unseen</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300">
+          Similar complaints handled in isolation across teams.
+        </p>
+      </div>
+      <div class="group  rounded-2xl p-6 transition hover:scale-[1.02] border">
+        <p class="text-xs uppercase tracking-wide text-slate-400 mb-2">
+          Stress
+        </p>
+        <h3 class="font-semibold mb-2">Audit-heavy reviews</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300">
+          Evidence is reconstructed manually under time pressure.
+        </p>
+      </div>
+      <div class="group  rounded-2xl p-6 transition hover:scale-[1.02] border border-red-500/30">
+        <p class="text-xs uppercase tracking-wide text-red-500 mb-2">
+          Risk
+        </p>
+        <h3 class="font-semibold mb-2">Explainability gap</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300">
+          Retain less data, yet explain every decision to regulators.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- CORE FLOW -->
-<section class="py-16">
-  <h2 class="text-2xl font-bold text-center mb-10">
-     ArthaShield - First MVP
-  </h2>
+<section class="py-6">
+<div class="glass dark:glass-dark rounded-2xl p-10">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
-  <div class="grid md:grid-cols-5 gap-4 text-center">
-    <div class="glass dark:glass-dark rounded-xl p-6">Ingest complaints</div>
-    <div class="glass dark:glass-dark rounded-xl p-6">Classify & prioritise</div>
-    <div class="glass dark:glass-dark rounded-xl p-6">Detect duplicates</div>
-    <div class="glass dark:glass-dark rounded-xl p-6">Route to right team</div>
-    <div class="glass dark:glass-dark rounded-xl p-6">Create audit trail</div>
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-slate-900 dark:text-white mb-10">
+      ArthaShield – Case MVP
+    </h2>
+
+    <!-- Flywheel Image -->
+    <div class="flex justify-center mb-12">
+      <div class="glass dark:glass-dark rounded-2xl p-6 max-w-md w-full">
+        <img
+          src="images/arthashield-flywheel.png"
+          alt="ArthaShield complaint intelligence flywheel"
+          class="w-full h-auto object-contain"
+        />
+      </div>
+    </div>
+
+    <!-- Linear Flow (supports flywheel) -->
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-5 text-center">
+      <div class="glass dark:glass-dark rounded-xl p-5 text-sm font-medium">
+        Ingest complaints
+      </div>
+      <div class="glass dark:glass-dark rounded-xl p-5 text-sm font-medium">
+        Classify & prioritise
+      </div>
+      <div class="glass dark:glass-dark rounded-xl p-5 text-sm font-medium">
+        Detect duplicates
+      </div>
+      <div class="glass dark:glass-dark rounded-xl p-5 text-sm font-medium">
+        Route to right team
+      </div>
+      <div class="glass dark:glass-dark rounded-xl p-5 text-sm font-medium">
+        Create audit trail
+      </div>
+    </div>
+
+    <p class="text-center text-slate-600 dark:text-slate-300 mt-8 max-w-3xl mx-auto">
+      One focused lifecycle — designed to improve complaint handling without
+      rip-and-replace or process upheaval.
+    </p>
+
   </div>
-
-  <p class="text-center text-slate-600 dark:text-slate-300 mt-8 max-w-3xl mx-auto">
-    One focused lifecycle — no rip-and-replace, no process upheaval.
-  </p>
+  </div>
 </section>
 
+
 <!-- INTELLIGENCE -->
-<section class="py-16">
+<section class="py-6">
   <div class="glass dark:glass-dark rounded-2xl p-10">
     <h2 class="text-2xl font-bold mb-4">
       Case intelligence built for regulated environments
@@ -202,11 +271,11 @@
 <section id="cta" class="py-10 text-center">
   <div class="glass dark:glass-dark rounded-2xl p-10">
     <h2 class="text-3xl font-extrabold mb-4">
-      Join the early-access beta for BFSI
+      Join early-access beta for BFSI
     </h2>
 
     <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-6">
-      We’re onboarding a limited set of banks, NBFCs and fintechs to
+      We’re onboarding a limited set of Banks, NBFCs and Fintechs to
       co-build the next generation of case intelligence.
     </p>
 
