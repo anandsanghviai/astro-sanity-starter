@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ArthaShield Technology & Architecture</title>
+  <meta name="description" content="ArthaShield technology stack for BFSI complaint intelligence, built on Apache ecosystem with privacy-by-design and regulatory compliance." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      color: #111;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 3rem 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    ul {
+      margin: 0.5rem 0 1rem 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 3rem 0;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .icon-item {
+      text-align: center;
+    }
+
+    .icon-item img {
+      max-width: 64px;
+      margin-bottom: 0.5rem;
+    }
+
+    .icon-item span {
+      display: block;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .highlight {
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-left: 4px solid #111;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+
+    <!-- PAGE INTRO -->
+    <header>
+      <h1>ArthaShield Technology Architecture</h1>
+      <p>
+        ArthaShield is built as a compliance-first, analytics-driven platform for
+        BFSI complaint and case intelligence. The architecture prioritizes
+        scalability, explainability, data minimization, and regulatory auditability
+        using proven Apache open-source technologies.
+      </p>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- SCALABLE ML -->
+    <section id="scalable-ml">
+      <h2>Scalable Machine Learning & Pattern Detection</h2>
+
+      <h3>Apache Mahout</h3>
+      <p>
+        Apache Mahout provides distributed machine learning capabilities optimized
+        for large-scale data environments such as Hadoop. In ArthaShield, Mahout
+        supports clustering and classification of complaints and cases across
+        millions of records.
+      </p>
+      <p>
+        By operating on distributed and aggregated datasets, Mahout enables
+        pattern detection without unnecessary exposure of raw personal data,
+        supporting privacy-preserving analytics aligned with regulatory guidance.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- NLP -->
+    <section id="nlp">
+      <h2>Natural Language Processing for BFSI Complaints</h2>
+
+      <h3>Apache OpenNLP (Primary Classification Engine)</h3>
+      <p>
+        Apache OpenNLP is the core NLP engine used for complaint and grievance
+        classification in ArthaShield. As a Java-based Apache project, it integrates
+        naturally with enterprise BFSI technology stacks.
+      </p>
+      <ul>
+        <li>Tokenization and sentence segmentation</li>
+        <li>Part-of-speech tagging</li>
+        <li>Named Entity Recognition (products, channels, issues)</li>
+        <li>Chunking for structured extraction</li>
+      </ul>
+      <p>
+        OpenNLP enables deterministic and explainable NLP pipelines, a key
+        requirement for regulated environments where model decisions must be
+        auditable and interpretable.
+      </p>
+
+      <h3>Spark NLP (Advanced & Large-Scale NLP)</h3>
+      <p>
+        Spark NLP, built natively on Apache Spark and licensed under Apache 2.0,
+        is used for high-volume and advanced NLP workloads. It supports modern
+        transformer-based models such as BERT and T5.
+      </p>
+      <p>
+        In ArthaShield, Spark NLP enables semantic similarity detection,
+        complaint deduplication, and contextual analysis across large datasets.
+      </p>
+
+      <h3>Apache Lucene (Text Analysis & Retrieval)</h3>
+      <p>
+        Apache Lucene provides foundational text analysis, indexing, and retrieval
+        capabilities. It powers fast search, relevance scoring, and historical
+        case lookup across complaints and regulatory records.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- DATA GOVERNANCE -->
+    <section id="data-governance">
+      <h2>Data Minimization, Storage & Auditability</h2>
+
+      <h3>Apache Parquet</h3>
+      <p>
+        Apache Parquet is the primary analytical storage format used in ArthaShield.
+        Its columnar design, compression, and encoding techniques significantly
+        reduce storage footprint while improving analytical performance.
+      </p>
+      <ul>
+        <li>Column-level storage for selective data access</li>
+        <li>Compression using Snappy and Gzip</li>
+        <li>Efficient encoding (Dictionary, RLE)</li>
+      </ul>
+      <p>
+        This design enforces data minimization by ensuring only necessary fields
+        are stored and processed, supporting FD, GDPR, and DPDP compliance.
+      </p>
+
+      <h3>Apache Ranger</h3>
+      <p>
+        Apache Ranger provides centralized access control, authorization policies,
+        and immutable audit logs. ArthaShield uses Ranger to ensure that complaint
+        and case data access is role-based, monitored, and regulator-ready.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- STREAMING & PRIVACY -->
+    <section id="streaming-privacy">
+      <h2>Streaming Architecture & Privacy-by-Design</h2>
+
+      <h3>Apache Pulsar</h3>
+      <p>
+        Apache Pulsar enables real-time ingestion and processing of complaints
+        and case updates. Its configurable retention policies allow sensitive
+        data to remain short-lived where required.
+      </p>
+      <p>
+        Using Pulsar Functions, personal data can be anonymized or redacted
+        before long-term storage, ensuring compliance with privacy and
+        supervisory requirements.
+      </p>
+
+      <div class="highlight">
+        <strong>Privacy-by-Design:</strong>
+        Personal data is minimized, anonymized early, and retained only for
+        justified regulatory or operational purposes.
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ICON STACK -->
+    <section id="technology-stack">
+      <h2>ArthaShield Technology Stack</h2>
+
+      <div class="icon-grid">
+        <div class="icon-item">
+          <img src="icons/apache-mahout.svg" alt="Apache Mahout">
+          <span>Apache Mahout</span>
+        </div>
+
+        <div class="icon-item">
+          <img src="icons/apache-opennlp.svg" alt="Apache OpenNLP">
+          <span>Apache OpenNLP</span>
+        </div>
+
+        <div class="icon-item">
+          <img src="icons/spark-nlp.svg" alt="Spark NLP">
+          <span>Spark NLP</span>
+        </div>
+
+        <div class="icon-item">
+          <img src="icons/apache-lucene.svg" alt="Apache Lucene">
+          <span>Apache Lucene</span>
+        </div>
+
+        <div class="icon-item">
+          <img src="icons/apache-parquet.svg" alt="Apache Parquet">
+          <span>Apache Parquet</span>
+        </div>
+
+        <div class="icon-item">
+          <img src="icons/apache-ranger.svg" alt="Apache Ranger">
+          <span>Apache Ranger</span>
+        </div>
+
+        <div class="icon-item">
+          <img src="icons/apache-pulsar.svg" alt="Apache Pulsar">
+          <span>Apache Pulsar</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- WHY APACHE -->
+    <section id="why-apache">
+      <h2>Why Apache-First Architecture</h2>
+      <p>
+        ArthaShield prioritizes Apache open-source technologies over non-Apache
+        alternatives such as NLTK or spaCy to ensure long-term sustainability,
+        vendor neutrality, and regulatory acceptance.
+      </p>
+      <ul>
+        <li>Apache 2.0 licensing for enterprise and government adoption</li>
+        <li>Proven scalability in large BFSI environments</li>
+        <li>Strong governance, auditability, and ecosystem maturity</li>
+        <li>Alignment with regulator expectations for transparency</li>
+      </ul>
+    </section>
+
+  </main>
+</body>
+</html>
