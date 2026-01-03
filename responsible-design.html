@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield – Responsible Design Loop</title>
+
+  <meta name="description"
+    content="ArthaShield’s Responsible Design Loop embeds explainability, auditability, and human oversight into complaint and risk intelligence for BFSI." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .glass-dark {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+  </style>
+</head>
+
+
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen dark:bg-slate-950">
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 z-40 bg-white/70 dark:bg-slate-900/70 backdrop-blur">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+      <a href="index.html" class="flex items-center gap-3 font-semibold">
+        <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+        <span>ArthaShield</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+        <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
+        <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white">Features</a>
+        <a href="#cta" class="hover:text-slate-900 dark:hover:text-white">Early Access</a>
+      </nav>
+
+      <button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="mx-auto max-w-7xl  py-10">
+  <div class="glass dark:glass-dark rounded-3xl p-10">
+    <h1 class="text-4xl font-semibold text-slate-900 dark:text-white max-w-3xl">
+       <span class="bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">ArthaShield</span> Responsible Design Loop™ ♾️
+    </h1>
+    <p class="mt-6 text-lg text-slate-600 dark:text-slate-300 max-w-3xl">
+      ArthaShield embeds responsibility directly into how decisions are formed, influenced, executed, and reviewed inside regulated operations 
+	  — ensuring every automated or assisted action remains explainable and auditable by design
+    </p>
+  </div>
+</section>
+
+<!-- ================= WHY THIS EXISTS ================= -->
+<section class="mx-auto max-w-7xl px-6  py-6">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">
+        Embedded Design Thinking
+      </h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-300">
+        In BFSI, complaints are not just service tickets.
+        They are early warning signals for operational, conduct, and regulatory risk.
+      </p>
+      <p class="mt-4 text-slate-600 dark:text-slate-300">
+        ArthaShield’s Responsible Design Loop ensures that speed, AI, and automation
+        never come at the cost of defensibility or trust.
+      </p>
+    </div>
+
+    <div class="glass dark:glass-dark rounded-2xl p-6">
+      <ul class="space-y-3 text-slate-700 dark:text-slate-200 text-sm">
+        <li>• No black-box decisions</li>
+        <li>• No loss of context across handoffs</li>
+        <li>• No post-facto audit scrambling</li>
+        <li>• Human judgment is built in, not bolted on</li>
+      </ul>
+    </div>
+  </div>
+</section><!-- ================= DESIGN LOOP ================= -->
+<section class="mx-auto max-w-7xl px-6 py-6">
+  <h2 class="text-3xl font-semibold text-slate-900 dark:text-white mb-12">
+    Responsible <span class="bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">AI</span> Loop
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <!-- OBSERVE -->
+    <div class="glass dark:glass-dark rounded-2xl p-6">
+      <!-- Icon -->
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 rounded-xl bg-blue-50 dark:bg-slate-800">
+          🔍
+        </div>
+        <span class="text-xs font-semibold text-blue-600">01 · OBSERVE</span>
+      </div>
+
+      <h3 class="font-semibold text-slate-900 dark:text-white">
+        Signal-Safe Intake
+      </h3>
+
+      <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+        ArthaShield captures raw operational signals — customer inputs, context, history, and metadata — without premature abstraction or loss of intent.
+      </p>
+
+      <!-- Principle -->
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          Product Principle
+        </p>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
+          Preserve signal integrity at intake. Any loss of context makes downstream
+          AI decisions non-defensible.
+        </p>
+      </div>
+    </div>
+
+    <!-- INTERPRET -->
+    <div class="glass dark:glass-dark rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 rounded-xl bg-blue-50 dark:bg-slate-800">
+          🧠
+        </div>
+        <span class="text-xs font-semibold text-blue-600">02 · INTERPRET</span>
+      </div>
+
+      <h3 class="font-semibold text-slate-900 dark:text-white">
+        Explainable Classification
+      </h3>
+
+      <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+        AI classifies by product, issue and category while exposing
+        the reasoning behind each decision.
+      </p>
+
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          Design Principle
+        </p>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
+          If a supervisor cannot explain a classification to an auditor,
+          the model is incomplete — not the user.
+        </p>
+      </div>
+    </div>
+
+    <!-- ASSESS -->
+    <div class="glass dark:glass-dark rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 rounded-xl bg-blue-50 dark:bg-slate-800">
+          ⚠️
+        </div>
+        <span class="text-xs font-semibold text-blue-600">03 · ASSESS RISK</span>
+      </div>
+
+      <h3 class="font-semibold text-slate-900 dark:text-white">
+        Early Risk Detection
+      </h3>
+
+      <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+        Decisions are evaluated for severity, recurrence, and regulatory exposure before they materialize as escalations.
+      </p>
+
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          Product Principle
+        </p>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
+          Risk should be sensed upstream, not justified downstream.
+        </p>
+      </div>
+    </div>
+
+    <!-- ACT -->
+    <div class="glass dark:glass-dark rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 rounded-xl bg-blue-50 dark:bg-slate-800">
+          🔀
+        </div>
+        <span class="text-xs font-semibold text-blue-600">04 · ACT</span>
+      </div>
+
+      <h3 class="font-semibold text-slate-900 dark:text-white">
+        Accountable Routing
+      </h3>
+
+      <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+       Actions triggered by the system carry clear ownership, authority boundaries, and escalation logic.
+      </p>
+
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          Design Principle
+        </p>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
+          Speed without ownership creates chaos.
+          ArthaShield optimizes for defensible speed.
+        </p>
+      </div>
+    </div>
+
+    <!-- REVIEW -->
+    <div class="glass dark:glass-dark rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 rounded-xl bg-blue-50 dark:bg-slate-800">
+          👁️
+        </div>
+        <span class="text-xs font-semibold text-blue-600">05 · REVIEW</span>
+      </div>
+
+      <h3 class="font-semibold text-slate-900 dark:text-white">
+        Human-in-the-Loop Oversight
+      </h3>
+
+      <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+        Supervisors review AI actions, override decisions,
+        and leave a permanent audit trail.
+      </p>
+
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          Responsible AI Principle
+        </p>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
+          Humans don’t validate the system —
+          the system is designed to invite human judgment.
+        </p>
+      </div>
+    </div>
+
+    <!-- IMPROVE -->
+    <div class="glass dark:glass-dark rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 rounded-xl bg-blue-50 dark:bg-slate-800">
+          ♻️
+        </div>
+        <span class="text-xs font-semibold text-blue-600">06 · IMPROVE</span>
+      </div>
+
+      <h3 class="font-semibold text-slate-900 dark:text-white">
+        Learning Without Drift
+      </h3>
+
+      <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+        System learning is governed, versioned, and policy-aware — avoiding silent behavioral drift.
+      </p>
+
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          Product Principle
+        </p>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
+          Systems must evolve without violating institutional intent.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= CTA ================= -->
+<section id="cta" class="mx-auto max-w-7xl px-6 py-6">
+  <div class="glass dark:glass-dark rounded-3xl p-10 text-center">
+    <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">
+      Built for Compliance Teams
+    </h2>
+    <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+      ArthaShield turns high-risk operational signals into explainable, auditable, and defensible intelligence — by design
+    </p>
+    <a href="arthashieldfeatures.html#contact"
+      class="inline-block mt-6 rounded-xl bg-blue-600 px-6 py-3 text-white font-medium hover:bg-blue-700">
+      Request Early Access
+    </a>
+  </div>
+</section>
+
+</body>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-300">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
+      
+      <!-- Brand -->
+      <div class="col-span-2 lg:col-span-1">
+        <h3 class="text-l font-bold text-white">ArthaShield</h3>
+      </div>
+
+      <!-- Solutions -->
+      <div>
+        <h4 class="text-m font-semibold text-white mb-4">Solutions</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="pdi-maintenance.html" class="hover:text-white">Pre-Deployment Checks</a></li>
+		  <li><a href="pdi-maintenance.html" class="hover:text-white">Continous Monitoring</a></li>
+          <li><a href="autopilot-assistant.html" class="hover:text-white">Compliance Auto-Pilot</a></li>
+		  <li><a href="#" class="hover:text-white">Governance & Audit</a></li>
+        </ul>
+      </div>
+
+
+	   <div>
+        <h4 class="text-m font-semibold text-white mb-4">Flagship Offering</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="caseIntelligence.html" class="hover:text-white">AI based Case Intelligence</a></li>
+		  <li><a href="#" class="hover:text-white">Responsible Design Loop™ ♾️</a></li>
+        </ul>
+      </div>
+	  
+      <!-- Global Alignment -->
+      <div>
+        <h4 class="text-m font-semibold text-white mb-4">Data Security</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="#" class="hover:text-white">SOC 2</a></li>
+          <li><a href="#" class="hover:text-white">ISO 27001</a></li>
+          <li><a href="#" class="hover:text-white">NIST AI RMF</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-m font-semibold text-white mb-4">Resources</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="#" class="hover:text-white">Blogs</a></li>
+          <li><a href="api-platform.html" class="hover:text-white">API Documentation</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-slate-800 mt-14 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
+      <p>© 2025 ArthaShield. All rights reserved.</p>
+      <div class="flex space-x-6 mt-4 md:mt-0">
+        <a href="#" class="hover:text-white">Privacy Policy</a>
+        <a href="#" class="hover:text-white">Terms of Service</a>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+</html>
+	
