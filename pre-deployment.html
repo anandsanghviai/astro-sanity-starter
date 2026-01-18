@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield AI - Pre-Deployment (PDI) SCF Audit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .glass-dark {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 min-h-screen text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+  <header class="sticky top-0 z-40 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <div class="h-10 w-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">A</div>
+          <span class="text-xl tracking-tight">ArthaShield <span class="text-indigo-600 font-bold">PDI</span></span>
+        </a>
+        
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+          <a href="#" class="hover:text-indigo-600 transition">Deployment History</a>
+          <a href="#" class="hover:text-indigo-600 transition">Gate Policies</a>
+          <a href="#" class="font-semibold text-indigo-600">Active Audit</a>
+          <a href="#" class="hover:text-indigo-600 transition">Integrations</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+            <span class="hidden lg:block text-xs font-mono bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700">
+                Build: #AS-99283-PROD
+            </span>
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl text-sm font-medium transition shadow-lg shadow-indigo-500/20">
+                Approve Deployment
+            </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+            <div class="flex items-center gap-2 mb-2">
+                <span class="flex h-2 w-2 rounded-full bg-amber-500 animate-pulse"></span>
+                <nav class="text-sm text-slate-500">Pre-Deployment Stage: <span class="text-slate-900 dark:text-white font-bold">Staging-to-Production</span></nav>
+            </div>
+            <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                Compliance <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-500">Security Gate</span> Audit
+            </h1>
+            <p class="mt-2 text-lg text-slate-600 dark:text-slate-400">Verifying Build #AS-99283 against SCF v2024.1 requirements.</p>
+        </div>
+        <div class="flex flex-col items-end">
+            <span class="text-xs text-slate-500 uppercase font-bold mb-1">Deployment Readiness</span>
+            <div class="text-4xl font-black text-indigo-600 italic">82%</div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="glass dark:glass-dark p-6 rounded-3xl shadow-sm border-b-4 border-indigo-500">
+            <p class="text-sm font-medium text-slate-500">Total SCF Checks</p>
+            <h3 class="text-3xl font-bold mt-1">142</h3>
+            <p class="text-[10px] mt-2 text-slate-400">Scoped for "Cloud-Native Infrastructure"</p>
+        </div>
+        <div class="glass dark:glass-dark p-6 rounded-3xl shadow-sm border-b-4 border-emerald-500">
+            <p class="text-sm font-medium text-slate-500">Passed Gates</p>
+            <h3 class="text-3xl font-bold mt-1 text-emerald-600">116</h3>
+            <div class="mt-4 flex -space-x-2">
+                <div class="w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-[8px] text-white">CI</div>
+                <div class="w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-[8px] text-white">SAST</div>
+                <div class="w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-[8px] text-white">IAM</div>
+            </div>
+        </div>
+        <div class="glass dark:glass-dark p-6 rounded-3xl shadow-sm border-b-4 border-rose-500">
+            <p class="text-sm font-medium text-slate-500">Blockers Found</p>
+            <h3 class="text-3xl font-bold mt-1 text-rose-600">4</h3>
+            <p class="mt-4 text-xs font-bold text-rose-500 bg-rose-50 dark:bg-rose-900/20 px-2 py-1 rounded w-fit italic">Deployment Halted</p>
+        </div>
+        <div class="glass dark:glass-dark p-6 rounded-3xl shadow-sm border-b-4 border-amber-500">
+            <p class="text-sm font-medium text-slate-500">Policy Exceptions</p>
+            <h3 class="text-3xl font-bold mt-1 text-amber-600">2</h3>
+            <p class="text-[10px] mt-2 text-slate-400">Requires Senior Auditor Override</p>
+        </div>
+    </div>
+
+    <div class="glass dark:glass-dark rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+        <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-slate-900/30 flex justify-between items-center">
+            <h2 class="font-bold text-lg">Pre-Deployment Checklists (SCF)</h2>
+            <div class="flex gap-2">
+                <span class="px-3 py-1 bg-rose-100 text-rose-700 text-[10px] font-bold rounded-md">4 FAILED</span>
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold rounded-md">138 PASSED</span>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-500 text-xs uppercase font-bold">
+                        <th class="px-6 py-4">SCF Control ID</th>
+                        <th class="px-6 py-4">Deployment Requirement</th>
+                        <th class="px-6 py-4">Verification Result</th>
+                        <th class="px-6 py-4">Severity</th>
+                        <th class="px-6 py-4">AI Remediation Plan</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                    <tr class="hover:bg-rose-50/20 transition-colors group">
+                        <td class="px-6 py-5 font-mono text-sm font-bold text-indigo-600">CST-04</td>
+                        <td class="px-6 py-5">
+                            <span class="text-sm font-semibold block">Secrets Management Verification</span>
+                            <span class="text-xs text-slate-500">Ensure no hardcoded API keys in container env.</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>
+                                Failed Gate
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="px-2 py-1 rounded bg-rose-600 text-white text-[10px] font-bold uppercase">Critical - Blocker</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <button class="text-xs font-semibold bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-200 hover:bg-indigo-600 hover:text-white transition">
+                                View Fix Code (2 Lines)
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-emerald-50/20 transition-colors group">
+                        <td class="px-6 py-5 font-mono text-sm font-bold text-indigo-600">DCP-01</td>
+                        <td class="px-6 py-5">
+                            <span class="text-sm font-semibold block">Data Encryption at Rest</span>
+                            <span class="text-xs text-slate-500">Verify RDS instances use AES-256 keys.</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                Passed
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 text-slate-400 text-xs italic">Standard Requirement</td>
+                        <td class="px-6 py-5">
+                            <span class="text-[10px] text-slate-500">Evidence Log: <code>db-check-882.log</code></span>
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-amber-50/20 transition-colors group">
+                        <td class="px-6 py-5 font-mono text-sm font-bold text-indigo-600">IAM-09</td>
+                        <td class="px-6 py-5">
+                            <span class="text-sm font-semibold block">Multi-Factor Authentication</span>
+                            <span class="text-xs text-slate-500">Service accounts must use certificate-based auth.</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-2 text-amber-600 font-bold text-xs uppercase">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                Exception Active
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="px-2 py-1 rounded bg-amber-500 text-white text-[10px] font-bold uppercase">Medium - Advisory</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="text-[10px] text-slate-500 italic">Pre-approved for Build #AS-99283</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </main>
+
+  <footer class="mx-auto max-w-7xl px-4 py-8 text-center text-slate-500 text-xs mt-10 border-t border-slate-200 dark:border-slate-800">
+    ArthaShield AI Pre-Deployment Engine | Build Stability Level: <span class="text-emerald-500 font-bold">HIGH</span>
+  </footer>
+
+</body>
+</html>

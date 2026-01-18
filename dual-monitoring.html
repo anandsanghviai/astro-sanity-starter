@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield AI - Compliance Intelligence Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+	
+    .glass-dark {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .tab-active {
+        background: rgb(37 99 235);
+        color: white;
+        box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+    }
+
+    .view-hidden { display: none; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 min-h-screen transition-colors duration-300">
+
+  <header class="sticky top-0 z-40 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <div class="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">A</div>
+          <span class="text-xl tracking-tight text-slate-900 dark:text-white">ArthaShield <span class="text-blue-600 font-bold">AI</span></span>
+        </a>
+        
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300 relative">
+          <a href="#" class="hover:text-blue-600 transition">Solution</a>
+          <a href="#" class="hover:text-blue-600 transition">Global Alignment</a>
+          <div class="relative group">
+            <button id="desktopResourcesBtn" class="flex items-center space-x-1 hover:text-blue-600 focus:outline-none transition">
+              <span>Resources</span>
+              <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="desktopResourcesMenu" class="absolute left-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden max-h-0 transition-all duration-300 z-50">
+              <a href="#" class="block px-4 py-3 text-sm hover:bg-slate-50 dark:hover:bg-slate-700/50 border-b border-slate-100 dark:border-slate-700">ArthaShield Agents</a>
+              <a href="#" class="block px-4 py-3 text-sm hover:bg-slate-50 dark:hover:bg-slate-700/50">AI Monitoring & PDI</a>
+            </div>
+          </div>
+          <a href="#" class="hover:text-blue-600">Contact</a>
+        </nav>
+
+        <button id="menuButton" class="md:hidden flex items-center text-slate-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+    
+    <div class="flex flex-col items-center mb-12">
+        <div class="inline-flex p-1.5 glass dark:glass-dark rounded-2xl shadow-inner mb-6">
+            <button onclick="switchView('monitoring')" id="tab-monitoring" class="tab-active px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300">
+                Continuous Monitoring
+            </button>
+            <button onclick="switchView('pdi')" id="tab-pdi" class="px-6 py-2.5 rounded-xl text-sm font-bold text-slate-500 hover:text-blue-600 transition-all duration-300">
+                Pre-Deployment (PDI)
+            </button>
+        </div>
+        <h1 id="page-title" class="text-3xl font-extrabold text-slate-900 dark:text-white">Continuous Posture Intelligence</h1>
+        <p id="page-desc" class="text-slate-500 mt-2">Real-time mapping and gap analysis of live infrastructure.</p>
+    </div>
+
+    <div id="view-monitoring" class="animate-in fade-in duration-500">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-blue-500 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Active SCF Controls</p>
+                <h3 class="text-3xl font-bold mt-1 dark:text-white">1,042</h3>
+            </div>
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-emerald-500 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Live Compliance</p>
+                <h3 class="text-3xl font-bold mt-1 text-emerald-600">81.4%</h3>
+            </div>
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-amber-500 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Drift Detected</p>
+                <h3 class="text-3xl font-bold mt-1 text-amber-600">12 Gaps</h3>
+            </div>
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-slate-900 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Last Scan</p>
+                <h3 class="text-lg font-bold mt-1 dark:text-white italic">4 mins ago</h3>
+            </div>
+        </div>
+
+        <div class="glass dark:glass-dark rounded-3xl shadow-xl overflow-hidden border border-white/20">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-slate-900/30">
+                <h2 class="font-bold">Live Asset Mapping</h2>
+            </div>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-500 text-xs uppercase font-bold">
+                        <th class="px-6 py-4">SCF ID</th>
+                        <th class="px-6 py-4">Live Requirement</th>
+                        <th class="px-6 py-4">Status</th>
+                        <th class="px-6 py-4">Evidence</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                    <tr>
+                        <td class="px-6 py-5 font-mono text-sm text-blue-600 font-bold">AST-01</td>
+                        <td class="px-6 py-5 text-sm dark:text-slate-300">Asset Inventory Accuracy</td>
+                        <td class="px-6 py-5">
+                            <span class="px-2.5 py-1 text-[10px] font-bold bg-emerald-100 text-emerald-700 rounded-full uppercase">Compliant</span>
+                        </td>
+                        <td class="px-6 py-5 text-xs text-slate-500 italic">Verified: 12,402 Assets</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="view-pdi" class="view-hidden animate-in fade-in duration-500">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-indigo-600 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Build ID</p>
+                <h3 class="text-xl font-mono font-bold mt-1 dark:text-white">#AS-99283</h3>
+            </div>
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-rose-500 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Gate Blockers</p>
+                <h3 class="text-3xl font-bold mt-1 text-rose-600">4 Critical</h3>
+            </div>
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-indigo-400 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Readiness Score</p>
+                <h3 class="text-3xl font-bold mt-1 text-indigo-600">82%</h3>
+            </div>
+            <div class="glass dark:glass-dark p-6 rounded-3xl border-b-4 border-emerald-500 shadow-sm">
+                <p class="text-sm font-medium text-slate-500">Automated Fixes</p>
+                <h3 class="text-3xl font-bold mt-1 text-emerald-600">Ready</h3>
+            </div>
+        </div>
+
+        <div class="glass dark:glass-dark rounded-3xl shadow-xl overflow-hidden border border-white/20">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-slate-900/30 flex justify-between">
+                <h2 class="font-bold italic">Security Gate Analysis</h2>
+                <span class="text-xs bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-bold uppercase">Pipeline: Production</span>
+            </div>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-500 text-xs uppercase font-bold">
+                        <th class="px-6 py-4">SCF ID</th>
+                        <th class="px-6 py-4">Gate Requirement</th>
+                        <th class="px-6 py-4">Result</th>
+                        <th class="px-6 py-4">AI Remediation</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                    <tr class="bg-rose-50/10">
+                        <td class="px-6 py-5 font-mono text-sm text-indigo-600 font-bold">CST-04</td>
+                        <td class="px-6 py-5">
+                            <span class="text-sm font-semibold block dark:text-white">Secrets In Code</span>
+                            <span class="text-xs text-slate-500">Hardcoded AWS keys found in /src/config.js</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="px-2.5 py-1 text-[10px] font-bold bg-rose-600 text-white rounded-md uppercase">Blocker</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <button class="bg-indigo-600 text-white text-[10px] font-bold px-3 py-2 rounded-lg shadow-lg shadow-indigo-500/30 hover:scale-105 transition">Apply Fix</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+  </main>
+
+  <footer class="text-center py-10 text-slate-400 text-xs">
+      &copy; 2024 ArthaShield AI Intelligence. Cross-Framework SCF Engine Active.
+  </footer>
+
+  <script>
+    function switchView(view) {
+        const monView = document.getElementById('view-monitoring');
+        const pdiView = document.getElementById('view-pdi');
+        const monTab = document.getElementById('tab-monitoring');
+        const pdiTab = document.getElementById('tab-pdi');
+        const title = document.getElementById('page-title');
+        const desc = document.getElementById('page-desc');
+
+        if (view === 'monitoring') {
+            // Show Monitoring
+            monView.classList.remove('view-hidden');
+            pdiView.classList.add('view-hidden');
+            // Toggle Tabs
+            monTab.classList.add('tab-active');
+            monTab.classList.remove('text-slate-500');
+            pdiTab.classList.remove('tab-active');
+            pdiTab.classList.add('text-slate-500');
+            // Update Text
+            title.innerText = "Continuous Posture Intelligence";
+            desc.innerText = "Real-time mapping and gap analysis of live infrastructure.";
+        } else {
+            // Show PDI
+            pdiView.classList.remove('view-hidden');
+            monView.classList.add('view-hidden');
+            // Toggle Tabs
+            pdiTab.classList.add('tab-active');
+            pdiTab.classList.remove('text-slate-500');
+            monTab.classList.remove('tab-active');
+            monTab.classList.add('text-slate-500');
+            // Update Text
+            title.innerText = "Pre-Deployment Gate Audit";
+            desc.innerText = "Validating build #AS-99283 against SCF policy before production.";
+        }
+    }
+
+    // Dropdown Logic
+    const desktopResourcesBtn = document.getElementById('desktopResourcesBtn');
+    const desktopResourcesMenu = document.getElementById('desktopResourcesMenu');
+    desktopResourcesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        desktopResourcesMenu.style.maxHeight = desktopResourcesMenu.style.maxHeight === '0px' || desktopResourcesMenu.style.maxHeight === '' ? '300px' : '0px';
+    });
+    window.onclick = () => desktopResourcesMenu.style.maxHeight = '0px';
+  </script>
+
+</body>
+</html>
