@@ -1,359 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ArthaShield AI —  ISO 42001 Issues</title>
-  <meta name="description" content="ArthaShield AI: demo of Compliance Co-Pilot and  ISO/IEC 42001 issues, challenges and automated responses." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield — Regulatory Intelligence Copilot</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root { --radius: 1rem; --glass-bg: rgba(255,255,255,0.62); --glass-border: rgba(255,255,255,0.4); }
-    html,body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-    .glass { backdrop-filter: blur(10px); background: linear-gradient(180deg, var(--glass-bg), rgba(255,255,255,0.28)); border: 1px solid var(--glass-border); border-radius: var(--radius); }
-    .glass-dark { backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(17,24,39,0.62), rgba(17,24,39,0.36)); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); }
-    .card { border-radius: calc(var(--radius) + 6px); }
-    .badge { font-size: 0.72rem; padding: 0.18rem 0.5rem; border-radius: 999px; background: rgba(255,255,255,0.85); border: 1px solid rgba(0,0,0,0.06); display:inline-flex; gap:0.4rem; align-items:center; }
-    .issue-tag { font-size:0.75rem; padding: 0.18rem 0.5rem; border-radius: 999px; background:#fff7ed; border-left:3px solid #f59e0b; display:inline-block; }
-    .table-scroll { max-height: 42vh; overflow:auto; }
-    .highlight { background:#fffbeb; border-left:4px solid #f59e0b; padding:0.8rem; border-radius:8px; }
-    .muted { color:#475569; }
-    .glass-action { background: linear-gradient(90deg,#eef2ff, #f8fafc); border: 1px solid rgba(79,70,229,0.06) }
-
-	/* Chat container */
-.chat-output {
-  max-height: 44vh;
-  overflow-y: auto;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  scroll-behavior: smooth;mit
-}
-
-/* Chat bubble base */
-.bubble {
-  max-width: 75%;
-  padding: 10px 14px;
-  line-height: 1.5;
-  border-radius: 16px;
-  position: relative;
-  word-wrap: break-word;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: all 0.2s ease-in-out;
-}
-
-/* AI messages */
-.bubble.ai {
-  background: linear-gradient(90deg,#eef2ff,#f8fafc);
-  border: 1px solid rgba(79,70,229,0.1);
-  color: #1e293b;
-  align-self: flex-start;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 16px;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-}
-
-/* User messages */
-.bubble.user {
-  background: #3b82f6;
-  color: white;
-  align-self: flex-end;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-}
-
-/* Timestamp small label */
-.bubble small {
-  display: block;
-  font-size: 0.65rem;
-  margin-top: 2px;
-  opacity: 0.6;
-}
-
-/* Scrollbar styling */
-.chat-output::-webkit-scrollbar {
-  width: 6px;
-}
-.chat-output::-webkit-scrollbar-track {
-  background: transparent;
-}
-.chat-output::-webkit-scrollbar-thumb {
-  background: rgba(100,100,100,0.3);
-  border-radius: 3px;
-}
-
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 16px;
+    }
+    .highlight {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 10px;
+      border-radius: 8px;
+    }
   </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8L28KXK8PM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-8L28KXK8PM');
-</script>
-<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
 
-  <!-- NAV -->
-  <header class="sticky top-4 z-40 px-6">
-    <div class="mx-auto max-w-7xl">
-      <div class="glass px-4 py-3 flex items-center justify-between shadow-sm">
-        <div class="flex items-center gap-3">
-          <div>
-		  <a href="index.html" class="flex items-center gap-3 font-semibold">
-			<img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto" />
-            <div class="font-semibold">ArthaShield AI</div>
-            <div class="text-xs muted">AI Compliance Co-Pilot — ISO/IEC 42001</div>
-          </div>
-        </div>
-        <nav class="hidden md:flex items-center gap-6 text-sm">
-          <a class="muted hover:text-indigo-600" href="#demo">Demo</a>
-          <a class="muted hover:text-indigo-600" href="#-issues"> Issues</a>
-          <a class="muted hover:text-indigo-600" href="#compliance-matrix">Matrix</a>
-		  <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
-          <a href="ai-hub.html" class="flex items-center space-x-1 font-semibold text-blue-600 dark:text-blue-400">
-			<span>✨</span>
-			Explore AI Hub </a>
-          <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
-		  <!-- Mobile Hamburger -->
-			<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+
+
+
+
+<body class="bg-gradient-to-br from-slate-50 to-slate-100  min-h-screen">
+
+  <header class="sticky top-0 z-40 bg-white dark:bg-slate-900 md:bg-transparent">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield </span>
+		  <div class="text-xs text-slate-500">Regulatory Intelligence Copilot</div>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300 relative">
+		 <a href="#features" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
+
+  <!-- Desktop Resources Dropdown -->
+  <div class="relative">
+    <button id="desktopResourcesBtn" class="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-white focus:outline-none">
+      <span>Resources</span>
+      <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </button>
+
+    <div id="desktopResourcesMenu" class="absolute left-0 mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300 z-50">
+      <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Arthasheild Agents</a>
+      <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Risk Monitor</a>
+      <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
+      <a href="general-blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
+    </div>
+  </div>
+
+  <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+</nav>
+
+		<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
 			  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 					  d="M4 6h16M4 12h16m-7 6h7"/>
 			  </svg>
-        </nav>
-      </div>
-	  
-	  <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+			</button>
+		 </div>
+    </div>
+	
+	
+	<!-- Mobile Nav (hidden by default) -->
+  <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
     <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
-      <a href="#arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
-      <a href="#demo" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Demo</a>
-      <a href="ai-hub.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Explore AI Hub</a>
-      <a href="#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
-    </div>
+      <a href="autopilot-assistant.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Solution</a>
+          <a href="#credibility" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Global Alignment</a>
+		  <a href="arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
+		  <div class="relative">
+			  <button id="mobileResourcesBtn" class="flex items-center justify-between w-full  text-slate-700 dark:text-slate-200 hover:text-blue-600 focus:outline-none">
+				<span>Resources</span>
+				<svg id="mobileResourcesArrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+				</svg>
+			  </button>
+
+			  <!-- Dropdown menu -->
+			  <div id="mobileResourcesMenu" class="mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300">
+				<a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Arthasheild Agents</a>
+				<a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Risk Monitor</a>
+				<a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
+				<a href="blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
+			  </div>
+			</div>
+		 
+          <a href="arthashieldfeatures.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
   </div>
-	  
-    </div>
+	
   </header>
 
-  <!-- Hero / Summary -->
-  <main class="mx-auto max-w-7xl px-6 py-10">
-    <section class="grid lg:grid-cols-3 gap-8 items-start">
-      <div class="lg:col-span-2 space-y-6">
-        <div class="glass p-6 card shadow">
-          <h1 class="text-2xl font-semibold">ArthaShield — AI Compliance Co-Pilot</h1>
-          <p class="text-sm muted mt-1">Detect AI incidents, map to ISO/IEC 42001 controls, and provide audit-ready remediation guidance for BFSI.</p>
-          <div class="mt-3 flex gap-3">
-            <span class="badge">ISO 42001 mapped</span>
-            <span class="badge">RBI CMS aware</span>
-            <span class="badge">EU AI Act alerts</span>
-          </div>
-        </div>
+<!-- HERO -->
+<section class="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-10 items-center">
 
-        <!-- Conversation & quick demo -->
-        <div class="glass p-4 card shadow">
-          <div class="flex gap-4">
-            <div class="w-1/3">
-              <h3 class="font-semibold mb-3">Triggers</h3>
-              <div class="flex flex-col gap-3">
-					
-                <button onclick="runMockAnalysis('classify_complaint')" class="py-2 px-3 rounded-lg bg-blue-600 text-white">📋 Classify Complaint</button>
-                <button onclick="runMockAnalysis('ai-bias-incident')" class="py-2 px-3 rounded-lg bg-purple-600 text-white"> 🪪 Bias detection in KYC </button>
-                <button onclick="runMockAnalysis('kyc_doc_check')" class="py-2 px-3 rounded-lg bg-amber-500 text-white">⚠️ High-risk complaints</button>
-                <button onclick="runMockAnalysis('simulate-explainability-gap')" class="py-2 px-3 rounded-lg bg-emerald-600 text-white">🔎 Simulate Explainability Gap</button>
-              </div>
-            </div>
+  <div>
+    <h1 class="text-3xl font-bold leading-tight">
+      Detect, Explain & Fix <br> Regulatory Risks in Real-Time
+    </h1>
+    <p class="mt-4 text-slate-600">
+      ArthaShield uses Retrieval-Augmented Generation (RAG) to map RBI, DPDP, and compliance frameworks directly to your fintech workflows.
+    </p>
 
-            <!-- Chat -->
-            <div class="w-2/3 flex flex-col">
-              <div id="chat" class="glass p-3 card chat-output">
-                <div class="bubble glass-action px-3 py-2 rounded-lg inline-block">
-                  👋 Hello — I’m your AI Compliance Co-Pilot. Choose a trigger to simulate an incident and I'll map it to ISO 42001 controls, recommend actions, and prepare an audit-ready summary.
-                </div>
-              </div>
+    <div class="mt-6 flex gap-4">
+      <button class="bg-indigo-600 text-white px-5 py-3 rounded-lg">
+        Try Copilot
+      </button>
+      <button class="border px-5 py-3 rounded-lg">
+        View Use Cases
+      </button>
+    </div>
+  </div>
 
-              <div class="mt-4">
-                <label class="block text-sm mb-2 font-medium">💬 Continue the conversation</label>
-                <div class="flex gap-3">
-                  <input id="userText" type="text" placeholder="e.g. 'Draft RBI incident disclosure'" class="flex-1 px-4 py-2 rounded-lg border border-slate-200 bg-white/80 focus:ring-2 focus:ring-indigo-400" />
-                  <button id="askBtn" class="px-4 py-2 rounded-lg bg-indigo-600 text-white">Ask</button>
-                </div>
-                <div class="flex gap-2 mt-3 flex-wrap">
-                  <button onclick="quickAsk('Map to RBI reporting')" class="px-3 py-1 rounded-full bg-slate-200 text-sm">📑 Map to RBI</button>
-                  <button onclick="quickAsk('Generate draft regulatory report')" class="px-3 py-1 rounded-full bg-slate-200 text-sm">📝 Draft report</button>
-                  <button onclick="quickAsk('Show ISO 42001 gaps')" class="px-3 py-1 rounded-full bg-slate-200 text-sm">⚖️ Show ISO gaps</button>
-                </div>
-              </div>
+  <div class="glass p-6">
+    <p class="text-sm text-slate-600">✔ RBI-aware</p>
+    <p class="text-sm text-slate-600">✔ DPDP compliant</p>
+    <p class="text-sm text-slate-600">✔ Audit-ready outputs</p>
+  </div>
 
-            </div>
-          </div>
-        </div>
+</section>
 
-        <!-- Quick Recommendation -->
-        <div class="glass p-4 card shadow">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="font-semibold">Quick Recommendation</h3>
-              <p class="text-sm muted">When AI misclassifications or bias incidents occur, prioritize containment, RCA, reporting, and model remediation with audit trails.</p>
-            </div>
-            <div class="text-right">
-              <div class="text-xs muted">Severity</div>
-              <div class="text-lg font-semibold text-rose-600">High</div>
-            </div>
+<!-- RAG COPILOT -->
+<section class="max-w-7xl mx-auto px-6 py-10">
+
+  <div class="glass p-6">
+
+    <h2 class="text-xl font-semibold mb-4">
+       Regulatory Copilot (RAG-powered)
+    </h2>
+
+    <!-- CONTEXT -->
+    <div class="grid md:grid-cols-3 gap-4 mb-4">
+      <select id="productType" class="p-2 border rounded-lg">
+        <option>Wallet</option>
+        <option>NBFC</option>
+        <option>Bank</option>
+      </select>
+
+      <select id="workflowType" class="p-2 border rounded-lg">
+        <option>Complaint Handling</option>
+        <option>KYC</option>
+        <option>UPI Transactions</option>
+      </select>
+
+      <button onclick="runRAG()" class="bg-indigo-600 text-white rounded-lg">
+        Analyze
+      </button>
+    </div>
+
+    <input id="queryInput"
+           class="w-full p-3 border rounded-lg mb-6"
+           placeholder="e.g. Can I auto-close complaints in 48 hours?" />
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- OUTPUT -->
+      <div class="glass p-4">
+        <h3 class="font-semibold mb-3"> Copilot Output</h3>
+
+        <div id="copilotOutput" class="space-y-3 text-sm">
+          <div class="highlight">
+            <b>✅ Recommendation:</b><br>
+            Awaiting analysis...
           </div>
         </div>
       </div>
 
-      <!-- Right column:  Issues -->
-      <aside class="space-y-6">
-        <div class="glass p-4 card shadow">
-          <h3 class="font-semibold mb-2"> AI Compliance Issues</h3>
-          <p class="text-sm muted">Examples expected under ISO/IEC 42001 adherence.</p>
-          <ul class="mt-3 space-y-2 text-sm">
-            <li class="flex items-start gap-2"><span class="issue-tag">A</span> Model drift affecting complaint routing</li>
-            <li class="flex items-start gap-2"><span class="issue-tag">B</span> Explainability gaps for black-box models</li>
-            <li class="flex items-start gap-2"><span class="issue-tag">C</span> Data lineage & provenance failures</li>
-            <li class="flex items-start gap-2"><span class="issue-tag">D</span> Bias discovered post-deployment</li>
-          </ul>
-        </div>
+      <!-- EVIDENCE -->
+      <!-- RBI LIVE CITATION PANEL -->
+			<div class="glass p-4">
 
-        <div class="glass p-4 card shadow">
-          <h3 class="font-semibold mb-2">Demo Controls</h3>
-          <div class="flex flex-col gap-2">
-            <button onclick="injectIssue()" class="py-2 rounded-lg bg-amber-500 text-white">Simulate  Issue</button>
-            <button onclick="exportIncident()" class="py-2 rounded-lg bg-slate-800 text-white">Export Incident (JSON)</button>
-          </div>
-        </div>
-      </aside>
-    </section>
-	
-	<section id="-issues" class="mt-12 glass p-6 card shadow">
-  <h2 class="text-xl font-semibold mb-4"> AI Compliance Issues (ISO/IEC 42001) — Challenges & ArthaShield Responses</h2>
-  <div class="table-scroll">
-    <table class="min-w-full text-sm">
-      <thead>
-        <tr class="text-left text-slate-700">
-          <th class="px-4 py-2 font-semibold">Issue</th>
-          <th class="px-4 py-2 font-semibold">Practical Challenge</th>
-          <th class="px-4 py-2 font-semibold">How ArthaShield Helps</th>
-          <th class="px-4 py-2 font-semibold">Action / KPI for CDO</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y">
-        <tr>
-          <td class="px-4 py-3 font-medium">Model drift impacting complaint routing</td>
-          <td class="px-4 py-3 muted">Undetected performance decay → missed regulatory escalations, reputational risk</td>
-          <td class="px-4 py-3">Continuous monitoring, auto-drift alerts, automated rollback & canary retrain with timestamped audit</td>
-          <td class="px-4 py-3">KPI: <b>drift_detected_rate</b>, SLA: Retrain decision within 48h</td>
-        </tr>
-        <tr>
-          <td class="px-4 py-3 font-medium">Explainability gaps for models</td>
-          <td class="px-4 py-3 muted">Ensure audit-ready model transparency. Provide clear rationale for model-driven decisions</td>
-          <td class="px-4 py-3">On-demand decision rationales, incident summaries, and technical feature contribution analysis</td>
-          <td class="px-4 py-3">KPI:Incidents with attached explainability artifacts</td>
-        </tr>
-        <tr>
-          <td class="px-4 py-3 font-medium">Training data lineage & provenance failures</td>
-          <td class="px-4 py-3 muted">Inability to prove training sets → failed audits and fines</td>
-          <td class="px-4 py-3">Immutable dataset registry, hashed artifacts, versioned datasets and access logs for every model build</td>
-          <td class="px-4 py-3">Action: Enforce dataset sign-off; KPI: dataset provenance coverage 70%</td>
-        </tr>
-        <tr>
-          <td class="px-4 py-3 font-medium">Bias discovered post-deployment</td>
-          <td class="px-4 py-3 muted">Late discovery → customer harm + regulatory escalation</td>
-          <td class="px-4 py-3">Bias scanners + synthetic probing, targeted retraining pipelines, consumer-facing remediation templates</td>
-          <td class="px-4 py-3">SLA: Remediation plan, KPI: bias incident closure rate</td>
-        </tr>
-      </tbody>
-    </table>
+			  <div class="flex items-center justify-between mb-3">
+				<h3 class="font-semibold"> RBI Live Citations</h3>
+				<span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+				  Live RAG
+				</span>
+			  </div>
+
+			  <div id="rbiCitations" class="space-y-4 text-sm">
+
+				<!-- Citation Card -->
+				<div class="border rounded-lg p-3 bg-white shadow-sm">
+				  
+				  <div class="flex justify-between items-center mb-1">
+					<span class="text-xs font-medium text-indigo-600">
+					  RBI CMS Framework
+					</span>
+					<span class="text-xs text-slate-500">
+					  Confidence: 92%
+					</span>
+				  </div>
+
+				  <p class="text-slate-700">
+					“Single window system for lodging complaints against regulated entities”
+				  </p>
+
+				  <div class="mt-2 text-xs text-slate-500">
+					Why relevant: Complaint handling workflow detected
+				  </div>
+
+				  <a href="https://www.rbi.org.in"
+					 target="_blank"
+					 class="text-indigo-600 text-xs mt-2 inline-block">
+					 🔗 View Source
+				  </a>
+
+				</div>
+
+			  </div>
+			</div>	
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="max-w-7xl mx-auto px-6 py-16">
+
+  <div class="text-center mb-12">
+    <h2 class="text-3xl font-bold">Real Use Cases, Real Compliance Impact</h2>
+    <p class="text-slate-600 mt-3">
+      ArthaShield goes beyond chat — it detects, explains, and fixes regulatory risks across fintech workflows.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <!-- Use Case 1 -->
+    <div class="glass p-6 hover:shadow-lg transition">
+      <h3 class="font-semibold text-lg">🚀 Pre-Deployment Risk Check</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        Validate new features before release against RBI and compliance frameworks.
+      </p>
+
+      <div class="mt-4 text-sm">
+        <p><b>Trigger:</b> Feature launch</p>
+        <p><b>Copilot:</b> RAG-based regulatory scan</p>
+        <p><b>Outcome:</b> Prevent penalties before deployment</p>
+      </div>
+
+      <button onclick="runUseCase('predeploy')" class="mt-4 text-indigo-600 text-sm">
+		  Try this →
+		</button>
+    </div>
+
+    <!-- Use Case 2 -->
+    <div class="glass p-6 hover:shadow-lg transition">
+      <h3 class="font-semibold text-lg">📋 Complaint Intelligence</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        Automatically classify complaints and map them to RBI obligations.
+      </p>
+
+      <div class="mt-4 text-sm">
+        <p><b>Trigger:</b> Incoming complaint</p>
+        <p><b>Copilot:</b> Categorization + SLA mapping</p>
+        <p><b>Outcome:</b> Faster resolution, fewer escalations</p>
+      </div>
+
+      <button onclick="runUseCase('complaint')" class="mt-4 text-indigo-600 text-sm">
+		Try this →
+	  </button>
+    </div>
+
+    <!-- Use Case 3 -->
+    <div class="glass p-6 hover:shadow-lg transition">
+      <h3 class="font-semibold text-lg">💸 UPI Failure Compliance</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        Ensure failed transactions are handled as per RBI timelines.
+      </p>
+
+      <div class="mt-4 text-sm">
+        <p><b>Trigger:</b> Failed payment</p>
+        <p><b>Copilot:</b> Refund rule validation</p>
+        <p><b>Outcome:</b> Avoid mass complaints & fines</p>
+      </div>
+
+      <button onclick="runUseCase('upi')" class="mt-4 text-indigo-600 text-sm">
+		Try this →
+	  </button>
+    </div>
+
+    <!-- Use Case 4 -->
+    <div class="glass p-6 hover:shadow-lg transition">
+      <h3 class="font-semibold text-lg">🔐 DPDP Compliance Check</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        Validate data collection, consent, and storage policies.
+      </p>
+
+      <div class="mt-4 text-sm">
+        <p><b>Trigger:</b> Data capture</p>
+        <p><b>Copilot:</b> Privacy mapping</p>
+        <p><b>Outcome:</b> Avoid legal exposure</p>
+      </div>
+
+	 <button onclick="runUseCase('dpdp')" class="mt-4 text-indigo-600 text-sm">
+		Try this →
+	  </button>
+    </div>
+
+    <!-- Use Case 5 -->
+    <div class="glass p-6 hover:shadow-lg transition">
+      <h3 class="font-semibold text-lg">📊 Audit Readiness</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        Prepare audit-ready compliance reports instantly.
+      </p>
+
+      <div class="mt-4 text-sm">
+        <p><b>Trigger:</b> Audit request</p>
+        <p><b>Copilot:</b> Gap detection + reporting</p>
+        <p><b>Outcome:</b> Reduce manual effort</p>
+      </div>
+
+		<button onclick="runUseCase('audit')" class="mt-4 text-indigo-600 text-sm">
+			Try this →
+		</button>
+  </div>
+
   </div>
 </section>
 
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-300">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
+      
+      <!-- Brand -->
+      <div class="col-span-2 lg:col-span-1">
+        <h3 class="text-l font-bold text-white">ArthaShield</h3>
+      </div>
+
+      <!-- Solutions -->
+      <div>
+        <h4 class="text-m font-semibold text-white mb-4">Solutions</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="pdi-maintenance.html" class="hover:text-white">Complaint Intelligence</a></li>
+		  <li><a href="pdi-maintenance.html" class="hover:text-white">AI Based KYC Risk Detection</a></li>
+          <li><a href="autopilot-assistant.html" class="hover:text-white">Regulatory Copilot</a></li>
+		  <li><a href="#" class="hover:text-white">Dispute Resolution Engine</a></li>
+        </ul>
+      </div>
+
+
+	   <div>
+        <h4 class="text-m font-semibold text-white mb-4">Flagship Offering</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="caseIntelligence.html" class="hover:text-white">AI based Case Intelligence</a></li>
+		  <li><a href="responsible-design.html" class="hover:text-white">Responsible Design Loop™ ♾️</a></li>
+        </ul>
+      </div>
+	  
+      <!-- Global Alignment -->
+      <div>
+        <h4 class="text-m font-semibold text-white mb-4">Data Security</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="#" class="hover:text-white">SOC 2</a></li>
+          <li><a href="#" class="hover:text-white">ISO 27001</a></li>
+          <li><a href="#" class="hover:text-white">NIST AI RMF</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-m font-semibold text-white mb-4">Resources</h4>
+        <ul class="space-y-2 text-m">
+          <li><a href="how-case-intel-works.html" class="hover:text-white">Case Intelligence Architecture</a></li>
+          <li><a href="api-platform.html" class="hover:text-white">API Documentation</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-slate-800 mt-14 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
+      <p>© 2025 ArthaShield. All rights reserved.</p>
+      <div class="flex space-x-6 mt-4 md:mt-0">
+        <a href="#" class="hover:text-white">Privacy Policy</a>
+        <a href="#" class="hover:text-white">Terms of Service</a>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- SCRIPT -->
+<script>
+
+// Scroll animations
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); } });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 	
-  </main>
-	
-	<script>
-  const chat = document.getElementById('chat');
+	  const menuButton = document.getElementById("menuButton");
+	  const mobileMenu = document.getElementById("mobileMenu");
 
-  // Mock responses for each trigger
-  const mockResponses = {
-    triage_upi: [
-      "🚨 UPI transaction anomalies detected. Mapping to ISO 42001 controls...",
-      "Control 5.2 triggered: Customer fund loss risk mitigation.",
-      "Recommendation: Freeze suspicious accounts and notify compliance officer. Audit-ready report generated."
-    ],
-    classify_complaint: [
-      "📋 Complaint received: 'Unauthorized transaction'. Classifying under RBI complaint matrix...",
-      "Mapped to ISO 42001 Control 3.4: Complaint handling & escalation.",
-      "Recommended Action: Initiate investigation within 24h, send acknowledgement to customer."
-    ],
-    kyc_doc_check: [
-      "🪪 KYC document review triggered. Checking for missing or inconsistent data...",
-      "Detected anomalies in PAN and address proofs.",
-      "Action: Request customer to resubmit documents. Log incident for audit trail."
-    ],
-    'ai-bias-incident': [
-      "⚠️ Bias cluster detected in credit scoring AI model.",
-      "ISO 42001 Control 7.1 applied: Model fairness and bias mitigation.",
-      "Recommendation: Trigger synthetic probing and retraining pipeline. Notify CDO."
-    ],
-    'simulate-explainability-gap': [
-      "🔎 Explainability gap detected in ensemble model decisions.",
-      "Action: Generate SHAP/LIME explainers, prepare human-readable summary.",
-      "Audit-ready summary prepared for regulatory inspection."
-    ]
-  };
+	  menuButton.addEventListener("click", () => {
+		if (mobileMenu.classList.contains("max-h-0")) {
+		  mobileMenu.classList.remove("max-h-0");
+		  mobileMenu.classList.add("max-h-screen"); // expands smoothly
+		} else {
+		  mobileMenu.classList.add("max-h-0");
+		  mobileMenu.classList.remove("max-h-screen");
+		}
+	  });
+	  
+	  const resBtn = document.getElementById('mobileResourcesBtn');
+  const resMenu = document.getElementById('mobileResourcesMenu');
+  const resArrow = document.getElementById('mobileResourcesArrow');
 
-  // Function to append message to chat
-  function appendBubble(message, isUser=false) {
-    const bubble = document.createElement('div');
-    bubble.className = 'bubble px-3 py-2 rounded-lg inline-block ' + (isUser ? 'bg-indigo-100 text-indigo-900' : 'glass-action');
-    bubble.textContent = message;
-    chat.appendChild(bubble);
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-  // Run mock analysis for trigger buttons
-  function runMockAnalysis(trigger) {
-    const responses = mockResponses[trigger];
-    if (!responses) return;
-
-    responses.forEach((msg, i) => {
-      setTimeout(() => appendBubble(msg), i * 1000); // stagger messages by 1s
-    });
-  }
-
-  // Quick ask buttons
-  function quickAsk(query) {
-    appendBubble("💬 " + query, true);
-    setTimeout(() => appendBubble("🤖 Generating response for: " + query), 500);
-  }
-
-  // Input field interaction
-  document.getElementById('askBtn').addEventListener('click', () => {
-    const input = document.getElementById('userText');
-    if (!input.value.trim()) return;
-    quickAsk(input.value.trim());
-    input.value = '';
+  resBtn.addEventListener('click', () => {
+    if (resMenu.classList.contains('max-h-0')) {
+      resMenu.classList.remove('max-h-0');
+      resMenu.classList.add('max-h-96'); // expand dropdown
+      resArrow.classList.add('rotate-180'); // arrow up
+    } else {
+      resMenu.classList.add('max-h-0');
+      resMenu.classList.remove('max-h-96'); // collapse dropdown
+      resArrow.classList.remove('rotate-180'); // arrow down
+    }
   });
   
-  function appendBubble(message, isUser=false) {
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble ' + (isUser ? 'user' : 'ai');
-  bubble.textContent = message;
-  chat.appendChild(bubble);
-  chat.scrollTop = chat.scrollHeight;
+   const desktopBtn = document.getElementById('desktopResourcesBtn');
+  const desktopMenu = document.getElementById('desktopResourcesMenu');
+  const desktopArrow = document.getElementById('desktopResourcesArrow');
+
+  desktopBtn.addEventListener('click', () => {
+    if (desktopMenu.classList.contains('max-h-0')) {
+      desktopMenu.classList.remove('max-h-0');
+      desktopMenu.classList.add('max-h-96'); // expand
+      desktopArrow.classList.add('rotate-180'); // arrow up
+    } else {
+      desktopMenu.classList.add('max-h-0');
+      desktopMenu.classList.remove('max-h-96'); // collapse
+      desktopArrow.classList.remove('rotate-180'); // arrow down
+    }
+  });
+
+  // Optional: close dropdown if click outside
+  document.addEventListener('click', (e) => {
+    if (!desktopBtn.contains(e.target) && !desktopMenu.contains(e.target)) {
+      desktopMenu.classList.add('max-h-0');
+      desktopMenu.classList.remove('max-h-96');
+      desktopArrow.classList.remove('rotate-180');
+    }
+  });
+
+function runRAG() {
+
+  const query = document.getElementById('queryInput').value;
+
+  // Copilot Output
+  document.getElementById('copilotOutput').innerHTML = `
+    <div class="highlight">
+      <b>✅ Recommendation:</b><br>
+      Not compliant with RBI grievance norms
+    </div>
+
+    <div>
+      <b>📜 Regulation:</b><br>
+      Complaint must be acknowledged & resolved before closure
+    </div>
+
+    <div>
+      <b>⚠️ Risk:</b><br>
+      Escalation to Ombudsman
+    </div>
+
+    <div>
+      <b>💡 Action:</b><br>
+      Add acknowledgement + extend SLA beyond 48h
+    </div>
+  `;
+
+  // RBI Citations Panel (simulate RAG retrieval)
+  document.getElementById('rbiCitations').innerHTML = `
+
+    <div class="border rounded-lg p-3 bg-white shadow-sm">
+      <div class="flex justify-between mb-1">
+        <span class="text-xs font-medium text-indigo-600">
+          RBI Complaint Management System
+        </span>
+        <span class="text-xs text-slate-500">Confidence: 91%</span>
+      </div>
+      <p>Single window platform for complaint lodging</p>
+      <div class="text-xs text-slate-500 mt-1">
+        Applies to: Complaint workflows
+      </div>
+      <a href="https://cms.rbi.org.in" target="_blank" class="text-indigo-600 text-xs">
+        🔗 Open CMS
+      </a>
+    </div>
+
+    <div class="border rounded-lg p-3 bg-white shadow-sm">
+      <div class="flex justify-between mb-1">
+        <span class="text-xs font-medium text-indigo-600">
+          RBI Ombudsman Scheme
+        </span>
+        <span class="text-xs text-slate-500">Confidence: 94%</span>
+      </div>
+      <p>Escalation allowed if complaint unresolved within ~30 days</p>
+      <div class="text-xs text-slate-500 mt-1">
+        Applies to: SLA violations
+      </div>
+      <a href="https://www.rbi.org.in" target="_blank" class="text-indigo-600 text-xs">
+        🔗 View Scheme
+      </a>
+    </div>
+
+  `;
+}
+
+
+
+function runUseCase(type) {
+
+  const queryInput = document.getElementById('queryInput');
+  const product = document.getElementById('productType');
+  const workflow = document.getElementById('workflowType');
+
+  let query = "";
+
+  switch(type) {
+
+    case 'predeploy':
+      product.value = "Wallet";
+      workflow.value = "UPI Transactions";
+      query = "Check if auto-refund workflow for failed UPI is RBI compliant";
+      break;
+
+    case 'complaint':
+      product.value = "NBFC";
+      workflow.value = "Complaint Handling";
+      query = "Can complaints be auto-closed in 48 hours?";
+      break;
+
+    case 'upi':
+      product.value = "Wallet";
+      workflow.value = "UPI Transactions";
+      query = "What are RBI rules for failed UPI transaction refunds?";
+      break;
+
+    case 'dpdp':
+      product.value = "Bank";
+      workflow.value = "KYC";
+      query = "Is storing Aadhaar data compliant under DPDP?";
+      break;
+
+    case 'audit':
+      product.value = "NBFC";
+      workflow.value = "Complaint Handling";
+      query = "Show compliance gaps in complaint handling system";
+      break;
+  }
+
+  queryInput.value = query;
+
+  // scroll to copilot
+  document.getElementById('queryInput').scrollIntoView({ behavior: 'smooth' });
+
+  // trigger RAG
+  setTimeout(() => runRAG(), 400);
 }
 
 </script>
-
 
 </body>
 </html>
