@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anand Sanghvi — Profile | ArthaShield</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .glass-dark {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 min-h-screen text-slate-900 dark:text-slate-100">
+
+  <header class="sticky top-0 z-40 bg-white dark:bg-slate-900 md:bg-transparent">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
+        <a href="index.html" class="flex items-center gap-3 font-semibold">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-11 w-auto"/>
+          <span>ArthaShield</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
+          <a href="index.html" class="hover:text-slate-900 dark:hover:text-white">Home</a>
+          <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
+          <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
+          <a href="profile.html" class="text-slate-900 dark:text-white font-medium">Profile</a>
+          <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+        </nav>
+        <button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+      <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
+        <a href="index.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Home</a>
+        <a href="autopilot-assistant.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Solution</a>
+        <a href="arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
+        <a href="profile.html" class="block text-blue-600 font-medium">Profile</a>
+        <a href="arthashieldfeatures.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Profile Hero -->
+  <section class="py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl overflow-hidden shadow-lg glass dark:glass-dark">
+        <div class="h-32 sm:h-40 bg-gradient-to-tr from-blue-600 to-indigo-600"></div>
+        <div class="px-6 sm:px-10 pb-10">
+          <div class="flex flex-col sm:flex-row sm:items-end gap-6 -mt-16">
+            <img src="images/profile-photo.jpg" alt="Anand Sanghvi"
+                 onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Anand+Sanghvi&size=256&background=2563eb&color=ffffff';"
+                 class="h-32 w-32 rounded-2xl object-cover ring-4 ring-white dark:ring-slate-900 shadow-xl bg-white"/>
+            <div class="flex-1">
+              <h1 class="text-3xl font-bold tracking-tight">Anand Sanghvi</h1>
+              <p class="text-lg text-slate-600 dark:text-slate-300">Founder &amp; Financial Infrastructure Lead — ArthaShield</p>
+              <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                <span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700">Financial Infrastructure</span>
+                <span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700">Payments &amp; Rails</span>
+                <span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700">BFSI</span>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <a href="mailto:anandsanghvi@arthashield.org" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-5 py-2.5 font-medium text-sm hover:opacity-90 transition">Get in touch</a>
+              <a href="#" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-slate-900 to-slate-700 text-white px-5 py-2.5 font-medium text-sm hover:opacity-90 transition">Download CV</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About + Stats -->
+  <section class="pb-6">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 grid gap-8 lg:grid-cols-3">
+      <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow">
+        <h2 class="text-xl font-bold mb-4">About</h2>
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+          I build financial infrastructure for BFSI — the rails, APIs, and data layer that
+          let financial products move money, settle transactions, and stay auditable at scale.
+          My work sits at the intersection of payments, risk, and platform engineering, with a
+          focus on resilient, high-throughput systems that regulated institutions can build on.
+        </p>
+        <p class="mt-4 text-slate-600 dark:text-slate-300 leading-relaxed">
+          <em class="not-italic text-slate-400 dark:text-slate-500">[Replace this with your own bio —
+          background, what you care about, and what you're building.]</em>
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-4 content-start">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+          <div class="text-3xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">18+</div>
+          <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">Years experience</div>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+          <div class="text-3xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">99.99%</div>
+          <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">Uptime target</div>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+          <div class="text-3xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">API</div>
+          <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">First platform</div>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+          <div class="text-3xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">BFSI</div>
+          <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">Domain focus</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise -->
+  <section class="py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-extrabold text-center mb-8">Expertise</h2>
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+          <h3 class="font-bold text-lg mb-2">Payments &amp; Rails</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-300">Money movement, settlement, and reconciliation infrastructure built for scale and resilience.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+          <h3 class="font-bold text-lg mb-2">Platform &amp; APIs</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-300">API-first ledgers and data layers that financial products build on — high-throughput and auditable by design.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
+          <h3 class="font-bold text-lg mb-2">Reliability &amp; Risk</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-300">Resilient systems with the controls, observability, and governance regulated institutions require.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-extrabold text-center mb-8">Experience</h2>
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="sm:w-40 flex-shrink-0 text-sm text-slate-500 dark:text-slate-400">2022 — Present</div>
+          <div>
+            <h3 class="font-bold text-lg">Founder &amp; Financial Infrastructure Lead</h3>
+            <p class="text-sm text-blue-600 dark:text-blue-400 mb-2">ArthaShield</p>
+            <p class="text-sm text-slate-600 dark:text-slate-300">Building the financial infrastructure layer for BFSI — the rails, APIs, and ledger that move money and keep it auditable at scale.</p>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="sm:w-40 flex-shrink-0 text-sm text-slate-500 dark:text-slate-400">Earlier role</div>
+          <div>
+            <h3 class="font-bold text-lg">[Position]</h3>
+            <p class="text-sm text-blue-600 dark:text-blue-400 mb-2">[Company]</p>
+            <p class="text-sm text-slate-600 dark:text-slate-300">[Describe what you did and the impact you had.]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-12">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white p-10 text-center shadow-lg">
+        <h2 class="text-2xl font-bold mb-3">Let's work together</h2>
+        <p class="text-white/90 max-w-2xl mx-auto mb-6">Open to conversations about payments, financial rails, and building the infrastructure regulated institutions run on.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="mailto:anandsanghvi@arthashield.org" class="inline-flex items-center justify-center rounded-xl bg-white text-blue-700 px-6 py-3 font-medium text-sm hover:opacity-90 transition">Email me</a>
+          <a href="#" class="inline-flex items-center justify-center rounded-xl bg-slate-900/30 ring-1 ring-white/40 text-white px-6 py-3 font-medium text-sm hover:bg-slate-900/50 transition">LinkedIn</a>
+        </div>
+      </div>
+
+      <!-- Scan to save contact -->
+      <div class="mt-8 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow flex flex-col sm:flex-row items-center gap-8">
+        <img src="images/profile-vcard-qr.svg" alt="Scan to save Anand Sanghvi's contact"
+             class="h-40 w-40 flex-shrink-0 rounded-xl bg-white p-2 ring-1 ring-slate-200 dark:ring-slate-700"/>
+        <div class="text-center sm:text-left">
+          <h3 class="text-xl font-bold mb-2">Scan to save my contact</h3>
+          <p class="text-slate-600 dark:text-slate-300 text-sm mb-4">Point your phone camera at the code to add me to your contacts — name, title, phone, email, and profile link included.</p>
+          <div class="space-y-1 text-sm text-slate-500 dark:text-slate-400">
+            <p><span class="font-medium text-slate-700 dark:text-slate-200">Phone:</span> +91 98201 30015</p>
+            <p><span class="font-medium text-slate-700 dark:text-slate-200">Email:</span> anandsanghvi@arthashield.org</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <a href="index.html" class="flex items-center gap-3 font-semibold text-white">
+          <img src="artha_shield_logo.png" alt="ArthaShield Logo" class="h-9 w-auto"/>
+          <span>ArthaShield</span>
+        </a>
+        <div class="flex space-x-6 text-sm">
+          <a href="index.html" class="hover:text-white">Home</a>
+          <a href="arthashieldfeatures.html" class="hover:text-white">Features</a>
+          <a href="mailto:anandsanghvi@arthashield.org" class="hover:text-white">Contact</a>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 mt-8 pt-6 text-sm text-slate-400 text-center">
+        <p>© 2025 Anand Sanghvi · ArthaShield. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("max-h-0");
+      mobileMenu.classList.toggle("max-h-screen");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield Graph — Intelligence Modeler</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="lib/arthashield-graph.css"/>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass { background: rgba(255,255,255,0.72); backdrop-filter: blur(12px); border: 1px solid rgba(226,232,240,0.7); }
+    @media (prefers-color-scheme: dark) { .glass { background: rgba(15,23,42,0.72); border-color: rgba(51,65,85,0.7); } }
+  </style>
+</head>
+
+<body class="h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col">
+
+  <!-- Top bar -->
+  <header class="flex-none h-14 px-3 sm:px-4 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur z-20">
+    <a href="../index.html" class="flex items-center gap-2 font-semibold shrink-0">
+      <img src="../artha_shield_logo.png" alt="ArthaShield" class="h-8 w-auto"/>
+      <span class="hidden sm:inline">ArthaShield Graph</span>
+    </a>
+    <span class="hidden md:inline text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">prototype</span>
+
+    <!-- Examples dropdown -->
+    <div class="relative ml-2">
+      <button id="exBtn" class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">
+        Examples
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div id="exMenu" class="hidden absolute left-0 mt-1 w-72 bg-white dark:bg-slate-800 rounded-xl shadow-xl ring-1 ring-slate-200 dark:ring-slate-700 overflow-hidden z-30"></div>
+    </div>
+
+    <div class="hidden sm:flex items-center gap-1">
+      <button id="btnArrange" class="px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Auto-arrange</button>
+      <button id="btnExport"  class="px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Export</button>
+    </div>
+
+    <div class="flex-1"></div>
+    <button id="btnPanel" class="px-3 py-1.5 rounded-lg text-sm font-medium bg-blue-600 text-white hover:opacity-90">Intelligence</button>
+    <a href="../knowledge-graph.html" class="hidden lg:inline px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Vision</a>
+  </header>
+
+  <!-- Canvas area -->
+  <main class="relative flex-1 min-h-0">
+    <div id="canvas" class="absolute inset-0"></div>
+
+    <!-- Floating palette -->
+    <div class="absolute top-3 left-3 glass rounded-xl shadow-lg p-2 max-h-[calc(100%-1.5rem)] overflow-y-auto">
+      <div class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 px-1 pb-1">Add entity</div>
+      <div id="palette" class="grid grid-cols-1 gap-1"></div>
+    </div>
+
+    <!-- Zoom controls -->
+    <div class="absolute bottom-3 right-3 flex flex-col gap-1">
+      <button id="btnFit"  title="Fit"      class="w-9 h-9 grid place-items-center rounded-lg glass shadow hover:bg-slate-100 dark:hover:bg-slate-800 text-lg">⤢</button>
+      <button id="btnIn"   title="Zoom in"  class="w-9 h-9 grid place-items-center rounded-lg glass shadow hover:bg-slate-100 dark:hover:bg-slate-800 text-xl leading-none">+</button>
+      <button id="btnOut"  title="Zoom out" class="w-9 h-9 grid place-items-center rounded-lg glass shadow hover:bg-slate-100 dark:hover:bg-slate-800 text-xl leading-none">−</button>
+    </div>
+
+    <!-- Hint -->
+    <div class="absolute bottom-3 left-3 glass rounded-lg shadow px-3 py-2 text-[11px] text-slate-500 dark:text-slate-400 max-w-xs">
+      Drag a node to move · drag canvas to pan · scroll to zoom · click a node then <b>→ Connect</b> to link.
+    </div>
+
+    <!-- Intelligence panel -->
+    <aside id="panel" class="absolute top-3 right-3 w-[340px] max-w-[calc(100%-1.5rem)] glass rounded-2xl shadow-xl flex flex-col max-h-[calc(100%-1.5rem)]">
+      <div class="flex items-center justify-between px-4 pt-4">
+        <h2 class="text-sm font-bold">ArthaShield Intelligence</h2>
+        <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">live</span>
+      </div>
+      <div id="scenario" class="px-4 pt-2 text-xs text-slate-500 dark:text-slate-400"></div>
+      <div id="metrics" class="grid grid-cols-3 gap-2 px-4 py-3 text-center"></div>
+      <div id="insights" class="px-4 pb-4 space-y-3 overflow-y-auto"></div>
+    </aside>
+  </main>
+
+  <script src="lib/arthashield-graph.js"></script>
+  <script src="examples.js"></script>
+  <script>
+    var levelStyle = {
+      risk:  { ring: 'ring-rose-200 dark:ring-rose-500/30',   dot: '#e11d48', tag: 'Risk' },
+      watch: { ring: 'ring-amber-200 dark:ring-amber-500/30', dot: '#f59e0b', tag: 'Watch' },
+      info:  { ring: 'ring-blue-200 dark:ring-blue-500/30',   dot: '#2563eb', tag: 'Info' }
+    };
+    var currentScenario = '';
+
+    var modeler = new ArthaShieldGraph({ container: '#canvas', onChange: refresh });
+
+    // Palette
+    var palette = document.getElementById('palette');
+    Object.keys(ArthaShieldGraph.ENTITY_TYPES).forEach(function (type) {
+      var meta = ArthaShieldGraph.ENTITY_TYPES[type];
+      var b = document.createElement('button');
+      b.className = 'flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[13px] font-medium hover:bg-slate-100 dark:hover:bg-slate-700/60 text-left w-40';
+      b.innerHTML = '<span style="width:9px;height:9px;border-radius:50%;background:' + meta.color + '"></span>' + type;
+      b.onclick = function () { modeler.addNode(type); };
+      palette.appendChild(b);
+    });
+
+    // Examples menu
+    var exMenu = document.getElementById('exMenu');
+    ARTHASHIELD_EXAMPLES.forEach(function (ex, i) {
+      var a = document.createElement('button');
+      a.className = 'block w-full text-left px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-700/60 border-b border-slate-100 dark:border-slate-700 last:border-0';
+      a.innerHTML = '<div class="text-sm font-semibold">' + ex.name + '</div>' +
+                    '<div class="text-xs text-slate-500 dark:text-slate-400">' + ex.blurb + '</div>';
+      a.onclick = function () { load(ex); exMenu.classList.add('hidden'); };
+      exMenu.appendChild(a);
+    });
+    document.getElementById('exBtn').onclick = function (e) { e.stopPropagation(); exMenu.classList.toggle('hidden'); };
+    document.addEventListener('click', function () { exMenu.classList.add('hidden'); });
+
+    // Toolbar
+    document.getElementById('btnArrange').onclick = function () { modeler.autoLayout(); };
+    document.getElementById('btnFit').onclick = function () { modeler.fit(); };
+    document.getElementById('btnIn').onclick = function () { modeler.zoomIn(); };
+    document.getElementById('btnOut').onclick = function () { modeler.zoomOut(); };
+    document.getElementById('btnExport').onclick = function () {
+      var blob = new Blob([JSON.stringify(modeler.getGraph(), null, 2)], { type: 'application/json' });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = 'arthashield-graph.json'; a.click(); URL.revokeObjectURL(a.href);
+    };
+    document.getElementById('btnPanel').onclick = function () {
+      document.getElementById('panel').classList.toggle('hidden');
+    };
+
+    function load(ex) {
+      currentScenario = ex.blurb;
+      modeler.loadGraph(JSON.parse(JSON.stringify(ex.graph)));
+    }
+
+    function refresh(graph) {
+      var r = ArthaShieldIntelligence.analyze(graph), m = r.metrics;
+      document.getElementById('scenario').textContent = currentScenario;
+      document.getElementById('metrics').innerHTML =
+        tile(m.entities, 'entities') + tile(m.relationships, 'links') + tile(m.connected, 'connected');
+      var box = document.getElementById('insights');
+      box.innerHTML = r.insights.length ? r.insights.map(function (ins) {
+        var s = levelStyle[ins.level];
+        return '<div class="rounded-xl p-3.5 ring-1 ' + s.ring + ' bg-white/70 dark:bg-slate-800/50">' +
+          '<div class="flex items-center gap-2 mb-1"><span style="width:8px;height:8px;border-radius:50%;background:' + s.dot + '"></span>' +
+          '<span class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">' + s.tag + '</span></div>' +
+          '<p class="text-sm font-semibold mb-1.5">' + ins.title + '</p>' +
+          '<p class="text-xs text-slate-500 dark:text-slate-400 mb-1"><b class="text-slate-600 dark:text-slate-300">Why:</b> ' + ins.why + '</p>' +
+          '<p class="text-xs text-slate-500 dark:text-slate-400"><b class="text-slate-600 dark:text-slate-300">Next step:</b> ' + ins.action + '</p></div>';
+      }).join('') : '<p class="text-sm text-slate-400">Add entities and connect them to generate intelligence.</p>';
+    }
+    function tile(v, l) {
+      return '<div class="bg-white/60 dark:bg-slate-800/50 rounded-xl py-2">' +
+        '<div class="text-xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">' + v + '</div>' +
+        '<div class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wide">' + l + '</div></div>';
+    }
+
+    load(ARTHASHIELD_EXAMPLES[0]);
+  </script>
+</body>
+</html>
