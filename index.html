@@ -285,6 +285,90 @@ loading="lazy" decoding="async"       src="images/shield-agents.webp"
   </div>
 </section>
 
+
+<!-- Shaping What's Next — mascot teaser -->
+<section class="py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+  <style>
+    @keyframes aswFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes aswSpark { 0%,100%{opacity:.45;transform:scale(.85)} 50%{opacity:1;transform:scale(1.15)} }
+    @keyframes aswBlink { 0%,92%,100%{transform:scaleY(1)} 96%{transform:scaleY(.12)} }
+    .asw-float{ animation:aswFloat 4s ease-in-out infinite; transform-origin:center; }
+    .asw-spark{ animation:aswSpark 2s ease-in-out infinite; transform-origin:120px 16px; }
+    .asw-eyes{ animation:aswBlink 5s ease-in-out infinite; transform-origin:120px 110px; }
+    @media (prefers-reduced-motion: reduce){ .asw-float,.asw-spark,.asw-eyes{ animation:none; } }
+  </style>
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rounded-3xl bg-white dark:bg-slate-800/60 ring-1 ring-slate-200/70 dark:ring-slate-700/60 shadow-lg">
+      <div class="grid md:grid-cols-2 items-center gap-6 p-8 sm:p-12">
+
+        <!-- Mascot -->
+        <div class="order-2 md:order-1 flex justify-center">
+          <div class="relative">
+            <div class="absolute -top-1 right-0 sm:-right-4 bg-slate-900 text-white text-xs font-medium px-3 py-1.5 rounded-full rounded-br-sm shadow-lg">What should happen next?</div>
+            <svg viewBox="0 0 240 270" class="w-56 h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arthi, the ArthaShield agent mascot">
+              <defs>
+                <linearGradient id="aswGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#4f46e5"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="120" cy="252" rx="64" ry="9" fill="#0f172a" opacity="0.10"/>
+              <g class="asw-float">
+                <!-- ears -->
+                <circle cx="46" cy="122" r="14" fill="url(#aswGrad)"/>
+                <circle cx="194" cy="122" r="14" fill="url(#aswGrad)"/>
+                <!-- antenna -->
+                <line x1="120" y1="48" x2="120" y2="24" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+                <g class="asw-spark">
+                  <circle cx="120" cy="16" r="8" fill="#818cf8"/>
+                  <circle cx="120" cy="16" r="3" fill="#ffffff"/>
+                </g>
+                <!-- body -->
+                <rect x="50" y="48" width="140" height="150" rx="42" fill="url(#aswGrad)"/>
+                <rect x="66" y="58" width="108" height="26" rx="13" fill="#ffffff" opacity="0.12"/>
+                <!-- visor -->
+                <rect x="72" y="86" width="96" height="56" rx="28" fill="#0f172a"/>
+                <!-- eyes -->
+                <g class="asw-eyes">
+                  <circle cx="104" cy="110" r="11" fill="#e0f2fe"/>
+                  <circle cx="107" cy="112" r="4" fill="#1e293b"/>
+                  <circle cx="100" cy="106" r="2.4" fill="#ffffff"/>
+                  <circle cx="136" cy="110" r="11" fill="#e0f2fe"/>
+                  <circle cx="139" cy="112" r="4" fill="#1e293b"/>
+                  <circle cx="132" cy="106" r="2.4" fill="#ffffff"/>
+                </g>
+                <!-- smile -->
+                <path d="M108 127 Q120 137 132 127" stroke="#38bdf8" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <!-- cheeks -->
+                <circle cx="88" cy="123" r="5" fill="#f472b6" opacity="0.35"/>
+                <circle cx="152" cy="123" r="5" fill="#f472b6" opacity="0.35"/>
+                <!-- chest shield -->
+                <path d="M120 152 l18 7 v12 c0 13 -9 20 -18 25 c-9 -5 -18 -12 -18 -25 v-12 z" fill="#ffffff" opacity="0.95"/>
+                <path d="M112 173 l6 6 l11 -12" stroke="#2563eb" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="order-1 md:order-2 text-center md:text-left">
+          <span class="inline-block text-xs font-semibold tracking-wide uppercase text-blue-600 dark:text-blue-400 mb-3">Shaping What's Next</span>
+          <h2 class="text-3xl font-extrabold mb-4">Meet the agents behind the next move</h2>
+          <p class="text-slate-600 dark:text-slate-300 mb-6 max-w-lg mx-auto md:mx-0">
+            Autonomous, human-approved AI agents for RRBs, UCBs, NBFCs and Fintechs — across KYC, AML,
+            credit, collections, settlement and complaints. Each one turns a challenge into an action.
+          </p>
+          <a href="agentic-use-cases.html" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
+            Explore the Top 10 agentic use cases
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- Trust & Compliance section for the Features page -->
 <section id="trust-compliance" class="py-10 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
   <div class="max-w-6xl mx-auto px-6">
@@ -398,6 +482,7 @@ loading="lazy" decoding="async"       src="images/shield-agents.webp"
         <h4 class="text-m font-semibold text-white mb-4">Resources</h4>
         <ul class="space-y-2 text-m">
           <li><a href="knowledge-graph.html" class="hover:text-white">Knowledge Graph</a></li>
+          <li><a href="agentic-use-cases.html" class="hover:text-white">Agentic AI Use Cases</a></li>
           <li><a href="arthashield-graph-js/index.html" class="hover:text-white">Intelligence Modeler</a></li>
           <li><a href="how-case-intel-works.html" class="hover:text-white">Case Intelligence Architecture</a></li>
           <li><a href="api-platform.html" class="hover:text-white">API Documentation</a></li>

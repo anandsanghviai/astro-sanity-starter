@@ -29,6 +29,7 @@
     'Merchant':          { color: '#64748b', rank: 2 },
     'Counterparty':      { color: '#e11d48', rank: 2 },
     'Complaint':         { color: '#db2777', rank: 2 },
+    'Settlement':        { color: '#0d9488', rank: 3 },
     'Risk Signal':       { color: '#f59e0b', rank: 3 },
     'Regulation':        { color: '#8b5cf6', rank: 4 },
     'AI Recommendation': { color: '#10b981', rank: 5 },
@@ -431,6 +432,30 @@
         title: 'This risk maps to a specific regulatory obligation.',
         why: 'A risk signal is linked to a regulation, so the event may carry a reporting duty.',
         action: 'Check compliance status and reporting timelines.'
+      });
+
+      // Early-warning: a loan carries a risk signal (collections use case).
+      if (connected('Loan', 'Risk Signal')) out.push({
+        level: 'watch',
+        title: 'An early-warning signal is attached to a loan.',
+        why: 'A loan is linked to a risk signal, pointing to possible stress before it becomes a default.',
+        action: 'Sequence borrower outreach and review the account.'
+      });
+
+      // AML: a counterparty directly linked to a risk signal.
+      if (connected('Counterparty', 'Risk Signal')) out.push({
+        level: 'watch',
+        title: 'A counterparty is linked to a risk signal.',
+        why: 'Flows to this counterparty match a monitored pattern rather than ordinary activity.',
+        action: 'Prepare an STR / CTR draft for review.'
+      });
+
+      // Reconciliation: a settlement chain shows a break.
+      if (connected('Settlement', 'Risk Signal')) out.push({
+        level: 'watch',
+        title: 'A settlement chain shows a break.',
+        why: 'A settlement is tied to a risk signal — records across rails are not reconciling.',
+        action: 'Reconcile the settlement and resolve the break.'
       });
 
       nodesOf('Customer').forEach(function (c) {

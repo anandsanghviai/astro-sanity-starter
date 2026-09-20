@@ -84,7 +84,14 @@
       watch: { ring: 'ring-amber-200 dark:ring-amber-500/30', dot: '#f59e0b', tag: 'Watch' },
       info:  { ring: 'ring-blue-200 dark:ring-blue-500/30',   dot: '#2563eb', tag: 'Info' }
     };
-    var currentScenario = '';
+    var currentScenario = '', currentSegs = [];
+    var segColor = { rrb:'#0891b2', ucb:'#7c3aed', nbfc:'#e11d48', fintech:'#2563eb' };
+    var segLabel = { rrb:'RRB', ucb:'UCB', nbfc:'NBFC', fintech:'Fintech' };
+    function segChips(segs) {
+      return (segs || []).map(function (s) {
+        return '<span class="text-[9px] font-semibold px-1.5 py-0.5 rounded-full" style="background:' + segColor[s] + '1a;color:' + segColor[s] + '">' + segLabel[s] + '</span>';
+      }).join(' ');
+    }
 
     var modeler = new ArthaShieldGraph({ container: '#canvas', onChange: refresh });
 
@@ -105,7 +112,8 @@
       var a = document.createElement('button');
       a.className = 'block w-full text-left px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-700/60 border-b border-slate-100 dark:border-slate-700 last:border-0';
       a.innerHTML = '<div class="text-sm font-semibold">' + ex.name + '</div>' +
-                    '<div class="text-xs text-slate-500 dark:text-slate-400">' + ex.blurb + '</div>';
+                    '<div class="text-xs text-slate-500 dark:text-slate-400 mb-1.5">' + ex.blurb + '</div>' +
+                    '<div class="flex flex-wrap gap-1">' + segChips(ex.segs) + '</div>';
       a.onclick = function () { load(ex); exMenu.classList.add('hidden'); };
       exMenu.appendChild(a);
     });
@@ -128,12 +136,15 @@
 
     function load(ex) {
       currentScenario = ex.blurb;
+      currentSegs = ex.segs || [];
       modeler.loadGraph(JSON.parse(JSON.stringify(ex.graph)));
     }
 
     function refresh(graph) {
       var r = ArthaShieldIntelligence.analyze(graph), m = r.metrics;
-      document.getElementById('scenario').textContent = currentScenario;
+      document.getElementById('scenario').innerHTML =
+        (currentScenario ? '<div class="mb-1.5">' + currentScenario + '</div>' : '') +
+        '<div class="flex flex-wrap gap-1">' + segChips(currentSegs) + '</div>';
       document.getElementById('metrics').innerHTML =
         tile(m.entities, 'entities') + tile(m.relationships, 'links') + tile(m.connected, 'connected');
       var box = document.getElementById('insights');

@@ -1,9 +1,11 @@
 /* Curated financial scenarios for the ArthaShield Graph modeler.
-   Each is a small, legible graph that produces a distinct class of insight. */
+   Each mirrors one of the Top 10 Agentic AI use cases and is tagged with the
+   institution segments it fits: rrb | ucb | nbfc | fintech. */
 window.ARTHASHIELD_EXAMPLES = [
   {
     name: 'Transaction anomaly',
     blurb: 'A customer’s recent transactions break their historical pattern.',
+    segs: ['rrb','ucb','nbfc','fintech'],
     graph: {
       nodes: [
         { id: 'cust', type: 'Customer',         x: 380, y: 30 },
@@ -25,8 +27,52 @@ window.ARTHASHIELD_EXAMPLES = [
     }
   },
   {
+    name: 'KYC onboarding risk',
+    blurb: 'A new customer is linked to a high-risk counterparty at onboarding.',
+    segs: ['rrb','ucb','nbfc','fintech'],
+    graph: {
+      nodes: [
+        { id: 'cust', type: 'Customer',          x: 220, y: 30 },
+        { id: 'acct', type: 'Account',           x: 60,  y: 150 },
+        { id: 'cpty', type: 'Counterparty',      x: 400, y: 150 },
+        { id: 'risk', type: 'Risk Signal',       x: 400, y: 260 },
+        { id: 'reg',  type: 'Regulation',        x: 200, y: 370 },
+        { id: 'rec',  type: 'AI Recommendation', x: 420, y: 370 },
+        { id: 'flow', type: 'Workflow',          x: 420, y: 480 }
+      ],
+      edges: [
+        { from: 'cust', to: 'acct' }, { from: 'cust', to: 'cpty', dashed: true },
+        { from: 'cpty', to: 'risk' }, { from: 'risk', to: 'reg' },
+        { from: 'risk', to: 'rec' }, { from: 'rec', to: 'flow' }
+      ]
+    }
+  },
+  {
+    name: 'AML transaction monitoring',
+    blurb: 'Flows to a counterparty match a monitored laundering pattern.',
+    segs: ['ucb','nbfc','fintech'],
+    graph: {
+      nodes: [
+        { id: 'cust', type: 'Customer',          x: 300, y: 30 },
+        { id: 'acct', type: 'Account',           x: 300, y: 120 },
+        { id: 'txn',  type: 'Transaction',       x: 300, y: 210 },
+        { id: 'cpty', type: 'Counterparty',      x: 520, y: 210 },
+        { id: 'risk', type: 'Risk Signal',       x: 520, y: 310 },
+        { id: 'reg',  type: 'Regulation',        x: 300, y: 410 },
+        { id: 'rec',  type: 'AI Recommendation', x: 520, y: 410 },
+        { id: 'flow', type: 'Workflow',          x: 520, y: 510 }
+      ],
+      edges: [
+        { from: 'cust', to: 'acct' }, { from: 'acct', to: 'txn' },
+        { from: 'txn', to: 'cpty', dashed: true }, { from: 'cpty', to: 'risk' },
+        { from: 'risk', to: 'reg' }, { from: 'risk', to: 'rec' }, { from: 'rec', to: 'flow' }
+      ]
+    }
+  },
+  {
     name: 'Fraud ring',
     blurb: 'Several customers route money through one shared counterparty.',
+    segs: ['ucb','nbfc','fintech'],
     graph: {
       nodes: [
         { id: 'c1', type: 'Customer',    x: 100, y: 30 },  { id: 'a1', type: 'Account', x: 100, y: 130 }, { id: 't1', type: 'Transaction', x: 100, y: 230 },
@@ -48,28 +94,9 @@ window.ARTHASHIELD_EXAMPLES = [
     }
   },
   {
-    name: 'KYC onboarding risk',
-    blurb: 'A new customer is linked to a high-risk counterparty at onboarding.',
-    graph: {
-      nodes: [
-        { id: 'cust', type: 'Customer',          x: 220, y: 30 },
-        { id: 'acct', type: 'Account',           x: 60,  y: 150 },
-        { id: 'cpty', type: 'Counterparty',      x: 400, y: 150 },
-        { id: 'risk', type: 'Risk Signal',       x: 400, y: 260 },
-        { id: 'reg',  type: 'Regulation',        x: 200, y: 370 },
-        { id: 'rec',  type: 'AI Recommendation', x: 420, y: 370 },
-        { id: 'flow', type: 'Workflow',          x: 420, y: 480 }
-      ],
-      edges: [
-        { from: 'cust', to: 'acct' }, { from: 'cust', to: 'cpty', dashed: true },
-        { from: 'cpty', to: 'risk' }, { from: 'risk', to: 'reg' },
-        { from: 'risk', to: 'rec' }, { from: 'rec', to: 'flow' }
-      ]
-    }
-  },
-  {
     name: 'Credit exposure',
     blurb: 'One customer holds several products — exposure is concentrated.',
+    segs: ['rrb','ucb','nbfc'],
     graph: {
       nodes: [
         { id: 'cust',  type: 'Customer',          x: 320, y: 30 },
@@ -89,8 +116,69 @@ window.ARTHASHIELD_EXAMPLES = [
     }
   },
   {
+    name: 'Collections & early warning',
+    blurb: 'An active loan shows stress before it becomes a default.',
+    segs: ['rrb','ucb','nbfc'],
+    graph: {
+      nodes: [
+        { id: 'cust', type: 'Customer',          x: 300, y: 30 },
+        { id: 'acct', type: 'Account',           x: 140, y: 150 },
+        { id: 'loan', type: 'Loan',              x: 460, y: 150 },
+        { id: 'risk', type: 'Risk Signal',       x: 460, y: 260 },
+        { id: 'rec',  type: 'AI Recommendation', x: 460, y: 370 },
+        { id: 'flow', type: 'Workflow',          x: 460, y: 470 }
+      ],
+      edges: [
+        { from: 'cust', to: 'acct' }, { from: 'cust', to: 'loan' },
+        { from: 'loan', to: 'risk' }, { from: 'risk', to: 'rec' }, { from: 'rec', to: 'flow' }
+      ]
+    }
+  },
+  {
+    name: 'Loan origination',
+    blurb: 'An application moves from eligibility check to disbursement.',
+    segs: ['rrb','nbfc','fintech'],
+    graph: {
+      nodes: [
+        { id: 'cust', type: 'Customer',          x: 300, y: 30 },
+        { id: 'acct', type: 'Account',           x: 140, y: 150 },
+        { id: 'loan', type: 'Loan',              x: 300, y: 150 },
+        { id: 'reg',  type: 'Regulation',        x: 480, y: 150 },
+        { id: 'rec',  type: 'AI Recommendation', x: 300, y: 270 },
+        { id: 'flow', type: 'Workflow',          x: 300, y: 380 }
+      ],
+      edges: [
+        { from: 'cust', to: 'acct' }, { from: 'cust', to: 'loan' },
+        { from: 'loan', to: 'reg' }, { from: 'loan', to: 'rec' }, { from: 'rec', to: 'flow' }
+      ]
+    }
+  },
+  {
+    name: 'Settlement reconciliation',
+    blurb: 'A settlement chain breaks across rails and needs reconciliation.',
+    segs: ['ucb','nbfc','fintech'],
+    graph: {
+      nodes: [
+        { id: 'cust', type: 'Customer',          x: 300, y: 30 },
+        { id: 'acct', type: 'Account',           x: 300, y: 120 },
+        { id: 'txn',  type: 'Transaction',       x: 300, y: 210 },
+        { id: 'sett', type: 'Settlement',        x: 300, y: 300 },
+        { id: 'cpty', type: 'Counterparty',      x: 110, y: 300 },
+        { id: 'risk', type: 'Risk Signal',       x: 500, y: 300 },
+        { id: 'rec',  type: 'AI Recommendation', x: 500, y: 400 },
+        { id: 'flow', type: 'Workflow',          x: 500, y: 500 }
+      ],
+      edges: [
+        { from: 'cust', to: 'acct' }, { from: 'acct', to: 'txn' },
+        { from: 'txn', to: 'sett' }, { from: 'sett', to: 'cpty', dashed: true },
+        { from: 'sett', to: 'risk' }, { from: 'risk', to: 'rec' }, { from: 'rec', to: 'flow' }
+      ]
+    }
+  },
+  {
     name: 'Complaint root cause',
     blurb: 'Multiple complaints trace back to a single merchant.',
+    segs: ['rrb','ucb','nbfc','fintech'],
     graph: {
       nodes: [
         { id: 'merc', type: 'Merchant',   x: 380, y: 30 },
