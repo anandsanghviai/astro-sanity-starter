@@ -341,12 +341,19 @@ loading="lazy" decoding="async"         src="images/arthashield-dashboard.webp"
 <section id="contact" class="py-16">
   <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
     <h2 class="text-2xl font-bold mb-6">GET IN TOUCH</h2>
-    <form class="card bg-white dark:bg-slate-900 shadow ring-1 ring-slate-200 dark:ring-slate-800 p-6 space-y-4">
-      <input type="text" placeholder="Your Name" class="w-full rounded-lg border border-slate-300 dark:border-slate-700 p-3 bg-transparent" required>
-      <input type="email" placeholder="Your Email" class="w-full rounded-lg border border-slate-300 dark:border-slate-700 p-3 bg-transparent" required>
-      <textarea rows="4" placeholder="Your Message" class="w-full rounded-lg border border-slate-300 dark:border-slate-700 p-3 bg-transparent" required></textarea>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?submitted=true"
+          class="card bg-white dark:bg-slate-900 shadow ring-1 ring-slate-200 dark:ring-slate-800 p-6 space-y-4">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hidden"><label>Leave this empty: <input name="bot-field"></label></p>
+      <input type="text" name="name" placeholder="Your Name" class="w-full rounded-lg border border-slate-300 dark:border-slate-700 p-3 bg-transparent" required>
+      <input type="email" name="email" placeholder="Your Email" class="w-full rounded-lg border border-slate-300 dark:border-slate-700 p-3 bg-transparent" required>
+      <textarea name="message" rows="4" placeholder="Your Message" class="w-full rounded-lg border border-slate-300 dark:border-slate-700 p-3 bg-transparent" required></textarea>
       <button type="submit" class="rounded-xl bg-blue-600 text-white px-5 py-3 font-medium hover:opacity-90 transition">Send Message</button>
     </form>
+    <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">
+      Prefer email? Write to
+      <a href="mailto:anandsanghvi@arthashield.org" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">anandsanghvi@arthashield.org</a>.
+    </p>
   </div>
 </section>
 

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /profile.html
+
+Sitemap: https://arthashield.org/sitemap.xml
