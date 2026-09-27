@@ -4,497 +4,457 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Knowledge Graph — The Intelligence Layer | ArthaShield</title>
+  <meta name="description" content="The ArthaShield Knowledge Graph connects customers, transactions, products, risks, regulations and operations into one contextual intelligence layer for financial services."/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+  <!-- Runs before paint so a saved night-mode choice never flashes white -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.classList.toggle('dark', isDark);
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="css/arthashield.css?v=3"/>
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .glass {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .glass-dark {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-    }
     details > summary { list-style: none; }
     details > summary::-webkit-details-marker { display: none; }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 min-h-screen text-slate-900 dark:text-slate-100">
+<body class="min-h-screen">
 
-  <header class="sticky top-0 z-40 bg-white dark:bg-slate-900 md:bg-transparent">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
-        <a href="index.html" class="flex items-center gap-3 font-semibold">
-          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-11 w-auto"/>
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+        <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-9 w-9 rounded-xl bg-white object-contain"/>
           <span>ArthaShield</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
-          <a href="index.html" class="hover:text-slate-900 dark:hover:text-white">Home</a>
-          <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
-          <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
-          <a href="knowledge-graph.html" class="text-slate-900 dark:text-white font-medium">Knowledge Graph</a>
-          <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm muted">
+          <a href="index.html" class="hover:text-[color:var(--text)] transition">Home</a>
+          <a href="autopilot-assistant.html" class="hover:text-[color:var(--text)] transition">Solution</a>
+          <a href="arthashieldfeatures.html" class="hover:text-[color:var(--text)] transition">Features</a>
+          <a href="knowledge-graph.html" class="font-medium text-[color:var(--text)]" aria-current="page">Knowledge Graph</a>
+          <a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)] transition">Contact</a>
         </nav>
-        <button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-          </svg>
-        </button>
+
+        <div class="flex items-center gap-1">
+          <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+            <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+            </svg>
+          </button>
+          <a href="arthashield-graph-js/index.html" class="hidden md:inline-flex ml-1 rounded-full bg-[color:var(--text)] text-[color:var(--bg)] px-4 py-1.5 text-sm font-medium hover:opacity-85 transition">Live modeler</a>
+          <button id="menuButton" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
+
     <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
-      <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
-        <a href="index.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Home</a>
-        <a href="autopilot-assistant.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Solution</a>
-        <a href="arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
-        <a href="knowledge-graph.html" class="block text-blue-600 font-medium">Knowledge Graph</a>
-        <a href="arthashieldfeatures.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
+      <div class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]">
+        <a href="index.html" class="block">Home</a>
+        <a href="autopilot-assistant.html" class="block">Solution</a>
+        <a href="arthashieldfeatures.html" class="block">Features</a>
+        <a href="knowledge-graph.html" class="block font-semibold accent" aria-current="page">Knowledge Graph</a>
+        <a href="arthashieldfeatures.html#contact" class="block">Contact</a>
+        <a href="arthashield-graph-js/index.html" class="btn-primary w-full justify-center">Open the live modeler</a>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="py-16">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <span class="inline-block text-xs font-medium tracking-wide uppercase text-blue-600 dark:text-blue-400 mb-4">The Intelligence Layer for Financial Services</span>
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1] mb-6">
-          Connect the dots behind every
-          <span class="bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">financial decision.</span>
+  <main>
+
+    <section class="relative -mt-16 pt-36 pb-16 sm:pt-44 sm:pb-20 hero-glow overflow-hidden">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 text-center">
+        <p class="text-lg sm:text-xl font-semibold accent mb-5 tracking-tight">The Intelligence Layer for Financial Services</p>
+        <h1 class="headline text-4xl sm:text-6xl lg:text-7xl font-extrabold">
+          Connect the dots behind<br class="hidden sm:block"/> every <span class="text-gradient">financial decision.</span>
         </h1>
-        <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 max-w-xl">
-          ArthaShield builds a contextual intelligence layer across customers, transactions, products,
-          risks, regulations and operations — helping financial teams understand what is happening and
-          decide what to do next.
+        <p class="mt-7 text-lg sm:text-xl muted max-w-2xl mx-auto leading-relaxed">
+          ArthaShield builds a contextual intelligence layer across customers, transactions, products, risks, regulations and operations — helping financial teams understand what is happening and decide what to do next.
         </p>
-        <div class="flex flex-wrap items-center gap-3 text-sm">
-          <span class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700">Banks</span>
-          <span class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700">RRBs</span>
-          <span class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700">UCBs</span>
-          <span class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700">NBFCs</span>
-          <span class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700">Fintechs</span>
+        <div class="mt-8 flex flex-wrap justify-center gap-2 text-sm muted">
+          <span class="px-3 py-1 rounded-full border hairline">Banks</span>
+          <span class="px-3 py-1 rounded-full border hairline">RRBs</span>
+          <span class="px-3 py-1 rounded-full border hairline">UCBs</span>
+          <span class="px-3 py-1 rounded-full border hairline">NBFCs</span>
+          <span class="px-3 py-1 rounded-full border hairline">Fintechs</span>
         </div>
-        <div class="mt-8">
-          <a href="arthashield-graph-js/index.html" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+          <a href="arthashield-graph-js/index.html" class="btn-primary">
             Open the live modeler
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"/></svg>
           </a>
-          <p class="mt-2 text-xs text-slate-400 dark:text-slate-500">Build a graph, watch the intelligence appear — prototype.</p>
+          <a href="#pipeline" class="link-arrow">How the graph becomes decisions <span aria-hidden="true">›</span></a>
+        </div>
+        <p class="mt-3 text-xs muted">Build a graph, watch the intelligence appear — prototype.</p>
+      </div>
+    </section>
+
+    <section id="knowledge-graph" class="px-3 sm:px-6 pb-24 sm:pb-32 scroll-mt-20">
+      <div class="kg-stage relative mx-auto max-w-7xl rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden text-white">
+        <div class="kg-grid absolute inset-0 pointer-events-none"></div>
+
+        <div class="relative flex items-center justify-center gap-3 px-5 pt-10 sm:pt-14">
+          <span class="text-xs font-semibold uppercase tracking-wider text-white/60">ArthaShield Knowledge Graph</span>
+          <span class="rounded-full border border-white/15 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-sky-300">concept</span>
+        </div>
+
+        <div class="relative mx-auto max-w-5xl px-2 sm:px-8 mt-4 sm:mt-6">
+          <svg id="kgSvg" role="img" aria-label="ArthaShield knowledge graph linking customers, accounts, transactions, loans, merchants, counterparties, risk signals, regulations, AI recommendations and workflows"></svg>
+          <p id="kgCaption" class="mt-2 min-h-[3rem] text-center text-sm sm:text-base text-white/70" aria-live="polite">ArthaShield connects the dots that existing systems keep separate. Hover or tap a node.</p>
+        </div>
+
+        <div class="relative mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 px-5 pb-12 sm:pb-14 text-xs text-white/60">
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-sky-400"></span>People</span>
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-indigo-400"></span>Money</span>
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-rose-400"></span>Risk &amp; regulation</span>
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-400"></span>Action</span>
         </div>
       </div>
+    </section>
 
-      <!-- Knowledge Graph (deliberately small & elegant) -->
-      <div class="bg-white dark:bg-slate-800/60 rounded-3xl p-6 shadow-lg ring-1 ring-slate-200/60 dark:ring-slate-700/60">
-        <div class="flex items-center justify-between mb-2 px-2">
-          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">ArthaShield Knowledge Graph</span>
-          <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">concept</span>
+    <section class="pb-24 sm:pb-32">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <p class="text-sm font-semibold muted tracking-wide">CHALLENGE → INTELLIGENCE → ACTION</p>
+          <h2 class="headline mt-4 text-4xl sm:text-5xl font-extrabold">Three questions.<br class="hidden sm:block"/> One layer that answers them.</h2>
         </div>
-        <svg viewBox="0 0 640 620" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Knowledge graph connecting customer, account, transaction, risk signal, regulation, AI recommendation and workflow">
-          <defs>
-            <linearGradient id="kgGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#2563eb"/>
-              <stop offset="1" stop-color="#4f46e5"/>
-            </linearGradient>
-          </defs>
 
-          <!-- spine connectors -->
-          <g stroke="#94a3b8" stroke-width="2">
-            <line x1="300" y1="40"  x2="300" y2="128"/>
-            <line x1="300" y1="128" x2="300" y2="216"/>
-            <line x1="300" y1="216" x2="300" y2="304"/>
-            <line x1="300" y1="304" x2="300" y2="392"/>
-            <line x1="300" y1="392" x2="300" y2="480"/>
-            <line x1="300" y1="480" x2="300" y2="568"/>
-          </g>
-          <!-- cross connectors -->
-          <g stroke="#c7d2fe" stroke-width="2" stroke-dasharray="5 5">
-            <line x1="300" y1="40"  x2="498" y2="92"/>
-            <line x1="300" y1="216" x2="140" y2="180"/>
-            <line x1="300" y1="216" x2="498" y2="252"/>
-          </g>
-
-          <!-- spine nodes -->
-          <g font-family="Inter, sans-serif" font-size="15" font-weight="600" text-anchor="middle">
-            <g>
-              <rect x="220" y="18" width="160" height="44" rx="22" fill="url(#kgGrad)"/>
-              <text x="300" y="45" fill="#ffffff">Customer</text>
-            </g>
-            <g>
-              <rect x="220" y="106" width="160" height="44" rx="22" fill="url(#kgGrad)"/>
-              <text x="300" y="133" fill="#ffffff">Account</text>
-            </g>
-            <g>
-              <rect x="220" y="194" width="160" height="44" rx="22" fill="url(#kgGrad)"/>
-              <text x="300" y="221" fill="#ffffff">Transaction</text>
-            </g>
-            <g>
-              <rect x="220" y="282" width="160" height="44" rx="22" fill="url(#kgGrad)"/>
-              <text x="300" y="309" fill="#ffffff">Risk Signal</text>
-            </g>
-            <g>
-              <rect x="220" y="370" width="160" height="44" rx="22" fill="url(#kgGrad)"/>
-              <text x="300" y="397" fill="#ffffff">Regulation</text>
-            </g>
-            <g>
-              <rect x="210" y="458" width="180" height="44" rx="22" fill="url(#kgGrad)"/>
-              <text x="300" y="485" fill="#ffffff">AI Recommendation</text>
-            </g>
-            <g>
-              <rect x="220" y="546" width="160" height="44" rx="22" fill="url(#kgGrad)"/>
-              <text x="300" y="573" fill="#ffffff">Workflow</text>
-            </g>
-          </g>
-
-          <!-- cross-connection nodes -->
-          <g font-family="Inter, sans-serif" font-size="14" font-weight="600" text-anchor="middle">
-            <g>
-              <rect x="498" y="70" width="120" height="42" rx="21" fill="#eef2ff" stroke="#c7d2fe"/>
-              <text x="558" y="96" fill="#4338ca">Loan</text>
-            </g>
-            <g>
-              <rect x="22" y="159" width="130" height="42" rx="21" fill="#eef2ff" stroke="#c7d2fe"/>
-              <text x="87" y="185" fill="#4338ca">Merchant</text>
-            </g>
-            <g>
-              <rect x="486" y="231" width="144" height="42" rx="21" fill="#eef2ff" stroke="#c7d2fe"/>
-              <text x="558" y="257" fill="#4338ca">Counterparty</text>
-            </g>
-          </g>
-        </svg>
-        <p class="text-center text-sm text-slate-500 dark:text-slate-400 mt-2 px-4">
-          ArthaShield connects the dots that existing systems keep separate.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Three pillars -->
-  <section class="py-12">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-3">
-        <span class="text-sm font-semibold tracking-wide text-slate-500 dark:text-slate-400">CHALLENGE → INTELLIGENCE → ACTION</span>
-      </div>
-      <div class="grid gap-6 md:grid-cols-3">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 mb-3">01 — CHALLENGE</div>
-          <h3 class="text-xl font-bold mb-2">What needs attention?</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-300">Detect signals, anomalies, risks, opportunities and operational problems.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 mb-3">02 — INTELLIGENCE</div>
-          <h3 class="text-xl font-bold mb-2">What does it mean?</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-300">Connect context across data, relationships, regulations and financial events.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 mb-3">03 — ACTION</div>
-          <h3 class="text-xl font-bold mb-2">What should happen next?</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-300">Recommend or initiate the next best action through AI agents and workflows.</p>
+        <div class="mt-16 grid gap-px md:grid-cols-3 rounded-3xl overflow-hidden border hairline bg-[color:var(--line)] fade-up">
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold accent">01 — Challenge</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">What needs attention?</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Detect signals, anomalies, risks, opportunities and operational problems.</p>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold accent">02 — Intelligence</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">What does it mean?</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Connect context across data, relationships, regulations and financial events.</p>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold accent">03 — Action</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">What should happen next?</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Recommend or initiate the next best action through AI agents and workflows.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Intelligence areas -->
-  <section class="py-12">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-center gap-3 mb-3">
-        <h2 class="text-2xl font-extrabold text-center">What could ArthaShield understand?</h2>
-      </div>
-      <div class="flex justify-center mb-8">
-        <span class="text-xs font-medium px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">Intelligence areas — roadmap</span>
-      </div>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Customer</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">A unified view of who the customer is across products, channels and history.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Risk</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Early signals of exposure emerging from behaviour, context and relationships.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Fraud</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Patterns that connect accounts, devices and counterparties into suspected rings.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Credit</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Repayment context and financial behaviour that inform lending decisions.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Regulatory</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">How rules and circulars map to specific customers, products and events.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Payments</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Flows, failures and anomalies across payment rails and instruments.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Settlement</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Reconciliation and settlement chains, and where they break.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Complaints</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Recurring themes in grievances linked to products, teams and root causes.</p>
-        </details>
-        <details class="group bg-white dark:bg-slate-800 rounded-2xl p-5 shadow">
-          <summary class="flex items-center justify-between cursor-pointer">
-            <span class="font-semibold">Operations</span>
-            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Bottlenecks and exceptions across workflows and case handling.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- From Knowledge Graph to Intelligence -->
-  <section class="py-14 bg-white/50 dark:bg-slate-900/40">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-3">From Knowledge Graph to Intelligence</h2>
-      <p class="text-center text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto">How the graph becomes decisions — the path we build along.</p>
-      <div class="grid gap-4 md:grid-cols-5">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow text-center">
-          <div class="text-2xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">1</div>
-          <h3 class="font-bold mb-1">Connect</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Build relationships between entities.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow text-center">
-          <div class="text-2xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">2</div>
-          <h3 class="font-bold mb-1">Understand</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Identify meaningful patterns and context.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow text-center">
-          <div class="text-2xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">3</div>
-          <h3 class="font-bold mb-1">Explain</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Tell the user why something matters.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow text-center">
-          <div class="text-2xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">4</div>
-          <h3 class="font-bold mb-1">Recommend</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Suggest the next best action.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow text-center">
-          <div class="text-2xl font-extrabold bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">5</div>
-          <h3 class="font-bold mb-1">Act</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Trigger an agent/workflow with human approval.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Example insight -->
-  <section class="py-14">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-extrabold text-center mb-10">One insight, end to end</h2>
-      <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 sm:p-10 shadow-lg ring-1 ring-slate-200/60 dark:ring-slate-700/60">
-        <!-- mini graph -->
-        <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
-          <span class="px-4 py-2 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white text-sm font-medium">Customer</span>
-          <span class="text-slate-400">→</span>
-          <span class="px-4 py-2 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white text-sm font-medium">Transaction</span>
-          <span class="text-slate-400">→</span>
-          <span class="px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 ring-1 ring-indigo-200 dark:ring-indigo-500/30 text-sm font-medium">Merchant</span>
-          <span class="text-slate-400">→</span>
-          <span class="px-4 py-2 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-1 ring-amber-200 dark:ring-amber-500/30 text-sm font-medium">Risk Signal</span>
+    <section class="bg-alt py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">Intelligence areas — roadmap</span>
+          <h2 class="headline mt-5 text-4xl sm:text-5xl font-extrabold">What could ArthaShield understand?</h2>
         </div>
 
-        <div class="max-w-2xl mx-auto">
-          <div class="mb-6">
-            <div class="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-2">ArthaShield Insight</div>
-            <p class="text-lg font-medium leading-relaxed">“Recent transactions create a relationship pattern that differs from the customer's historical behaviour.”</p>
+        <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 fade-up">
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Customer</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">A unified view of who the customer is across products, channels and history.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Risk</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">Early signals of exposure emerging from behaviour, context and relationships.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Fraud</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">Patterns that connect accounts, devices and counterparties into suspected rings.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Credit</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">Repayment context and financial behaviour that inform lending decisions.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Regulatory</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">How rules and circulars map to specific customers, products and events.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Payments</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">Flows, failures and anomalies across payment rails and instruments.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Settlement</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">Reconciliation and settlement chains, and where they break.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Complaints</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">Recurring themes in grievances linked to products, teams and root causes.</p>
+          </details>
+          <details class="group surface rounded-2xl p-6">
+            <summary class="flex items-center justify-between cursor-pointer">
+              <span class="font-semibold">Operations</span>
+              <svg class="w-4 h-4 muted group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm muted">Bottlenecks and exceptions across workflows and case handling.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="pipeline" class="py-24 sm:py-32 scroll-mt-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">From knowledge graph<br class="hidden sm:block"/> to intelligence.</h2>
+          <p class="mt-5 text-lg muted">How the graph becomes decisions — the path we build along.</p>
+        </div>
+
+        <div class="relative mt-16 fade-up">
+        <div class="hidden md:block absolute left-[10%] right-[10%] top-6 h-px bg-gradient-to-r from-blue-500/0 via-indigo-500/60 to-violet-500/0" aria-hidden="true"></div>
+        <ol class="relative grid gap-10 md:grid-cols-5 md:gap-6">
+          <li class="relative text-center">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">1</span></div>
+            <h3 class="mt-5 font-bold text-lg tracking-tight">Connect</h3>
+            <p class="mt-1 text-sm muted">Build relationships between entities.</p>
+          </li>
+          <li class="relative text-center">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">2</span></div>
+            <h3 class="mt-5 font-bold text-lg tracking-tight">Understand</h3>
+            <p class="mt-1 text-sm muted">Identify meaningful patterns and context.</p>
+          </li>
+          <li class="relative text-center">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">3</span></div>
+            <h3 class="mt-5 font-bold text-lg tracking-tight">Explain</h3>
+            <p class="mt-1 text-sm muted">Tell the user why something matters.</p>
+          </li>
+          <li class="relative text-center">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">4</span></div>
+            <h3 class="mt-5 font-bold text-lg tracking-tight">Recommend</h3>
+            <p class="mt-1 text-sm muted">Suggest the next best action.</p>
+          </li>
+          <li class="relative text-center">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">5</span></div>
+            <h3 class="mt-5 font-bold text-lg tracking-tight">Act</h3>
+            <p class="mt-1 text-sm muted">Trigger an agent or workflow with human approval.</p>
+          </li>
+        </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-3 sm:px-6 pb-24 sm:pb-32">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center max-w-3xl mx-auto mb-12 fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">One insight, end to end.</h2>
+        </div>
+
+        <div class="kg-stage rounded-[2rem] p-8 sm:p-14 text-white fade-up">
+          <div class="flex flex-wrap items-center justify-center gap-3 text-sm font-medium">
+            <span class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2"><span class="h-2 w-2 rounded-full bg-sky-400"></span>Customer</span>
+            <span class="text-white/40" aria-hidden="true">→</span>
+            <span class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2"><span class="h-2 w-2 rounded-full bg-indigo-400"></span>Transaction</span>
+            <span class="text-white/40" aria-hidden="true">→</span>
+            <span class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2"><span class="h-2 w-2 rounded-full bg-sky-400"></span>Merchant</span>
+            <span class="text-white/40" aria-hidden="true">→</span>
+            <span class="flex items-center gap-2 rounded-full border border-rose-400/40 bg-rose-400/10 px-4 py-2 text-rose-200"><span class="h-2 w-2 rounded-full bg-rose-400"></span>Risk Signal</span>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-6 mb-8">
-            <div>
-              <div class="text-sm font-semibold mb-1">Why it matters</div>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Risk requiring review.</p>
+          <div class="mt-12 max-w-3xl mx-auto text-center">
+            <div class="text-xs font-semibold uppercase tracking-wider text-sky-300">ArthaShield Insight</div>
+            <p class="mt-4 text-2xl sm:text-3xl font-semibold tracking-tight leading-snug">“Recent transactions create a relationship pattern that differs from the customer's historical behaviour.”</p>
+          </div>
+
+          <div class="mt-12 grid sm:grid-cols-2 max-w-2xl mx-auto border-t border-white/10">
+            <div class="pt-6 sm:pr-6 text-center sm:text-left">
+              <div class="text-sm font-semibold">Why it matters</div>
+              <p class="mt-1 text-sm text-white/60">Risk requiring review.</p>
             </div>
-            <div>
-              <div class="text-sm font-semibold mb-1">Suggested next step</div>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Review transaction history.</p>
+            <div class="pt-6 sm:pl-6 sm:border-l border-white/10 text-center sm:text-left">
+              <div class="text-sm font-semibold">Suggested next step</div>
+              <p class="mt-1 text-sm text-white/60">Review transaction history.</p>
             </div>
           </div>
 
-          <a href="#" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">Investigate</a>
+          <div class="mt-10 text-center">
+            <a href="arthashield-graph-js/index.html" class="btn-primary">Investigate in the modeler</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-alt py-24 sm:py-32">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">Where this can go.</h2>
+          <p class="mt-5 text-lg muted">Today, financial teams work across CRM, core banking, payment systems, spreadsheets, regulatory documents and workflow tools. ArthaShield aims to become the intelligence layer connecting these systems.</p>
+        </div>
+
+        <div class="mt-14 fade-up">
+          <div class="surface rounded-3xl p-7 text-center">
+            <div class="text-xs font-semibold uppercase tracking-wider muted mb-4">Systems of Record</div>
+            <div class="flex flex-wrap justify-center gap-2 text-sm">
+              <span class="px-3 py-1.5 rounded-full border hairline">CRM</span>
+              <span class="px-3 py-1.5 rounded-full border hairline">Core Banking</span>
+              <span class="px-3 py-1.5 rounded-full border hairline">Payment Systems</span>
+              <span class="px-3 py-1.5 rounded-full border hairline">Data Platforms</span>
+            </div>
+          </div>
+
+          <div class="mx-auto h-10 w-px bg-gradient-to-b from-transparent via-indigo-500/60 to-indigo-500" aria-hidden="true"></div>
+
+          <div class="kg-stage rounded-3xl p-10 text-center text-white shadow-2xl shadow-indigo-500/20">
+            <div class="text-xs font-semibold uppercase tracking-wider text-white/60">The Intelligence Layer</div>
+            <div class="mt-2 text-3xl font-extrabold tracking-tight">ArthaShield</div>
+            <div class="mt-6 flex flex-wrap justify-center gap-2 text-sm">
+              <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15">Knowledge Graph</span>
+              <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15">Intelligence</span>
+              <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15">AI Agents</span>
+            </div>
+          </div>
+
+          <div class="mx-auto h-10 w-px bg-gradient-to-b from-indigo-500 via-indigo-500/60 to-transparent" aria-hidden="true"></div>
+
+          <div class="surface rounded-3xl p-7 text-center">
+            <div class="text-xs font-semibold uppercase tracking-wider muted mb-4">Systems of Action</div>
+            <div class="flex flex-wrap justify-center gap-2 text-sm">
+              <span class="px-3 py-1.5 rounded-full border hairline">Workflows</span>
+              <span class="px-3 py-1.5 rounded-full border hairline">Case Management</span>
+              <span class="px-3 py-1.5 rounded-full border hairline">Operations</span>
+              <span class="px-3 py-1.5 rounded-full border hairline">Human Teams</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 sm:py-32">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <div class="text-center fade-up">
+          <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">Illustrative direction</span>
+          <h2 class="headline mt-5 text-4xl sm:text-5xl font-extrabold">ArthaShield Intelligence Roadmap.</h2>
+        </div>
+
+        <ol class="relative mt-14 ml-4 border-l hairline fade-up">
+          <li class="relative pl-8 pb-10">
+            <span class="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 ring-4 ring-[color:var(--bg)]"></span>
+            <div class="text-sm font-semibold accent">Phase 1</div>
+            <div class="mt-1 text-xl font-bold tracking-tight">Regulatory + Customer Intelligence</div>
+          </li>
+          <li class="relative pl-8 pb-10">
+            <span class="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full surface ring-4 ring-[color:var(--bg)]"></span>
+            <div class="text-sm font-semibold muted">Phase 2</div>
+            <div class="mt-1 text-xl font-bold tracking-tight">Risk + Fraud Intelligence</div>
+          </li>
+          <li class="relative pl-8 pb-10">
+            <span class="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full surface ring-4 ring-[color:var(--bg)]"></span>
+            <div class="text-sm font-semibold muted">Phase 3</div>
+            <div class="mt-1 text-xl font-bold tracking-tight">Credit + Financial Decision Intelligence</div>
+          </li>
+          <li class="relative pl-8 pb-10">
+            <span class="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full surface ring-4 ring-[color:var(--bg)]"></span>
+            <div class="text-sm font-semibold muted">Phase 4</div>
+            <div class="mt-1 text-xl font-bold tracking-tight">Payments + Settlement Intelligence</div>
+          </li>
+          <li class="relative pl-8">
+            <span class="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full surface ring-4 ring-[color:var(--bg)]"></span>
+            <div class="text-sm font-semibold muted">Phase 5</div>
+            <div class="mt-1 text-xl font-bold tracking-tight">Agentic Financial Operations</div>
+          </li>
+        </ol>
+
+        <div class="mt-16 text-center">
+          <a href="arthashield-graph-js/index.html" class="btn-primary">Open the live modeler</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-alt border-t hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
+        <div>
+          <h4 class="font-semibold mb-4">Solutions</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">Complaint Intelligence</a></li>
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">AI Based KYC Risk Detection</a></li>
+            <li><a href="autopilot-assistant.html" class="hover:text-[color:var(--text)]">Regulatory Copilot</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">Dispute Resolution Engine</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Flagship Offering</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="CaseIntelligence.html" class="hover:text-[color:var(--text)]">AI based Case Intelligence</a></li>
+            <li><a href="responsible-design.html" class="hover:text-[color:var(--text)]">Responsible Design Loop™ ♾️</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Data Security</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="ai-security.html#llm-judge" class="hover:text-[color:var(--text)]">LLM-as-Judge</a></li>
+            <li><a href="ai-security.html#agentic-security" class="hover:text-[color:var(--text)]">Agentic Security</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">SOC 2</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">ISO 27001</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">NIST AI RMF</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="knowledge-graph.html" class="font-medium text-[color:var(--text)]" aria-current="page">Knowledge Graph</a></li>
+            <li><a href="arthashield-graph-js/index.html" class="hover:text-[color:var(--text)]">Intelligence Modeler</a></li>
+            <li><a href="agentic-use-cases.html" class="hover:text-[color:var(--text)]">Agentic AI Use Cases</a></li>
+            <li><a href="how-case-intel-works.html" class="hover:text-[color:var(--text)]">Case Intelligence Architecture</a></li>
+            <li><a href="api-platform.html" class="hover:text-[color:var(--text)]">API Documentation</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t hairline mt-14 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs muted">
+        <p>© 2025 ArthaShield. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-[color:var(--text)]">Privacy Policy</a>
+          <a href="#" class="hover:text-[color:var(--text)]">Terms of Service</a>
         </div>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <!-- Stakeholder vision panel: architecture -->
-  <section class="py-16 bg-white/50 dark:bg-slate-900/40">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-4">Where this can go</h2>
-      <p class="text-center text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-3">
-        Today, financial teams work across CRM, core banking, payment systems, spreadsheets,
-        regulatory documents and workflow tools.
-      </p>
-      <p class="text-center text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-12">
-        ArthaShield aims to become the intelligence layer connecting these systems.
-      </p>
-
-      <!-- Systems of Record -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
-        <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-3">Systems of Record</div>
-        <div class="flex flex-wrap justify-center gap-2 text-sm">
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">CRM</span>
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">Core Banking</span>
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">Payment Systems</span>
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">Data Platforms</span>
-        </div>
-      </div>
-
-      <div class="flex justify-center py-3">
-        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7M12 3v18"/></svg>
-      </div>
-
-      <!-- ArthaShield -->
-      <div class="rounded-2xl p-8 shadow-lg text-center bg-gradient-to-tr from-blue-600 to-indigo-600 text-white">
-        <div class="text-xs font-semibold uppercase tracking-wide text-white/80 mb-2">The Intelligence Layer</div>
-        <div class="text-2xl font-bold mb-4">ARTHASHIELD</div>
-        <div class="flex flex-wrap justify-center gap-2 text-sm">
-          <span class="px-3 py-1.5 rounded-full bg-white/15 ring-1 ring-white/25">Knowledge Graph</span>
-          <span class="px-3 py-1.5 rounded-full bg-white/15 ring-1 ring-white/25">Intelligence</span>
-          <span class="px-3 py-1.5 rounded-full bg-white/15 ring-1 ring-white/25">AI Agents</span>
-        </div>
-      </div>
-
-      <div class="flex justify-center py-3">
-        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7M12 3v18"/></svg>
-      </div>
-
-      <!-- Systems of Action -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
-        <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-3">Systems of Action</div>
-        <div class="flex flex-wrap justify-center gap-2 text-sm">
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">Workflows</span>
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">Case Management</span>
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">Operations</span>
-          <span class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700">Human Teams</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Roadmap -->
-  <section class="py-16">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-3">ArthaShield	 Intelligence Roadmap</h2>
-      <div class="flex justify-center mb-10">
-        <span class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400">Illustrative direction</span>
-      </div>
-      <div class="space-y-4">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow flex items-center gap-5">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 w-20 flex-shrink-0">Phase 1</div>
-          <div class="font-semibold">Regulatory + Customer Intelligence</div>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow flex items-center gap-5">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 w-20 flex-shrink-0">Phase 2</div>
-          <div class="font-semibold">Risk + Fraud Intelligence</div>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow flex items-center gap-5">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 w-20 flex-shrink-0">Phase 3</div>
-          <div class="font-semibold">Credit + Financial Decision Intelligence</div>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow flex items-center gap-5">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 w-20 flex-shrink-0">Phase 4</div>
-          <div class="font-semibold">Payments + Settlement Intelligence</div>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow flex items-center gap-5">
-          <div class="text-sm font-bold text-blue-600 dark:text-blue-400 w-20 flex-shrink-0">Phase 5</div>
-          <div class="font-semibold">Agentic Financial Operations</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  
-
-  <script>
-    const menuButton = document.getElementById("menuButton");
-    const mobileMenu = document.getElementById("mobileMenu");
-    menuButton.addEventListener("click", () => {
-      mobileMenu.classList.toggle("max-h-0");
-      mobileMenu.classList.toggle("max-h-screen");
-    });
-  </script>
-
-<footer class="bg-slate-900 text-slate-300">
-  <div class="max-w-7xl mx-auto px-6 py-16">
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10">
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Solutions</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="pdi-maintenance.html" class="hover:text-white">Complaint Intelligence</a></li>
-          <li><a href="pdi-maintenance.html" class="hover:text-white">AI Based KYC Risk Detection</a></li>
-          <li><a href="autopilot-assistant.html" class="hover:text-white">Regulatory Copilot</a></li>
-          <li><a href="#" class="hover:text-white">Dispute Resolution Engine</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Flagship Offering</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="CaseIntelligence.html" class="hover:text-white">AI based Case Intelligence</a></li>
-          <li><a href="responsible-design.html" class="hover:text-white">Responsible Design Loop™ ♾️</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Data Security</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="ai-security.html#llm-judge" class="hover:text-white">LLM-as-Judge</a></li>
-          <li><a href="ai-security.html#agentic-security" class="hover:text-white">Agentic Security</a></li>
-          <li><a href="#" class="hover:text-white">SOC 2</a></li>
-          <li><a href="#" class="hover:text-white">ISO 27001</a></li>
-          <li><a href="#" class="hover:text-white">NIST AI RMF</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Resources</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="knowledge-graph.html" class="hover:text-white">Knowledge Graph</a></li>
-          <li><a href="agentic-use-cases.html" class="hover:text-white">Agentic AI Use Cases</a></li>
-          <li><a href="arthashield-graph-js/index.html" class="hover:text-white">Intelligence Modeler</a></li>
-          <li><a href="how-case-intel-works.html" class="hover:text-white">Case Intelligence Architecture</a></li>
-          <li><a href="api-platform.html" class="hover:text-white">API Documentation</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="border-t border-slate-800 mt-14 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-      <p>© 2025 ArthaShield. All rights reserved.</p>
-      <div class="flex space-x-6 mt-4 md:mt-0">
-        <a href="#" class="hover:text-white">Privacy Policy</a>
-        <a href="#" class="hover:text-white">Terms of Service</a>
-      </div>
-    </div>
-  </div>
-</footer>
+<script src="js/site.js" defer></script>
+<script src="js/knowledge-graph.js" defer></script>
 </body>
 </html>

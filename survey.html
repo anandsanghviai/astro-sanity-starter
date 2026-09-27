@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Practitioner research | ArthaShield</title>
+  <meta name="description" content="A 2-minute, anonymous research survey for people who handle complaints, cases, compliance or risk at banks, RRBs, UCBs, NBFCs and fintechs. Skip anything. No sales pitch."/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+  <!-- Runs before paint so a saved night-mode choice never flashes white -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.classList.toggle('dark', isDark);
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="css/arthashield.css?v=3"/>
+  <style>
+    html, body { height: 100%; }
+    body { overflow: hidden; }
+
+    /* The carousel is native horizontal scroll-snap, so swiping works even before JavaScript loads */
+    .track {
+      display: flex; height: 100%;
+      overflow-x: auto; overflow-y: hidden;
+      scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+      scrollbar-width: none;
+    }
+    .track::-webkit-scrollbar { display: none; }
+    .slide {
+      flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always;
+      overflow-y: auto; display: flex;
+      padding: 5.25rem 1.25rem 5rem;
+    }
+    .slide[hidden] { display: none; }
+    .slide > .inner { margin: auto; width: 100%; max-width: 40rem; min-width: 0; border: 0; padding: 0; }
+    .slide > .inner > * { transition: opacity .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1); }
+    .js .slide:not(.is-current) > .inner > * { opacity: .25; transform: scale(.97); }
+
+    .nav-bar { display: none; }
+    .js .nav-bar { display: flex; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide > .inner > * { transition: none; }
+      .js .slide:not(.is-current) > .inner > * { opacity: 1; transform: none; }
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8L28KXK8PM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8L28KXK8PM');
+</script>
+</head>
+
+<body class="hero-glow">
+
+  <header class="fixed inset-x-0 top-0 z-40">
+    <div class="progress-fill" id="progressFill" aria-hidden="true"></div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+        <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-9 w-9 rounded-xl bg-white object-contain"/>
+          <span>ArthaShield</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm muted" aria-label="Site">
+          <a href="index.html" class="hover:text-[color:var(--text)] transition">Home</a>
+          <a href="arthashieldfeatures.html" class="hover:text-[color:var(--text)] transition">Features</a>
+          <a href="knowledge-graph.html" class="hover:text-[color:var(--text)] transition">Knowledge Graph</a>
+          <a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)] transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-1">
+          <span id="progressLabel" class="mr-1 text-xs muted tabular-nums" aria-live="polite"></span>
+          <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+            <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+            </svg>
+          </button>
+          <button id="menuButton" type="button" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+      <div class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]">
+        <a href="index.html" class="block">Home</a>
+        <a href="arthashieldfeatures.html" class="block">Features</a>
+        <a href="knowledge-graph.html" class="block">Knowledge Graph</a>
+        <a href="arthashieldfeatures.html#contact" class="block">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="thanks" class="hidden h-full flex items-center justify-center px-6 text-center">
+    <div>
+      <h2 class="headline text-4xl sm:text-6xl lg:text-7xl font-extrabold">Thank <span class="text-gradient">you.</span></h2>
+      <p class="mt-6 text-lg muted max-w-md mx-auto">That's genuinely useful. If you left an email, we'll only use it for what you ticked.</p>
+    </div>
+  </section>
+
+  <form id="surveyForm" name="arthashield-survey" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/survey.html?submitted=true" class="h-full" novalidate>
+    <input type="hidden" name="form-name" value="arthashield-survey">
+    <p class="hidden"><label>Leave this empty: <input name="bot-field"></label></p>
+
+    <div id="track" class="track" aria-roledescription="carousel" aria-label="Survey questions">
+
+      <section class="slide" data-slide data-intro aria-roledescription="slide">
+        <div class="inner text-center">
+          <p class="text-lg sm:text-xl font-semibold accent tracking-tight">Research, not sales</p>
+          <h1 class="headline mt-5 text-4xl sm:text-6xl lg:text-7xl font-extrabold">Two minutes.<br/> <span class="text-gradient">No pitch.</span></h1>
+          <p class="mt-6 text-lg muted max-w-md mx-auto leading-relaxed">How does your team handle complaints and cases today? Answer what you like, skip the rest.</p>
+          <button type="button" class="btn-primary mt-9 mx-auto w-fit" data-next>Begin →</button>
+          <p class="mt-4 text-xs muted">Anonymous · every question optional · swipe or use ← →</p>
+          <details class="mt-7 text-sm muted max-w-md mx-auto">
+            <summary class="cursor-pointer">How we use your answers</summary>
+            <p class="mt-3 text-left leading-relaxed">Only to understand how this work is done today, and to shape what we build and how we price it. Anonymous unless you leave an email at the end — then it's used only for what you tick (a summary of the findings, or arranging a conversation), never for marketing. Please don't include customer names or account details. To delete your details, email <a href="mailto:anandsanghvi@arthashield.org" class="link-arrow">anandsanghvi@arthashield.org</a>.</p>
+          </details>
+        </div>
+      </section>
+
+      <div class="slide" data-slide data-auto aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">What's your role?</legend>
+          <div class="mt-5 grid gap-2">
+            <label class="choice"><input type="radio" name="role" value="CISO / IT head"><span class="key">1</span>CISO / Head of IT</label>
+            <label class="choice"><input type="radio" name="role" value="Compliance / grievance officer"><span class="key">2</span>Compliance or grievance officer</label>
+            <label class="choice"><input type="radio" name="role" value="Operations / customer service head"><span class="key">3</span>Operations / customer service</label>
+            <label class="choice"><input type="radio" name="role" value="Risk / fraud"><span class="key">4</span>Risk / fraud</label>
+            <label class="choice"><input type="radio" name="role" value="CXO / board"><span class="key">5</span>CEO, MD, CXO or board</label>
+            <label class="choice"><input type="radio" name="role" value="Other"><span class="key">6</span>Something else</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="slide" data-slide data-auto aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">Where do you work?</legend>
+          <div class="mt-5 grid grid-cols-2 gap-2">
+            <label class="choice"><input type="radio" name="institution_type" value="RRB"><span class="key">1</span>Regional Rural Bank</label>
+            <label class="choice"><input type="radio" name="institution_type" value="UCB / cooperative bank"><span class="key">2</span>UCB / co-op bank</label>
+            <label class="choice"><input type="radio" name="institution_type" value="NBFC"><span class="key">3</span>NBFC</label>
+            <label class="choice"><input type="radio" name="institution_type" value="Public / private sector bank"><span class="key">4</span>Public or private bank</label>
+            <label class="choice"><input type="radio" name="institution_type" value="Fintech"><span class="key">5</span>Fintech</label>
+            <label class="choice"><input type="radio" name="institution_type" value="Other"><span class="key">6</span>Other</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="slide" data-slide data-auto aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">How many complaints arrive in a month?</legend>
+          <div class="mt-5 grid grid-cols-2 gap-2">
+            <label class="choice"><input type="radio" name="monthly_volume" value="Under 100"><span class="key">1</span>Under 100</label>
+            <label class="choice"><input type="radio" name="monthly_volume" value="100 to 1,000"><span class="key">2</span>100 – 1,000</label>
+            <label class="choice"><input type="radio" name="monthly_volume" value="1,000 to 10,000"><span class="key">3</span>1,000 – 10,000</label>
+            <label class="choice"><input type="radio" name="monthly_volume" value="Over 10,000"><span class="key">4</span>Over 10,000</label>
+            <label class="choice col-span-2"><input type="radio" name="monthly_volume" value="Don't know"><span class="key">5</span>I don't know</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="slide" data-slide data-auto aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">When did a complaint last turn into a bigger problem?</legend>
+          <p class="mt-3 muted">An escalation, ombudsman reference, audit observation, or fraud found late.</p>
+          <div class="mt-5 grid grid-cols-2 gap-2">
+            <label class="choice"><input type="radio" name="last_incident_when" value="This week"><span class="key">1</span>This week</label>
+            <label class="choice"><input type="radio" name="last_incident_when" value="This month"><span class="key">2</span>This month</label>
+            <label class="choice"><input type="radio" name="last_incident_when" value="This quarter"><span class="key">3</span>Last 3 months</label>
+            <label class="choice"><input type="radio" name="last_incident_when" value="This year"><span class="key">4</span>Last year</label>
+            <label class="choice col-span-2"><input type="radio" name="last_incident_when" value="Can't remember one"><span class="key">5</span>I can't remember one</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <section class="slide" data-slide data-show-if="last_incident_when=This week|This month|This quarter|This year" aria-roledescription="slide">
+        <div class="inner">
+          <label for="last_incident" class="question block">What happened?</label>
+          <p class="mt-3 muted">A few lines. Who got pulled in, how long it took, what it cost. No names.</p>
+          <textarea id="last_incident" name="last_incident" rows="4" class="field mt-5 text-base"></textarea>
+        </div>
+      </section>
+
+      <div class="slide" data-slide aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">Past 12 months — did any of these happen?</legend>
+          <div class="mt-5 grid gap-2">
+            <label class="choice"><input type="checkbox" name="events_12m[]" value="Ombudsman escalation"><span class="key">1</span>A complaint reached the ombudsman</label>
+            <label class="choice"><input type="checkbox" name="events_12m[]" value="Inspection or audit observation"><span class="key">2</span>An audit or inspection observation</label>
+            <label class="choice"><input type="checkbox" name="events_12m[]" value="Penalty or compensation"><span class="key">3</span>A penalty or compensation payout</label>
+            <label class="choice"><input type="checkbox" name="events_12m[]" value="Fraud spotted late in complaints"><span class="key">4</span>A fraud complaints hinted at, caught late</label>
+            <label class="choice"><input type="checkbox" name="events_12m[]" value="None" data-exclusive><span class="key">5</span>None of these</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="slide" data-slide aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">What do you handle complaints with today?</legend>
+          <div class="mt-5 grid grid-cols-2 gap-2">
+            <label class="choice"><input type="checkbox" name="current_tools[]" value="Email and spreadsheets"><span class="key">1</span>Email and spreadsheets</label>
+            <label class="choice"><input type="checkbox" name="current_tools[]" value="Core banking module"><span class="key">2</span>Core banking module</label>
+            <label class="choice"><input type="checkbox" name="current_tools[]" value="CRM"><span class="key">3</span>A CRM</label>
+            <label class="choice"><input type="checkbox" name="current_tools[]" value="In-house tool"><span class="key">4</span>In-house tool</label>
+            <label class="choice"><input type="checkbox" name="current_tools[]" value="Vendor complaint software"><span class="key">5</span>Vendor software</label>
+            <label class="choice"><input type="checkbox" name="current_tools[]" value="Sponsor bank system"><span class="key">6</span>Sponsor bank's system</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="slide" data-slide data-auto aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">Looked at software for this in the last two years?</legend>
+          <div class="mt-5 grid gap-2">
+            <label class="choice"><input type="radio" name="evaluated_tool" value="Bought one"><span class="key">1</span>Yes, and we bought one</label>
+            <label class="choice"><input type="radio" name="evaluated_tool" value="Evaluated, did not buy"><span class="key">2</span>Yes, but we didn't buy</label>
+            <label class="choice"><input type="radio" name="evaluated_tool" value="Looked, no budget"><span class="key">3</span>We looked — no budget</label>
+            <label class="choice"><input type="radio" name="evaluated_tool" value="No"><span class="key">4</span>No</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <section class="slide" data-slide data-show-if="evaluated_tool=Evaluated, did not buy|Looked, no budget" aria-roledescription="slide">
+        <div class="inner">
+          <label for="not_bought_reason" class="question block">What stopped it?</label>
+          <p class="mt-3 muted">Price, security review, integration, no owner, timing…</p>
+          <textarea id="not_bought_reason" name="not_bought_reason" rows="3" class="field mt-5 text-base"></textarea>
+        </div>
+      </section>
+
+      <div class="slide" data-slide data-auto aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">What's spent a year on complaint or compliance software today?</legend>
+          <div class="mt-5 grid grid-cols-2 gap-2">
+            <label class="choice"><input type="radio" name="current_spend" value="Nothing"><span class="key">1</span>Nothing</label>
+            <label class="choice"><input type="radio" name="current_spend" value="Under Rs 5 lakh"><span class="key">2</span>Under ₹5 lakh</label>
+            <label class="choice"><input type="radio" name="current_spend" value="Rs 5 to 25 lakh"><span class="key">3</span>₹5 – 25 lakh</label>
+            <label class="choice"><input type="radio" name="current_spend" value="Rs 25 lakh to 1 crore"><span class="key">4</span>₹25 lakh – 1 crore</label>
+            <label class="choice"><input type="radio" name="current_spend" value="Over Rs 1 crore"><span class="key">5</span>Over ₹1 crore</label>
+            <label class="choice"><input type="radio" name="current_spend" value="Don't know / prefer not to say"><span class="key">6</span>Rather not say</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="slide" data-slide data-auto aria-roledescription="slide">
+        <fieldset class="inner">
+          <legend class="question">Which costs you the most today?</legend>
+          <div class="mt-5 grid gap-2">
+            <label class="choice"><input type="radio" name="biggest_cost" value="Regulatory or inspection exposure"><span class="key">1</span>Regulatory or inspection exposure</label>
+            <label class="choice"><input type="radio" name="biggest_cost" value="Fraud signals missed"><span class="key">2</span>Fraud signals caught late</label>
+            <label class="choice"><input type="radio" name="biggest_cost" value="Team time on manual work"><span class="key">3</span>Team time on manual work</label>
+            <label class="choice"><input type="radio" name="biggest_cost" value="Customers lost or reputation"><span class="key">4</span>Customers or reputation</label>
+            <label class="choice"><input type="radio" name="biggest_cost" value="None is significant"><span class="key">5</span>Honestly, none of these</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <section class="slide" data-slide data-contact aria-roledescription="slide">
+        <div class="inner">
+          <h2 class="question">Want to hear what we learn?</h2>
+          <p class="mt-3 muted">Optional. Leave an email and choose what it's for — or just press Send.</p>
+          <label class="relative block mt-5"><span class="sr-only">Email (optional)</span>
+            <input type="email" name="email" id="emailField" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"
+                   placeholder="you@yourbank.in (optional)" class="field pr-10" aria-describedby="emailHint">
+            <span id="emailOk" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-emerald-500" aria-hidden="true">✓</span>
+          </label>
+          <p id="emailHint" class="mt-2 min-h-[1.25rem] text-sm muted" aria-live="polite"></p>
+          <div id="emailPurposes" class="mt-2 grid gap-2">
+            <label class="choice text-sm"><input type="checkbox" name="wants_summary" value="Yes"><span class="key tick">✓</span>Email me a short summary of the findings</label>
+            <label class="choice text-sm"><input type="checkbox" name="conversation" value="Yes"><span class="key tick">✓</span>I'm open to a 20-minute conversation — not a demo</label>
+          </div>
+          <p class="mt-3 text-xs muted">Your email is used only for what you tick. Never for marketing. No email, no problem — your answers stay anonymous.</p>
+          <p class="contact-error hidden mt-3 text-sm text-rose-600 dark:text-rose-400" role="alert"></p>
+          <button type="submit" class="btn-primary w-full justify-center mt-6 no-js-submit">Send my answers</button>
+        </div>
+      </section>
+    </div>
+  </form>
+
+  <nav class="nav-bar fixed inset-x-0 bottom-0 z-40 items-center justify-between gap-3 px-5 sm:px-6 pb-5 pt-3 mx-auto max-w-2xl" aria-label="Survey navigation">
+    <button type="button" id="backButton" class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border hairline hover:bg-black/5 dark:hover:bg-white/10 transition" aria-label="Previous question">‹</button>
+    <div id="dots" class="flex items-center gap-1.5 overflow-hidden"></div>
+    <div class="flex flex-shrink-0 items-center gap-2">
+      <button type="button" id="skipButton" class="rounded-full px-3 py-2 text-sm font-medium muted hover:text-[color:var(--text)] transition">Skip</button>
+      <button type="button" id="nextButton" class="btn-primary !py-2.5 !px-6">Next</button>
+    </div>
+  </nav>
+
+<script src="js/site.js" defer></script>
+<script>
+  const surveyForm = document.getElementById('surveyForm');
+  const track = document.getElementById('track');
+  const slides = [...track.querySelectorAll('[data-slide]')];
+  const navBar = document.querySelector('.nav-bar');
+  const dots = document.getElementById('dots');
+  const backButton = document.getElementById('backButton');
+  const skipButton = document.getElementById('skipButton');
+  const nextButton = document.getElementById('nextButton');
+  const contactSlide = track.querySelector('[data-contact]');
+  const contactError = contactSlide.querySelector('.contact-error');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = slides[0];
+
+  // The in-slide submit button is only for visitors without JavaScript; with JS the Next button becomes Send
+  contactSlide.querySelector('.no-js-submit').remove();
+
+  if (new URLSearchParams(location.search).get('submitted') === 'true') {
+    surveyForm.classList.add('hidden');
+    navBar.classList.add('!hidden');
+    document.getElementById('thanks').classList.remove('hidden');
+  }
+
+  const selectedValues = name => [...surveyForm.querySelectorAll(`[name="${name}"]:checked`)].map(input => input.value);
+
+  // data-show-if="field=Value A|Value B": the slide only applies when one of those values is chosen
+  function isApplicable(slide) {
+    const condition = slide.dataset.showIf;
+    if (!condition) return true;
+    const [name, values] = condition.split('=');
+    const chosen = selectedValues(name);
+    return values.split('|').some(value => chosen.includes(value));
+  }
+
+  function isAnswered(slide) {
+    return [...slide.querySelectorAll('input, textarea')].some(field =>
+      (field.type === 'radio' || field.type === 'checkbox') ? field.checked : field.value.trim() !== '');
+  }
+
+  // Slides that no longer apply leave the carousel and their fields are disabled, so stale answers aren't sent
+  function syncApplicability() {
+    slides.forEach(slide => {
+      const applies = isApplicable(slide);
+      slide.hidden = !applies;
+      slide.querySelectorAll('input, textarea').forEach(field => { field.disabled = !applies; });
+    });
+    refreshEmail();
+    if (!current.hidden) track.scrollTo({ left: current.offsetLeft, behavior: 'instant' });
+  }
+
+  const visibleSlides = () => slides.filter(slide => !slide.hidden);
+  const anyAnswered = () => visibleSlides().some(isAnswered);
+  const questionSlides = () => visibleSlides().filter(slide => !slide.hasAttribute('data-intro'));
+  const isLast = slide => { const list = visibleSlides(); return list[list.length - 1] === slide; };
+
+  function refreshChrome() {
+    const questions = questionSlides();
+    const position = questions.indexOf(current) + 1;
+    const isIntro = current.hasAttribute('data-intro');
+    document.getElementById('progressLabel').textContent = isIntro ? '' : `${position} of ${questions.length}`;
+    document.getElementById('progressFill').style.width = isIntro ? '0%' : `${Math.round((position / questions.length) * 100)}%`;
+    navBar.style.visibility = isIntro ? 'hidden' : 'visible';
+    backButton.style.visibility = position <= 1 ? 'hidden' : 'visible';
+    // Children with their own visibility override the hidden bar, so the intro must hide Skip explicitly
+    skipButton.style.visibility = isIntro || isAnswered(current) || isLast(current) ? 'hidden' : 'visible';
+    nextButton.textContent = isLast(current) ? (anyAnswered() ? 'Send' : 'Finish') : 'Next';
+
+    dots.replaceChildren(...questions.map((slide, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'dot' + (slide === current ? ' is-current' : '') + (isAnswered(slide) ? ' is-answered' : '');
+      dot.setAttribute('aria-label', `Go to question ${index + 1}`);
+      dot.addEventListener('click', () => goTo(slide));
+      return dot;
+    }));
+  }
+
+  function setCurrent(slide) {
+    if (slide === current) return;
+    current.classList.remove('is-current');
+    current = slide;
+    current.classList.add('is-current');
+    contactError.classList.add('hidden');
+    refreshChrome();
+  }
+
+  function goTo(slide) {
+    setCurrent(slide);
+    track.scrollTo({ left: slide.offsetLeft, behavior: reducedMotion ? 'instant' : 'smooth' });
+    const textField = slide.querySelector('textarea, input[type=text]');
+    if (textField && matchMedia('(hover: hover)').matches) setTimeout(() => textField.focus({ preventScroll: true }), 350);
+  }
+
+  function next() {
+    if (isLast(current)) { surveyForm.requestSubmit(); return; }
+    const list = visibleSlides();
+    goTo(list[list.indexOf(current) + 1]);
+  }
+
+  function back() {
+    const list = visibleSlides();
+    const previous = list[list.indexOf(current) - 1];
+    if (previous) goTo(previous);
+  }
+
+  // Swiping moves the carousel natively; this keeps "current" in step with whichever slide is on screen
+  const onScreen = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) setCurrent(entry.target); });
+  }, { root: track, threshold: 0.6 });
+  slides.forEach(slide => onScreen.observe(slide));
+
+  track.querySelector('[data-intro] [data-next]').addEventListener('click', next);
+  nextButton.addEventListener('click', next);
+  skipButton.addEventListener('click', next);
+  backButton.addEventListener('click', back);
+
+  surveyForm.addEventListener('change', (event) => {
+    const input = event.target;
+    // "None of these" can't be combined with other choices
+    if (input.type === 'checkbox' && input.checked) {
+      const group = surveyForm.querySelectorAll(`[name="${input.name}"]`);
+      if (input.hasAttribute('data-exclusive')) group.forEach(other => { if (other !== input) other.checked = false; });
+      else group.forEach(other => { if (other.hasAttribute('data-exclusive')) other.checked = false; });
+    }
+    syncApplicability();
+    refreshChrome();
+    if (input.type === 'radio' && current.hasAttribute('data-auto') && !isLast(current)) setTimeout(next, 320);
+  });
+  surveyForm.addEventListener('input', refreshChrome);
+
+  document.addEventListener('keydown', (event) => {
+    if (surveyForm.classList.contains('hidden')) return;
+    const target = event.target instanceof Element ? event.target : document.body;
+    const typing = target.matches('textarea, input[type=text], input[type=email]');
+    if (event.key === 'Enter') {
+      if (target.tagName === 'TEXTAREA' && !(event.ctrlKey || event.metaKey)) return;
+      if (target.matches('button, summary, a')) return;
+      event.preventDefault();
+      next();
+      return;
+    }
+    if (typing || event.ctrlKey || event.metaKey || event.altKey) return;
+    if (event.key === 'ArrowRight') { event.preventDefault(); next(); return; }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); back(); return; }
+    const options = [...current.querySelectorAll('input[type=radio], input[type=checkbox]')]
+      .filter(option => !option.disabled && !option.closest('.hidden'));
+    const option = options[Number(event.key) - 1];
+    if (option) {
+      option.checked = option.type === 'radio' ? true : !option.checked;
+      option.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  });
+
+  // Email is optional. When given, it is checked as you type, common domain typos get a one-tap fix,
+  // and the purpose choices appear — ticking one is the consent for that use.
+  const emailField = document.getElementById('emailField');
+  const emailHint = document.getElementById('emailHint');
+  const emailOk = document.getElementById('emailOk');
+  const emailPurposes = document.getElementById('emailPurposes');
+  const purposeBoxes = [...emailPurposes.querySelectorAll('input')];
+  const EMAIL_SHAPE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const COMMON_DOMAINS = ['gmail.com', 'yahoo.com', 'yahoo.co.in', 'outlook.com', 'hotmail.com', 'rediffmail.com', 'icloud.com'];
+
+  function editDistance(a, b) {
+    const row = Array.from({ length: b.length + 1 }, (_, i) => i);
+    for (let i = 1; i <= a.length; i++) {
+      let diagonal = row[0];
+      row[0] = i;
+      for (let j = 1; j <= b.length; j++) {
+        const above = row[j];
+        row[j] = Math.min(row[j] + 1, row[j - 1] + 1, diagonal + (a[i - 1] === b[j - 1] ? 0 : 1));
+        diagonal = above;
+      }
+    }
+    return row[b.length];
+  }
+
+  function suggestedEmail(value) {
+    const [user, domain] = value.toLowerCase().split('@');
+    if (!user || !domain || COMMON_DOMAINS.includes(domain)) return null;
+    const match = COMMON_DOMAINS.find(known => editDistance(domain, known) <= 2);
+    return match ? `${user}@${match}` : null;
+  }
+
+  function refreshEmail() {
+    const value = emailField.value.trim();
+    const looksValid = EMAIL_SHAPE.test(value);
+    emailOk.classList.toggle('hidden', !looksValid);
+    emailPurposes.classList.toggle('hidden', !value);
+    purposeBoxes.forEach(box => { box.disabled = !value; });
+    const suggestion = looksValid ? suggestedEmail(value) : null;
+    emailHint.replaceChildren();
+    if (suggestion) {
+      const fix = document.createElement('button');
+      fix.type = 'button';
+      fix.className = 'link-arrow';
+      fix.textContent = suggestion;
+      fix.addEventListener('click', () => { emailField.value = suggestion; refreshEmail(); refreshChrome(); emailField.focus(); });
+      emailHint.append('Did you mean ', fix, '?');
+    } else if (value && !looksValid && value.includes('@')) {
+      emailHint.textContent = 'Keep going — that doesn’t look like a full email yet.';
+    }
+  }
+  emailField.addEventListener('input', refreshEmail);
+
+  surveyForm.addEventListener('submit', (event) => {
+    syncApplicability();
+    refreshEmail();
+    // Someone who skipped everything gets a thank-you, not an empty row in the responses
+    if (!anyAnswered()) {
+      event.preventDefault();
+      surveyForm.classList.add('hidden');
+      navBar.classList.add('!hidden');
+      document.getElementById('thanks').classList.remove('hidden');
+      return;
+    }
+    const value = emailField.value.trim();
+    let problem = '';
+    if (value && !EMAIL_SHAPE.test(value)) problem = 'That email doesn’t look right — fix it or clear it to stay anonymous.';
+    else if (value && !purposeBoxes.some(box => box.checked)) problem = 'Tick what we may use your email for — or clear it to stay anonymous.';
+    if (problem) {
+      event.preventDefault();
+      goTo(contactSlide);
+      contactError.textContent = problem;
+      contactError.classList.remove('hidden');
+    }
+  });
+
+  refreshEmail();
+
+  syncApplicability();
+  current.classList.add('is-current');
+  refreshChrome();
+</script>
+</body>
+</html>

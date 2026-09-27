@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArthaShield Storybook</title>
+  <meta name="description" content="The ArthaShield design system: every shared component, rendered live from css/arthashield.css, with copy-paste markup."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+  <!-- Runs before paint so a saved night-mode choice never flashes white -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.classList.toggle('dark', isDark);
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="css/arthashield.css?v=3"/>
+  <style>
+    /* Storybook chrome only (sb-*). Components themselves come from css/arthashield.css, never from here. */
+    .sb-nav a { display: block; padding: .3rem .75rem; border-radius: .6rem; font-size: .875rem; color: var(--muted); }
+    .sb-nav a:hover { color: var(--text); background: rgba(127, 127, 127, .08); }
+    .sb-nav a.is-here { color: var(--text); font-weight: 600; background: rgba(37, 99, 235, .1); }
+    .sb-nav-group { margin-top: 1.25rem; padding: 0 .75rem; font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .sb-story { scroll-margin-top: 6rem; padding-block: 2.5rem; border-top: 1px solid var(--line); }
+    .sb-story:first-of-type { border-top: 0; }
+    .sb-story p code, .sb-story li code, .sb-rules code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .82em; padding: .1rem .35rem; border-radius: .35rem; background: rgba(127, 127, 127, .12); }
+    .sb-preview {
+      margin-top: 1.25rem; padding: 1.5rem; border-radius: 1.25rem; border: 1px solid var(--line);
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 18px 18px;
+      overflow: hidden;
+    }
+    .sb-preview.is-flush { padding: 0; }
+    /* Page-level positioning would escape the preview box */
+    .sb-preview .sticky, .sb-preview .fixed { position: relative !important; }
+    .sb-preview .-mt-16 { margin-top: 0 !important; }
+    .sb-code { margin-top: .75rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--bg-alt); }
+    .sb-code summary { cursor: pointer; padding: .6rem 1rem; font-size: .8rem; font-weight: 600; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+    .sb-code summary::-webkit-details-marker { display: none; }
+    .sb-code summary::after { content: 'Show'; font-weight: 500; }
+    .sb-code[open] summary::after { content: 'Hide'; }
+    .sb-code pre { margin: 0; padding: 0 1rem 1rem; overflow-x: auto; font: .78rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text); white-space: pre; }
+    .sb-copy { margin: 0 1rem .75rem; font-size: .75rem; font-weight: 600; padding: .3rem .8rem; border-radius: 9999px; border: 1px solid var(--line); color: var(--text); }
+    .sb-copy:hover { background: rgba(127, 127, 127, .1); }
+    .sb-swatch { border: 1px solid var(--line); border-radius: 1rem; overflow: hidden; background: var(--surface); }
+    .sb-swatch-chip { height: 4.5rem; border-bottom: 1px solid var(--line); }
+    .sb-demo-box { border: 1px dashed var(--line); border-radius: 1rem; padding: 1.25rem; }
+  </style>
+</head>
+
+<body class="min-h-screen">
+
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+        <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-9 w-9 rounded-xl bg-white object-contain"/>
+          <span>ArthaShield</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm muted" aria-label="Site">
+          <a href="index.html" class="hover:text-[color:var(--text)] transition">Home</a>
+          <a href="arthashieldfeatures.html" class="hover:text-[color:var(--text)] transition">Features</a>
+          <a href="knowledge-graph.html" class="hover:text-[color:var(--text)] transition">Knowledge Graph</a>
+          <a href="storybook.html" class="font-medium text-[color:var(--text)]" aria-current="page">Storybook</a>
+        </nav>
+
+        <div class="flex items-center gap-1">
+          <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+            <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+            </svg>
+          </button>
+          <button id="menuButton" type="button" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+      <div class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]">
+        <a href="index.html" class="block">Home</a>
+        <a href="arthashieldfeatures.html" class="block">Features</a>
+        <a href="knowledge-graph.html" class="block">Knowledge Graph</a>
+        <a href="storybook.html" class="block font-semibold accent" aria-current="page">Storybook</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+
+    <section class="pt-14 pb-10 sm:pt-20 sm:pb-12">
+      <p class="text-lg sm:text-xl font-semibold accent tracking-tight">ArthaShield design system</p>
+      <h1 class="headline mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold">One set of <span class="text-gradient">components.</span></h1>
+      <p class="mt-6 text-lg muted max-w-2xl leading-relaxed">Every page on the site is built from what's on this page. Each component below is rendered live from the shared stylesheet, and its code is taken from the same markup — copy it as it is.</p>
+      <dl class="mt-8 grid gap-3 sm:grid-cols-3 text-sm">
+        <div class="surface rounded-2xl px-5 py-4"><dt class="muted">Stylesheet</dt><dd class="mt-1 font-semibold"><span id="cssVersion">css/arthashield.css</span></dd></div>
+        <div class="surface rounded-2xl px-5 py-4"><dt class="muted">Scripts</dt><dd class="mt-1 font-semibold">js/site.js · js/knowledge-graph.js</dd></div>
+        <div class="surface rounded-2xl px-5 py-4"><dt class="muted">Both themes</dt><dd class="mt-1 font-semibold">Use the moon / sun toggle, top right</dd></div>
+      </dl>
+    </section>
+
+    <div class="lg:grid lg:grid-cols-[13rem_1fr] lg:gap-12 pb-24">
+
+      <aside class="hidden lg:block">
+        <nav class="sb-nav sticky top-24" aria-label="Storybook sections">
+          <p class="sb-nav-group !mt-0">Foundations</p>
+          <a href="#tokens">Colour tokens</a>
+          <a href="#typography">Typography</a>
+          <a href="#theme-motion">Theme &amp; motion</a>
+          <p class="sb-nav-group">Actions</p>
+          <a href="#buttons">Buttons &amp; links</a>
+          <a href="#pills">Pills &amp; badges</a>
+          <p class="sb-nav-group">Page frame</p>
+          <a href="#header">Header</a>
+          <a href="#footer">Footer</a>
+          <p class="sb-nav-group">Sections</p>
+          <a href="#hero">Hero</a>
+          <a href="#section-headline">Section headline</a>
+          <a href="#cards">Cards</a>
+          <a href="#three-column">Three-column panel</a>
+          <a href="#stats">Stat row</a>
+          <a href="#image-card">Image card</a>
+          <a href="#steps">Steps &amp; timeline</a>
+          <a href="#band">Band with actions</a>
+          <p class="sb-nav-group">Showcase</p>
+          <a href="#stage">Dark stage</a>
+          <a href="#knowledge-graph">Knowledge graph</a>
+          <a href="#diagram">Wide diagram</a>
+          <a href="#product-window">Product window</a>
+          <a href="#console">Console panel</a>
+          <p class="sb-nav-group">Input</p>
+          <a href="#forms">Fields &amp; choices</a>
+          <a href="#progress">Progress &amp; dots</a>
+          <p class="sb-nav-group">Rules</p>
+          <a href="#rules">Using this system</a>
+        </nav>
+      </aside>
+
+      <main>
+
+        <section id="tokens" class="sb-story">
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Foundation</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Colour tokens</h2>
+          <p class="mt-2 muted max-w-2xl">Colour always comes from these variables, so both themes stay in step. Values shown are live for the current theme — flip the toggle to see night mode. Night mode is true black.</p>
+          <div id="tokenGrid" class="mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+          <p class="mt-6 text-sm font-semibold">Fixed brand colours (same in both themes)</p>
+          <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+            <div class="sb-swatch"><div class="sb-swatch-chip" style="background: linear-gradient(135deg, #2563eb, #4f46e5)"></div><div class="p-3"><div class="font-semibold">Primary gradient</div><div class="muted text-xs">#2563eb → #4f46e5</div></div></div>
+            <div class="sb-swatch"><div class="sb-swatch-chip" style="background: #030308"></div><div class="p-3"><div class="font-semibold">Stage</div><div class="muted text-xs">#030308 · .kg-stage</div></div></div>
+            <div class="sb-swatch"><div class="sb-swatch-chip grid grid-cols-4"><span class="bg-sky-400"></span><span class="bg-indigo-400"></span><span class="bg-rose-400"></span><span class="bg-emerald-400"></span></div><div class="p-3"><div class="font-semibold">Graph groups</div><div class="muted text-xs">People · Money · Risk · Action</div></div></div>
+            <div class="sb-swatch"><div class="sb-swatch-chip grid grid-cols-3"><span class="bg-emerald-500"></span><span class="bg-amber-400"></span><span class="bg-rose-500"></span></div><div class="p-3"><div class="font-semibold">Status</div><div class="muted text-xs">Good · Watch · Problem</div></div></div>
+          </div>
+        </section>
+
+        <section id="typography" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Foundation</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Typography</h2>
+          <p class="mt-2 muted max-w-2xl">Inter throughout. One idea per section, headlines end with a full stop. The eyebrow above a page headline is <code>text-lg sm:text-xl</code>, and the page headline is capped at <code>text-4xl sm:text-6xl lg:text-7xl</code> — never bigger. Each page has exactly one <code>&lt;h1&gt;</code>.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<p class="text-lg sm:text-xl font-semibold accent tracking-tight">Eyebrow names the page</p>
+<h1 class="headline mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold">Page headline. <span class="text-gradient">Key words.</span></h1>
+<h2 class="headline mt-8 text-4xl sm:text-5xl font-extrabold">Section headline.</h2>
+<p class="question mt-8">A question on its own screen?</p>
+<p class="mt-6 text-lg sm:text-xl muted leading-relaxed">Supporting line in muted text, one or two sentences at most.</p>
+<p class="mt-3 text-sm muted">Small print: captions, notes and footers.</p>
+          </template>
+        </section>
+
+        <section id="theme-motion" class="sb-story" data-story data-keep-motion>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Foundation</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Theme &amp; motion</h2>
+          <p class="mt-2 muted max-w-2xl">Every page carries the inline pre-paint theme script in <code>&lt;head&gt;</code> and the <code>.theme-toggle</code> button; <code>js/site.js</code> does the rest and remembers the choice across pages. Add <code>fade-up</code> to headline blocks and card grids to reveal them on scroll — it switches off for visitors who prefer reduced motion.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="flex flex-wrap items-center gap-6">
+  <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+    <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+  </button>
+  <div class="fade-up surface rounded-2xl px-5 py-4">This block fades up the first time it scrolls into view.</div>
+</div>
+          </template>
+        </section>
+
+        <section id="buttons" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Component</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Buttons &amp; links</h2>
+          <p class="mt-2 muted max-w-2xl">One <code>.btn-primary</code> per view — it's the action the section exists for. <code>.btn-secondary</code> sits beside it for the alternative. The solid header pill is only for the header. <code>.link-arrow</code> is for "read more" style links. Label buttons with what happens.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="flex flex-wrap items-center gap-4">
+  <a href="#buttons" class="btn-primary">Open the live modeler</a>
+  <a href="#buttons" class="btn-secondary">Download report</a>
+  <a href="#buttons" class="inline-flex rounded-full bg-[color:var(--text)] text-[color:var(--bg)] px-4 py-1.5 text-sm font-medium hover:opacity-85 transition">Header action</a>
+  <a href="#buttons" class="link-arrow">See all features <span aria-hidden="true">›</span></a>
+</div>
+          </template>
+        </section>
+
+        <section id="pills" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Component</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Pills &amp; badges</h2>
+          <p class="mt-2 muted max-w-2xl">Hairline pills label audiences and tags. The gradient <strong>NEW</strong> badge is used sparingly — one per page. On a dark stage, use the white-alpha versions.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="flex flex-wrap items-center gap-3">
+  <span class="rounded-full border hairline px-3 py-1 text-sm muted">RRBs</span>
+  <span class="rounded-full bg-gradient-to-tr from-blue-600 to-violet-600 px-2 py-0.5 text-[10px] font-semibold text-white">NEW</span>
+  <span class="inline-flex items-center gap-2 text-xs muted"><span class="h-2 w-2 rounded-full bg-sky-400"></span>Legend dot</span>
+</div>
+<div class="kg-stage mt-4 rounded-2xl p-5 flex flex-wrap items-center gap-3 text-white">
+  <span class="rounded-full border border-white/15 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-sky-300">concept</span>
+  <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80"><span class="h-1.5 w-1.5 rounded-full bg-gradient-to-tr from-sky-400 to-violet-400"></span>Introducing the Knowledge Graph</span>
+</div>
+          </template>
+        </section>
+
+        <section id="header" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Page frame</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Header</h2>
+          <p class="mt-2 muted max-w-2xl">Glass pill, logo, the page's own nav links, theme toggle, an optional header action, and the hamburger menu under 768px. Mark the current page with <code>aria-current="page"</code>. The header at the top of this page is the working version — this preview is static.</p>
+          <div class="sb-preview is-flush pb-4"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<header class="sticky top-0 z-40">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+      <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+        <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-9 w-9 rounded-xl bg-white object-contain"/>
+        <span>ArthaShield</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm muted">
+        <a href="index.html" class="hover:text-[color:var(--text)] transition">Home</a>
+        <a href="arthashieldfeatures.html" class="font-medium text-[color:var(--text)]" aria-current="page">Features</a>
+        <a href="knowledge-graph.html" class="hover:text-[color:var(--text)] transition">Knowledge Graph</a>
+        <a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)] transition">Contact</a>
+      </nav>
+      <div class="flex items-center gap-1">
+        <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+          <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        </button>
+        <a href="#demo" class="hidden md:inline-flex ml-1 rounded-full bg-[color:var(--text)] text-[color:var(--bg)] px-4 py-1.5 text-sm font-medium hover:opacity-85 transition">Try Demo</a>
+        <button id="menuButton" type="button" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+    <div class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]">
+      <a href="index.html" class="block">Home</a>
+      <a href="arthashieldfeatures.html" class="block font-semibold accent" aria-current="page">Features</a>
+      <a href="knowledge-graph.html" class="block">Knowledge Graph</a>
+      <a href="arthashieldfeatures.html#contact" class="block">Contact</a>
+      <a href="#demo" class="btn-primary w-full justify-center">Try Demo</a>
+    </div>
+  </div>
+</header>
+          </template>
+        </section>
+
+        <section id="footer" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Page frame</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Footer</h2>
+          <p class="mt-2 muted max-w-2xl">Knowledge Graph banner first (keep it prominent), then four link columns. Links to pages that don't exist yet stay as <code>href="#"</code> and are reported, not invented.</p>
+          <div class="sb-preview is-flush"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<footer class="bg-alt border-t hairline">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+    <a href="knowledge-graph.html" class="group mb-14 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl kg-stage px-6 py-5 text-white">
+      <div>
+        <div class="text-xs font-medium text-white/60">New</div>
+        <div class="text-lg font-semibold tracking-tight">The ArthaShield Knowledge Graph</div>
+      </div>
+      <span class="inline-flex items-center gap-1 text-sm font-medium text-sky-300 group-hover:underline underline-offset-4">Connect the dots <span aria-hidden="true">›</span></span>
+    </a>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
+      <div>
+        <h4 class="font-semibold mb-4">Solutions</h4>
+        <ul class="space-y-2.5 muted">
+          <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">Complaint Intelligence</a></li>
+          <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">AI Based KYC Risk Detection</a></li>
+          <li><a href="autopilot-assistant.html" class="hover:text-[color:var(--text)]">Regulatory Copilot</a></li>
+          <li><a href="#" class="hover:text-[color:var(--text)]">Dispute Resolution Engine</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Flagship Offering</h4>
+        <ul class="space-y-2.5 muted">
+          <li><a href="CaseIntelligence.html" class="hover:text-[color:var(--text)]">AI based Case Intelligence</a></li>
+          <li><a href="responsible-design.html" class="hover:text-[color:var(--text)]">Responsible Design Loop™ ♾️</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Data Security</h4>
+        <ul class="space-y-2.5 muted">
+          <li><a href="ai-security.html#llm-judge" class="hover:text-[color:var(--text)]">LLM-as-Judge</a></li>
+          <li><a href="ai-security.html#agentic-security" class="hover:text-[color:var(--text)]">Agentic Security</a></li>
+          <li><a href="#" class="hover:text-[color:var(--text)]">SOC 2</a></li>
+          <li><a href="#" class="hover:text-[color:var(--text)]">ISO 27001</a></li>
+          <li><a href="#" class="hover:text-[color:var(--text)]">NIST AI RMF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Resources</h4>
+        <ul class="space-y-2.5 muted">
+          <li><a href="knowledge-graph.html" class="font-medium text-[color:var(--text)] hover:underline underline-offset-4">Knowledge Graph</a></li>
+          <li><a href="arthashield-graph-js/index.html" class="hover:text-[color:var(--text)]">Intelligence Modeler</a></li>
+          <li><a href="agentic-use-cases.html" class="hover:text-[color:var(--text)]">Agentic AI Use Cases</a></li>
+          <li><a href="how-case-intel-works.html" class="hover:text-[color:var(--text)]">Case Intelligence Architecture</a></li>
+          <li><a href="api-platform.html" class="hover:text-[color:var(--text)]">API Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t hairline mt-14 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs muted">
+      <p>© 2025 ArthaShield. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-[color:var(--text)]">Privacy Policy</a>
+        <a href="#" class="hover:text-[color:var(--text)]">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+          </template>
+        </section>
+
+        <section id="hero" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Hero</h2>
+          <p class="mt-2 muted max-w-2xl">The first section of every page. <code>-mt-16</code> pulls the glow under the sticky header. Check the headline at 1280px: no word left alone on a line — move the <code>&lt;br&gt;</code>, don't shrink the type.</p>
+          <div class="sb-preview is-flush"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<section class="relative -mt-16 pt-36 pb-16 sm:pt-44 sm:pb-20 hero-glow overflow-hidden">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 text-center">
+    <p class="text-lg sm:text-xl font-semibold accent mb-5 tracking-tight">The Intelligence Layer for Financial Services</p>
+    <h1 class="headline text-4xl sm:text-6xl lg:text-7xl font-extrabold">
+      Connect the dots behind<br class="hidden sm:block"/> every <span class="text-gradient">financial decision.</span>
+    </h1>
+    <p class="mt-7 text-lg sm:text-xl muted max-w-2xl mx-auto leading-relaxed">One supporting sentence that says who it's for and what changes for them.</p>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+      <a href="#hero" class="btn-primary">Primary action</a>
+      <a href="#hero" class="link-arrow">Secondary action <span aria-hidden="true">›</span></a>
+    </div>
+  </div>
+</section>
+          </template>
+        </section>
+
+        <section id="section-headline" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Section headline</h2>
+          <p class="mt-2 muted max-w-2xl">Opens most sections. Sections use <code>py-24 sm:py-32</code> and alternate plain and <code>.bg-alt</code> backgrounds, so they separate without borders.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="text-center max-w-3xl mx-auto fade-up">
+  <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">Optional badge</span>
+  <h2 class="headline mt-5 text-4xl sm:text-5xl font-extrabold">Built for how finance<br class="hidden sm:block"/> actually works.</h2>
+  <p class="mt-5 text-lg muted">One supporting sentence.</p>
+</div>
+          </template>
+        </section>
+
+        <section id="cards" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Cards</h2>
+          <p class="mt-2 muted max-w-2xl">For four or more parallel items, usually in a <code>.bg-alt</code> section. The coloured category label always has a <code>dark:</code> pair. The meta line sits at the bottom so cards in a row line up.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+  <article class="surface rounded-3xl p-7 flex flex-col fade-up">
+    <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">KYC &amp; Onboarding</div>
+    <h3 class="mt-3 text-xl font-bold tracking-tight">AI‑assisted KYC with risk scoring</h3>
+    <p class="mt-3 mb-6 text-sm muted leading-relaxed">OCR + entity resolution + watchlist screening, with clause‑level citations for auditors.</p>
+    <div class="mt-auto pt-5 text-xs muted border-t hairline">Exports: PDF, CSV · Audit log</div>
+  </article>
+  <article class="surface rounded-3xl p-7 flex flex-col fade-up">
+    <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Complaint Mgmt</div>
+    <h3 class="mt-3 text-xl font-bold tracking-tight">Email &amp; omnichannel triage</h3>
+    <p class="mt-3 mb-6 text-sm muted leading-relaxed">Classify, prioritise and deduplicate, with SLA‑aware routing.</p>
+    <div class="mt-auto pt-5 text-xs muted border-t hairline">Channels: Email, WhatsApp, Web</div>
+  </article>
+</div>
+          </template>
+        </section>
+
+        <section id="three-column" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Three-column panel</h2>
+          <p class="mt-2 muted max-w-2xl">Exactly three parallel ideas. The 1px gaps over a <code>--line</code> background draw the dividers. Number the columns only when they really are a sequence.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="grid gap-px md:grid-cols-3 rounded-3xl overflow-hidden border hairline bg-[color:var(--line)] fade-up">
+  <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+    <div class="text-sm font-semibold muted">01</div>
+    <h3 class="mt-6 text-2xl font-bold tracking-tight">AI Risk Readiness</h3>
+    <p class="mt-3 text-sm muted leading-relaxed">Pre-deployment checks before go-live.</p>
+    <a href="#three-column" class="link-arrow mt-6 text-sm">AI Risk Monitor <span aria-hidden="true">›</span></a>
+  </div>
+  <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+    <div class="text-sm font-semibold muted">02</div>
+    <h3 class="mt-6 text-2xl font-bold tracking-tight">Ongoing Monitoring</h3>
+    <p class="mt-3 text-sm muted leading-relaxed">Drift, anomalies and violations, caught early.</p>
+  </div>
+  <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+    <div class="text-sm font-semibold muted">03</div>
+    <h3 class="mt-6 text-2xl font-bold tracking-tight">Governance &amp; Audit</h3>
+    <p class="mt-3 text-sm muted leading-relaxed">Approvals and audit-ready dashboards.</p>
+  </div>
+</div>
+          </template>
+        </section>
+
+        <section id="stats" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Stat row</h2>
+          <p class="mt-2 muted max-w-2xl">Only for figures that are the point of the section — and every figure needs its basis stated nearby (a pilot, a study, a synthetic demo). The buyer-review scanner flags unsourced numbers.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="grid grid-cols-3 max-w-2xl mx-auto divide-x divide-[color:var(--line)] text-center">
+  <div class="px-2">
+    <div class="text-3xl sm:text-5xl font-bold tracking-tight">10</div>
+    <div class="mt-1 text-xs sm:text-sm muted">entity types</div>
+  </div>
+  <div class="px-2">
+    <div class="text-3xl sm:text-5xl font-bold tracking-tight">1 layer</div>
+    <div class="mt-1 text-xs sm:text-sm muted">of context</div>
+  </div>
+  <div class="px-2">
+    <div class="text-3xl sm:text-5xl font-bold tracking-tight">Every</div>
+    <div class="mt-1 text-xs sm:text-sm muted">link traceable</div>
+  </div>
+</div>
+<p class="mt-4 text-center text-xs muted">Basis: counts from the Knowledge Graph concept model.</p>
+          </template>
+        </section>
+
+        <section id="image-card" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Image card</h2>
+          <p class="mt-2 muted max-w-2xl">Illustrations with white backgrounds sit on a white tile with <code>soften-on-dark</code>, so they don't glare at night. Logos get <code>rounded-xl bg-white object-contain p-1</code>.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<article class="surface rounded-3xl overflow-hidden flex flex-col max-w-sm fade-up">
+  <div class="aspect-square bg-white">
+    <img loading="lazy" decoding="async" src="images/shield-agents.webp" alt="ArthaShield orchestration agents stack" class="h-full w-full object-cover soften-on-dark"/>
+  </div>
+  <div class="p-7">
+    <p class="text-xs font-semibold uppercase tracking-wider text-emerald-500">The agents</p>
+    <h3 class="mt-2 text-xl font-bold tracking-tight">Orchestration agents that act.</h3>
+  </div>
+</article>
+          </template>
+        </section>
+
+        <section id="steps" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Steps &amp; timeline</h2>
+          <p class="mt-2 muted max-w-2xl">Horizontal steps for a real process; the vertical timeline for phases. Decorative lines go in a wrapper <code>&lt;div&gt;</code>, never directly inside <code>&lt;ol&gt;</code>. Gradient numbers need their own <code>&lt;span class="text-gradient"&gt;</code> — it can't share an element with <code>.surface</code>.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="relative fade-up">
+  <div class="hidden md:block absolute left-[16%] right-[16%] top-6 h-px bg-gradient-to-r from-blue-500/0 via-indigo-500/60 to-violet-500/0" aria-hidden="true"></div>
+  <ol class="relative grid gap-10 md:grid-cols-3 md:gap-6">
+    <li class="relative text-center">
+      <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">1</span></div>
+      <h3 class="mt-5 font-bold text-lg tracking-tight">Connect</h3>
+      <p class="mt-1 text-sm muted">Build relationships between entities.</p>
+    </li>
+    <li class="relative text-center">
+      <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">2</span></div>
+      <h3 class="mt-5 font-bold text-lg tracking-tight">Understand</h3>
+      <p class="mt-1 text-sm muted">Identify patterns and context.</p>
+    </li>
+    <li class="relative text-center">
+      <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full surface text-lg font-bold"><span class="text-gradient">3</span></div>
+      <h3 class="mt-5 font-bold text-lg tracking-tight">Act</h3>
+      <p class="mt-1 text-sm muted">Trigger a workflow with human approval.</p>
+    </li>
+  </ol>
+</div>
+<ol class="relative mt-12 ml-4 border-l hairline max-w-xl">
+  <li class="relative pl-8 pb-8">
+    <span class="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 ring-4 ring-[color:var(--bg)]"></span>
+    <div class="text-sm font-semibold accent">Phase 1</div>
+    <div class="mt-1 text-xl font-bold tracking-tight">Regulatory + Customer Intelligence</div>
+  </li>
+  <li class="relative pl-8">
+    <span class="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full surface ring-4 ring-[color:var(--bg)]"></span>
+    <div class="text-sm font-semibold muted">Phase 2</div>
+    <div class="mt-1 text-xl font-bold tracking-tight">Risk + Fraud Intelligence</div>
+  </li>
+</ol>
+          </template>
+        </section>
+
+        <section id="band" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Section</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Band with actions</h2>
+          <p class="mt-2 muted max-w-2xl">A compact bar for a short message and one or two actions — downloads, a brief, a follow-up.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="surface rounded-3xl p-8 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8 fade-up">
+  <div>
+    <h2 class="text-3xl font-extrabold tracking-tight">Reports &amp; Analytics</h2>
+    <p class="mt-3 muted max-w-xl">Download reports for compliance, fraud and onboarding.</p>
+  </div>
+  <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+    <a href="#band" class="btn-primary justify-center">Download KYC Report</a>
+    <a href="#band" class="btn-secondary">Download Fraud Report</a>
+  </div>
+</div>
+          </template>
+        </section>
+
+        <section id="stage" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Showcase</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Dark stage</h2>
+          <p class="mt-2 muted max-w-2xl">The one thing on the page that should stand out. It stays dark in both themes, so inside it use white-alpha colours (<code>text-white/60</code>, <code>border-white/10</code>), never theme tokens. One or two per page at most.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="kg-stage relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden text-white px-4 py-14 sm:px-12 sm:py-20">
+  <div class="kg-grid absolute inset-0 pointer-events-none"></div>
+  <div class="relative text-center max-w-3xl mx-auto">
+    <h2 class="headline text-4xl sm:text-6xl font-extrabold">Live Console.</h2>
+    <p class="mt-5 text-lg text-white/65">Your AI co-pilot for risk, compliance, and governance.</p>
+    <a href="#stage" class="btn-primary mt-8">Primary action</a>
+  </div>
+</div>
+          </template>
+        </section>
+
+        <section id="knowledge-graph" class="sb-story" data-story data-keep-ids>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Showcase</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Knowledge graph</h2>
+          <p class="mt-2 muted max-w-2xl">The interactive graph, drawn by <code>js/knowledge-graph.js</code>. Place it inside a dark stage, give it <code>#kgSvg</code> and <code>#kgCaption</code>, and load the script. Hover or tap a node. Only one graph per page.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="kg-stage relative rounded-[2rem] overflow-hidden text-white px-2 py-10 sm:px-8">
+  <div class="kg-grid absolute inset-0 pointer-events-none"></div>
+  <div class="relative mx-auto max-w-4xl">
+    <svg id="kgSvg" role="img" aria-label="ArthaShield knowledge graph linking customers, accounts, transactions, loans, merchants, counterparties, risk signals, regulations, AI recommendations and workflows"></svg>
+    <p id="kgCaption" class="mt-2 min-h-[3rem] text-center text-sm sm:text-base text-white/70" aria-live="polite">Hover or tap a node to see how ArthaShield connects it.</p>
+  </div>
+</div>
+<!-- and before </body>: <script src="js/knowledge-graph.js" defer></script> -->
+          </template>
+        </section>
+
+        <section id="diagram" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Showcase</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Wide diagram</h2>
+          <p class="mt-2 muted max-w-2xl">Process charts and architecture diagrams sit on a white tile and scroll sideways inside their frame on phones instead of shrinking the labels. Always give lazy images their real <code>width</code> and <code>height</code>.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<figure class="kg-stage relative rounded-[2rem] overflow-hidden text-white px-3 py-8 sm:px-10">
+  <div class="relative overflow-x-auto rounded-2xl border border-white/10 bg-white">
+    <img loading="lazy" decoding="async" width="900" height="491" src="images/arthashield-case-intelligence-bpmn.webp" alt="BPMN 2.0 diagram of the AI-driven complaint intelligence flow" class="block w-full min-w-[720px] h-auto soften-on-dark"/>
+  </div>
+  <p class="relative mt-3 text-center text-xs text-white/50 sm:hidden">Swipe the diagram to explore it</p>
+  <figcaption class="relative mt-6 text-center text-sm text-white/65">Caption that says what the diagram shows.</figcaption>
+</figure>
+          </template>
+        </section>
+
+        <section id="product-window" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Showcase</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Product window</h2>
+          <p class="mt-2 muted max-w-2xl">A product screenshot in a browser frame, cropped with <code>.shot-fade</code> so a tall image doesn't take over the page.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="kg-stage relative rounded-[2rem] overflow-hidden px-3 pt-8 sm:px-12 sm:pt-12">
+  <div class="relative mx-auto max-w-3xl rounded-t-2xl overflow-hidden border border-white/10 border-b-0">
+    <div class="flex items-center gap-2 bg-[#16161a] px-4 py-2.5">
+      <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></span>
+      <span class="ml-3 text-xs text-white/40">Window title</span>
+    </div>
+    <div class="max-h-[320px] overflow-hidden bg-white shot-fade">
+      <img loading="lazy" decoding="async" src="images/arthashield-dashboard.webp" alt="ArthaShield Triple-Lens RegTech dashboard" class="w-full h-auto soften-on-dark"/>
+    </div>
+  </div>
+</div>
+          </template>
+        </section>
+
+        <section id="console" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Showcase</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Console panel</h2>
+          <p class="mt-2 muted max-w-2xl"><code>.console-panel</code> and <code>.console-inset</code> build demo UIs on a dark stage. Mark demo data as synthetic.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="kg-stage rounded-[2rem] p-5 sm:p-8 text-white">
+  <div class="console-panel rounded-3xl p-5 sm:p-6 max-w-xl">
+    <div class="text-sm font-semibold text-white/60">Explainability Snapshot</div>
+    <div class="console-inset mt-3 rounded-2xl p-4">
+      <div class="text-xs text-white/50">Decision</div>
+      <div class="mt-1 text-lg font-bold">KYC Risk Score: 0.37 <span class="text-emerald-400">(Low)</span></div>
+    </div>
+    <p class="mt-4 text-xs text-white/40">*All data synthetic for demo.</p>
+  </div>
+</div>
+          </template>
+        </section>
+
+        <section id="forms" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Input</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Fields &amp; choices</h2>
+          <p class="mt-2 muted max-w-2xl">Text inputs get <code>.field</code> and a label (visible or <code>sr-only</code>). Answers are <code>.choice</code> tiles: the native input is hidden and <code>.key</code> shows the number key; tick boxes use <code>.key.tick</code> so they stay empty until chosen. On a Netlify form, never rename the form or its field <code>name</code>s.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="max-w-xl space-y-5">
+  <label class="block"><span class="text-sm font-medium">Work email</span>
+    <input type="email" name="email" autocomplete="email" placeholder="you@yourbank.in" class="field mt-1.5"/></label>
+  <fieldset>
+    <legend class="question">Where do you work?</legend>
+    <div class="mt-5 grid grid-cols-2 gap-2">
+      <label class="choice"><input type="radio" name="institution_type" value="RRB"/><span class="key">1</span>Regional Rural Bank</label>
+      <label class="choice"><input type="radio" name="institution_type" value="NBFC"/><span class="key">2</span>NBFC</label>
+    </div>
+  </fieldset>
+  <label class="choice text-sm"><input type="checkbox" name="wants_summary" value="Yes"/><span class="key tick">✓</span>Email me a short summary of the findings</label>
+  <p class="text-sm text-rose-600 dark:text-rose-400" role="alert">Error text says what went wrong and how to fix it.</p>
+</div>
+          </template>
+        </section>
+
+        <section id="progress" class="sb-story" data-story>
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Input</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Progress &amp; dots</h2>
+          <p class="mt-2 muted max-w-2xl">For step-by-step flows like the survey. Set the bar's width in script; mark dots <code>.is-current</code> and <code>.is-answered</code>. The survey's carousel layout itself is specific to <code>survey.html</code>.</p>
+          <div class="sb-preview"></div>
+          <details class="sb-code"><summary>Code</summary><button type="button" class="sb-copy">Copy</button><pre><code></code></pre></details>
+          <template>
+<div class="max-w-xl space-y-6">
+  <div class="rounded-full overflow-hidden" style="background: var(--line)"><div class="progress-fill" style="width: 40%"></div></div>
+  <div class="flex items-center justify-between gap-3">
+    <button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full border hairline" aria-label="Previous question">‹</button>
+    <div class="flex items-center gap-1.5">
+      <span class="dot is-answered"></span><span class="dot is-answered"></span><span class="dot is-current"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button type="button" class="rounded-full px-3 py-2 text-sm font-medium muted">Skip</button>
+      <button type="button" class="btn-primary !py-2.5 !px-6">Next</button>
+    </div>
+  </div>
+</div>
+          </template>
+        </section>
+
+        <section id="rules" class="sb-story">
+          <p class="text-xs font-semibold uppercase tracking-wider accent">Rules</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight">Using this system</h2>
+          <div class="sb-rules mt-5 grid gap-5 lg:grid-cols-2">
+            <div class="surface rounded-3xl p-7">
+              <h3 class="font-semibold">Every page</h3>
+              <ul class="mt-3 space-y-2 text-sm muted leading-relaxed">
+                <li>Links <code>css/arthashield.css?v=N</code> and <code>js/site.js</code>, and keeps the pre-paint theme script inline in <code>&lt;head&gt;</code>.</li>
+                <li>Uses components exactly as shown here. Never restyle a shared class in a page's own <code>&lt;style&gt;</code> — the checker rejects it.</li>
+                <li>One <code>&lt;h1&gt;</code>, capped at <code>text-4xl sm:text-6xl lg:text-7xl</code>.</li>
+                <li>Night mode is true black. Colours come from the tokens; inside a dark stage use white-alpha.</li>
+                <li>Figures state their basis. No invented statistics, customers or certifications.</li>
+                <li>Dead links stay <code>href="#"</code> and are reported. Forms keep their Netlify names.</li>
+              </ul>
+            </div>
+            <div class="surface rounded-3xl p-7">
+              <h3 class="font-semibold">Adding or changing a component</h3>
+              <ol class="mt-3 space-y-2 text-sm muted leading-relaxed list-decimal pl-5">
+                <li>Change it in <code>css/arthashield.css</code> — never in one page.</li>
+                <li>Add or update its story on this page, with real content.</li>
+                <li>Bump <code>?v=N</code> on every page that links the stylesheet, and in the restyle skill's page skeleton.</li>
+                <li>Run the checker on every restyled page:<br/><code>python .claude/skills/restyle-arthashield-page/scripts/check_page.py astro-sanity-starter/&lt;page&gt;.html</code></li>
+                <li>Check the change here in both themes and at phone width.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+<script>
+  // Each story's <template> is the single source: it is rendered as the preview and shown as the code,
+  // so the snippet can never drift from what's on screen. Runs before the deferred scripts below,
+  // so site.js and knowledge-graph.js find the rendered components.
+  function dedent(text) {
+    const lines = text.replace(/^\n+|\s+$/g, '').split('\n');
+    const indent = Math.min(...lines.filter(line => line.trim()).map(line => line.match(/^ */)[0].length));
+    return lines.map(line => line.slice(indent)).join('\n');
+  }
+
+  document.querySelectorAll('[data-story]').forEach(story => {
+    const source = story.querySelector('template');
+    const preview = story.querySelector('.sb-preview');
+    // Scoped to .sb-code pre code: several stories also use inline <code> in their description text,
+    // and story.querySelector('code') would grab that one instead of the actual snippet block.
+    story.querySelector('.sb-code pre code').textContent = dedent(source.innerHTML);
+    const rendered = source.content.cloneNode(true);
+    // The live header already owns #menuButton / #mobileMenu; previews must not duplicate ids
+    if (!story.hasAttribute('data-keep-ids')) rendered.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+    // Previews stay visible at rest; only the motion story demonstrates the reveal
+    if (!story.hasAttribute('data-keep-motion')) rendered.querySelectorAll('.fade-up').forEach(el => el.classList.remove('fade-up'));
+    preview.append(rendered);
+  });
+
+  document.querySelectorAll('.sb-copy').forEach(button => {
+    button.addEventListener('click', () => {
+      const code = button.parentElement.querySelector('code');
+      const done = label => { button.textContent = label; setTimeout(() => { button.textContent = 'Copy'; }, 1600); };
+      navigator.clipboard.writeText(code.textContent).then(() => done('Copied'), () => {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        done('Selected — press Ctrl+C');
+      });
+    });
+  });
+
+  const TOKENS = [
+    ['--bg', 'Page background'], ['--bg-alt', 'Alternate section band'], ['--surface', 'Cards and tiles'],
+    ['--text', 'Body text'], ['--muted', 'Secondary text'], ['--line', 'Hairlines and borders'], ['--accent', 'Links, eyebrows, focus']
+  ];
+  function renderTokens() {
+    const values = getComputedStyle(document.documentElement);
+    document.getElementById('tokenGrid').replaceChildren(...TOKENS.map(([name, use]) => {
+      const card = document.createElement('div');
+      card.className = 'sb-swatch text-sm';
+      const chip = document.createElement('div');
+      chip.className = 'sb-swatch-chip';
+      chip.style.background = `var(${name})`;
+      const label = document.createElement('div');
+      label.className = 'p-3';
+      label.innerHTML = `<div class="font-semibold font-mono text-xs"></div><div class="muted text-xs mt-1"></div><div class="text-xs mt-1 tabular-nums"></div>`;
+      label.children[0].textContent = name;
+      label.children[1].textContent = use;
+      label.children[2].textContent = values.getPropertyValue(name).trim();
+      card.append(chip, label);
+      return card;
+    }));
+  }
+  renderTokens();
+  new MutationObserver(renderTokens).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  const stylesheet = document.querySelector('link[href*="arthashield.css"]');
+  document.getElementById('cssVersion').textContent = stylesheet.getAttribute('href');
+
+  // Highlight the section being read in the sidebar
+  const navLinks = [...document.querySelectorAll('.sb-nav a')];
+  const reading = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach(link => link.classList.toggle('is-here', link.getAttribute('href') === `#${entry.target.id}`));
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  document.querySelectorAll('.sb-story').forEach(section => reading.observe(section));
+</script>
+<script src="js/site.js" defer></script>
+<script src="js/knowledge-graph.js" defer></script>
+</body>
+</html>

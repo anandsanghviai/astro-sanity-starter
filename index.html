@@ -4,22 +4,28 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Arthasheild AI - Financial Intelligence Platform</title>
+  <meta name="description" content="ArthaShield is the decision intelligence layer for BFSI — a knowledge graph and AI agents that help financial institutions understand, decide, protect and act."/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+  <!-- Runs before paint so a saved night-mode choice never flashes white -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.classList.toggle('dark', isDark);
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .glass {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-	
-	.glass-dark {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-    }
-  </style>
-  
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="css/arthashield.css?v=3"/>
+
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8L28KXK8PM"></script>
 <script>
@@ -30,546 +36,488 @@
   gtag('config', 'G-8L28KXK8PM');
 </script>
 <script async defer src="https://beampipe.io/js/tracker.js" data-beampipe-domain="arthashield.org"></script>
-  
+
 </head>
 
+<body class="min-h-screen">
 
-<body class="bg-gradient-to-br from-slate-50 to-slate-100  min-h-screen">
-
-  <header class="sticky top-0 z-40 bg-white dark:bg-slate-900 md:bg-transparent">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm glass dark:glass-dark">
-        <a href="index.html" class="flex items-center gap-3 font-semibold">
-          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-11 w-auto"/>
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+        <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-9 w-9 rounded-xl bg-white object-contain"/>
           <span>ArthaShield</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300 relative">
-  <a href="autopilot-assistant.html" class="hover:text-slate-900 dark:hover:text-white">Solution</a>
-  <a href="#credibility" class="hover:text-slate-900 dark:hover:text-white">Global Alignment</a>
-  <a href="arthashieldfeatures.html" class="hover:text-slate-900 dark:hover:text-white transition">Features</a>
 
-  <!-- Desktop Resources Dropdown -->
-  <div class="relative">
-    <button id="desktopResourcesBtn" class="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-white focus:outline-none">
-      <span>Resources</span>
-      <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-      </svg>
-    </button>
-
-    <div id="desktopResourcesMenu" class="absolute left-0 mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300 z-50">
-      <a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Arthasheild Agents</a>
-      <a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Risk Monitor</a>
-      <a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
-      <a href="general-blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
-    </div>
-  </div>
-
-  <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
-</nav>
-
-		<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
-			  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-					  d="M4 6h16M4 12h16m-7 6h7"/>
-			  </svg>
-			</button>
-		 </div>
-    </div>
-	
-	
-	<!-- Mobile Nav (hidden by default) -->
-  <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
-    <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
-      <a href="autopilot-assistant.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Solution</a>
-          <a href="#credibility" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Global Alignment</a>
-		  <a href="arthashieldfeatures.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
-		  <div class="relative">
-			  <button id="mobileResourcesBtn" class="flex items-center justify-between w-full  text-slate-700 dark:text-slate-200 hover:text-blue-600 focus:outline-none">
-				<span>Resources</span>
-				<svg id="mobileResourcesArrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-				</svg>
-			  </button>
-
-			  <!-- Dropdown menu -->
-			  <div id="mobileResourcesMenu" class="mt-2 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden max-h-0 transition-all duration-300">
-				<a href="ai-agents.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Arthasheild Agents</a>
-				<a href="pdi-maintenance.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">AI Risk Monitor</a>
-				<a href="ai-hub.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">✨ Explore AI Hub</a>
-				<a href="general-blog.html" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-700">Blog</a>
-			  </div>
-			</div>
-		 
-          <a href="arthashieldfeatures.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
-  </div>
-	
-  </header>
-  
-   <!-- Storytelling Section -->
- <!-- Storytelling Section -->
-<section id="story" class="py-10 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
-  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center" >
-    <!-- Hero -->
-    <h2 class="text-3xl sm:text-3xl font-bold tracking-tight mb-6">
-        <span class="bg-gradient-to-tr from-blue-600 to-indigo-600 bg-clip-text text-transparent">ArthaShield</span> Financial Intelligence Platform
-    </h2>
-    <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-12">
-	AI that helps financial institutions understand, decide, protect and act. </p>
-    <div class="flex flex-row justify-center items-center gap-4 mb-12 flex-nowrap">
-      <a href="arthashieldfeatures.html" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
-        Checkout
-      </a>
-      <a href="autopilot-assistant.html" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-tr from-slate-900 to-slate-700 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
-        Try Autopilot
-      </a>
-    </div>
-  </div>
-
-  <!-- Problem Section -->
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
-    <div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px]">
-      <div class="basis-[65%]  bg-white overflow-hidden">
-        <img loading="lazy" decoding="async" src="images/challenge-sheild.webp" alt="Problem Image" class="w-full h-full object-contain object-top md:object-cover md:object-top" />
-      </div>
-      <div class="basis-[35%] bg-white dark:bg-slate-900 p-6 shadow ring-1 ring-slate-200 dark:ring-slate-800">
-        <h3 class="text-xl font-bold mb-2">Financial Teams Are Losing Time and Money</h3>
-		<ul class="text-sm text-slate-700 dark:text-slate-300 space-y-2">
-			  <li>Fraud signals are buried inside complaint data</li>
-			  <li>Teams scramble during audits</li>
-			  <li>Compliance and operations work in silos</li>
-			</ul>
-		
-      </div>
-    </div>
-	
-		  <!-- SeatBelt / Hero Solution Highlight -->
-	<div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px] mb-12">
-	  <!-- Image -->
-	  <div class="basis-[65%]  bg-black overflow-hidden">
-		<img loading="lazy" decoding="async" src="images/safe-trusted-ai.webp" alt="SeatBelt AI" class="w-full h-full object-contain object-top md:object-cover md:object-top" />
-	  </div>
-
-	  <!-- Text -->
-	  <div class="basis-[35%] bg-gradient-to-tr from-blue-600 to-indigo-600 text-white p-6 flex flex-col justify-center">
-		<h3 class="text-xl font-bold mb-2">ArthaShield — </h3>
-		<p class="text-white/90 text-sm">
-		  Decision Intelligence Layer for BFSI
-		  that makes CRM and workflows financially intelligent.
-		</p>
-	  </div>
-</div>
-	
-	<!-- Agents Section integrated post-SeatBelt -->
-<div class="rounded-2xl overflow-hidden shadow-lg flex flex-col h-[500px] mb-12">
-
-  <!-- Image -->
-  <div class="basis-[65%] bg-white overflow-hidden">
-    <img
-loading="lazy" decoding="async"       src="images/shield-agents.webp"
-      alt="Arthashield Intelligence"
-      class="h-full w-full object-contain md:object-cover"
-    />
-  </div>
-
-  <!-- Content -->
-  <div class="basis-[35%] bg-white dark:bg-slate-900 p-4 shadow ring-1 ring-slate-200 dark:ring-slate-800">
-
-    <h3 class="text-xl font-bold mb-2">Orchestration Agents</h3>
-
-    <ul class="text-sm text-slate-700 dark:text-slate-300 space-y-2">
-      <li>KYC Risk Agent</li>
-      <li>Fraud Intelligence Agent</li>
-	  <li>Complaint Management Agent</li>
-      <li>Regulatory Intelligence Agent</li>
-    </ul>
-
-  </div>
-</div>
-
-  </div>
-  
-
-
-  <!-- Solution Section -->
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mb-16">
-    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-4 text-center">How ArthaShield Works</h2>
-    <p class="text-lg text-slate-600 dark:text-slate-300 mb-12 text-center">
-      AI Risk Readiness, Ongoing Monitoring, Governance Controls and Audit-ready outputs generated automatically — all in one platform.
-    </p>
-    <div class="grid gap-8 md:grid-cols-3">
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
-        <h3 class="font-bold text-xl mb-4">AI Risk Readiness</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-300 mb-2">Pre-deployment risk checks to ensure every AI model is compliant, explainable, and audit-ready before go-live</p>
-		 <a href="pdi-maintenance.html" class="text-indigo-600 font-medium hover:underline"> AI Risk Monitor →</a>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
-        <h3 class="font-bold text-xl mb-2">Ongoing Monitoring</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-300 mb-2">Arthashield classifies and analyzes incoming cases  to detect drift, anomalies, and compliance violations.</p>
-		 <a href="pdi-maintenance.html#ongoing-autopilot" class="mt-2 text-indigo-600 font-medium hover:underline">Control Center →</a>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow text-center">
-        <h3 class="font-bold text-xl mb-2">Governance & Audit</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-300">Role-based approvals, audit-ready dashboards, and ISO-aligned governance controls.</p>
-      </div>
-    </div>
-    <div class="mt-10 text-center">
-      <a href="autopilot-assistant.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:opacity-90">See ArthaShield in Action</a>
-    </div>
-  </div>
-
-  
-</section>
-
-
-<section id="credibility" class="py-10 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-9500">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center mb-8">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Built on Global Compliance Standards</h2>
-      <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">We align with leading AI governance programs and research to make our approach auditable, principled and regulator-friendly.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-      <!-- SCF Card -->
-      <article class="p-6 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex flex-col gap-4">
-        <div class="flex items-center gap-4">
-          <!-- Replace with SCF logo img tag if available -->
-          <img loading="lazy" decoding="async" src="scf-media.png" alt="WEF Logo" class="h-11 w-auto" />
-          <div>
-            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Secure Controls Framework (SCF)</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-300">A comprehensive open-source cybersecurity and privacy control library that unifies standards and requirements into a common catalog..</p>
-          </div>
-        </div>
-
-        <p class="text-sm text-slate-600 dark:text-slate-300">SCF unifies fragmented security and compliance requirements into a single, auditable control system — enabling faster execution, simpler audits, and scalable governance as regulations evolve.</p>
-
-        <div class="mt-auto flex items-center justify-between gap-4">
-          <a href="https://securecontrolsframework.com/free-scf-content/scf-download/" target="_blank" rel="noopener noreferrer" class="text-sm font-medium underline">Download SCF / Learn More</a>
-          <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-700">Research-backed</span>
-            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-700">Auditable</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- WEF Card -->
-      <article class="p-6 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex flex-col gap-4">
-        <div class="flex items-center gap-4">
-          <!-- Replace with WEF logo img tag if available -->
-          
-            <img loading="lazy" decoding="async" src="world-economic-forum-1.svg" alt="WEF Logo" class="h-11 w-auto" />
-          
-          <div>
-            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">World Economic Forum — AI Governance Alliance</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-300">Practical, multi-stakeholder playbooks for aligning AI deployment with public interest and regulatory expectations.</p>
-          </div>
-        </div>
-
-        <p class="text-sm text-slate-600 dark:text-slate-300">Why it matters: The WEF’s Alliance provides cross-industry standards and operational checklists we use for governance-ready product design and stakeholder reporting.</p>
-
-        <div class="mt-auto flex items-center justify-between gap-4">
-          <a href="https://initiatives.weforum.org/ai-governance-alliance/home" target="_blank" rel="noopener noreferrer" class="text-sm font-medium underline">Explore WEF Alliance</a>
-          <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-700">Multi-stakeholder</span>
-            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-700">Practical</span>
-          </div>
-        </div>
-      </article>
-	  
-
-    </div>
-
-    <!-- Optional: credibility footnote -->
-    <p class="mt-6 text-xs text-slate-500 dark:text-slate-400 max-w-3xl mx-auto">Note: We reference these programs to show our alignment with global governance thinking.</p>
-  </div>
-</section>
-
-
-<!-- Shaping What's Next — mascot teaser -->
-<section class="py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
-  <style>
-    @keyframes aswFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    @keyframes aswSpark { 0%,100%{opacity:.45;transform:scale(.85)} 50%{opacity:1;transform:scale(1.15)} }
-    @keyframes aswBlink { 0%,92%,100%{transform:scaleY(1)} 96%{transform:scaleY(.12)} }
-    .asw-float{ animation:aswFloat 4s ease-in-out infinite; transform-origin:center; }
-    .asw-spark{ animation:aswSpark 2s ease-in-out infinite; transform-origin:120px 16px; }
-    .asw-eyes{ animation:aswBlink 5s ease-in-out infinite; transform-origin:120px 110px; }
-    @media (prefers-reduced-motion: reduce){ .asw-float,.asw-spark,.asw-eyes{ animation:none; } }
-  </style>
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="rounded-3xl bg-white dark:bg-slate-800/60 ring-1 ring-slate-200/70 dark:ring-slate-700/60 shadow-lg">
-      <div class="grid md:grid-cols-2 items-center gap-6 p-8 sm:p-12">
-
-        <!-- Mascot -->
-        <div class="order-2 md:order-1 flex justify-center">
-          <div class="relative">
-            <div class="absolute -top-1 right-0 sm:-right-4 bg-slate-900 text-white text-xs font-medium px-3 py-1.5 rounded-full rounded-br-sm shadow-lg">What should happen next?</div>
-            <svg viewBox="0 0 240 270" class="w-56 h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arthi, the ArthaShield agent mascot">
-              <defs>
-                <linearGradient id="aswGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#4f46e5"/>
-                </linearGradient>
-              </defs>
-              <ellipse cx="120" cy="252" rx="64" ry="9" fill="#0f172a" opacity="0.10"/>
-              <g class="asw-float">
-                <!-- ears -->
-                <circle cx="46" cy="122" r="14" fill="url(#aswGrad)"/>
-                <circle cx="194" cy="122" r="14" fill="url(#aswGrad)"/>
-                <!-- antenna -->
-                <line x1="120" y1="48" x2="120" y2="24" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
-                <g class="asw-spark">
-                  <circle cx="120" cy="16" r="8" fill="#818cf8"/>
-                  <circle cx="120" cy="16" r="3" fill="#ffffff"/>
-                </g>
-                <!-- body -->
-                <rect x="50" y="48" width="140" height="150" rx="42" fill="url(#aswGrad)"/>
-                <rect x="66" y="58" width="108" height="26" rx="13" fill="#ffffff" opacity="0.12"/>
-                <!-- visor -->
-                <rect x="72" y="86" width="96" height="56" rx="28" fill="#0f172a"/>
-                <!-- eyes -->
-                <g class="asw-eyes">
-                  <circle cx="104" cy="110" r="11" fill="#e0f2fe"/>
-                  <circle cx="107" cy="112" r="4" fill="#1e293b"/>
-                  <circle cx="100" cy="106" r="2.4" fill="#ffffff"/>
-                  <circle cx="136" cy="110" r="11" fill="#e0f2fe"/>
-                  <circle cx="139" cy="112" r="4" fill="#1e293b"/>
-                  <circle cx="132" cy="106" r="2.4" fill="#ffffff"/>
-                </g>
-                <!-- smile -->
-                <path d="M108 127 Q120 137 132 127" stroke="#38bdf8" stroke-width="4" fill="none" stroke-linecap="round"/>
-                <!-- cheeks -->
-                <circle cx="88" cy="123" r="5" fill="#f472b6" opacity="0.35"/>
-                <circle cx="152" cy="123" r="5" fill="#f472b6" opacity="0.35"/>
-                <!-- chest shield -->
-                <path d="M120 152 l18 7 v12 c0 13 -9 20 -18 25 c-9 -5 -18 -12 -18 -25 v-12 z" fill="#ffffff" opacity="0.95"/>
-                <path d="M112 173 l6 6 l11 -12" stroke="#2563eb" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Copy -->
-        <div class="order-1 md:order-2 text-center md:text-left">
-          <span class="inline-block text-xs font-semibold tracking-wide uppercase text-blue-600 dark:text-blue-400 mb-3">Shaping What's Next</span>
-          <h2 class="text-3xl font-extrabold mb-4">Meet the agents behind the next move</h2>
-          <p class="text-slate-600 dark:text-slate-300 mb-6 max-w-lg mx-auto md:mx-0">
-            Autonomous, human-approved AI agents for RRBs, UCBs, NBFCs and Fintechs — across KYC, AML,
-            credit, collections, settlement and complaints. Each one turns a challenge into an action.
-          </p>
-          <a href="agentic-use-cases.html" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white px-6 py-3 font-medium text-sm hover:opacity-90 transition">
-            Explore the Top 10 agentic use cases
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"/></svg>
+        <nav class="hidden md:flex items-center gap-7 text-sm muted">
+          <a href="autopilot-assistant.html" class="hover:text-[color:var(--text)] transition">Solution</a>
+          <a href="#knowledge-graph" class="relative hover:text-[color:var(--text)] transition">
+            Knowledge Graph
+            <span class="absolute -top-1 -right-2.5 h-1.5 w-1.5 rounded-full bg-gradient-to-tr from-blue-500 to-violet-500"></span>
           </a>
-        </div>
+          <a href="arthashieldfeatures.html" class="hover:text-[color:var(--text)] transition">Features</a>
+          <a href="#credibility" class="hover:text-[color:var(--text)] transition">Global Alignment</a>
 
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- Trust & Compliance section for the Features page -->
-<section id="trust-compliance" class="py-10 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="flex flex-col lg:flex-row gap-8 lg:items-center">
-      <!-- Left: Text -->
-      <div class="flex-1">
-        <h2 class="text-2xl lg:text-3xl font-semibold leading-tight">Trust &amp; Compliance</h2>
-        <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-3xl">Every AI decision is traceable and audit-ready—no black-box risk.</p>
-
-        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
-            </svg>
-            <div>
-              <div class="font-medium">Explainable Decisions</div>
-              <div class="text-sm text-slate-500 dark:text-slate-400">Traceable reasoning for model outputs, designed for auditor review.</div>
+          <div class="relative">
+            <button id="desktopResourcesBtn" class="flex items-center gap-1 hover:text-[color:var(--text)] focus:outline-none transition">
+              <span>Resources</span>
+              <svg id="desktopResourcesArrow" class="w-4 h-4 mt-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="desktopResourcesMenu" class="absolute right-0 mt-3 w-48 surface rounded-xl shadow-xl overflow-hidden max-h-0 transition-all duration-300 z-50">
+              <a href="ai-agents.html" class="block px-4 py-2.5 text-sm hover:bg-black/5 dark:hover:bg-white/5">Arthasheild Agents</a>
+              <a href="pdi-maintenance.html" class="block px-4 py-2.5 text-sm hover:bg-black/5 dark:hover:bg-white/5">AI Risk Monitor</a>
+              <a href="ai-hub.html" class="block px-4 py-2.5 text-sm hover:bg-black/5 dark:hover:bg-white/5">✨ Explore AI Hub</a>
+              <a href="general-blog.html" class="block px-4 py-2.5 text-sm hover:bg-black/5 dark:hover:bg-white/5">Blog</a>
             </div>
           </div>
 
-          <div class="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7h18M3 12h18M3 17h18" />
+          <a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)] transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-1">
+          <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+            <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
             </svg>
-            <div>
-              <div class="font-medium">Audit Trail &amp; Versioning</div>
-              <div class="text-sm text-slate-500 dark:text-slate-400">Immutable logs of model changes, decision contexts, and compliance actions.</div>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
             </svg>
-            <div>
-              <div class="font-medium">Governance Controls</div>
-              <div class="text-sm text-slate-500 dark:text-slate-400">Role-based approvals, policy guardrails, and human-in-loop checkpoints.</div>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5h18M3 12h18M3 19h18" />
+          </button>
+          <a href="autopilot-assistant.html" class="hidden md:inline-flex ml-1 rounded-full bg-[color:var(--text)] text-[color:var(--bg)] px-4 py-1.5 text-sm font-medium hover:opacity-85 transition">Try Autopilot</a>
+          <button id="menuButton" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
             </svg>
-            <div>
-              <div class="font-medium">Certification Readiness</div>
-              <div class="text-sm text-slate-500 dark:text-slate-400">Designed to align with ISO/IEC 42001:2023 AI management systems.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-6 flex items-center gap-4">
-          <a href="api-platform.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm text-sm font-medium bg-blue-600 text-white hover:bg-blue-700">API Reference</a>
-          <a href="#contact" class="text-sm text-slate-600 dark:text-slate-300 hover:underline">Request a technical brief</a>
-        </div>
-      </div>
-
-      <!-- Right: ISO badge / graphic -->
-      <div class="w-full lg:w-80 flex-shrink-0 flex flex-col items-center justify-center">
-        <div class="p-6 rounded-xl border border-slate-100 dark:border-slate-800 bg-gradient-to-b from-white/50 to-slate-50/40 dark:from-slate-900/60 dark:to-slate-900/50 text-center">
-          <!-- Simple ISO badge -->
-          <div class="flex items-center justify-center mb-4">
-            <img loading="lazy" decoding="async" src="ISO-42001-2023-1.webp" alt="ISO-42001-2023-1 Logo" class="h-20 w-auto" />
-          </div>
-          <div class="text-sm font-semibold">ISO/IEC 42001:2023</div>
-          <div class="mt-2 text-xs text-slate-500 dark:text-slate-400">Aligned AI management practices for governance &amp; safety</div>
-          <div class="mt-4 text-xs text-slate-500 dark:text-slate-400">Arthashield is designed with ISO alignment in mind — supporting auditability, governance, and explainability required by modern regulators.</div>
+          </button>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- Footer -->
 
-
-
-  
-
-<footer class="bg-slate-900 text-slate-300">
-  <div class="max-w-7xl mx-auto px-6 py-16">
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10">
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Solutions</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="pdi-maintenance.html" class="hover:text-white">Complaint Intelligence</a></li>
-          <li><a href="pdi-maintenance.html" class="hover:text-white">AI Based KYC Risk Detection</a></li>
-          <li><a href="autopilot-assistant.html" class="hover:text-white">Regulatory Copilot</a></li>
-          <li><a href="#" class="hover:text-white">Dispute Resolution Engine</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Flagship Offering</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="CaseIntelligence.html" class="hover:text-white">AI based Case Intelligence</a></li>
-          <li><a href="responsible-design.html" class="hover:text-white">Responsible Design Loop™ ♾️</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Data Security</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="ai-security.html#llm-judge" class="hover:text-white">LLM-as-Judge</a></li>
-          <li><a href="ai-security.html#agentic-security" class="hover:text-white">Agentic Security</a></li>
-          <li><a href="#" class="hover:text-white">SOC 2</a></li>
-          <li><a href="#" class="hover:text-white">ISO 27001</a></li>
-          <li><a href="#" class="hover:text-white">NIST AI RMF</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Resources</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="knowledge-graph.html" class="hover:text-white">Knowledge Graph</a></li>
-          <li><a href="agentic-use-cases.html" class="hover:text-white">Agentic AI Use Cases</a></li>
-          <li><a href="arthashield-graph-js/index.html" class="hover:text-white">Intelligence Modeler</a></li>
-          <li><a href="how-case-intel-works.html" class="hover:text-white">Case Intelligence Architecture</a></li>
-          <li><a href="api-platform.html" class="hover:text-white">API Documentation</a></li>
-        </ul>
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+      <div class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]">
+        <a href="autopilot-assistant.html" class="block">Solution</a>
+        <a href="#knowledge-graph" class="flex items-center gap-2">Knowledge Graph <span class="rounded-full bg-gradient-to-tr from-blue-600 to-violet-600 px-2 py-0.5 text-[10px] font-semibold text-white">NEW</span></a>
+        <a href="arthashieldfeatures.html" class="block">Features</a>
+        <a href="#credibility" class="block">Global Alignment</a>
+        <div>
+          <button id="mobileResourcesBtn" class="flex items-center justify-between w-full focus:outline-none">
+            <span>Resources</span>
+            <svg id="mobileResourcesArrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="mobileResourcesMenu" class="overflow-hidden max-h-0 transition-all duration-300 pl-3 muted text-sm">
+            <a href="ai-agents.html" class="block pt-3">Arthasheild Agents</a>
+            <a href="pdi-maintenance.html" class="block pt-3">AI Risk Monitor</a>
+            <a href="ai-hub.html" class="block pt-3">✨ Explore AI Hub</a>
+            <a href="general-blog.html" class="block pt-3">Blog</a>
+          </div>
+        </div>
+        <a href="arthashieldfeatures.html#contact" class="block">Contact</a>
+        <a href="autopilot-assistant.html" class="btn-primary w-full justify-center">Try Autopilot</a>
       </div>
     </div>
-    <div class="border-t border-slate-800 mt-14 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-      <p>© 2025 ArthaShield. All rights reserved.</p>
-      <div class="flex space-x-6 mt-4 md:mt-0">
-        <a href="#" class="hover:text-white">Privacy Policy</a>
-        <a href="#" class="hover:text-white">Terms of Service</a>
+  </header>
+
+  <main>
+
+    <section id="story" class="relative -mt-16 pt-36 pb-20 sm:pt-44 sm:pb-28 hero-glow overflow-hidden">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 text-center">
+        <p class="text-lg sm:text-xl font-semibold accent mb-5 tracking-tight">ArthaShield Financial Intelligence Platform</p>
+        <h1 class="headline text-4xl sm:text-6xl lg:text-7xl font-extrabold">
+          Understand. Decide.<br/><span class="text-gradient">Protect. Act.</span>
+        </h1>
+        <p class="mt-7 text-lg sm:text-xl muted max-w-2xl mx-auto leading-relaxed">
+          The decision intelligence layer for BFSI. AI that makes your CRM and workflows financially intelligent — and every decision audit-ready.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+          <a href="#knowledge-graph" class="btn-primary">
+            Explore the Knowledge Graph
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7M12 21V3"/></svg>
+          </a>
+          <a href="arthashieldfeatures.html" class="link-arrow">See all features <span aria-hidden="true">›</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="knowledge-graph" class="px-3 sm:px-6 pb-24 sm:pb-32 scroll-mt-20">
+      <div class="kg-stage relative mx-auto max-w-7xl rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden text-white">
+        <div class="kg-grid absolute inset-0 pointer-events-none"></div>
+
+        <div class="relative px-5 pt-14 sm:px-12 sm:pt-20 text-center fade-up">
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80">
+            <span class="h-1.5 w-1.5 rounded-full bg-gradient-to-tr from-sky-400 to-violet-400"></span>
+            Introducing the ArthaShield Knowledge Graph
+          </span>
+          <h2 class="headline mt-6 text-4xl sm:text-6xl font-extrabold max-w-4xl mx-auto">
+            Connect the dots behind<br class="hidden sm:block"/> every financial decision.
+          </h2>
+          <p class="mt-6 text-base sm:text-lg text-white/65 max-w-2xl mx-auto leading-relaxed">
+            One contextual intelligence layer across customers, transactions, products, risks, regulations and operations — connecting what existing systems keep separate.
+          </p>
+        </div>
+
+        <div class="relative mx-auto max-w-5xl px-2 sm:px-8 mt-6 sm:mt-10">
+          <svg id="kgSvg" role="img" aria-label="ArthaShield knowledge graph linking customers, accounts, transactions, loans, merchants, counterparties, risk signals, regulations, AI recommendations and workflows"></svg>
+          <p id="kgCaption" class="mt-2 min-h-[3rem] text-center text-sm sm:text-base text-white/70 transition-opacity duration-300" aria-live="polite">Hover or tap a node to see how ArthaShield connects it.</p>
+        </div>
+
+        <div class="relative mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 px-5 text-xs text-white/60">
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-sky-400"></span>People</span>
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-indigo-400"></span>Money</span>
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-rose-400"></span>Risk &amp; regulation</span>
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-400"></span>Action</span>
+        </div>
+
+        <div class="relative mt-14 grid sm:grid-cols-3 border-t border-white/10">
+          <div class="px-8 py-8 sm:py-10 border-b sm:border-b-0 sm:border-r border-white/10">
+            <div class="text-3xl font-bold tracking-tight">10</div>
+            <p class="mt-1 text-sm text-white/60">connected entity types, from customer to regulation.</p>
+          </div>
+          <div class="px-8 py-8 sm:py-10 border-b sm:border-b-0 sm:border-r border-white/10">
+            <div class="text-3xl font-bold tracking-tight">1 layer</div>
+            <p class="mt-1 text-sm text-white/60">of context over the systems you already run.</p>
+          </div>
+          <div class="px-8 py-8 sm:py-10">
+            <div class="text-3xl font-bold tracking-tight">Every link</div>
+            <p class="mt-1 text-sm text-white/60">traceable — so every recommendation can be explained.</p>
+          </div>
+        </div>
+
+        <div class="relative flex flex-col sm:flex-row items-center justify-center gap-5 px-5 pb-14 sm:pb-16 pt-4">
+          <a href="knowledge-graph.html" class="btn-primary">Explore the Knowledge Graph</a>
+          <a href="arthashield-graph-js/index.html" class="inline-flex items-center gap-1 font-medium text-sky-300 hover:underline underline-offset-4">Open the live modeler <span aria-hidden="true">›</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-alt py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">Built for how finance<br class="hidden sm:block"/> actually works.</h2>
+          <p class="mt-5 text-lg muted">Fraud, audits and compliance shouldn't live in separate rooms.</p>
+        </div>
+
+        <div class="mt-16 grid gap-6 md:grid-cols-3">
+          <article class="surface rounded-3xl overflow-hidden flex flex-col fade-up">
+            <div class="aspect-square bg-white">
+              <img loading="lazy" decoding="async" src="images/challenge-sheild.webp" alt="Compliance lag trapped between CRM, core banking and email" class="h-full w-full object-cover soften-on-dark"/>
+            </div>
+            <div class="p-7">
+              <p class="text-xs font-semibold uppercase tracking-wider text-rose-500">The challenge</p>
+              <h3 class="mt-2 text-xl font-bold tracking-tight">Financial teams are losing time and money.</h3>
+              <ul class="mt-4 space-y-2 text-sm muted">
+                <li>Fraud signals are buried inside complaint data</li>
+                <li>Teams scramble during audits</li>
+                <li>Compliance and operations work in silos</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="surface rounded-3xl overflow-hidden flex flex-col fade-up">
+            <div class="aspect-square bg-black">
+              <img loading="lazy" decoding="async" src="images/safe-trusted-ai.webp" alt="Safe and trusted AI" class="h-full w-full object-cover"/>
+            </div>
+            <div class="p-7">
+              <p class="text-xs font-semibold uppercase tracking-wider accent">The answer</p>
+              <h3 class="mt-2 text-xl font-bold tracking-tight">A decision intelligence layer for BFSI.</h3>
+              <p class="mt-4 text-sm muted">ArthaShield makes CRM and workflows financially intelligent — safely, and with a human in the loop.</p>
+            </div>
+          </article>
+
+          <article class="surface rounded-3xl overflow-hidden flex flex-col fade-up">
+            <div class="aspect-square bg-white">
+              <img loading="lazy" decoding="async" src="images/shield-agents.webp" alt="ArthaShield orchestration agents stack" class="h-full w-full object-cover soften-on-dark"/>
+            </div>
+            <div class="p-7">
+              <p class="text-xs font-semibold uppercase tracking-wider text-emerald-500">The agents</p>
+              <h3 class="mt-2 text-xl font-bold tracking-tight">Orchestration agents that act.</h3>
+              <ul class="mt-4 space-y-2 text-sm muted">
+                <li>KYC Risk Agent</li>
+                <li>Fraud Intelligence Agent</li>
+                <li>Complaint Management Agent</li>
+                <li>Regulatory Intelligence Agent</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">How ArthaShield works.</h2>
+          <p class="mt-5 text-lg muted">Risk readiness, ongoing monitoring, governance controls and audit-ready outputs — generated automatically, in one platform.</p>
+        </div>
+
+        <div class="mt-16 grid gap-px md:grid-cols-3 rounded-3xl overflow-hidden border hairline bg-[color:var(--line)] fade-up">
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold muted">01</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">AI Risk Readiness</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Pre-deployment risk checks so every AI model is compliant, explainable and audit-ready before go-live.</p>
+            <a href="pdi-maintenance.html" class="link-arrow mt-6 text-sm">AI Risk Monitor <span aria-hidden="true">›</span></a>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold muted">02</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">Ongoing Monitoring</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Classifies and analyses incoming cases to detect drift, anomalies and compliance violations.</p>
+            <a href="pdi-maintenance.html#ongoing-autopilot" class="link-arrow mt-6 text-sm">Control Center <span aria-hidden="true">›</span></a>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold muted">03</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">Governance &amp; Audit</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Role-based approvals, audit-ready dashboards and ISO-aligned governance controls.</p>
+            <a href="governance-audit.html" class="link-arrow mt-6 text-sm">Governance <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="autopilot-assistant.html" class="btn-primary">See ArthaShield in Action</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-3 sm:px-6 pb-24 sm:pb-32">
+      <style>
+        @keyframes aswFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        @keyframes aswSpark { 0%,100%{opacity:.45;transform:scale(.85)} 50%{opacity:1;transform:scale(1.15)} }
+        @keyframes aswBlink { 0%,92%,100%{transform:scaleY(1)} 96%{transform:scaleY(.12)} }
+        .asw-float{ animation:aswFloat 4s ease-in-out infinite; transform-origin:center; }
+        .asw-spark{ animation:aswSpark 2s ease-in-out infinite; transform-origin:120px 16px; }
+        .asw-eyes{ animation:aswBlink 5s ease-in-out infinite; transform-origin:120px 110px; }
+        @media (prefers-reduced-motion: reduce){ .asw-float,.asw-spark,.asw-eyes{ animation:none; } }
+      </style>
+      <div class="mx-auto max-w-6xl surface rounded-[2rem] overflow-hidden fade-up">
+        <div class="grid md:grid-cols-2 items-center gap-8 p-8 sm:p-14">
+          <div class="order-2 md:order-1 flex justify-center">
+            <div class="relative">
+              <div class="absolute -top-1 right-0 sm:-right-6 bg-[color:var(--text)] text-[color:var(--bg)] text-xs font-medium px-3 py-1.5 rounded-full rounded-br-sm shadow-lg">What should happen next?</div>
+              <svg viewBox="0 0 240 270" class="w-56 h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arthi, the ArthaShield agent mascot">
+                <defs>
+                  <linearGradient id="aswGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#4f46e5"/>
+                  </linearGradient>
+                </defs>
+                <ellipse cx="120" cy="252" rx="64" ry="9" fill="#6366f1" opacity="0.18"/>
+                <g class="asw-float">
+                  <circle cx="46" cy="122" r="14" fill="url(#aswGrad)"/>
+                  <circle cx="194" cy="122" r="14" fill="url(#aswGrad)"/>
+                  <line x1="120" y1="48" x2="120" y2="24" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+                  <g class="asw-spark">
+                    <circle cx="120" cy="16" r="8" fill="#818cf8"/>
+                    <circle cx="120" cy="16" r="3" fill="#ffffff"/>
+                  </g>
+                  <rect x="50" y="48" width="140" height="150" rx="42" fill="url(#aswGrad)"/>
+                  <rect x="66" y="58" width="108" height="26" rx="13" fill="#ffffff" opacity="0.12"/>
+                  <rect x="72" y="86" width="96" height="56" rx="28" fill="#0f172a"/>
+                  <g class="asw-eyes">
+                    <circle cx="104" cy="110" r="11" fill="#e0f2fe"/>
+                    <circle cx="107" cy="112" r="4" fill="#1e293b"/>
+                    <circle cx="100" cy="106" r="2.4" fill="#ffffff"/>
+                    <circle cx="136" cy="110" r="11" fill="#e0f2fe"/>
+                    <circle cx="139" cy="112" r="4" fill="#1e293b"/>
+                    <circle cx="132" cy="106" r="2.4" fill="#ffffff"/>
+                  </g>
+                  <path d="M108 127 Q120 137 132 127" stroke="#38bdf8" stroke-width="4" fill="none" stroke-linecap="round"/>
+                  <circle cx="88" cy="123" r="5" fill="#f472b6" opacity="0.35"/>
+                  <circle cx="152" cy="123" r="5" fill="#f472b6" opacity="0.35"/>
+                  <path d="M120 152 l18 7 v12 c0 13 -9 20 -18 25 c-9 -5 -18 -12 -18 -25 v-12 z" fill="#ffffff" opacity="0.95"/>
+                  <path d="M112 173 l6 6 l11 -12" stroke="#2563eb" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="order-1 md:order-2 text-center md:text-left">
+            <p class="text-sm font-semibold accent mb-3">Shaping what's next</p>
+            <h2 class="headline text-4xl sm:text-5xl font-extrabold">Meet the agents behind the next move.</h2>
+            <p class="mt-5 muted max-w-lg mx-auto md:mx-0 leading-relaxed">
+              Autonomous, human-approved AI agents for RRBs, UCBs, NBFCs and Fintechs — across KYC, AML, credit, collections, settlement and complaints. Each one turns a challenge into an action.
+            </p>
+            <a href="agentic-use-cases.html" class="btn-primary mt-8">
+              Explore the top 10 agentic use cases
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="credibility" class="bg-alt py-24 sm:py-32 scroll-mt-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">Built on global<br class="hidden sm:block"/> compliance standards.</h2>
+          <p class="mt-5 text-lg muted">We align with leading AI governance programmes and research to keep our approach auditable, principled and regulator-friendly.</p>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <article class="surface rounded-3xl p-8 flex flex-col gap-5 fade-up">
+            <div class="flex items-center gap-4">
+              <img loading="lazy" decoding="async" src="scf-media.png" alt="Secure Controls Framework logo" class="h-12 w-12 rounded-xl bg-white object-contain p-1"/>
+              <h3 class="text-lg font-semibold tracking-tight">Secure Controls Framework (SCF)</h3>
+            </div>
+            <p class="text-sm muted leading-relaxed">A comprehensive open-source cybersecurity and privacy control library that unifies fragmented requirements into a single, auditable control system — enabling faster execution, simpler audits and scalable governance as regulations evolve.</p>
+            <div class="mt-auto flex flex-wrap items-center justify-between gap-4 pt-2">
+              <a href="https://securecontrolsframework.com/free-scf-content/scf-download/" target="_blank" rel="noopener noreferrer" class="link-arrow text-sm">Download SCF <span aria-hidden="true">↗</span></a>
+              <div class="flex gap-2 text-xs muted">
+                <span class="px-2.5 py-1 rounded-full border hairline">Research-backed</span>
+                <span class="px-2.5 py-1 rounded-full border hairline">Auditable</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="surface rounded-3xl p-8 flex flex-col gap-5 fade-up">
+            <div class="flex items-center gap-4">
+              <img loading="lazy" decoding="async" src="world-economic-forum-1.svg" alt="World Economic Forum logo" class="h-12 w-12 rounded-xl object-contain"/>
+              <h3 class="text-lg font-semibold tracking-tight">World Economic Forum — AI Governance Alliance</h3>
+            </div>
+            <p class="text-sm muted leading-relaxed">Practical, multi-stakeholder playbooks for aligning AI deployment with public interest and regulatory expectations. We use its cross-industry standards and checklists for governance-ready product design and stakeholder reporting.</p>
+            <div class="mt-auto flex flex-wrap items-center justify-between gap-4 pt-2">
+              <a href="https://initiatives.weforum.org/ai-governance-alliance/home" target="_blank" rel="noopener noreferrer" class="link-arrow text-sm">Explore WEF Alliance <span aria-hidden="true">↗</span></a>
+              <div class="flex gap-2 text-xs muted">
+                <span class="px-2.5 py-1 rounded-full border hairline">Multi-stakeholder</span>
+                <span class="px-2.5 py-1 rounded-full border hairline">Practical</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="mt-8 text-center text-xs muted">We reference these programmes to show our alignment with global governance thinking.</p>
+      </div>
+    </section>
+
+    <section id="trust-compliance" class="py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="flex flex-col lg:flex-row gap-12 lg:items-center">
+          <div class="flex-1 fade-up">
+            <h2 class="headline text-4xl sm:text-5xl font-extrabold">Trust, by design.</h2>
+            <p class="mt-5 text-lg muted max-w-2xl">Every AI decision is traceable and audit-ready. No black-box risk.</p>
+
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-7">
+              <div class="flex items-start gap-4">
+                <svg class="h-6 w-6 flex-shrink-0 accent" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+                <div>
+                  <div class="font-semibold">Explainable decisions</div>
+                  <div class="mt-1 text-sm muted">Traceable reasoning for model outputs, designed for auditor review.</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <svg class="h-6 w-6 flex-shrink-0 accent" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7h18M3 12h18M3 17h18"/>
+                </svg>
+                <div>
+                  <div class="font-semibold">Audit trail &amp; versioning</div>
+                  <div class="mt-1 text-sm muted">Immutable logs of model changes, decision contexts and compliance actions.</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <svg class="h-6 w-6 flex-shrink-0 accent" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                  <div class="font-semibold">Governance controls</div>
+                  <div class="mt-1 text-sm muted">Role-based approvals, policy guardrails and human-in-the-loop checkpoints.</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <svg class="h-6 w-6 flex-shrink-0 accent" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/>
+                </svg>
+                <div>
+                  <div class="font-semibold">Certification readiness</div>
+                  <div class="mt-1 text-sm muted">Designed to align with ISO/IEC 42001:2023 AI management systems.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10 flex flex-wrap items-center gap-6">
+              <a href="api-platform.html" class="btn-primary">API Reference</a>
+              <a href="arthashieldfeatures.html#contact" class="link-arrow">Request a technical brief <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-80 flex-shrink-0 fade-up">
+            <div class="surface rounded-3xl p-8 text-center">
+              <img loading="lazy" decoding="async" src="ISO-42001-2023-1.webp" alt="ISO/IEC 42001:2023 badge" class="mx-auto h-24 w-24 rounded-2xl bg-white object-contain p-2"/>
+              <div class="mt-5 font-semibold">ISO/IEC 42001:2023</div>
+              <div class="mt-2 text-sm muted">Aligned AI management practices for governance &amp; safety.</div>
+              <div class="mt-4 text-xs muted leading-relaxed">Designed with ISO alignment in mind — supporting the auditability, governance and explainability modern regulators require.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-alt border-t hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <a href="knowledge-graph.html" class="group mb-14 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl kg-stage px-6 py-5 text-white">
+        <div>
+          <div class="text-xs font-medium text-white/60">New</div>
+          <div class="text-lg font-semibold tracking-tight">The ArthaShield Knowledge Graph</div>
+        </div>
+        <span class="inline-flex items-center gap-1 text-sm font-medium text-sky-300 group-hover:underline underline-offset-4">Connect the dots <span aria-hidden="true">›</span></span>
+      </a>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
+        <div>
+          <h4 class="font-semibold mb-4">Solutions</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">Complaint Intelligence</a></li>
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">AI Based KYC Risk Detection</a></li>
+            <li><a href="autopilot-assistant.html" class="hover:text-[color:var(--text)]">Regulatory Copilot</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">Dispute Resolution Engine</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Flagship Offering</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="CaseIntelligence.html" class="hover:text-[color:var(--text)]">AI based Case Intelligence</a></li>
+            <li><a href="responsible-design.html" class="hover:text-[color:var(--text)]">Responsible Design Loop™ ♾️</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Data Security</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="ai-security.html#llm-judge" class="hover:text-[color:var(--text)]">LLM-as-Judge</a></li>
+            <li><a href="ai-security.html#agentic-security" class="hover:text-[color:var(--text)]">Agentic Security</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">SOC 2</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">ISO 27001</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">NIST AI RMF</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="knowledge-graph.html" class="font-medium text-[color:var(--text)] hover:underline underline-offset-4">Knowledge Graph</a></li>
+            <li><a href="arthashield-graph-js/index.html" class="hover:text-[color:var(--text)]">Intelligence Modeler</a></li>
+            <li><a href="agentic-use-cases.html" class="hover:text-[color:var(--text)]">Agentic AI Use Cases</a></li>
+            <li><a href="how-case-intel-works.html" class="hover:text-[color:var(--text)]">Case Intelligence Architecture</a></li>
+            <li><a href="api-platform.html" class="hover:text-[color:var(--text)]">API Documentation</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t hairline mt-14 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs muted">
+        <p>© 2025 ArthaShield. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-[color:var(--text)]">Privacy Policy</a>
+          <a href="#" class="hover:text-[color:var(--text)]">Terms of Service</a>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+
+<script src="js/site.js" defer></script>
+<script src="js/knowledge-graph.js" defer></script>
 </body>
-<script>
-// Scroll animations
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); } });
-    }, {threshold: 0.12});
-    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-	
-	  const menuButton = document.getElementById("menuButton");
-	  const mobileMenu = document.getElementById("mobileMenu");
-
-	  menuButton.addEventListener("click", () => {
-		if (mobileMenu.classList.contains("max-h-0")) {
-		  mobileMenu.classList.remove("max-h-0");
-		  mobileMenu.classList.add("max-h-screen"); // expands smoothly
-		} else {
-		  mobileMenu.classList.add("max-h-0");
-		  mobileMenu.classList.remove("max-h-screen");
-		}
-	  });
-	  
-	  const resBtn = document.getElementById('mobileResourcesBtn');
-  const resMenu = document.getElementById('mobileResourcesMenu');
-  const resArrow = document.getElementById('mobileResourcesArrow');
-
-  resBtn.addEventListener('click', () => {
-    if (resMenu.classList.contains('max-h-0')) {
-      resMenu.classList.remove('max-h-0');
-      resMenu.classList.add('max-h-96'); // expand dropdown
-      resArrow.classList.add('rotate-180'); // arrow up
-    } else {
-      resMenu.classList.add('max-h-0');
-      resMenu.classList.remove('max-h-96'); // collapse dropdown
-      resArrow.classList.remove('rotate-180'); // arrow down
-    }
-  });
-  
-   const desktopBtn = document.getElementById('desktopResourcesBtn');
-  const desktopMenu = document.getElementById('desktopResourcesMenu');
-  const desktopArrow = document.getElementById('desktopResourcesArrow');
-
-  desktopBtn.addEventListener('click', () => {
-    if (desktopMenu.classList.contains('max-h-0')) {
-      desktopMenu.classList.remove('max-h-0');
-      desktopMenu.classList.add('max-h-96'); // expand
-      desktopArrow.classList.add('rotate-180'); // arrow up
-    } else {
-      desktopMenu.classList.add('max-h-0');
-      desktopMenu.classList.remove('max-h-96'); // collapse
-      desktopArrow.classList.remove('rotate-180'); // arrow down
-    }
-  });
-
-  // Optional: close dropdown if click outside
-  document.addEventListener('click', (e) => {
-    if (!desktopBtn.contains(e.target) && !desktopMenu.contains(e.target)) {
-      desktopMenu.classList.add('max-h-0');
-      desktopMenu.classList.remove('max-h-96');
-      desktopArrow.classList.remove('rotate-180');
-    }
-  });
-	  
-  // FAQ toggle
-  document.querySelectorAll(".faq-question").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const answer = btn.nextElementSibling;
-      const svg = btn.querySelector("svg");
-
-      answer.classList.toggle("hidden");
-      svg.classList.toggle("rotate-180");
-    });
-  });
-
-  </script>
 </html>
