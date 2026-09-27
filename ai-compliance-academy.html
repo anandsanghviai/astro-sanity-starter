@@ -237,8 +237,7 @@
     topics.forEach(btn => btn.addEventListener("click", () => handleInput(btn.textContent)));
 
     // Theme toggle
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-      document.documentElement.classList.add('dark');
+    document.documentElement.classList.add('dark');
 
     document.getElementById("themeToggle").addEventListener("click", () => {
       document.documentElement.classList.toggle("dark");

@@ -15,7 +15,7 @@
       var root = document.documentElement;
       var saved = null;
       try { saved = localStorage.getItem('theme'); } catch (e) {}
-      var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = saved ? saved === 'dark' : true;
       root.classList.toggle('dark', isDark);
       root.classList.add('js');
     })();
