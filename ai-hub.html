@@ -1,173 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ArthaShield AI Hub</title>
+  <meta name="description" content="The central gateway to all of ArthaShield’s AI capabilities — explore our agents, oversight tools, APIs, and more."/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+  <!-- Runs before paint so a saved night-mode choice never flashes white -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var isDark = saved ? saved === 'dark' : true;
+      root.classList.toggle('dark', isDark);
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="css/arthashield.css?v=3"/>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
 
-  <!-- Navbar -->
+<body class="min-h-screen">
+
   <header class="sticky top-0 z-40">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mt-4 mb-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm ring-1 ring-white/10 glass dark:glass-dark">
-        <a href="index.html" class="flex items-center gap-3 font-semibold">
-          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-11 w-auto" />
-          <span>ArthaShield AI</span>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+        <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-9 w-9 rounded-xl bg-white object-contain"/>
+          <span>ArthaShield</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-300">
-          <a href="arthashieldfeatures.html#features" class="hover:text-slate-900 dark:hover:text-white">Features</a>
-          <a href="arthashieldfeatures.html#demo" class="hover:text-slate-900 dark:hover:text-white">Demo</a>
-          <a href="ai-hub.html" class="text-blue-600 dark:text-blue-400 font-semibold">Explore AI Hub</a>
-		  <a href="general-blog.html" class="text-blue-600 dark:text-blue-400 font-semibold">Blog</a>
-          <a href="arthashieldfeatures.html#contact" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm muted">
+          <a href="arthashieldfeatures.html#features" class="hover:text-[color:var(--text)] transition">Features</a>
+          <a href="ai-hub.html" class="font-medium text-[color:var(--text)]" aria-current="page">AI Hub</a>
+          <a href="knowledge-graph.html" class="hover:text-[color:var(--text)] transition">Knowledge Graph</a>
+          <a href="general-blog.html" class="hover:text-[color:var(--text)] transition">Blog</a>
+          <a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)] transition">Contact</a>
         </nav>
-		<button id="menuButton" class="md:hidden flex items-center text-slate-700 dark:text-slate-200 focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"/>
-      </svg>
-    </button>
+
+        <div class="flex items-center gap-1">
+          <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+            <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+            </svg>
+          </button>
+          <a href="arthashieldfeatures.html#demo" class="hidden md:inline-flex ml-1 rounded-full bg-[color:var(--text)] text-[color:var(--bg)] px-4 py-1.5 text-sm font-medium hover:opacity-85 transition">Demo</a>
+          <button id="menuButton" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-	
-	<div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
-    <div class="mx-4 mt-2 rounded-2xl backdrop-blur bg-white/80 dark:bg-slate-800/80 shadow-xl ring-1 ring-black/10 p-4 space-y-4">
-      <a href="arthashieldfeatures.html#features" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Features</a>
-      <a href="arthashieldfeatures.html#demo" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Live Demo</a>
-      <a href="arthashieldfeatures.html#sandbox" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Sandbox Video</a>
-      <a href="arthashieldfeatures.html#security" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Security</a>
-      <a href="ai-hub.html" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Explore AI Hub</a>
-      <a href="arthashieldfeatures.html#compliance" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Compliance</a>
-      <a href="arthashieldfeatures.html#contact" class="block text-slate-700 dark:text-slate-200 hover:text-blue-600">Contact</a>
+
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+      <div class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]">
+        <a href="arthashieldfeatures.html#features" class="block">Features</a>
+        <a href="arthashieldfeatures.html#sandbox" class="block">Sandbox Video</a>
+        <a href="arthashieldfeatures.html#security" class="block">Security</a>
+        <a href="arthashieldfeatures.html#compliance" class="block">Compliance</a>
+        <a href="ai-hub.html" class="block font-semibold accent" aria-current="page">Explore AI Hub</a>
+        <a href="knowledge-graph.html" class="block">Knowledge Graph</a>
+        <a href="general-blog.html" class="block">Blog</a>
+        <a href="arthashieldfeatures.html#contact" class="block">Contact</a>
+        <a href="arthashieldfeatures.html#demo" class="btn-primary w-full justify-center">Live Demo</a>
+      </div>
     </div>
-  </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="flex flex-col items-center text-center py-16 px-6">
-    <h1 class="text-4xl font-bold mb-4">ArthaShield AI Hub</h1>
-    <p class="max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-      The central gateway to all of ArthaShield’s AI capabilities — explore our agents, oversight tools, APIs, and more.
-    </p>
-  </section>
+  <main>
 
-  <!-- Hub Sections -->
-  <section class="max-w-6xl mx-auto px-6 grid gap-8 md:grid-cols-2 lg:grid-cols-2 mb-20">
-
-    <!-- AI Agents -->
-    <div class="rounded-2xl glass dark:glass-dark p-6 shadow hover:shadow-lg transition">
-      <h2 class="text-2xl font-semibold mb-2">AI Agents</h2>
-      <p class="text-slate-600 dark:text-slate-300 mb-4">
-        Specialized agents designed to handle compliance, security, oversight, and integrations.
-      </p>
-      <a href="ai-agents.html" class="text-blue-600 dark:text-blue-400 hover:underline">Explore AI Agents →</a>
-    </div>
-
-    <!-- Oversight Tree -->
-    <div class="rounded-2xl glass dark:glass-dark p-6 shadow hover:shadow-lg transition">
-      <h2 class="text-2xl font-semibold mb-2">Oversight Organization Tree</h2>
-      <p class="text-slate-600 dark:text-slate-300 mb-4">
-        A transparent view of governance and responsibility for AI oversight within your organization.
-      </p>
-      <a href="ai-oversight.html" class="text-indigo-600 dark:text-indigo-400 hover:underline">View Oversight Tree →</a>
-    </div>
-
-    <!-- API Platform -->
-    <div class="rounded-2xl glass dark:glass-dark p-6 shadow hover:shadow-lg transition">
-      <h2 class="text-2xl font-semibold mb-2">API Platform</h2>
-      <p class="text-slate-600 dark:text-slate-300 mb-4">
-        Secure APIs and integration tools to extend ArthaShield’s AI capabilities into your ecosystem.
-      </p>
-      <a href="api-platform.html" class="text-emerald-600 dark:text-emerald-400 hover:underline">Explore APIs →</a>
-    </div>
-
-    <!-- Others -->
-    <div class="rounded-2xl glass dark:glass-dark p-6 shadow hover:shadow-lg transition">
-      <h2 class="text-2xl font-semibold mb-2">Others</h2>
-      <p class="text-slate-600 dark:text-slate-300 mb-4">
-        Additional AI utilities and experimental modules under development.
-      </p>
-      <a href="#" class="text-slate-600 dark:text-slate-300 hover:underline">See More →</a>
-    </div>
-
-  </section>
-  
-  
-
-  <!-- Footer -->
-  
-
-	<script>
-	const observer = new IntersectionObserver((entries)=>{
-		  entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); } });
-		}, {threshold: 0.12});
-    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-	
-	  const menuButton = document.getElementById("menuButton");
-	  const mobileMenu = document.getElementById("mobileMenu");
-
-	  menuButton.addEventListener("click", () => {
-		if (mobileMenu.classList.contains("max-h-0")) {
-		  mobileMenu.classList.remove("max-h-0");
-		  mobileMenu.classList.add("max-h-screen"); // expands smoothly
-		} else {
-		  mobileMenu.classList.add("max-h-0");
-		  mobileMenu.classList.remove("max-h-screen");
-		}
-	  });
-  </script>
-  
-
-<footer class="bg-slate-900 text-slate-300">
-  <div class="max-w-7xl mx-auto px-6 py-16">
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10">
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Solutions</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="pdi-maintenance.html" class="hover:text-white">Complaint Intelligence</a></li>
-          <li><a href="pdi-maintenance.html" class="hover:text-white">AI Based KYC Risk Detection</a></li>
-          <li><a href="autopilot-assistant.html" class="hover:text-white">Regulatory Copilot</a></li>
-          <li><a href="#" class="hover:text-white">Dispute Resolution Engine</a></li>
-        </ul>
+    <section class="relative -mt-16 pt-36 pb-16 sm:pt-44 sm:pb-20 hero-glow overflow-hidden">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 text-center">
+        <p class="text-lg sm:text-xl font-semibold accent mb-5 tracking-tight">ArthaShield AI Hub</p>
+        <h1 class="headline text-4xl sm:text-6xl lg:text-7xl font-extrabold">
+          Every AI capability.<br class="hidden sm:block"/> <span class="text-gradient">One place.</span>
+        </h1>
+        <p class="mt-7 text-lg sm:text-xl muted max-w-2xl mx-auto leading-relaxed">
+          The central gateway to all of ArthaShield’s AI capabilities — explore our agents, oversight tools, APIs, and more.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+          <a href="ai-agents.html" class="btn-primary">Explore AI Agents</a>
+          <a href="arthashieldfeatures.html#demo" class="link-arrow">See the demo <span aria-hidden="true">›</span></a>
+        </div>
       </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Flagship Offering</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="CaseIntelligence.html" class="hover:text-white">AI based Case Intelligence</a></li>
-          <li><a href="responsible-design.html" class="hover:text-white">Responsible Design Loop™ ♾️</a></li>
-        </ul>
+    </section>
+
+    <section class="pb-24 sm:pb-32">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="grid gap-px md:grid-cols-2 rounded-3xl overflow-hidden border hairline bg-[color:var(--line)] fade-up">
+          <div class="bg-[color:var(--bg)] p-8 sm:p-12 flex flex-col">
+            <div class="text-sm font-semibold muted">01</div>
+            <h2 class="mt-6 text-2xl sm:text-3xl font-bold tracking-tight">AI Agents</h2>
+            <p class="mt-3 mb-8 muted leading-relaxed">Specialized agents designed to handle compliance, security, oversight, and integrations.</p>
+            <a href="ai-agents.html" class="link-arrow mt-auto">Explore AI Agents <span aria-hidden="true">›</span></a>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-12 flex flex-col">
+            <div class="text-sm font-semibold muted">02</div>
+            <h2 class="mt-6 text-2xl sm:text-3xl font-bold tracking-tight">Oversight Organization Tree</h2>
+            <p class="mt-3 mb-8 muted leading-relaxed">A transparent view of governance and responsibility for AI oversight within your organization.</p>
+            <a href="ai-oversight.html" class="link-arrow mt-auto">View Oversight Tree <span aria-hidden="true">›</span></a>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-12 flex flex-col">
+            <div class="text-sm font-semibold muted">03</div>
+            <h2 class="mt-6 text-2xl sm:text-3xl font-bold tracking-tight">API Platform</h2>
+            <p class="mt-3 mb-8 muted leading-relaxed">Secure APIs and integration tools to extend ArthaShield’s AI capabilities into your ecosystem.</p>
+            <a href="api-platform.html" class="link-arrow mt-auto">Explore APIs <span aria-hidden="true">›</span></a>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-12 flex flex-col">
+            <div class="text-sm font-semibold muted">04</div>
+            <h2 class="mt-6 text-2xl sm:text-3xl font-bold tracking-tight">Others</h2>
+            <p class="mt-3 mb-8 muted leading-relaxed">Additional AI utilities and experimental modules under development.</p>
+            <a href="#" class="link-arrow mt-auto">See More <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
       </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Data Security</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="ai-security.html#llm-judge" class="hover:text-white">LLM-as-Judge</a></li>
-          <li><a href="ai-security.html#agentic-security" class="hover:text-white">Agentic Security</a></li>
-          <li><a href="#" class="hover:text-white">SOC 2</a></li>
-          <li><a href="#" class="hover:text-white">ISO 27001</a></li>
-          <li><a href="#" class="hover:text-white">NIST AI RMF</a></li>
-        </ul>
+    </section>
+
+  </main>
+
+  <footer class="bg-alt border-t hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <a href="knowledge-graph.html" class="group mb-14 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl kg-stage px-6 py-5 text-white">
+        <div>
+          <div class="text-xs font-medium text-white/60">New</div>
+          <div class="text-lg font-semibold tracking-tight">The ArthaShield Knowledge Graph</div>
+        </div>
+        <span class="inline-flex items-center gap-1 text-sm font-medium text-sky-300 group-hover:underline underline-offset-4">Connect the dots <span aria-hidden="true">›</span></span>
+      </a>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
+        <div>
+          <h4 class="font-semibold mb-4">Solutions</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">Complaint Intelligence</a></li>
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">AI Based KYC Risk Detection</a></li>
+            <li><a href="autopilot-assistant.html" class="hover:text-[color:var(--text)]">Regulatory Copilot</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">Dispute Resolution Engine</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Flagship Offering</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="CaseIntelligence.html" class="hover:text-[color:var(--text)]">AI based Case Intelligence</a></li>
+            <li><a href="responsible-design.html" class="hover:text-[color:var(--text)]">Responsible Design Loop™ ♾️</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Data Security</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="ai-security.html#llm-judge" class="hover:text-[color:var(--text)]">LLM-as-Judge</a></li>
+            <li><a href="ai-security.html#agentic-security" class="hover:text-[color:var(--text)]">Agentic Security</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">SOC 2</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">ISO 27001</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">NIST AI RMF</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="knowledge-graph.html" class="font-medium text-[color:var(--text)] hover:underline underline-offset-4">Knowledge Graph</a></li>
+            <li><a href="agentic-use-cases.html" class="hover:text-[color:var(--text)]">Agentic AI Use Cases</a></li>
+            <li><a href="arthashield-graph-js/index.html" class="hover:text-[color:var(--text)]">Intelligence Modeler</a></li>
+            <li><a href="how-case-intel-works.html" class="hover:text-[color:var(--text)]">Case Intelligence Architecture</a></li>
+            <li><a href="api-platform.html" class="hover:text-[color:var(--text)]">API Documentation</a></li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <h4 class="text-m font-semibold text-white mb-4">Resources</h4>
-        <ul class="space-y-2 text-m">
-          <li><a href="knowledge-graph.html" class="hover:text-white">Knowledge Graph</a></li>
-          <li><a href="agentic-use-cases.html" class="hover:text-white">Agentic AI Use Cases</a></li>
-          <li><a href="arthashield-graph-js/index.html" class="hover:text-white">Intelligence Modeler</a></li>
-          <li><a href="how-case-intel-works.html" class="hover:text-white">Case Intelligence Architecture</a></li>
-          <li><a href="api-platform.html" class="hover:text-white">API Documentation</a></li>
-        </ul>
+
+      <div class="border-t hairline mt-14 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs muted">
+        <p>© 2026 ArthaShield. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-[color:var(--text)]">Privacy Policy</a>
+          <a href="#" class="hover:text-[color:var(--text)]">Terms of Service</a>
+        </div>
       </div>
     </div>
-    <div class="border-t border-slate-800 mt-14 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-      <p>© 2025 ArthaShield. All rights reserved.</p>
-      <div class="flex space-x-6 mt-4 md:mt-0">
-        <a href="#" class="hover:text-white">Privacy Policy</a>
-        <a href="#" class="hover:text-white">Terms of Service</a>
-      </div>
-    </div>
-  </div>
-</footer>
+  </footer>
+
+<script src="js/site.js" defer></script>
 </body>
 </html>

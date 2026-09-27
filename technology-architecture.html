@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technology Architecture | ArthaShield</title>
+  <meta name="description" content="How ArthaShield makes compliance decisions with a typed decision model instead of a general-purpose LLM, on a compliance-first Apache data foundation."/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+  <!-- Runs before paint so a saved night-mode choice never flashes white -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var isDark = saved ? saved === 'dark' : true;
+      root.classList.toggle('dark', isDark);
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="css/arthashield.css?v=3"/>
+</head>
+
+<body class="min-h-screen">
+
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+        <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" class="h-9 w-9 rounded-xl bg-white object-contain"/>
+          <span>ArthaShield</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm muted">
+          <a href="arthashieldfeatures.html#features" class="hover:text-[color:var(--text)] transition">Features</a>
+          <a href="ai-hub.html" class="hover:text-[color:var(--text)] transition">AI Hub</a>
+          <a href="knowledge-graph.html" class="hover:text-[color:var(--text)] transition">Knowledge Graph</a>
+          <a href="technology-architecture.html" class="font-medium text-[color:var(--text)]" aria-current="page">Architecture</a>
+          <a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)] transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-1">
+          <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+            <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+            </svg>
+          </button>
+          <a href="arthashieldfeatures.html#demo" class="hidden md:inline-flex ml-1 rounded-full bg-[color:var(--text)] text-[color:var(--bg)] px-4 py-1.5 text-sm font-medium hover:opacity-85 transition">Demo</a>
+          <button id="menuButton" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden">
+      <div class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]">
+        <a href="arthashieldfeatures.html#features" class="block">Features</a>
+        <a href="ai-hub.html" class="block">AI Hub</a>
+        <a href="knowledge-graph.html" class="block">Knowledge Graph</a>
+        <a href="technology-architecture.html" class="block font-semibold accent" aria-current="page">Architecture</a>
+        <a href="arthashieldfeatures.html#contact" class="block">Contact</a>
+        <a href="arthashieldfeatures.html#demo" class="btn-primary w-full justify-center">Live Demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="relative -mt-16 pt-36 pb-16 sm:pt-44 sm:pb-20 hero-glow overflow-hidden">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 text-center">
+        <p class="text-lg sm:text-xl font-semibold accent mb-5 tracking-tight">ArthaShield Technology Architecture</p>
+        <h1 class="headline text-4xl sm:text-6xl lg:text-7xl font-extrabold">
+          Typed decisions.<br class="hidden sm:block"/> <span class="text-gradient">Not prompts.</span>
+        </h1>
+        <p class="mt-7 text-lg sm:text-xl muted max-w-2xl mx-auto leading-relaxed">
+          ArthaShield makes compliance decisions with a typed decision model instead of a general-purpose LLM —
+          on a compliance-first, privacy-by-design Apache data foundation.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+          <a href="#pipeline" class="btn-primary">See the pipeline</a>
+          <a href="#why-not-llm" class="link-arrow">Why not an LLM <span aria-hidden="true">›</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline: the showcase -->
+    <section id="pipeline" class="px-3 sm:px-6 pb-24 sm:pb-32 scroll-mt-20">
+      <div class="kg-stage relative mx-auto max-w-7xl rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden text-white px-4 py-14 sm:px-12 sm:py-20">
+        <div class="kg-grid absolute inset-0 pointer-events-none"></div>
+        <div class="relative text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-6xl font-extrabold">State in. Decision out.</h2>
+          <p class="mt-5 text-lg text-white/65">No general-purpose LLM in the decision path.</p>
+        </div>
+
+        <ol class="relative mt-14 grid gap-3 md:grid-cols-5 fade-up">
+          <li class="console-panel rounded-2xl p-5">
+            <div class="text-xs font-semibold text-white/50">01 · Ingest</div>
+            <div class="mt-2 text-lg font-semibold tracking-tight">Capture &amp; redact</div>
+            <p class="mt-2 text-sm text-white/60 leading-relaxed">Complaints stream in; personal data is anonymized or redacted before long-term storage.</p>
+            <div class="mt-4 text-xs font-medium text-sky-300">Apache Pulsar</div>
+          </li>
+          <li class="console-panel rounded-2xl p-5">
+            <div class="text-xs font-semibold text-white/50">02 · Structure</div>
+            <div class="mt-2 text-lg font-semibold tracking-tight">Understand the text</div>
+            <p class="mt-2 text-sm text-white/60 leading-relaxed">Explainable NLP extracts products, channels and issues into structured state.</p>
+            <div class="mt-4 text-xs font-medium text-sky-300">OpenNLP · Spark NLP</div>
+          </li>
+          <li class="rounded-2xl p-5 bg-white/10 border border-sky-300/40">
+            <div class="text-xs font-semibold text-sky-300">03 · Decide</div>
+            <div class="mt-2 text-lg font-semibold tracking-tight">Typed decision</div>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Jev answers typed questions against that state — a label plus a calibrated confidence. Never free text.</p>
+            <div class="mt-4 text-xs font-medium text-sky-300">Jev · Choice + Noul</div>
+          </li>
+          <li class="console-panel rounded-2xl p-5">
+            <div class="text-xs font-semibold text-white/50">04 · Act</div>
+            <div class="mt-2 text-lg font-semibold tracking-tight">Gate &amp; route</div>
+            <p class="mt-2 text-sm text-white/60 leading-relaxed">Plain code maps the decision to an action. Low confidence goes to a human.</p>
+            <div class="mt-4 text-xs font-medium text-sky-300">Deterministic code</div>
+          </li>
+          <li class="console-panel rounded-2xl p-5">
+            <div class="text-xs font-semibold text-white/50">05 · Audit</div>
+            <div class="mt-2 text-lg font-semibold tracking-tight">Record everything</div>
+            <p class="mt-2 text-sm text-white/60 leading-relaxed">Every decision is logged before the response; access is role-based and monitored.</p>
+            <div class="mt-4 text-xs font-medium text-sky-300">Audit log · Apache Ranger</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Why not an LLM -->
+    <section id="why-not-llm" class="py-24 sm:py-32 bg-alt scroll-mt-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">Why not just ask an LLM?</h2>
+          <p class="mt-5 text-lg muted leading-relaxed">
+            Routing a complaint is a classification, not a conversation. With a general-purpose LLM you build a prompt,
+            parse free text back into a label, hope it's a valid one — and pay full LLM cost and latency every time.
+          </p>
+        </div>
+
+        <div class="mt-16 grid gap-px md:grid-cols-2 rounded-3xl overflow-hidden border hairline bg-[color:var(--line)] fade-up">
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold muted">01</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">Typed, constrained output</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Jev can only return one of the options it was given. No parsing step, and no chance of an invalid label.</p>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold muted">02</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">Calibrated confidence</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Every answer carries a confidence, so code decides when to act automatically and when to escalate — no costly "second opinion" call.</p>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold muted">03</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">Cheaper and faster</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">System One models are built for high-volume structured classification — exactly the workload of routing every complaint.</p>
+          </div>
+          <div class="bg-[color:var(--bg)] p-8 sm:p-10">
+            <div class="text-sm font-semibold muted">04</div>
+            <h3 class="mt-6 text-2xl font-bold tracking-tight">A narrow, auditable path</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">State, question, typed answer, code action, log entry. Every step can be shown to a regulator — what was decided, and why.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The first decision -->
+    <section class="py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">First decision · MVP</span>
+          <h2 class="headline mt-5 text-4xl sm:text-5xl font-extrabold">Complaint Risk &amp; Routing.</h2>
+          <p class="mt-5 text-lg muted leading-relaxed">
+            One call, five questions, answered in parallel: a <strong class="font-semibold text-[color:var(--text)]">choice</strong> across six routing decisions,
+            and four <strong class="font-semibold text-[color:var(--text)]">yes/no probabilities</strong> that become the reason codes.
+          </p>
+        </div>
+
+        <div class="mt-14 surface rounded-3xl overflow-x-auto fade-up">
+          <table class="w-full min-w-[560px] text-left text-sm">
+            <thead>
+              <tr class="border-b hairline muted">
+                <th scope="col" class="px-6 py-4 font-medium">Jev decides</th>
+                <th scope="col" class="px-6 py-4 font-medium">When</th>
+                <th scope="col" class="px-6 py-4 font-medium">Code then does</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[color:var(--line)]">
+              <tr><td class="px-6 py-4 font-mono text-xs font-semibold">LOW_RISK</td><td class="px-6 py-4 muted">Minor issue, low amount, no repeat pattern</td><td class="px-6 py-4 font-mono text-xs">AUTO_CLOSE_STANDARD</td></tr>
+              <tr><td class="px-6 py-4 font-mono text-xs font-semibold">MEDIUM_RISK</td><td class="px-6 py-4 muted">Some risk signals, none severe</td><td class="px-6 py-4 font-mono text-xs">ASSIGN_TO_SUPPORT_QUEUE</td></tr>
+              <tr><td class="px-6 py-4 font-mono text-xs font-semibold">HIGH_RISK</td><td class="px-6 py-4 muted">Multiple strong risk signals together</td><td class="px-6 py-4 font-mono text-xs">PRIORITY_QUEUE_REVIEW</td></tr>
+              <tr><td class="px-6 py-4 font-mono text-xs font-semibold">FRAUD_REVIEW</td><td class="px-6 py-4 muted">Strong combined signals of unauthorized activity</td><td class="px-6 py-4 font-mono text-xs">SEND_TO_FRAUD_INVESTIGATION</td></tr>
+              <tr><td class="px-6 py-4 font-mono text-xs font-semibold">COMPLIANCE_REVIEW</td><td class="px-6 py-4 muted">Regulatory, disclosure, mis-selling or data-privacy issue</td><td class="px-6 py-4 font-mono text-xs">SEND_TO_COMPLIANCE_TEAM</td></tr>
+              <tr><td class="px-6 py-4 font-mono text-xs font-semibold">HUMAN_REVIEW</td><td class="px-6 py-4 muted">Ambiguous or insufficient signals</td><td class="px-6 py-4 font-mono text-xs">ESCALATE_TO_HUMAN_REVIEWER</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-5 grid gap-5 md:grid-cols-2 fade-up">
+          <div class="surface rounded-3xl p-7">
+            <h3 class="text-lg font-bold tracking-tight">Reason codes</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">Each is an independent probability, included at 0.5 or above.</p>
+            <div class="mt-5 flex flex-wrap gap-2 font-mono text-xs">
+              <span class="rounded-full border hairline px-3 py-1">HIGH_AMOUNT</span>
+              <span class="rounded-full border hairline px-3 py-1">HIGH_CUSTOMER_RISK</span>
+              <span class="rounded-full border hairline px-3 py-1">RECENT_TRANSACTION</span>
+              <span class="rounded-full border hairline px-3 py-1">REPEATED_PATTERN</span>
+            </div>
+          </div>
+          <div class="surface rounded-3xl p-7">
+            <h3 class="text-lg font-bold tracking-tight">Confidence gate</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">
+              If Jev's confidence is below <span class="font-semibold text-[color:var(--text)]">0.6</span>, code overrides the decision to
+              <span class="font-mono text-xs font-semibold text-[color:var(--text)]">HUMAN_REVIEW</span> and adds
+              <span class="font-mono text-xs font-semibold text-[color:var(--text)]">LOW_MODEL_CONFIDENCE</span>. Ordinary application logic — not a second model call.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apache foundation -->
+    <section id="technology-stack" class="py-24 sm:py-32 bg-alt scroll-mt-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <h2 class="headline text-4xl sm:text-5xl font-extrabold">Built on Apache.<br class="hidden sm:block"/> Private by design.</h2>
+          <p class="mt-5 text-lg muted leading-relaxed">
+            The data layer prioritizes scalability, explainability, data minimization, and regulatory auditability
+            using proven Apache open-source technologies.
+          </p>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <article id="streaming-privacy" class="surface rounded-3xl p-7 fade-up scroll-mt-20">
+            <div class="text-sm font-semibold text-sky-600 dark:text-sky-400">Streaming &amp; privacy</div>
+            <h3 class="mt-3 text-xl font-bold tracking-tight">Apache Pulsar</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Real-time ingestion of complaints and case updates. Configurable retention keeps sensitive data short-lived, and Pulsar Functions anonymize or redact personal data before long-term storage.</p>
+          </article>
+          <article id="nlp" class="surface rounded-3xl p-7 fade-up scroll-mt-20">
+            <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">NLP · primary engine</div>
+            <h3 class="mt-3 text-xl font-bold tracking-tight">Apache OpenNLP</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Tokenization, sentence segmentation, part-of-speech tagging, named entities (products, channels, issues) and chunking — deterministic, explainable pipelines that integrate naturally with Java BFSI stacks.</p>
+          </article>
+          <article class="surface rounded-3xl p-7 fade-up">
+            <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">NLP · large scale</div>
+            <h3 class="mt-3 text-xl font-bold tracking-tight">Spark NLP</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Built on Apache Spark under Apache 2.0, with transformer models such as BERT and T5 — for semantic similarity, complaint deduplication, and contextual analysis across large datasets.</p>
+          </article>
+          <article class="surface rounded-3xl p-7 fade-up">
+            <div class="text-sm font-semibold text-violet-600 dark:text-violet-400">Search &amp; retrieval</div>
+            <h3 class="mt-3 text-xl font-bold tracking-tight">Apache Lucene</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Text analysis, indexing and retrieval — fast search, relevance scoring, and historical case lookup across complaints and regulatory records.</p>
+          </article>
+          <article id="data-governance" class="surface rounded-3xl p-7 fade-up scroll-mt-20">
+            <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Storage &amp; minimization</div>
+            <h3 class="mt-3 text-xl font-bold tracking-tight">Apache Parquet</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Columnar storage with Snappy/Gzip compression and dictionary/RLE encoding, so only necessary fields are stored and processed — supporting FD, GDPR, and DPDP compliance.</p>
+          </article>
+          <article class="surface rounded-3xl p-7 fade-up">
+            <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Access &amp; audit</div>
+            <h3 class="mt-3 text-xl font-bold tracking-tight">Apache Ranger</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Centralized access control, authorization policies, and immutable audit logs — complaint and case data access is role-based, monitored, and regulator-ready.</p>
+          </article>
+          <article id="scalable-ml" class="surface rounded-3xl p-7 fade-up md:col-span-2 lg:col-span-3 scroll-mt-20">
+            <div class="text-sm font-semibold text-amber-600 dark:text-amber-400">Pattern detection</div>
+            <h3 class="mt-3 text-xl font-bold tracking-tight">Apache Mahout</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Distributed clustering and classification of complaints and cases across millions of records — operating on distributed, aggregated datasets so patterns are found without unnecessary exposure of raw personal data.</p>
+          </article>
+        </div>
+
+        <div class="mt-5 grid gap-5 lg:grid-cols-2 fade-up">
+          <div class="surface rounded-3xl p-8">
+            <h3 class="text-xl font-bold tracking-tight">Privacy-by-design</h3>
+            <p class="mt-3 muted leading-relaxed">Personal data is minimized, anonymized early, and retained only for justified regulatory or operational purposes.</p>
+          </div>
+          <div id="why-apache" class="surface rounded-3xl p-8 scroll-mt-20">
+            <h3 class="text-xl font-bold tracking-tight">Why Apache-first</h3>
+            <p class="mt-3 text-sm muted leading-relaxed">Chosen over alternatives such as NLTK or spaCy for long-term sustainability, vendor neutrality, and regulatory acceptance.</p>
+            <ul class="mt-4 space-y-1.5 text-sm muted">
+              <li>• Apache 2.0 licensing for enterprise and government adoption</li>
+              <li>• Proven scalability in large BFSI environments</li>
+              <li>• Strong governance, auditability, and ecosystem maturity</li>
+              <li>• Alignment with regulator expectations for transparency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next decisions -->
+    <section class="py-24 sm:py-32 px-4 sm:px-6">
+      <div class="mx-auto max-w-6xl surface rounded-3xl p-8 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8 fade-up">
+        <div>
+          <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">Roadmap</span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight">One decision at a time.</h2>
+          <p class="mt-3 muted max-w-xl leading-relaxed">
+            Each decision is an independent module with its own evaluation set — KYC, fraud, regulatory and agent-routing
+            decisions can be added and rolled out one by one, without touching the ones already live.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+          <a href="arthashieldfeatures.html#contact" class="btn-primary justify-center">Talk to us</a>
+          <a href="how-case-intel-works.html" class="inline-flex items-center justify-center rounded-full border hairline px-6 py-3 text-[0.95rem] font-medium hover:bg-black/5 dark:hover:bg-white/10 transition">Case Intelligence Architecture</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-alt border-t hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <a href="knowledge-graph.html" class="group mb-14 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl kg-stage px-6 py-5 text-white">
+        <div>
+          <div class="text-xs font-medium text-white/60">New</div>
+          <div class="text-lg font-semibold tracking-tight">The ArthaShield Knowledge Graph</div>
+        </div>
+        <span class="inline-flex items-center gap-1 text-sm font-medium text-sky-300 group-hover:underline underline-offset-4">Connect the dots <span aria-hidden="true">›</span></span>
+      </a>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
+        <div>
+          <h4 class="font-semibold mb-4">Solutions</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">Complaint Intelligence</a></li>
+            <li><a href="pdi-maintenance.html" class="hover:text-[color:var(--text)]">AI Based KYC Risk Detection</a></li>
+            <li><a href="autopilot-assistant.html" class="hover:text-[color:var(--text)]">Regulatory Copilot</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">Dispute Resolution Engine</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Flagship Offering</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="CaseIntelligence.html" class="hover:text-[color:var(--text)]">AI based Case Intelligence</a></li>
+            <li><a href="responsible-design.html" class="hover:text-[color:var(--text)]">Responsible Design Loop™ ♾️</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Data Security</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="ai-security.html#llm-judge" class="hover:text-[color:var(--text)]">LLM-as-Judge</a></li>
+            <li><a href="ai-security.html#agentic-security" class="hover:text-[color:var(--text)]">Agentic Security</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">SOC 2</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">ISO 27001</a></li>
+            <li><a href="#" class="hover:text-[color:var(--text)]">NIST AI RMF</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2.5 muted">
+            <li><a href="knowledge-graph.html" class="font-medium text-[color:var(--text)] hover:underline underline-offset-4">Knowledge Graph</a></li>
+            <li><a href="agentic-use-cases.html" class="hover:text-[color:var(--text)]">Agentic AI Use Cases</a></li>
+            <li><a href="arthashield-graph-js/index.html" class="hover:text-[color:var(--text)]">Intelligence Modeler</a></li>
+            <li><a href="how-case-intel-works.html" class="hover:text-[color:var(--text)]">Case Intelligence Architecture</a></li>
+            <li><a href="api-platform.html" class="hover:text-[color:var(--text)]">API Documentation</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t hairline mt-14 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs muted">
+        <p>© 2026 ArthaShield. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-[color:var(--text)]">Privacy Policy</a>
+          <a href="#" class="hover:text-[color:var(--text)]">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>
