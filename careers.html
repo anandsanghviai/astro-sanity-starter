@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Careers at ArthaShield | Build AI Infrastructure for Financial Services</title>
+  <meta name="description" content="Join ArthaShield and help build AI-powered regulatory intelligence, risk and compliance infrastructure for banks, NBFCs and fintechs."/>
+  <link rel="canonical" href="https://arthashield.org/careers.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="ArthaShield"/>
+  <meta property="og:url" content="https://arthashield.org/careers.html"/>
+  <meta property="og:title" content="Careers at ArthaShield | Build AI Infrastructure for Financial Services"/>
+  <meta property="og:description" content="Join ArthaShield and help build AI-powered regulatory intelligence, risk and compliance infrastructure for banks, NBFCs and fintechs."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+  <!-- Runs before paint so a saved night-mode choice never flashes white -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var isDark = saved ? saved === 'dark' : true;
+      root.classList.toggle('dark', isDark);
+      root.classList.add('js');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <link rel="stylesheet" href="css/arthashield.css?v=3"/>
+  <style>
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .role-card { position: relative; transition: border-color .3s, box-shadow .3s; }
+    .role-card::before {
+      content: ''; position: absolute; top: -1px; left: 12%; right: 12%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(96, 165, 250, .8), rgba(167, 139, 250, .8), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .role-card:hover, .role-card.is-open { border-color: rgba(37, 99, 235, .3); box-shadow: 0 30px 60px -40px rgba(37, 99, 235, .45); }
+    .dark .role-card:hover, .dark .role-card.is-open { border-color: rgba(96, 165, 250, .28); box-shadow: 0 30px 70px -40px rgba(79, 70, 229, .75); }
+    .role-card:hover::before, .role-card.is-open::before { opacity: 1; }
+
+    /* Outlined numerals that fill with the brand gradient when the card is active */
+    .role-num { color: transparent; -webkit-text-stroke: 1px var(--muted); transition: -webkit-text-stroke-color .3s; }
+    .role-card:hover .role-num, .role-card.is-open .role-num {
+      -webkit-text-stroke-color: transparent;
+      background-image: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text; background-clip: text;
+    }
+    .dark .role-card:hover .role-num, .dark .role-card.is-open .role-num { background-image: linear-gradient(135deg, #60a5fa, #a78bfa); }
+
+    /* The whole card header is the toggle's hit area; the Apply link sits outside it */
+    .role-head { position: relative; }
+    .role-toggle { text-align: left; }
+    .role-toggle::after { content: ''; position: absolute; inset: -.5rem; border-radius: 1rem; }
+    .role-toggle:focus-visible { outline: none; }
+    .role-toggle:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .role-icon { position: absolute; top: 0; right: 0; transition: transform .35s ease, border-color .2s; }
+    .role-card:hover .role-icon { border-color: var(--muted); }
+    .role-card.is-open .role-icon { transform: rotate(45deg); }
+    html:not(.js) .role-icon { display: none; }
+
+    /* Collapsed only when JS can reopen it; visibility keeps closed details out of the tab order and screen readers */
+    .role-body { display: grid; grid-template-rows: 1fr; }
+    .role-body > div { min-height: 0; overflow: hidden; }
+    .js .role-body { transition: grid-template-rows .45s cubic-bezier(.2, .7, .2, 1), visibility 0s linear 0s; }
+    .js .role-card:not(.is-open) .role-body {
+      grid-template-rows: 0fr; visibility: hidden;
+      transition: grid-template-rows .45s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .45s;
+    }
+    .role-list li { position: relative; padding-left: 1.25rem; }
+    .role-list li::before {
+      content: ''; position: absolute; left: 0; top: .62em; width: .375rem; height: .375rem; border-radius: 9999px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    }
+
+    .js .trait { opacity: .22; transition: opacity .8s ease; }
+    .js .trait.is-lit { opacity: 1; }
+
+    .venn-orbit { transform-origin: 200px 200px; animation: vennSpin 90s linear infinite; }
+    .venn-halo { transform-box: fill-box; transform-origin: center; animation: vennPulse 3.6s ease-in-out infinite; }
+    @keyframes vennSpin { to { transform: rotate(360deg); } }
+    @keyframes vennPulse { 0%, 100% { transform: scale(1); opacity: .35; } 50% { transform: scale(1.5); opacity: 0; } }
+
+    .dropzone { border-color: var(--line); transition: border-color .2s, background-color .2s; }
+    .dropzone:hover { border-color: var(--muted); }
+    .dropzone.is-dragging { border-color: var(--accent); background: rgba(37, 99, 235, .06); }
+    .dropzone:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .select-flash { animation: selectFlash 1.2s ease; }
+    @keyframes selectFlash { 0%, 60% { box-shadow: 0 0 0 4px rgba(37, 99, 235, .35); } 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); } }
+
+    .wordmark {
+      background-image: linear-gradient(180deg, var(--text) 30%, var(--muted));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .js .trait { opacity: 1; transition: none; }
+      .venn-orbit, .venn-halo, .select-flash { animation: none; }
+      .js .role-body, .js .role-card:not(.is-open) .role-body { transition: none; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ArthaShield",
+    "url": "https://arthashield.org/",
+    "logo": "https://arthashield.org/artha_shield_logo.webp"
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8L28KXK8PM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-8L28KXK8PM');
+  </script>
+  <script async defer src="https://beampipe.io/js/tracker.js" data-beampipe-domain="arthashield.org"></script>
+</head>
+
+<body class="min-h-screen">
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-[color:var(--text)] focus:px-4 focus:py-2 focus:text-sm focus:text-[color:var(--bg)]">Skip to content</a>
+
+  <header class="sticky top-0 z-40">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mt-3 flex items-center justify-between rounded-2xl px-3 py-2 glass">
+        <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+          <img loading="eager" decoding="async" src="artha_shield_logo.webp" alt="ArthaShield Logo" width="36" height="36" class="h-9 w-9 rounded-xl bg-white object-contain"/>
+          <span>ArthaShield</span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7 text-sm muted" aria-label="Primary">
+          <a href="index.html" class="hover:text-[color:var(--text)] transition">Home</a>
+          <a href="arthashieldfeatures.html" class="hover:text-[color:var(--text)] transition">Product</a>
+          <a href="knowledge-graph.html" class="relative hover:text-[color:var(--text)] transition">
+            Knowledge Graph
+            <span class="absolute -top-1 -right-2.5 h-1.5 w-1.5 rounded-full bg-gradient-to-tr from-blue-500 to-violet-500"></span>
+          </a>
+          <a href="aboutus.html" class="hover:text-[color:var(--text)] transition">About</a>
+          <a href="careers.html" class="font-medium text-[color:var(--text)]" aria-current="page">Careers</a>
+          <a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)] transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-1">
+          <button type="button" class="theme-toggle inline-flex h-9 w-9 items-center justify-center rounded-full muted hover:bg-black/5 dark:hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Toggle night mode" title="Toggle night mode">
+            <svg class="icon-moon w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+            </svg>
+          </button>
+          <a href="#openings" class="hidden lg:inline-flex ml-1 rounded-full bg-[color:var(--text)] text-[color:var(--bg)] px-4 py-1.5 text-sm font-medium hover:opacity-85 transition">Explore Opportunities</a>
+          <button id="menuButton" type="button" class="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out lg:hidden">
+      <nav class="mx-4 mt-2 rounded-2xl glass shadow-xl p-5 space-y-4 text-[15px]" aria-label="Mobile">
+        <a href="index.html" class="block">Home</a>
+        <a href="arthashieldfeatures.html" class="block">Product</a>
+        <a href="knowledge-graph.html" class="flex items-center gap-2">Knowledge Graph <span class="rounded-full bg-gradient-to-tr from-blue-600 to-violet-600 px-2 py-0.5 text-[10px] font-semibold text-white">NEW</span></a>
+        <a href="aboutus.html" class="block">About</a>
+        <a href="careers.html" class="block font-semibold accent" aria-current="page">Careers</a>
+        <a href="arthashieldfeatures.html#contact" class="block">Contact</a>
+        <a href="#openings" class="btn-primary w-full justify-center">Explore Opportunities</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="relative -mt-16 overflow-hidden hero-glow">
+      <canvas id="heroNetwork" class="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-5xl px-4 sm:px-6 pt-40 pb-24 sm:pt-52 sm:pb-32 text-center">
+        <p class="text-lg sm:text-xl font-semibold accent mb-6 uppercase tracking-[0.14em]">Careers @ ArthaShield</p>
+        <h1 class="headline text-4xl sm:text-6xl lg:text-7xl font-extrabold">
+          Build the <span class="text-gradient">Intelligence Layer</span><br class="hidden sm:block"/> for Financial Services.
+        </h1>
+        <p class="mt-8 text-lg sm:text-xl muted max-w-3xl mx-auto leading-relaxed">
+          ArthaShield is building AI-powered regulatory intelligence, risk and compliance infrastructure for banks, NBFCs, fintechs and other regulated financial institutions.
+        </p>
+        <p class="mt-5 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed opacity-90">
+          We are building from zero. Join us if you want to shape the product, work directly with the founder, talk to financial institutions and create something that matters.
+        </p>
+        <div class="mt-11 flex flex-col sm:flex-row items-center justify-center gap-5">
+          <a href="#openings" class="btn-primary">Explore 5 Openings <span aria-hidden="true">↓</span></a>
+          <a href="#apply" class="link-arrow">Tell Us Your Story <span aria-hidden="true">›</span></a>
+        </div>
+        <ul class="mt-16 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-medium muted" aria-label="How we work">
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-blue-500" aria-hidden="true"></span>Small team.</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-indigo-500" aria-hidden="true"></span>Serious problem.</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-violet-500" aria-hidden="true"></span>High ownership.</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-sky-500" aria-hidden="true"></span>Large ambition.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="why" class="bg-alt py-24 sm:py-32 scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          <div class="fade-up">
+            <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">Why ArthaShield</span>
+            <h2 class="headline mt-5 text-4xl sm:text-5xl font-extrabold"><span class="muted">This isn't another job.</span><br/> It's a chance to build.</h2>
+            <p class="mt-7 text-lg muted leading-relaxed">
+              ArthaShield sits at the intersection of <strong class="font-semibold text-[color:var(--text)]">BFSI × AI × Regulatory Intelligence × Risk</strong>.
+            </p>
+            <p class="mt-4 text-lg muted leading-relaxed">
+              We are building technology that can transform complex regulations, risk signals and compliance requirements into actionable intelligence and workflows.
+            </p>
+            <p class="mt-8 text-xl sm:text-2xl font-semibold tracking-tight">Because we are early, every person matters.</p>
+          </div>
+
+          <div class="fade-up">
+            <svg viewBox="0 0 400 400" class="mx-auto w-full max-w-[420px] text-[color:var(--text)]" role="img" aria-labelledby="vennTitle">
+              <title id="vennTitle">ArthaShield sits where BFSI, AI, regulatory intelligence and risk overlap</title>
+              <defs>
+                <linearGradient id="vennCore" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#2563eb"/>
+                  <stop offset="1" stop-color="#7c3aed"/>
+                </linearGradient>
+              </defs>
+              <g class="venn-orbit" fill="none">
+                <circle cx="200" cy="200" r="188" stroke="currentColor" stroke-opacity=".14" stroke-dasharray="2 7"/>
+                <circle cx="200" cy="12" r="3" fill="#60a5fa"/>
+                <circle cx="388" cy="200" r="2.5" fill="#a78bfa"/>
+                <circle cx="67" cy="333" r="2.5" fill="#38bdf8"/>
+              </g>
+              <circle cx="155" cy="155" r="105" fill="#2563eb" fill-opacity=".08" stroke="#3b82f6" stroke-opacity=".55"/>
+              <circle cx="245" cy="155" r="105" fill="#7c3aed" fill-opacity=".08" stroke="#8b5cf6" stroke-opacity=".55"/>
+              <circle cx="245" cy="245" r="105" fill="#0ea5e9" fill-opacity=".08" stroke="#0ea5e9" stroke-opacity=".55"/>
+              <circle cx="155" cy="245" r="105" fill="#10b981" fill-opacity=".08" stroke="#10b981" stroke-opacity=".55"/>
+              <g fill="currentColor" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">
+                <text x="104" y="112">BFSI</text>
+                <text x="296" y="112">AI</text>
+                <text x="298" y="290">Regulatory</text>
+                <text x="298" y="308">Intelligence</text>
+                <text x="104" y="300">Risk</text>
+              </g>
+              <rect class="venn-halo" x="146" y="186" width="108" height="28" rx="14" fill="url(#vennCore)"/>
+              <rect x="146" y="186" width="108" height="28" rx="14" fill="url(#vennCore)"/>
+              <text x="200" y="204.5" fill="#fff" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="700" text-anchor="middle">ArthaShield</text>
+            </svg>
+          </div>
+        </div>
+
+        <ul class="mt-20 grid gap-px sm:grid-cols-2 lg:grid-cols-4 rounded-3xl overflow-hidden border hairline bg-[color:var(--line)] fade-up">
+          <li class="bg-[color:var(--surface)] p-7 sm:p-8">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border hairline accent" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+            </span>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Build from zero</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">Shape products, architecture and the company—not just assigned tasks.</p>
+          </li>
+          <li class="bg-[color:var(--surface)] p-7 sm:p-8">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border hairline accent" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="2.5"/><circle cx="18.5" cy="12" r="2.5"/><path d="M8 12h8"/></svg>
+            </span>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Direct access</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">Work directly with the founder and senior BFSI stakeholders.</p>
+          </li>
+          <li class="bg-[color:var(--surface)] p-7 sm:p-8">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border hairline accent" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21h18M4 10h16M6 10v8m4-8v8m4-8v8m4-8v8M12 3l9 5H3l9-5z"/></svg>
+            </span>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Real problems</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">Build for banks, NBFCs, fintechs and regulated financial institutions.</p>
+          </li>
+          <li class="bg-[color:var(--surface)] p-7 sm:p-8">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border hairline accent" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+            </span>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Own the outcome</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">We value people who take ownership and move things forward.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="openings" class="py-24 sm:py-32 scroll-mt-24">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">Open positions · 5</span>
+          <h2 class="headline mt-5 text-4xl sm:text-5xl font-extrabold">Five ways to build with us.</h2>
+          <p class="mt-5 text-lg muted">We're deliberately keeping the founding team small. Some roles are fractional, advisory or partner-based initially.</p>
+        </div>
+
+        <div class="mt-14 mb-5 flex items-center justify-between gap-4 text-sm">
+          <p class="muted">Open a role to see what you'll do and who we're looking for.</p>
+          <button id="toggleAllRoles" type="button" class="hidden sm:inline-flex flex-shrink-0 font-medium accent hover:underline underline-offset-4">Expand all</button>
+        </div>
+
+        <div class="space-y-5">
+
+          <article id="role-business-development" class="role-card surface rounded-3xl p-6 sm:p-9 sm:grid sm:grid-cols-[5rem_1fr] fade-up" data-role-card>
+            <div class="role-num headline text-4xl sm:text-5xl font-extrabold tabular-nums" aria-hidden="true">01</div>
+            <div class="min-w-0">
+              <div class="role-head pr-12 mt-4 sm:mt-0">
+                <p class="text-sm font-semibold text-violet-600 dark:text-violet-400">BFSI × Business Development × Partnerships</p>
+                <h3 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">
+                  <button type="button" class="role-toggle" aria-expanded="false" aria-controls="role-business-development-details">
+                    Business Development &amp; Strategic Partnerships
+                    <span class="role-icon inline-flex h-9 w-9 items-center justify-center rounded-full border hairline" aria-hidden="true">
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                </h3>
+                <p class="mt-3 muted leading-relaxed max-w-2xl">Help us discover the highest-value problems worth solving and turn them into a repeatable business.</p>
+              </div>
+              <div id="role-business-development-details" class="role-body">
+                <div>
+                  <div class="grid gap-8 pt-8 md:grid-cols-2">
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What you'll do</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>Customer discovery</li>
+                        <li>Identify high-value BFSI use cases</li>
+                        <li>Develop design-partner relationships</li>
+                        <li>Shape product direction</li>
+                        <li>Help develop GTM and commercial strategy</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What we're looking for</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>8–15+ years across banking, NBFC, fintech, insurance, capital markets, consulting or RegTech</li>
+                        <li>Strong BFSI network</li>
+                        <li>Entrepreneurial mindset</li>
+                        <li>Ability to operate independently</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-7 pt-6 border-t hairline flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                <p class="text-sm"><span class="block text-xs font-semibold uppercase tracking-[0.14em] muted">Engagement</span><span class="mt-1 block font-medium">Fractional / Potential Founding Role</span></p>
+                <a href="#apply" class="btn-primary justify-center flex-shrink-0" data-apply="Business Development &amp; Strategic Partnerships">Apply for BD &amp; Partnerships <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article id="role-ai-engineer" class="role-card surface rounded-3xl p-6 sm:p-9 sm:grid sm:grid-cols-[5rem_1fr] fade-up" data-role-card>
+            <div class="role-num headline text-4xl sm:text-5xl font-extrabold tabular-nums" aria-hidden="true">02</div>
+            <div class="min-w-0">
+              <div class="role-head pr-12 mt-4 sm:mt-0">
+                <p class="text-sm font-semibold text-blue-600 dark:text-blue-400">AI × RAG × Agents × Backend</p>
+                <h3 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">
+                  <button type="button" class="role-toggle" aria-expanded="false" aria-controls="role-ai-engineer-details">
+                    Founding AI Engineer
+                    <span class="role-icon inline-flex h-9 w-9 items-center justify-center rounded-full border hairline" aria-hidden="true">
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                </h3>
+                <p class="mt-3 muted leading-relaxed max-w-2xl">Build the intelligence engine behind ArthaShield.</p>
+              </div>
+              <div id="role-ai-engineer-details" class="role-body">
+                <div>
+                  <div class="grid gap-8 pt-8 md:grid-cols-2">
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What you'll do</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>Build RAG and semantic search</li>
+                        <li>Work with LLMs and AI agents</li>
+                        <li>Build document intelligence pipelines</li>
+                        <li>Develop APIs and backend services</li>
+                        <li>Build evaluation and reliability mechanisms</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What we're looking for</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>Strong Python/backend engineering</li>
+                        <li>LLM/RAG experience</li>
+                        <li>Embeddings and semantic search</li>
+                        <li>APIs and data pipelines</li>
+                        <li>Strong engineering fundamentals</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-7 pt-6 border-t hairline flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                <p class="text-sm"><span class="block text-xs font-semibold uppercase tracking-[0.14em] muted">Engagement</span><span class="mt-1 block font-medium">Contract / Part-time initially → Potential Founding Role</span></p>
+                <a href="#apply" class="btn-primary justify-center flex-shrink-0" data-apply="AI Engineer">Apply for AI Engineer <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article id="role-regulatory-advisor" class="role-card surface rounded-3xl p-6 sm:p-9 sm:grid sm:grid-cols-[5rem_1fr] fade-up" data-role-card>
+            <div class="role-num headline text-4xl sm:text-5xl font-extrabold tabular-nums" aria-hidden="true">03</div>
+            <div class="min-w-0">
+              <div class="role-head pr-12 mt-4 sm:mt-0">
+                <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Regulation × Risk × Compliance</p>
+                <h3 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">
+                  <button type="button" class="role-toggle" aria-expanded="false" aria-controls="role-regulatory-advisor-details">
+                    BFSI Regulatory Intelligence Advisor
+                    <span class="role-icon inline-flex h-9 w-9 items-center justify-center rounded-full border hairline" aria-hidden="true">
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                </h3>
+                <p class="mt-3 muted leading-relaxed max-w-2xl">Help us make AI-generated regulatory intelligence trustworthy, explainable and useful.</p>
+              </div>
+              <div id="role-regulatory-advisor-details" class="role-body">
+                <div>
+                  <div class="grid gap-8 pt-8 md:grid-cols-2">
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What you'll do</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>Interpret regulatory requirements</li>
+                        <li>Translate regulations into obligations and controls</li>
+                        <li>Validate AI outputs</li>
+                        <li>Identify high-value compliance workflows</li>
+                        <li>Advise the product team</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What we're looking for</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>10+ years BFSI experience</li>
+                        <li>Banking/NBFC/insurance/capital markets</li>
+                        <li>Risk, compliance, audit or regulatory affairs</li>
+                        <li>Strong RBI knowledge</li>
+                        <li>SEBI/IRDAI/IFSCA experience is valuable</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-7 pt-6 border-t hairline flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                <p class="text-sm"><span class="block text-xs font-semibold uppercase tracking-[0.14em] muted">Engagement</span><span class="mt-1 block font-medium">Fractional Advisory</span></p>
+                <a href="#apply" class="btn-primary justify-center flex-shrink-0" data-apply="Regulatory Intelligence Advisor">Become an Advisor <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article id="role-strategic-partner" class="role-card surface rounded-3xl p-6 sm:p-9 sm:grid sm:grid-cols-[5rem_1fr] fade-up" data-role-card>
+            <div class="role-num headline text-4xl sm:text-5xl font-extrabold tabular-nums" aria-hidden="true">04</div>
+            <div class="min-w-0">
+              <div class="role-head pr-12 mt-4 sm:mt-0">
+                <p class="text-sm font-semibold text-amber-600 dark:text-amber-400">Relationships × Introductions × Enterprise</p>
+                <h3 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">
+                  <button type="button" class="role-toggle" aria-expanded="false" aria-controls="role-strategic-partner-details">
+                    BFSI Strategic Partner
+                    <span class="role-icon inline-flex h-9 w-9 items-center justify-center rounded-full border hairline" aria-hidden="true">
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                </h3>
+                <p class="mt-3 muted leading-relaxed max-w-2xl">Help ArthaShield reach the people who can use it.</p>
+              </div>
+              <div id="role-strategic-partner-details" class="role-body">
+                <div>
+                  <div class="grid gap-8 pt-8 md:grid-cols-2">
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What you'll do</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>Introduce ArthaShield to qualified BFSI decision-makers</li>
+                        <li>Facilitate warm introductions</li>
+                        <li>Help identify pilot opportunities</li>
+                        <li>Provide market intelligence</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What we're looking for</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>Genuine relationships with banks/NBFCs/fintechs</li>
+                        <li>Access to senior BFSI decision-makers</li>
+                        <li>Strong credibility and commercial understanding</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <p class="mt-8 rounded-2xl bg-alt px-5 py-4 text-sm muted">This is an independent partnership, not a salaried sales role.</p>
+                </div>
+              </div>
+              <div class="mt-7 pt-6 border-t hairline flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                <p class="text-sm"><span class="block text-xs font-semibold uppercase tracking-[0.14em] muted">Engagement</span><span class="mt-1 block font-medium">Independent Partner / Referral / Revenue Share</span></p>
+                <a href="#apply" class="btn-primary justify-center flex-shrink-0" data-apply="Strategic Partner">Become a Partner <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article id="role-full-stack-engineer" class="role-card surface rounded-3xl p-6 sm:p-9 sm:grid sm:grid-cols-[5rem_1fr] fade-up" data-role-card>
+            <div class="role-num headline text-4xl sm:text-5xl font-extrabold tabular-nums" aria-hidden="true">05</div>
+            <div class="min-w-0">
+              <div class="role-head pr-12 mt-4 sm:mt-0">
+                <p class="text-sm font-semibold text-sky-600 dark:text-sky-400">Product × SaaS × AI</p>
+                <h3 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">
+                  <button type="button" class="role-toggle" aria-expanded="false" aria-controls="role-full-stack-engineer-details">
+                    Founding Full-Stack Engineer
+                    <span class="role-icon inline-flex h-9 w-9 items-center justify-center rounded-full border hairline" aria-hidden="true">
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                </h3>
+                <p class="mt-3 muted leading-relaxed max-w-2xl">Turn the ArthaShield intelligence engine into a product people love to use.</p>
+              </div>
+              <div id="role-full-stack-engineer-details" class="role-body">
+                <div>
+                  <div class="grid gap-8 pt-8 md:grid-cols-2">
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What you'll do</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>Build the web/PWA product</li>
+                        <li>Build dashboards and workflows</li>
+                        <li>Integrate AI services</li>
+                        <li>Build APIs and enterprise integrations</li>
+                        <li>Develop authentication and authorization</li>
+                        <li>Turn prototypes into production-quality experiences</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-semibold uppercase tracking-[0.14em] muted">What we're looking for</h4>
+                      <ul class="role-list mt-4 space-y-2.5 text-[0.95rem]">
+                        <li>React / Next.js / TypeScript</li>
+                        <li>APIs and databases</li>
+                        <li>SaaS development</li>
+                        <li>AI integration</li>
+                        <li>Python or Java is valuable</li>
+                        <li>BFSI experience is a plus</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-7 pt-6 border-t hairline flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                <p class="text-sm"><span class="block text-xs font-semibold uppercase tracking-[0.14em] muted">Engagement</span><span class="mt-1 block font-medium">Contract / Part-time initially → Potential Founding Role</span></p>
+                <a href="#apply" class="btn-primary justify-center flex-shrink-0" data-apply="Full-Stack Engineer">Apply as Full-Stack Engineer <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="who" class="bg-alt py-24 sm:py-32 scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <div class="lg:sticky lg:top-32 fade-up">
+            <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">Who we look for</span>
+            <h2 class="headline mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold">We don't hire for keywords alone.</h2>
+            <p class="mt-7 text-lg font-semibold tracking-tight">You don't need to match every requirement.</p>
+            <p class="mt-3 text-lg muted leading-relaxed">
+              If you've built something, transformed something, sold something, solved a difficult problem or understand a BFSI problem deeply—we want to hear from you.
+            </p>
+            <a href="#apply" class="link-arrow mt-8">Tell Us Your Story <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+        <ol class="lg:col-span-7 border-t hairline" aria-label="What we look for">
+          <li class="trait flex items-baseline gap-5 sm:gap-8 border-b hairline py-5 sm:py-7"><span class="w-7 flex-shrink-0 text-sm font-semibold muted tabular-nums" aria-hidden="true">01</span><span class="headline text-[2rem] leading-[1.1] sm:text-5xl font-extrabold">Curiosity<span class="accent">.</span></span></li>
+          <li class="trait flex items-baseline gap-5 sm:gap-8 border-b hairline py-5 sm:py-7"><span class="w-7 flex-shrink-0 text-sm font-semibold muted tabular-nums" aria-hidden="true">02</span><span class="headline text-[2rem] leading-[1.1] sm:text-5xl font-extrabold">Ownership<span class="accent">.</span></span></li>
+          <li class="trait flex items-baseline gap-5 sm:gap-8 border-b hairline py-5 sm:py-7"><span class="w-7 flex-shrink-0 text-sm font-semibold muted tabular-nums" aria-hidden="true">03</span><span class="headline text-[2rem] leading-[1.1] sm:text-5xl font-extrabold">Technical depth<span class="accent">.</span></span></li>
+          <li class="trait flex items-baseline gap-5 sm:gap-8 border-b hairline py-5 sm:py-7"><span class="w-7 flex-shrink-0 text-sm font-semibold muted tabular-nums" aria-hidden="true">04</span><span class="headline text-[2rem] leading-[1.1] sm:text-5xl font-extrabold">BFSI understanding<span class="accent">.</span></span></li>
+          <li class="trait flex items-baseline gap-5 sm:gap-8 border-b hairline py-5 sm:py-7"><span class="w-7 flex-shrink-0 text-sm font-semibold muted tabular-nums" aria-hidden="true">05</span><span class="headline text-[2rem] leading-[1.1] sm:text-5xl font-extrabold">Commercial instinct<span class="accent">.</span></span></li>
+          <li class="trait flex items-baseline gap-5 sm:gap-8 border-b hairline py-5 sm:py-7"><span class="w-7 flex-shrink-0 text-sm font-semibold muted tabular-nums" aria-hidden="true">06</span><span class="headline text-[2rem] leading-[1.1] sm:text-5xl font-extrabold">Speed<span class="accent">.</span></span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="what-you-get" class="pt-24 pb-16 sm:pt-32 sm:pb-20 scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto fade-up">
+          <span class="inline-block rounded-full border hairline px-3 py-1 text-xs font-medium muted">What you get</span>
+          <h2 class="headline mt-5 text-4xl sm:text-5xl font-extrabold">No layers. Real work.</h2>
+        </div>
+        <ul class="mt-14 grid gap-px sm:grid-cols-2 lg:grid-cols-4 rounded-3xl overflow-hidden border hairline bg-[color:var(--line)] fade-up">
+          <li class="bg-[color:var(--bg)] p-7 sm:p-8">
+            <svg class="h-6 w-6 accent" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L4 14h7l-1 7 9-11h-7l1-7z"/></svg>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Build from zero</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">No layers. No bureaucracy.</p>
+          </li>
+          <li class="bg-[color:var(--bg)] p-7 sm:p-8">
+            <svg class="h-6 w-6 accent" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M9 20V9"/></svg>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Work close to the product</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">Your work directly influences what we build.</p>
+          </li>
+          <li class="bg-[color:var(--bg)] p-7 sm:p-8">
+            <svg class="h-6 w-6 accent" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.2a3 3 0 010 5.6M21 20c0-2.7-1.7-5-4-5.7"/></svg>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Meet the industry</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">Work with real BFSI problems and decision-makers.</p>
+          </li>
+          <li class="bg-[color:var(--bg)] p-7 sm:p-8">
+            <svg class="h-6 w-6 accent" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">Potential upside</h3>
+            <p class="mt-2 text-sm muted leading-relaxed">For long-term contributors, meaningful equity/upside arrangements may be available.</p>
+          </li>
+        </ul>
+        <p class="mt-6 text-center text-xs muted max-w-2xl mx-auto">
+          Terms for every engagement, including any compensation or equity, are agreed individually and in writing. Nothing on this page is an offer of employment.
+        </p>
+      </div>
+    </section>
+
+    <section id="apply" class="px-3 sm:px-6 pb-24 sm:pb-32 scroll-mt-24">
+      <div class="kg-stage relative mx-auto max-w-6xl rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden text-white px-4 py-14 sm:px-12 sm:py-20">
+        <div class="kg-grid absolute inset-0 pointer-events-none"></div>
+        <div class="relative grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+          <div class="lg:pt-4">
+            <span class="inline-block rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-white/70">Open application</span>
+            <h2 class="headline mt-5 text-4xl sm:text-6xl font-extrabold">Don't see your role?</h2>
+            <p class="mt-6 text-lg text-white/65 leading-relaxed max-w-md">
+              If you believe you can help ArthaShield build something significant, tell us what you can bring.
+            </p>
+            <p class="mt-10 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Tell us about</p>
+            <ul class="mt-4 space-y-3 text-[0.95rem] text-white/85">
+              <li class="flex items-center gap-3"><span class="h-px w-5 bg-gradient-to-r from-sky-400 to-violet-400" aria-hidden="true"></span>Something you built</li>
+              <li class="flex items-center gap-3"><span class="h-px w-5 bg-gradient-to-r from-sky-400 to-violet-400" aria-hidden="true"></span>Something you transformed</li>
+              <li class="flex items-center gap-3"><span class="h-px w-5 bg-gradient-to-r from-sky-400 to-violet-400" aria-hidden="true"></span>Something you sold</li>
+              <li class="flex items-center gap-3"><span class="h-px w-5 bg-gradient-to-r from-sky-400 to-violet-400" aria-hidden="true"></span>A difficult problem you solved</li>
+              <li class="flex items-center gap-3"><span class="h-px w-5 bg-gradient-to-r from-sky-400 to-violet-400" aria-hidden="true"></span>A BFSI problem you understand deeply</li>
+            </ul>
+            <p class="mt-10 text-sm text-white/55">
+              Prefer email?
+              <a href="mailto:anandsanghvi@arthashield.org" class="font-medium text-sky-300 hover:underline underline-offset-4">anandsanghvi@arthashield.org</a>
+            </p>
+          </div>
+
+          <div class="surface rounded-3xl p-6 sm:p-8 text-[color:var(--text)] shadow-2xl shadow-black/40 flex flex-col justify-center">
+            <form id="applicationForm" name="careers" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/careers.html?submitted=true#apply" class="space-y-5">
+              <input type="hidden" name="form-name" value="careers">
+              <p class="hidden"><label>Leave this empty: <input name="bot-field"></label></p>
+
+              <div class="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label for="applicantName" class="block text-sm font-medium">Name</label>
+                  <input id="applicantName" type="text" name="name" autocomplete="name" required class="field mt-2">
+                </div>
+                <div>
+                  <label for="applicantEmail" class="block text-sm font-medium">Email</label>
+                  <input id="applicantEmail" type="email" name="email" autocomplete="email" required class="field mt-2">
+                </div>
+              </div>
+
+              <div>
+                <label for="applicantProfile" class="block text-sm font-medium">LinkedIn / Portfolio <span class="font-normal muted">(optional)</span></label>
+                <input id="applicantProfile" type="url" name="profile_url" autocomplete="url" inputmode="url" placeholder="https://linkedin.com/in/…" class="field mt-2">
+              </div>
+
+              <div>
+                <label for="applicantOpportunity" class="block text-sm font-medium">Which opportunity interests you?</label>
+                <div class="relative mt-2">
+                  <select id="applicantOpportunity" name="opportunity" required class="field appearance-none cursor-pointer pr-11">
+                    <option value="">Choose an opportunity</option>
+                    <option>Business Development &amp; Strategic Partnerships</option>
+                    <option>AI Engineer</option>
+                    <option>Regulatory Intelligence Advisor</option>
+                    <option>Strategic Partner</option>
+                    <option>Full-Stack Engineer</option>
+                    <option>Something else</option>
+                  </select>
+                  <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 muted" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+              </div>
+
+              <div>
+                <label for="applicantAchievements" class="block text-sm font-medium">What have you built, transformed or achieved?</label>
+                <textarea id="applicantAchievements" name="achievements" rows="4" required class="field mt-2"></textarea>
+              </div>
+
+              <div>
+                <label for="applicantWhy" class="block text-sm font-medium">Why ArthaShield? <span class="font-normal muted">(optional)</span></label>
+                <textarea id="applicantWhy" name="why_arthashield" rows="3" class="field mt-2"></textarea>
+              </div>
+
+              <div>
+                <span class="block text-sm font-medium">CV / Profile <span class="font-normal muted">(optional)</span></span>
+                <label for="applicantCv" class="dropzone relative mt-2 flex cursor-pointer items-center gap-4 rounded-2xl border border-dashed px-5 py-5" data-dropzone>
+                  <span class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border hairline accent" aria-hidden="true">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block truncate text-sm font-medium" data-file-name>Upload your CV, or drop it here</span>
+                    <span id="applicantCvHint" class="mt-0.5 block text-xs muted">PDF, DOC or DOCX · up to 5 MB</span>
+                  </span>
+                  <input id="applicantCv" type="file" name="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="sr-only" aria-describedby="applicantCvHint applicantCvError">
+                </label>
+                <div class="mt-2 flex items-start justify-between gap-4">
+                  <p id="applicantCvError" class="text-sm text-red-600 dark:text-red-400" aria-live="polite"></p>
+                  <button type="button" class="flex-shrink-0 text-sm font-medium accent hover:underline underline-offset-4" data-file-clear hidden>Remove file</button>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary w-full justify-center"><span data-submit-label>Send Your Profile</span> <span aria-hidden="true">→</span></button>
+              <p class="text-center text-xs muted">We use what you share only to consider you for opportunities at ArthaShield.</p>
+            </form>
+
+            <div id="applyThanks" class="py-12 text-center" tabindex="-1" hidden>
+              <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-violet-600 text-white" aria-hidden="true">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              </span>
+              <h3 class="mt-6 text-2xl font-bold tracking-tight">Thank you. Your profile is with us.</h3>
+              <p class="mt-3 muted">We'll reach out if there's a fit.</p>
+              <a href="#openings" class="link-arrow mt-6">Back to openings <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-alt border-t hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+      <a href="knowledge-graph.html" class="group mb-16 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl kg-stage px-6 py-5 text-white">
+        <div>
+          <div class="text-xs font-medium text-white/60">New</div>
+          <div class="text-lg font-semibold tracking-tight">The ArthaShield Knowledge Graph</div>
+        </div>
+        <span class="inline-flex items-center gap-1 text-sm font-medium text-sky-300 group-hover:underline underline-offset-4">Connect the dots <span aria-hidden="true">›</span></span>
+      </a>
+
+      <div class="text-center">
+        <p class="wordmark text-4xl sm:text-6xl font-extrabold tracking-[0.18em] sm:tracking-[0.22em] pl-[0.18em] sm:pl-[0.22em]">ARTHASHIELD</p>
+        <p class="mt-5 text-sm sm:text-base font-semibold accent">AI × BFSI × Regulatory Intelligence</p>
+        <p class="mt-2 text-sm muted">Building trusted intelligence for financial services.</p>
+        <nav class="mt-10" aria-label="Footer">
+          <ul class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm muted">
+            <li><a href="index.html" class="hover:text-[color:var(--text)]">Home</a></li>
+            <li><a href="arthashieldfeatures.html" class="hover:text-[color:var(--text)]">Product</a></li>
+            <li><a href="aboutus.html" class="hover:text-[color:var(--text)]">About</a></li>
+            <li><a href="careers.html" class="font-medium text-[color:var(--text)]" aria-current="page">Careers</a></li>
+            <li><a href="arthashieldfeatures.html#contact" class="hover:text-[color:var(--text)]">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="border-t hairline mt-14 pt-6 text-center text-xs muted">
+        <p>© 2026 ArthaShield. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+<script src="js/site.js" defer></script>
+<script>
+(function () {
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  function initHeroNetwork() {
+    const canvas = document.getElementById('heroNetwork');
+    const context = canvas && canvas.getContext && canvas.getContext('2d');
+    if (!context) return;
+    const hero = canvas.parentElement;
+    const LINK_DISTANCE = 140;
+    const POINTER_DISTANCE = 170;
+    const PULSE_DURATION = 1300;
+    const PULSE_INTERVAL = 650;
+    let width = 0, height = 0, nodes = [], pulses = [], palette = null;
+    let frameId = null, lastFrameAt = 0, lastPulseAt = 0, isOnScreen = true, pointer = null;
+
+    function readPalette() {
+      palette = document.documentElement.classList.contains('dark')
+        ? { node: '165,180,252', hub: '96,165,250', link: '148,163,184', pulse: '125,211,252', linkAlpha: .2, nodeAlpha: .75 }
+        : { node: '37,99,235', hub: '79,70,229', link: '51,65,85', pulse: '37,99,235', linkAlpha: .13, nodeAlpha: .5 };
+    }
+
+    // Quiet in the middle so the headline stays readable, fading out toward the bottom edge
+    function presence(x, y) {
+      const dx = (x - width / 2) / (width * .36);
+      const dy = (y - height * .45) / (height * .34);
+      const fromCentre = Math.min(1, Math.hypot(dx, dy));
+      const fromBottom = Math.min(1, Math.max(0, (height - y) / (height * .28)));
+      return Math.max(.1, fromCentre * fromCentre) * fromBottom;
+    }
+
+    function buildNodes() {
+      const count = Math.round(Math.min(110, Math.max(34, width * height / 12500)));
+      nodes = Array.from({ length: count }, () => {
+        const isHub = Math.random() < .09;
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - .5) * .16,
+          vy: (Math.random() - .5) * .16,
+          radius: isHub ? 2.3 + Math.random() * 1.1 : .8 + Math.random() * 1.1,
+          isHub,
+        };
+      });
+      pulses = [];
+    }
+
+    function resize() {
+      const rect = hero.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const widthChanged = Math.round(rect.width) !== width;
+      width = Math.round(rect.width);
+      height = Math.round(rect.height);
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      if (widthChanged || !nodes.length) buildNodes();
+      draw();
+    }
+
+    function spawnPulse(from, hopsLeft) {
+      const neighbours = nodes.filter(node => node !== from && Math.hypot(node.x - from.x, node.y - from.y) < LINK_DISTANCE);
+      if (!neighbours.length) return;
+      pulses.push({ from, to: neighbours[Math.floor(Math.random() * neighbours.length)], progress: 0, hopsLeft });
+    }
+
+    function step(elapsed) {
+      nodes.forEach(node => {
+        node.x += node.vx * elapsed / 16;
+        node.y += node.vy * elapsed / 16;
+        if (node.x < -20 || node.x > width + 20) node.vx *= -1;
+        if (node.y < -20 || node.y > height + 20) node.vy *= -1;
+      });
+      pulses = pulses.filter(pulse => {
+        pulse.progress += elapsed / PULSE_DURATION;
+        if (pulse.progress < 1) return true;
+        if (pulse.hopsLeft > 0) spawnPulse(pulse.to, pulse.hopsLeft - 1);
+        return false;
+      });
+    }
+
+    function draw() {
+      context.clearRect(0, 0, width, height);
+      nodes.forEach(node => { node.presence = presence(node.x, node.y); });
+
+      context.lineWidth = .8;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const distance = Math.hypot(a.x - b.x, a.y - b.y);
+          if (distance >= LINK_DISTANCE) continue;
+          const alpha = (1 - distance / LINK_DISTANCE) * palette.linkAlpha * Math.min(a.presence, b.presence);
+          context.strokeStyle = `rgba(${palette.link},${alpha})`;
+          context.beginPath();
+          context.moveTo(a.x, a.y);
+          context.lineTo(b.x, b.y);
+          context.stroke();
+        }
+      }
+
+      if (pointer) {
+        nodes.forEach(node => {
+          const distance = Math.hypot(node.x - pointer.x, node.y - pointer.y);
+          if (distance >= POINTER_DISTANCE) return;
+          context.strokeStyle = `rgba(${palette.hub},${(1 - distance / POINTER_DISTANCE) * .35 * node.presence})`;
+          context.beginPath();
+          context.moveTo(pointer.x, pointer.y);
+          context.lineTo(node.x, node.y);
+          context.stroke();
+        });
+      }
+
+      nodes.forEach(node => {
+        const colour = node.isHub ? palette.hub : palette.node;
+        if (node.isHub) {
+          context.fillStyle = `rgba(${colour},${.12 * node.presence})`;
+          context.beginPath();
+          context.arc(node.x, node.y, node.radius * 3.2, 0, Math.PI * 2);
+          context.fill();
+        }
+        context.fillStyle = `rgba(${colour},${palette.nodeAlpha * node.presence})`;
+        context.beginPath();
+        context.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      pulses.forEach(pulse => {
+        const eased = pulse.progress < .5 ? 2 * pulse.progress * pulse.progress : 1 - Math.pow(-2 * pulse.progress + 2, 2) / 2;
+        const x = pulse.from.x + (pulse.to.x - pulse.from.x) * eased;
+        const y = pulse.from.y + (pulse.to.y - pulse.from.y) * eased;
+        const alpha = Math.sin(pulse.progress * Math.PI) * presence(x, y);
+        const glow = context.createRadialGradient(x, y, 0, x, y, 9);
+        glow.addColorStop(0, `rgba(${palette.pulse},${.55 * alpha})`);
+        glow.addColorStop(1, `rgba(${palette.pulse},0)`);
+        context.fillStyle = glow;
+        context.beginPath();
+        context.arc(x, y, 9, 0, Math.PI * 2);
+        context.fill();
+        context.fillStyle = `rgba(255,255,255,${.9 * alpha})`;
+        context.beginPath();
+        context.arc(x, y, 1.4, 0, Math.PI * 2);
+        context.fill();
+      });
+    }
+
+    function tick(now) {
+      const elapsed = Math.min(64, now - (lastFrameAt || now));
+      lastFrameAt = now;
+      if (now - lastPulseAt > PULSE_INTERVAL) {
+        const hubs = nodes.filter(node => node.isHub);
+        const source = hubs.length ? hubs[Math.floor(Math.random() * hubs.length)] : nodes[0];
+        spawnPulse(source, 2);
+        lastPulseAt = now;
+      }
+      step(elapsed);
+      draw();
+      frameId = requestAnimationFrame(tick);
+    }
+
+    function updateLoop() {
+      const shouldRun = isOnScreen && !document.hidden && !reducedMotion.matches;
+      if (shouldRun && frameId === null) {
+        lastFrameAt = 0;
+        frameId = requestAnimationFrame(tick);
+      } else if (!shouldRun && frameId !== null) {
+        cancelAnimationFrame(frameId);
+        frameId = null;
+        draw();
+      }
+    }
+
+    readPalette();
+    resize();
+    new ResizeObserver(resize).observe(hero);
+    new IntersectionObserver(entries => { isOnScreen = entries[0].isIntersecting; updateLoop(); }).observe(hero);
+    document.addEventListener('visibilitychange', updateLoop);
+    reducedMotion.addEventListener('change', updateLoop);
+    new MutationObserver(() => { readPalette(); draw(); })
+      .observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    if (matchMedia('(pointer: fine)').matches) {
+      hero.addEventListener('pointermove', event => {
+        const rect = hero.getBoundingClientRect();
+        pointer = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+      });
+      hero.addEventListener('pointerleave', () => { pointer = null; });
+    }
+    updateLoop();
+  }
+
+  function initRoleCards() {
+    const cards = [...document.querySelectorAll('[data-role-card]')];
+    const toggleAll = document.getElementById('toggleAllRoles');
+
+    function setOpen(card, isOpen) {
+      card.classList.toggle('is-open', isOpen);
+      card.querySelector('.role-toggle').setAttribute('aria-expanded', String(isOpen));
+    }
+
+    function syncToggleAll() {
+      if (toggleAll) toggleAll.textContent = cards.every(card => card.classList.contains('is-open')) ? 'Collapse all' : 'Expand all';
+    }
+
+    cards.forEach(card => {
+      card.querySelector('.role-toggle').addEventListener('click', () => {
+        setOpen(card, !card.classList.contains('is-open'));
+        syncToggleAll();
+      });
+    });
+
+    if (toggleAll) {
+      toggleAll.addEventListener('click', () => {
+        const shouldOpen = !cards.every(card => card.classList.contains('is-open'));
+        cards.forEach(card => setOpen(card, shouldOpen));
+        syncToggleAll();
+      });
+    }
+
+    function openFromHash() {
+      const card = cards.find(candidate => '#' + candidate.id === location.hash);
+      if (!card) return;
+      setOpen(card, true);
+      syncToggleAll();
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  }
+
+  function initTraits() {
+    const traits = document.querySelectorAll('.trait');
+    if (!('IntersectionObserver' in window)) {
+      traits.forEach(trait => trait.classList.add('is-lit'));
+      return;
+    }
+    const light = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-lit');
+        light.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -30% 0px' });
+    traits.forEach(trait => light.observe(trait));
+  }
+
+  function initApplicationForm() {
+    const form = document.getElementById('applicationForm');
+    if (!form) return;
+    const MAX_FILE_BYTES = 5 * 1024 * 1024;
+    const nameField = form.querySelector('[name="name"]');
+    const opportunity = form.querySelector('[name="opportunity"]');
+    const profileField = form.querySelector('[name="profile_url"]');
+    const fileInput = form.querySelector('[name="cv"]');
+    const dropzone = form.querySelector('[data-dropzone]');
+    const fileName = form.querySelector('[data-file-name]');
+    const fileError = document.getElementById('applicantCvError');
+    const clearFile = form.querySelector('[data-file-clear]');
+    const submitButton = form.querySelector('[type="submit"]');
+    const submitLabel = form.querySelector('[data-submit-label]');
+    const emptyFileText = fileName.textContent;
+
+    if (new URLSearchParams(location.search).get('submitted') === 'true') {
+      const thanks = document.getElementById('applyThanks');
+      form.hidden = true;
+      thanks.hidden = false;
+      // The browser resets focus when it jumps to #apply on load, so focus the message once that has happened
+      window.addEventListener('load', () => thanks.focus({ preventScroll: true }));
+    }
+
+    document.querySelectorAll('[data-apply]').forEach(link => {
+      link.addEventListener('click', event => {
+        opportunity.value = link.dataset.apply;
+        opportunity.classList.remove('select-flash');
+        void opportunity.offsetWidth;
+        opportunity.classList.add('select-flash');
+        // Keyboard activation (detail 0) moves focus into the form; a tap only scrolls, so phones don't pop the keyboard
+        if (event.detail === 0) nameField.focus({ preventScroll: true });
+      });
+    });
+
+    profileField.addEventListener('blur', () => {
+      const value = profileField.value.trim();
+      if (value && !/^https?:\/\//i.test(value)) profileField.value = 'https://' + value;
+    });
+
+    function formatSize(bytes) {
+      return bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+    }
+
+    function describeFile() {
+      const file = fileInput.files[0];
+      let problem = '';
+      if (file && !/\.(pdf|docx?)$/i.test(file.name)) problem = `${file.name} is not a PDF or Word document.`;
+      else if (file && file.size > MAX_FILE_BYTES) problem = `${file.name} is ${formatSize(file.size)} — the limit is 5 MB.`;
+      fileInput.setCustomValidity(problem);
+      fileError.textContent = problem;
+      fileName.textContent = file ? `${file.name} · ${formatSize(file.size)}` : emptyFileText;
+      clearFile.hidden = !file;
+    }
+
+    fileInput.addEventListener('change', describeFile);
+    clearFile.addEventListener('click', () => {
+      fileInput.value = '';
+      describeFile();
+      fileInput.focus();
+    });
+
+    ['dragenter', 'dragover'].forEach(type => dropzone.addEventListener(type, event => {
+      event.preventDefault();
+      dropzone.classList.add('is-dragging');
+    }));
+    ['dragleave', 'drop'].forEach(type => dropzone.addEventListener(type, event => {
+      event.preventDefault();
+      dropzone.classList.remove('is-dragging');
+    }));
+    dropzone.addEventListener('drop', event => {
+      if (!event.dataTransfer.files.length) return;
+      fileInput.files = event.dataTransfer.files;
+      describeFile();
+    });
+
+    form.addEventListener('submit', () => {
+      submitButton.disabled = true;
+      submitButton.classList.add('opacity-70');
+      submitLabel.textContent = 'Sending…';
+    });
+    // Coming back via the browser's back button restores the page from cache with the button still disabled
+    window.addEventListener('pageshow', () => {
+      submitButton.disabled = false;
+      submitButton.classList.remove('opacity-70');
+      submitLabel.textContent = 'Send Your Profile';
+    });
+  }
+
+  initHeroNetwork();
+  initRoleCards();
+  initTraits();
+  initApplicationForm();
+})();
+</script>
+</body>
+</html>
